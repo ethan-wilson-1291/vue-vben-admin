@@ -1,10 +1,13 @@
+import { useAppConfig } from '@vben/hooks';
+
 import { baseRequestClient, requestClient } from '#/api/request';
+
+const { apiURL } = useAppConfig(import.meta.env, import.meta.env.PROD);
 
 export namespace AuthApi {
   /** 登录接口参数 */
   export interface LoginParams {
-    password?: string;
-    username?: string;
+    myshopifyDomain?: string;
   }
 
   /** 登录接口返回值 */
@@ -21,8 +24,17 @@ export namespace AuthApi {
 /**
  * 登录
  */
-export async function loginApi(data: AuthApi.LoginParams) {
-  return requestClient.post<AuthApi.LoginResult>('/auth/login', data);
+export function loginApi(data: AuthApi.LoginParams) {
+  const shopifyDomain: string =
+    data.myshopifyDomain
+      ?.replaceAll(/\s/g, '')
+      .replace('https://', '')
+      .replace('http://', '')
+      .replace('.myshopify.com', '') ?? '';
+
+  const url: string = `${apiURL}/auth/generate?subdomain=${shopifyDomain}`;
+
+  window.location.href = url;
 }
 
 /**
