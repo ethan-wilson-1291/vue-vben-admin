@@ -13,14 +13,14 @@ defineOptions({ name: 'Fallback404Demo' });
 const authStore = useAuthStore();
 const route = useRoute();
 
-onBeforeMount(async () => {
+onBeforeMount(() => {
   const queryParams = route.query;
 
   resetAllStores();
 
-  await (isShopifyEmbedded()
+  isShopifyEmbedded()
     ? authStore.authLoginViaShopifySession(queryParams)
-    : authStore.authLogin({ myshopifyDomain: queryParams.shop as string }));
+    : authStore.authLogin({ myshopifyDomain: queryParams.shop as string });
 });
 </script>
 
