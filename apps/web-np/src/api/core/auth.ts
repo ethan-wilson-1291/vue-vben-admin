@@ -53,14 +53,8 @@ export async function refreshTokenApi() {
   });
 }
 
-/**
- * 退出登录
- */
-export async function logoutApi() {
-  return baseRequestClient.post('/auth/logout', {
-    withCredentials: true,
-  });
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+export async function logoutApi() {}
 
 export async function getAccessCodesApi() {
   return [];
