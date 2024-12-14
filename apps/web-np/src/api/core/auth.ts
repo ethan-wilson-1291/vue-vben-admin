@@ -37,6 +37,13 @@ export function loginApi(data: AuthApi.LoginParams) {
   window.location.href = url;
 }
 
+export async function loginApiViaShopifySession(data: any) {
+  return requestClient.post<AuthApi.LoginResult>(
+    '/auth/verify-shopify-session',
+    data,
+  );
+}
+
 /**
  * 刷新accessToken
  */
@@ -55,9 +62,6 @@ export async function logoutApi() {
   });
 }
 
-/**
- * 获取用户权限码
- */
 export async function getAccessCodesApi() {
-  return requestClient.get<string[]>('/auth/codes');
+  return [];
 }
