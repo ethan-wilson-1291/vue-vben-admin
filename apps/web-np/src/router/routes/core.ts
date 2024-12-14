@@ -53,6 +53,29 @@ const coreRoutes: RouteRecordRaw[] = [
       toolbarList: ['color', 'language', 'theme'],
     },
   },
+  {
+    name: 'Auth With Shopify',
+    path: '/auth/shopify',
+    component: () => import('#/views/_core/authentication/auth-shopify.vue'),
+    meta: {
+      ignoreAccess: true,
+      title: 'Auth With Shopify',
+    },
+  },
+  // This route should not be added to loginPaths, because it is not a login route for normal shop.
+  // This route will be used by Admin Staff to login to the shop.
+  // This route will remove all pinia stores and then login to the shop.
+  {
+    name: 'Auth With Token',
+    path: '/auth/token',
+    component: () => import('#/views/_core/authentication/auth-token.vue'),
+    meta: {
+      ignoreAccess: true,
+      title: 'Auth With Token',
+    },
+  },
 ];
 
-export { coreRoutes, fallbackNotFoundRoute };
+const loginPaths = [LOGIN_PATH, '/auth/shopify'];
+
+export { coreRoutes, fallbackNotFoundRoute, loginPaths };
