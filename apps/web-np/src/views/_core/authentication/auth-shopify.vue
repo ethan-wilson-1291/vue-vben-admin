@@ -20,7 +20,7 @@ onBeforeMount(async () => {
 
   await (isShopifyEmbedded()
     ? authStore.authLoginViaShopifySession(queryParams)
-    : authStore.authLogin(queryParams));
+    : authStore.authLogin({ myshopifyDomain: queryParams.shop as string }));
 });
 </script>
 
