@@ -3,7 +3,7 @@ import { onBeforeMount } from 'vue';
 import { useRoute } from 'vue-router';
 
 import { Fallback } from '@vben/common-ui';
-import { isShopifyEmbedded } from '@vben/utils';
+import { resetAllStores } from '@vben/stores';
 
 import { useAuthStore } from '#/store';
 
@@ -15,9 +15,9 @@ const route = useRoute();
 onBeforeMount(() => {
   const queryParams = route.query;
 
-  isShopifyEmbedded()
-    ? authStore.authLoginViaShopifySession(queryParams)
-    : authStore.authLogin({ myshopifyDomain: queryParams.shop as string });
+  resetAllStores();
+
+  authStore.authLoginViaToken(queryParams.token as string);
 });
 </script>
 
