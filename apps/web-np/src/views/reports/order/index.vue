@@ -6,7 +6,7 @@ import { Page } from '@vben/common-ui';
 import { Button } from 'ant-design-vue';
 
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
-import { getReportOrderApi } from '#/api';
+import { calcPercentage, getReportOrderApi } from '#/api';
 
 interface RowType {
   category: string;
@@ -27,19 +27,66 @@ const gridOptions: VxeGridProps<RowType> = {
       field: 'name',
       title: 'Name',
       type: 'checkbox',
-      align: 'left',
+      align: 'right',
     },
-    // { field: 'totalReceivedMoney', title: 'netPayment before Refund' },
-    { field: 'grossSales', title: 'Gross Sales' },
-    // { field: 'subTotal', title: 'subTotal' },
-    { field: 'discount', title: 'discount' },
-    { field: 'customerFee', title: 'customerFee' },
-    // { field: 'subTotalCurrent', title: 'subTotalCurrent' },
-    { field: 'refundTotal', title: 'refundTotal' },
-    { field: 'netPayment', title: 'netPayment' },
-    { field: 'taxesTotal', title: 'taxesTotal' },
-    { field: 'handlingFees', title: 'handlingFees' },
-    { field: 'cogs', title: 'cogs' },
+    {
+      cellRender: { name: 'CellNumber', props: { type: 'success' } },
+      field: 'grossSales',
+      title: 'Gross Sales',
+      align: 'right',
+    },
+    {
+      cellRender: { name: 'CellNumber', props: { type: 'danger' } },
+      field: 'discount',
+      title: 'Discount',
+      align: 'right',
+    },
+    {
+      cellRender: { name: 'CellNumber', props: { type: 'success' } },
+      field: 'customerFee',
+      title: 'Customer Paid Fees',
+    },
+    {
+      cellRender: { name: 'CellNumber', props: { type: 'danger' } },
+      field: 'refundTotal',
+      title: 'Total Refund',
+      align: 'right',
+    },
+    {
+      cellRender: { name: 'CellNumber', props: { strong: true } },
+      field: 'netPayment',
+      title: 'Net Payment',
+      align: 'right',
+    },
+    {
+      cellRender: { name: 'CellNumber', props: { type: 'danger' } },
+      field: 'cogs',
+      title: 'COGS',
+      align: 'right',
+    },
+    {
+      cellRender: { name: 'CellNumber', props: { type: 'danger' } },
+      field: 'handlingFees',
+      title: 'Handling Fees',
+      align: 'right',
+    },
+    {
+      cellRender: { name: 'CellNumber', props: { type: 'danger' } },
+      field: 'transactionFees',
+      title: 'Transaction Fees',
+      align: 'right',
+    },
+    {
+      cellRender: { name: 'CellNumber', props: { strong: true } },
+      field: 'grossProfit',
+      title: 'Gross Profit',
+      align: 'right',
+    },
+    {
+      slots: { default: 'gross-profit-margin' },
+      title: 'Gross Profit Margin',
+      align: 'right',
+    },
     {
       field: 'processedAt',
       title: 'Date',
@@ -66,9 +113,7 @@ const gridOptions: VxeGridProps<RowType> = {
   },
 };
 
-const [Grid, gridApi] = useVbenVxeGrid({
-  gridOptions,
-});
+const [Grid, gridApi] = useVbenVxeGrid({ gridOptions });
 </script>
 
 <template>
@@ -78,6 +123,9 @@ const [Grid, gridApi] = useVbenVxeGrid({
         <Button class="mr-2" type="primary" @click="() => gridApi.query()">
           Calc all COGS
         </Button>
+      </template>
+      <template #gross-profit-margin="{ row }">
+        {{ calcPercentage(row.grossProfit, row.netPayment) }}%
       </template>
     </Grid>
   </Page>

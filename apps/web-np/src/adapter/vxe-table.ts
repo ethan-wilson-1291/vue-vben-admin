@@ -2,7 +2,7 @@ import { h } from 'vue';
 
 import { setupVbenVxeTable, useVbenVxeGrid } from '@vben/plugins/vxe-table';
 
-import { Button, Image } from 'ant-design-vue';
+import { Button, Image, Typography } from 'ant-design-vue';
 
 import { useVbenForm } from './form';
 
@@ -56,6 +56,15 @@ setupVbenVxeTable({
       },
     });
 
+    vxeUI.renderer.add('CellNumber', {
+      renderTableDefault(renderOpts, params) {
+        const { props } = renderOpts;
+        const { column, row } = params;
+        const number = Number.parseFloat(row[column.field]).toFixed(2);
+
+        return h(Typography.Text, props, number);
+      },
+    });
     // 这里可以自行扩展 vxe-table 的全局配置，比如自定义格式化
     // vxeUI.formats.add
   },
