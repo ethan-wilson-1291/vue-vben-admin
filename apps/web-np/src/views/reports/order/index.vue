@@ -36,15 +36,16 @@ const gridOptions: VxeGridProps<RowType> = {
       align: 'right',
     },
     {
+      cellRender: { name: 'CellNumber', props: { type: 'success' } },
+      field: 'customerFee',
+      title: 'Customer Paid Fees',
+      align: 'right',
+    },
+    {
       cellRender: { name: 'CellNumber', props: { type: 'danger' } },
       field: 'discount',
       title: 'Discount',
       align: 'right',
-    },
-    {
-      cellRender: { name: 'CellNumber', props: { type: 'success' } },
-      field: 'customerFee',
-      title: 'Customer Paid Fees',
     },
     {
       cellRender: { name: 'CellNumber', props: { type: 'danger' } },
@@ -60,8 +61,14 @@ const gridOptions: VxeGridProps<RowType> = {
     },
     {
       cellRender: { name: 'CellNumber', props: { type: 'danger' } },
+      field: 'transactionFees',
+      title: 'Shipping Cost',
+      align: 'right',
+    },
+    {
+      cellRender: { name: 'CellNumber', props: { type: 'danger' } },
       field: 'cogs',
-      title: 'COGS',
+      title: 'Total COGS',
       align: 'right',
     },
     {
