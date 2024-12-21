@@ -11,6 +11,9 @@ export const overridesPreferences = defineOverridesPreferences({
     name: import.meta.env.VITE_APP_TITLE,
     locale: 'en-US',
   },
+  tabbar: {
+    enable: false,
+  },
   copyright: {
     companyName: 'Netpower',
     companySiteLink: 'https://www.netpower.com',
