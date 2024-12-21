@@ -1,3 +1,6 @@
 export function calcPercentage(a: number, b: number) {
-  return (a / b) * 100;
+  if (!b) {
+    return 0;
+  }
+  return ((a / b) * 100).toFixed(0);
 }
