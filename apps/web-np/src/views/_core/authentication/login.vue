@@ -17,7 +17,7 @@ const formSchema = computed((): VbenFormSchema[] => {
     {
       component: 'VbenInput',
       componentProps: {
-        placeholder: $t('authentication.usernameTip'),
+        placeholder: $t('authentication.username'),
       },
       fieldName: 'myshopifyDomain',
       label: $t('authentication.username'),
