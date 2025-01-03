@@ -61,14 +61,14 @@ const gridOptions: VxeGridProps<RowType> = {
     },
     {
       cellRender: { name: 'CellNumber', props: { type: 'danger' } },
-      field: 'transactionFees',
+      field: 'shippingCosts',
       title: 'Shipping Cost',
       align: 'right',
     },
     {
       cellRender: { name: 'CellNumber', props: { type: 'danger' } },
       field: 'cogs',
-      title: 'Total COGS',
+      title: 'COGS',
       align: 'right',
     },
     {
