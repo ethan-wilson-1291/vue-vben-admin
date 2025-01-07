@@ -2,7 +2,7 @@
 import { onBeforeMount } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { Fallback } from '@vben/common-ui';
+import { VbenLoading } from '@vben/common-ui';
 import { isShopifyEmbedded } from '@vben/utils';
 
 import { useAuthStore } from '#/store';
@@ -22,5 +22,5 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <Fallback status="coming-soon" />
+  <VbenLoading spinning text="Shopify verifying..." />
 </template>
