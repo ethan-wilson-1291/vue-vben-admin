@@ -4,7 +4,12 @@ import type { Recordable } from '@vben/types';
 
 import type { VxeGridApi } from './api';
 
-import { formatDate, formatDateTime, isFunction } from '@vben/utils';
+import {
+  formatDate,
+  formatDateTime,
+  isFunction,
+  npFormatDateTime,
+} from '@vben/utils';
 
 export function extendProxyOptions(
   api: VxeGridApi,
@@ -76,6 +81,12 @@ export function extendsDefaultFormatter(vxeUI: VxeUIExport) {
   vxeUI.formats.add('formatDateTime', {
     tableCellFormatMethod({ cellValue }) {
       return formatDateTime(cellValue);
+    },
+  });
+
+  vxeUI.formats.add('npFormatDateTime', {
+    tableCellFormatMethod({ cellValue }) {
+      return npFormatDateTime(cellValue);
     },
   });
 }
