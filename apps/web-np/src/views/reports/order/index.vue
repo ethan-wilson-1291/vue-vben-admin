@@ -4,7 +4,6 @@ import type { VxeTableGridOptions } from '#/adapter/vxe-table';
 
 import { Page } from '@vben/common-ui';
 
-import { Button } from 'ant-design-vue';
 import dayjs from 'dayjs';
 
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
@@ -29,7 +28,7 @@ const formOptions: VbenFormProps = {
       componentProps: {
         // Show last week button
         presets: [
-          { label: 'Today', value: [dayjs().add(-7, 'd'), dayjs()] },
+          { label: 'Today', value: [dayjs().add(-1, 'd'), dayjs()] },
           { label: 'Last 7 Days', value: [dayjs().add(-7, 'd'), dayjs()] },
           { label: 'Last 14 Days', value: [dayjs().add(-14, 'd'), dayjs()] },
           { label: 'Last 30 Days', value: [dayjs().add(-30, 'd'), dayjs()] },
@@ -46,20 +45,37 @@ const formOptions: VbenFormProps = {
       component: 'Select',
       componentProps: {
         allowClear: true,
+        mode: 'multiple',
         options: [
           {
-            label: 'Color1',
-            value: '1',
+            value: 'AUTHORIZED',
+            label: 'Authorized',
           },
           {
-            label: 'Color2',
-            value: '2',
+            value: 'PAID',
+            label: 'Paid',
+          },
+          {
+            value: 'PARTIALLY_PAID',
+            label: 'Partially Paid',
+          },
+          {
+            value: 'PARTIALLY_REFUNDED',
+            label: 'Partially Refunded',
+          },
+          {
+            value: 'PENDING',
+            label: 'Pending',
+          },
+          {
+            value: 'VOIDED',
+            label: 'Voided',
           },
         ],
-        placeholder: '请选择',
+        placeholder: 'Payment status',
       },
-      fieldName: 'payment',
-      label: 'Payment',
+      fieldName: 'financialStatus',
+      label: 'Status',
     },
     {
       component: 'Input',
@@ -122,7 +138,7 @@ const gridOptions: VxeTableGridOptions<RowType> = {
       cellRender: { name: 'CellNumber', props: { type: 'success' } },
       field: 'customerFee',
       title: 'Customer Paid',
-      titleHelp: {
+      titlePrefix: {
         content: 'The fees paid by the customer. Ex: shipping, tips, etc.',
       },
       align: 'right',
@@ -146,7 +162,7 @@ const gridOptions: VxeTableGridOptions<RowType> = {
       cellRender: { name: 'CellNumber', props: { strong: true } },
       field: 'netPayment',
       title: 'Revenue',
-      titleHelp: {
+      titlePrefix: {
         content:
           'Net payment = Revenue = Gross sales + Customer paid - Discount - Refund',
       },
@@ -164,7 +180,7 @@ const gridOptions: VxeTableGridOptions<RowType> = {
       cellRender: { name: 'CellNumber', props: { type: 'danger' } },
       field: 'cogs',
       title: 'COGS',
-      titleHelp: {
+      titlePrefix: {
         content:
           'Cost of Goods Sold (COGS) is the direct costs attributable to the production of the goods sold in a company. This amount includes the cost of the materials used in creating the good along with the direct labor costs used to produce the good.',
       },
@@ -175,7 +191,7 @@ const gridOptions: VxeTableGridOptions<RowType> = {
       cellRender: { name: 'CellNumber', props: { type: 'danger' } },
       field: 'handlingFees',
       title: 'Handling',
-      titleHelp: {
+      titlePrefix: {
         content:
           'Handling fees are the costs associated with the handling of goods, including the cost of labor, packaging, and shipping.',
       },
@@ -186,7 +202,7 @@ const gridOptions: VxeTableGridOptions<RowType> = {
       cellRender: { name: 'CellNumber', props: { type: 'danger' } },
       field: 'transactionFees',
       title: 'Transaction',
-      titleHelp: {
+      titlePrefix: {
         content:
           'Transaction fees are fees that a merchant must pay every time a customer makes a purchase with a credit card. These fees can vary depending on the credit card company and the merchant account provider.',
       },
@@ -197,7 +213,7 @@ const gridOptions: VxeTableGridOptions<RowType> = {
       cellRender: { name: 'CellNumber', props: { strong: true } },
       field: 'grossProfit',
       title: 'Gross Profit',
-      titleHelp: {
+      titlePrefix: {
         content:
           'Gross profit = Revenue - COGS - Shipping cost - Handling - Transaction',
       },
@@ -207,7 +223,7 @@ const gridOptions: VxeTableGridOptions<RowType> = {
     {
       slots: { default: 'gross-profit-margin' },
       title: 'Gross Profit Margin',
-      titleHelp: {
+      titlePrefix: {
         content: 'Gross profit margin = (Gross profit / Revenue) * 100%',
       },
       align: 'right',
@@ -242,9 +258,6 @@ const [Grid] = useVbenVxeGrid({ gridOptions, formOptions });
 <template>
   <Page auto-content-height>
     <Grid table-title="Order Report">
-      <template #toolbar-actions>
-        <Button class="ml-8" type="primary"> Calc all COGS </Button>
-      </template>
       <template #gross-profit-margin="{ row }">
         {{ calcPercentage(row.grossProfit, row.netPayment) }}%
       </template>
