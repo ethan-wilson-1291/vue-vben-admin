@@ -17,6 +17,10 @@ export function formatDateTime(time: number | string) {
   return formatDate(time, 'YYYY-MM-DD HH:mm:ss');
 }
 
+export function npFormatDateTime(time: number | string) {
+  return formatDate(time, 'MMM DD, YYYY');
+}
+
 export function isDate(value: any): value is Date {
   return value instanceof Date;
 }
