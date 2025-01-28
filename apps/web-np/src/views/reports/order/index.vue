@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { VbenFormProps } from '#/adapter/form';
-import type { VxeGridProps } from '#/adapter/vxe-table';
+import type { VxeTableGridOptions } from '#/adapter/vxe-table';
 
 import { Page } from '@vben/common-ui';
 
@@ -22,23 +22,25 @@ interface RowType {
 const formOptions: VbenFormProps = {
   // 默认展开
   collapsed: false,
-  fieldMappingTime: [['date', ['start', 'end']]],
+  fieldMappingTime: [['date', ['from', 'to']]],
   schema: [
     {
-      component: 'Input',
-      defaultValue: '1',
-      fieldName: 'category',
-      label: 'Category',
-    },
-    {
-      component: 'Input',
-      fieldName: 'productName',
-      label: 'ProductName',
-    },
-    {
-      component: 'Input',
-      fieldName: 'price',
-      label: 'Price',
+      component: 'RangePicker',
+      componentProps: {
+        // Show last week button
+        presets: [
+          { label: 'Today', value: [dayjs().add(-7, 'd'), dayjs()] },
+          { label: 'Last 7 Days', value: [dayjs().add(-7, 'd'), dayjs()] },
+          { label: 'Last 14 Days', value: [dayjs().add(-14, 'd'), dayjs()] },
+          { label: 'Last 30 Days', value: [dayjs().add(-30, 'd'), dayjs()] },
+          { label: 'Last 90 Days', value: [dayjs().add(-90, 'd'), dayjs()] },
+          { label: 'Last year', value: [dayjs().add(-365, 'd'), dayjs()] },
+          { label: 'Last 2 year', value: [dayjs().add(-730, 'd'), dayjs()] },
+        ],
+      },
+      defaultValue: [dayjs().subtract(30, 'days'), dayjs()],
+      fieldName: 'date',
+      label: 'Date',
     },
     {
       component: 'Select',
@@ -56,25 +58,25 @@ const formOptions: VbenFormProps = {
         ],
         placeholder: '请选择',
       },
-      fieldName: 'color',
-      label: 'Color',
+      fieldName: 'payment',
+      label: 'Payment',
     },
     {
-      component: 'RangePicker',
-      defaultValue: [dayjs().subtract(7, 'days'), dayjs()],
-      fieldName: 'date',
-      label: 'Date',
+      component: 'Input',
+      fieldName: 'name',
+      label: 'Order ID',
+      componentProps: {
+        placeholder: ' ',
+      },
     },
   ],
-  // 控制表单是否显示折叠按钮
   showCollapseButton: true,
-  // 是否在字段值改变时提交表单
   submitOnChange: true,
-  // 按下回车时是否提交表单
   submitOnEnter: false,
+  showDefaultActions: false,
 };
 
-const gridOptions: VxeGridProps<RowType> = {
+const gridOptions: VxeTableGridOptions<RowType> = {
   checkboxConfig: {
     highlight: true,
     labelField: 'id',
@@ -91,6 +93,23 @@ const gridOptions: VxeGridProps<RowType> = {
       title: 'Date',
       formatter: 'npFormatDateTime',
       minWidth: 110,
+    },
+    {
+      field: 'quantityTotal',
+      title: 'Items',
+      minWidth: 100,
+    },
+    {
+      field: 'quantityCurrent',
+      title: 'Current Items',
+      minWidth: 130,
+      visible: false,
+    },
+    {
+      field: 'quantityRefund',
+      title: 'Refund Items',
+      minWidth: 130,
+      visible: false,
     },
     {
       cellRender: { name: 'CellNumber', props: { type: 'success' } },
@@ -200,10 +219,11 @@ const gridOptions: VxeGridProps<RowType> = {
   keepSource: true,
   proxyConfig: {
     ajax: {
-      query: async ({ page }) => {
+      query: async ({ page }, formValues) => {
         return await getReportOrderApi({
           page: page.currentPage,
           pageSize: page.pageSize,
+          ...formValues,
         });
       },
     },
@@ -216,16 +236,14 @@ const gridOptions: VxeGridProps<RowType> = {
   },
 };
 
-const [Grid, gridApi] = useVbenVxeGrid({ gridOptions, formOptions });
+const [Grid] = useVbenVxeGrid({ gridOptions, formOptions });
 </script>
 
 <template>
   <Page auto-content-height>
-    <Grid table-title="Order" table-title-help="Helper">
-      <template #toolbar-tools>
-        <Button class="mr-2" type="primary" @click="() => gridApi.query()">
-          Calc all COGS
-        </Button>
+    <Grid table-title="Order Report">
+      <template #toolbar-actions>
+        <Button class="ml-8" type="primary"> Calc all COGS </Button>
       </template>
       <template #gross-profit-margin="{ row }">
         {{ calcPercentage(row.grossProfit, row.netPayment) }}%
