@@ -6,6 +6,10 @@ import { Button, Image, Typography } from 'ant-design-vue';
 
 import { useVbenForm } from './form';
 
+function numberWithCommas(x: any) {
+  return x.toString().replaceAll(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
 setupVbenVxeTable({
   configVxeTable: (vxeUI) => {
     vxeUI.setConfig({
@@ -62,14 +66,14 @@ setupVbenVxeTable({
         const { column, row } = params;
         const number = Number.parseFloat(row[column.field]).toFixed(2);
 
-        return h(Typography.Text, props, number);
+        return h(Typography.Text, props, numberWithCommas(number));
       },
       renderTableFooter(renderOpts, params) {
         const { props } = renderOpts;
         const { column, row } = params;
         const number = Number.parseFloat(row[column.field]).toFixed(2);
 
-        return h(Typography.Text, props, number);
+        return h(Typography.Text, props, numberWithCommas(number));
       },
     });
 
@@ -79,14 +83,14 @@ setupVbenVxeTable({
         const { column, row } = params;
         const number = `${row[column.field]}%`;
 
-        return h(Typography.Text, props, number);
+        return h(Typography.Text, props, numberWithCommas(number));
       },
       renderTableFooter(renderOpts, params) {
         const { props } = renderOpts;
         const { column, row } = params;
         const number = `${row[column.field]}%`;
 
-        return h(Typography.Text, props, number);
+        return h(Typography.Text, props, numberWithCommas(number));
       },
     });
     // 这里可以自行扩展 vxe-table 的全局配置，比如自定义格式化
