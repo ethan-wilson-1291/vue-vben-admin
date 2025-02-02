@@ -5,7 +5,7 @@ import { $t } from '#/locales';
 const routes: RouteRecordRaw[] = [
   {
     meta: {
-      icon: 'ic:baseline-view-in-ar',
+      icon: 'lsicon:column-line-outline',
       keepAlive: true,
       order: 1000,
       title: $t('reports.title'),
@@ -16,6 +16,7 @@ const routes: RouteRecordRaw[] = [
       {
         meta: {
           title: $t('reports.order.title'),
+          icon: 'fluent-mdl2:reservation-orders',
         },
         name: 'ReportsOrder',
         path: '/reports/order',

@@ -64,6 +64,30 @@ setupVbenVxeTable({
 
         return h(Typography.Text, props, number);
       },
+      renderTableFooter(renderOpts, params) {
+        const { props } = renderOpts;
+        const { column, row } = params;
+        const number = Number.parseFloat(row[column.field]).toFixed(2);
+
+        return h(Typography.Text, props, number);
+      },
+    });
+
+    vxeUI.renderer.add('CellPercentage', {
+      renderTableDefault(renderOpts, params) {
+        const { props } = renderOpts;
+        const { column, row } = params;
+        const number = `${row[column.field]}%`;
+
+        return h(Typography.Text, props, number);
+      },
+      renderTableFooter(renderOpts, params) {
+        const { props } = renderOpts;
+        const { column, row } = params;
+        const number = `${row[column.field]}%`;
+
+        return h(Typography.Text, props, number);
+      },
     });
     // 这里可以自行扩展 vxe-table 的全局配置，比如自定义格式化
     // vxeUI.formats.add

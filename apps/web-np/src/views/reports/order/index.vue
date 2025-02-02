@@ -7,7 +7,7 @@ import { Page } from '@vben/common-ui';
 import dayjs from 'dayjs';
 
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
-import { calcPercentage, getReportOrderApi } from '#/api';
+import { calcGrossProfitMargin, getReportOrderApi } from '#/api';
 
 interface RowType {
   category: string;
@@ -92,6 +92,23 @@ const formOptions: VbenFormProps = {
   showDefaultActions: false,
 };
 
+let footerData = {
+  name: '',
+  processedAt: '',
+  quantityTotal: '_',
+  grossSales: '_',
+  customerFee: '_',
+  discount: '_',
+  refundTotal: '_',
+  netPayment: '_',
+  shippingCosts: '_',
+  cogs: '_',
+  handlingFees: '_',
+  transactionFees: '_',
+  grossProfit: '_',
+  grossProfitMargin: '_',
+};
+
 const gridOptions: VxeTableGridOptions<RowType> = {
   checkboxConfig: {
     highlight: true,
@@ -100,8 +117,8 @@ const gridOptions: VxeTableGridOptions<RowType> = {
   columns: [
     {
       field: 'name',
+      footerClassName: 'font-bold',
       title: 'Order ID',
-      fixed: 'left',
       minWidth: 120,
     },
     {
@@ -112,23 +129,27 @@ const gridOptions: VxeTableGridOptions<RowType> = {
     },
     {
       field: 'quantityTotal',
+      footerClassName: 'font-bold',
       title: 'Items',
       minWidth: 100,
     },
     {
       field: 'quantityCurrent',
+      footerClassName: 'font-bold',
       title: 'Current Items',
       minWidth: 130,
       visible: false,
     },
     {
       field: 'quantityRefund',
+      footerClassName: 'font-bold',
       title: 'Refund Items',
       minWidth: 130,
       visible: false,
     },
     {
       cellRender: { name: 'CellNumber', props: { type: 'success' } },
+      footerClassName: 'font-bold',
       field: 'grossSales',
       title: 'Gross Sales',
       align: 'right',
@@ -136,6 +157,7 @@ const gridOptions: VxeTableGridOptions<RowType> = {
     },
     {
       cellRender: { name: 'CellNumber', props: { type: 'success' } },
+      footerClassName: 'font-bold',
       field: 'customerFee',
       title: 'Customer Paid',
       titlePrefix: {
@@ -146,6 +168,7 @@ const gridOptions: VxeTableGridOptions<RowType> = {
     },
     {
       cellRender: { name: 'CellNumber', props: { type: 'danger' } },
+      footerClassName: 'font-bold',
       field: 'discount',
       title: 'Discount',
       align: 'right',
@@ -153,6 +176,7 @@ const gridOptions: VxeTableGridOptions<RowType> = {
     },
     {
       cellRender: { name: 'CellNumber', props: { type: 'danger' } },
+      footerClassName: 'font-bold',
       field: 'refundTotal',
       title: 'Refund',
       align: 'right',
@@ -160,6 +184,7 @@ const gridOptions: VxeTableGridOptions<RowType> = {
     },
     {
       cellRender: { name: 'CellNumber', props: { strong: true } },
+      footerClassName: 'font-bold',
       field: 'netPayment',
       title: 'Revenue',
       titlePrefix: {
@@ -171,6 +196,7 @@ const gridOptions: VxeTableGridOptions<RowType> = {
     },
     {
       cellRender: { name: 'CellNumber', props: { type: 'danger' } },
+      footerClassName: 'font-bold',
       field: 'shippingCosts',
       title: 'Shipping Cost',
       align: 'right',
@@ -178,6 +204,7 @@ const gridOptions: VxeTableGridOptions<RowType> = {
     },
     {
       cellRender: { name: 'CellNumber', props: { type: 'danger' } },
+      footerClassName: 'font-bold',
       field: 'cogs',
       title: 'COGS',
       titlePrefix: {
@@ -189,6 +216,7 @@ const gridOptions: VxeTableGridOptions<RowType> = {
     },
     {
       cellRender: { name: 'CellNumber', props: { type: 'danger' } },
+      footerClassName: 'font-bold',
       field: 'handlingFees',
       title: 'Handling',
       titlePrefix: {
@@ -200,6 +228,7 @@ const gridOptions: VxeTableGridOptions<RowType> = {
     },
     {
       cellRender: { name: 'CellNumber', props: { type: 'danger' } },
+      footerClassName: 'font-bold',
       field: 'transactionFees',
       title: 'Transaction',
       titlePrefix: {
@@ -211,6 +240,7 @@ const gridOptions: VxeTableGridOptions<RowType> = {
     },
     {
       cellRender: { name: 'CellNumber', props: { strong: true } },
+      footerClassName: 'font-bold',
       field: 'grossProfit',
       title: 'Gross Profit',
       titlePrefix: {
@@ -221,7 +251,9 @@ const gridOptions: VxeTableGridOptions<RowType> = {
       minWidth: 150,
     },
     {
-      slots: { default: 'gross-profit-margin' },
+      cellRender: { name: 'CellPercentage', props: { strong: true } },
+      footerClassName: 'font-bold',
+      field: 'grossProfitMargin',
       title: 'Gross Profit Margin',
       titlePrefix: {
         content: 'Gross profit margin = (Gross profit / Revenue) * 100%',
@@ -236,11 +268,23 @@ const gridOptions: VxeTableGridOptions<RowType> = {
   proxyConfig: {
     ajax: {
       query: async ({ page }, formValues) => {
-        return await getReportOrderApi({
+        const res = await getReportOrderApi({
           page: page.currentPage,
           pageSize: page.pageSize,
           ...formValues,
         });
+
+        if (res.summary) {
+          footerData = res.summary;
+
+          // Reset some fields
+          footerData.name = `${res.total} order(s)`;
+          footerData.processedAt = '';
+          footerData.grossProfitMargin =
+            calcGrossProfitMargin(footerData).toString();
+        }
+
+        return res;
       },
     },
   },
@@ -250,6 +294,11 @@ const gridOptions: VxeTableGridOptions<RowType> = {
     refresh: true,
     zoom: true,
   },
+  showFooter: true,
+  footerMethod: () => {
+    return [footerData];
+  },
+  mergeFooterItems: [{ row: 0, col: 0, rowspan: 1, colspan: 2 }],
 };
 
 const [Grid] = useVbenVxeGrid({ gridOptions, formOptions });
@@ -257,10 +306,6 @@ const [Grid] = useVbenVxeGrid({ gridOptions, formOptions });
 
 <template>
   <Page auto-content-height>
-    <Grid table-title="Order Report">
-      <template #gross-profit-margin="{ row }">
-        {{ calcPercentage(row.grossProfit, row.netPayment) }}%
-      </template>
-    </Grid>
+    <Grid table-title="Order Report" />
   </Page>
 </template>
