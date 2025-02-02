@@ -7,8 +7,6 @@ import { resetAllStores } from '@vben/stores';
 
 import { useAuthStore } from '#/store';
 
-defineOptions({ name: 'Fallback404Demo' });
-
 const authStore = useAuthStore();
 const route = useRoute();
 

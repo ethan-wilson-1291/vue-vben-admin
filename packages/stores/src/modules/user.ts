@@ -1,5 +1,11 @@
 import { acceptHMRUpdate, defineStore } from 'pinia';
 
+enum ShopState {
+  PENDING = 'pending',
+  PROCESSED = 'processed',
+  PROCESSING = 'processing',
+}
+
 interface BasicUserInfo {
   [key: string]: any;
   /**
@@ -14,6 +20,53 @@ interface BasicUserInfo {
    * 用户角色
    */
   roles?: string[];
+
+  /**
+   * Customized by Ethan Wilson
+   */
+  settings: {
+    [key: string]: any;
+
+    cogsRate: number;
+    handlingFees: string;
+    regions: {
+      [key: string]: any;
+    };
+    transactionFees: {
+      [key: string]: any;
+    };
+  };
+
+  /**
+   * Customized by Ethan Wilson
+   */
+  shop: {
+    [key: string]: any;
+
+    countryCode: string;
+    countryName: string;
+    currency: string;
+    domain: string;
+    myshopifyDomain: string;
+    plan: string;
+  };
+
+  /**
+   * Customized by Ethan Wilson
+   */
+  state: {
+    [key: string]: any;
+
+    cogs_config: string;
+    customer_sync: string;
+    handling_fees_config: string;
+    onboard: string;
+    order_sync: string;
+    product_sync: string;
+    shipping_fee_config: string;
+    transaction_fee_config: string;
+  };
+
   /**
    * 用户id
    */
@@ -40,6 +93,9 @@ interface AccessState {
  */
 export const useUserStore = defineStore('core-user', {
   actions: {
+    isOnboarding() {
+      return this.userInfo?.state.onboard === ShopState.PROCESSING;
+    },
     setUserInfo(userInfo: BasicUserInfo | null) {
       // 设置用户信息
       this.userInfo = userInfo;

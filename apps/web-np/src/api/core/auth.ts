@@ -21,10 +21,7 @@ export namespace AuthApi {
   }
 }
 
-/**
- * 登录
- */
-export function loginApi(data: AuthApi.LoginParams) {
+export function generateAuthUrl(data: AuthApi.LoginParams) {
   const shopifyDomain: string =
     data.myshopifyDomain
       ?.replaceAll(/\s/g, '')
@@ -32,9 +29,7 @@ export function loginApi(data: AuthApi.LoginParams) {
       .replace('http://', '')
       .replace('.myshopify.com', '') ?? '';
 
-  const url: string = `${apiURL}/auth/generate?subdomain=${shopifyDomain}`;
-
-  window.location.href = url;
+  return `${apiURL}/auth/generate?subdomain=${shopifyDomain}`;
 }
 
 export async function loginApiViaShopifySession(data: any) {

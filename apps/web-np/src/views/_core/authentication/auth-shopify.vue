@@ -7,8 +7,6 @@ import { isShopifyEmbedded } from '@vben/utils';
 
 import { useAuthStore } from '#/store';
 
-defineOptions({ name: 'Fallback404Demo' });
-
 const authStore = useAuthStore();
 const route = useRoute();
 
