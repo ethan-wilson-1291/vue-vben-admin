@@ -76,9 +76,8 @@ export const useAuthStore = defineStore('auth', () => {
         if (accessStore.loginExpired) {
           accessStore.setLoginExpired(false);
         } else {
-          onSuccess
-            ? await onSuccess?.()
-            : await router.push(userInfo.homePath || DEFAULT_HOME_PATH);
+          const url = userInfo.homePath || DEFAULT_HOME_PATH;
+          onSuccess ? await onSuccess?.() : await router.push(url);
         }
 
         if (userInfo?.realName) {

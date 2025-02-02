@@ -93,9 +93,6 @@ interface AccessState {
  */
 export const useUserStore = defineStore('core-user', {
   actions: {
-    isOnboarding() {
-      return this.userInfo?.state.onboard === ShopState.PROCESSING;
-    },
     setUserInfo(userInfo: BasicUserInfo | null) {
       // 设置用户信息
       this.userInfo = userInfo;
@@ -107,6 +104,13 @@ export const useUserStore = defineStore('core-user', {
       this.userRoles = roles;
     },
   },
+
+  getters: {
+    isOnboarding(): boolean {
+      return this.userInfo?.state.onboard === ShopState.PROCESSING;
+    },
+  },
+
   state: (): AccessState => ({
     userInfo: null,
     userRoles: [],

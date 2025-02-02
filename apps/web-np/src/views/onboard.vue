@@ -3,5 +3,5 @@ import { VbenLoading } from '@vben/common-ui';
 </script>
 
 <template>
-  <VbenLoading spinning text="Onboardinh" />
+  <VbenLoading spinning text="...onboarding..." />
 </template>

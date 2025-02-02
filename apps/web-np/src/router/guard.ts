@@ -1,6 +1,6 @@
 import type { Router } from 'vue-router';
 
-import { DEFAULT_HOME_PATH, LOGIN_PATH } from '@vben/constants';
+import { DEFAULT_HOME_PATH, LOGIN_PATH, ONBOARD_PATH } from '@vben/constants';
 import { preferences } from '@vben/preferences';
 import { useAccessStore, useUserStore } from '@vben/stores';
 import { startProgress, stopProgress } from '@vben/utils';
@@ -95,6 +95,14 @@ function setupAccessGuard(router: Router) {
     // 当前登录用户拥有的角色标识列表
     const userInfo = userStore.userInfo || (await authStore.fetchUserInfo());
     const userRoles = userInfo.roles ?? [];
+
+    // Customized by Ethan Wilson
+    if (userStore.isOnboarding && to.path !== ONBOARD_PATH) {
+      return {
+        path: ONBOARD_PATH,
+        replace: true,
+      };
+    }
 
     // 生成菜单和路由
     const { accessibleMenus, accessibleRoutes } = await generateAccess({
