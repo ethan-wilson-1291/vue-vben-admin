@@ -80,7 +80,7 @@ export const useAuthStore = defineStore('auth', () => {
           onSuccess ? await onSuccess?.() : await router.push(url);
         }
 
-        if (userInfo?.realName) {
+        if (userInfo?.realName && !userStore.isOnboarding) {
           notification.success({
             description: `${$t('authentication.loginSuccessDesc')}:${userInfo?.realName}`,
             duration: 3,
