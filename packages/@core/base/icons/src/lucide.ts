@@ -2,6 +2,7 @@ export {
   ArrowDown,
   ArrowLeft,
   ArrowLeftToLine,
+  ArrowRight,
   ArrowRightLeft,
   ArrowRightToLine,
   ArrowUp,

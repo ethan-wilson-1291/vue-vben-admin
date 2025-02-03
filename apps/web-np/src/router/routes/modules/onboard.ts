@@ -12,7 +12,7 @@ const routes: RouteRecordRaw[] = [
     },
     name: 'Onboard',
     path: ONBOARD_PATH,
-    component: () => import('#/views/onboard.vue'),
+    component: () => import('#/views/onboard/index.vue'),
   },
 ];
 
