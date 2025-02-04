@@ -6,6 +6,28 @@ enum ShopState {
   PROCESSING = 'processing',
 }
 
+interface IShop {
+  [key: string]: any;
+  countryCode: string;
+  countryName: string;
+  currency: string;
+  domain: string;
+  myshopifyDomain: string;
+  plan: string;
+}
+
+interface IShopSettings {
+  [key: string]: any;
+  cogsRate: number;
+  handlingFees: any;
+  regions: {
+    [key: string]: any;
+  };
+  transactionFees: {
+    [key: string]: any;
+  };
+}
+
 interface BasicUserInfo {
   [key: string]: any;
   /**
@@ -24,32 +46,12 @@ interface BasicUserInfo {
   /**
    * Customized by Ethan Wilson
    */
-  settings: {
-    [key: string]: any;
-
-    cogsRate: number;
-    handlingFees: string;
-    regions: {
-      [key: string]: any;
-    };
-    transactionFees: {
-      [key: string]: any;
-    };
-  };
+  settings: IShopSettings;
 
   /**
    * Customized by Ethan Wilson
    */
-  shop: {
-    [key: string]: any;
-
-    countryCode: string;
-    countryName: string;
-    currency: string;
-    domain: string;
-    myshopifyDomain: string;
-    plan: string;
-  };
+  shop: IShop;
 
   /**
    * Customized by Ethan Wilson
@@ -108,6 +110,12 @@ export const useUserStore = defineStore('core-user', {
   getters: {
     isOnboarding(): boolean {
       return this.userInfo?.state.onboard === ShopState.PROCESSING;
+    },
+    settings(): IShopSettings {
+      return this.userInfo?.settings;
+    },
+    shop(): IShop {
+      return this.userInfo?.shop;
     },
   },
 

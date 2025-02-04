@@ -5,16 +5,22 @@ import { useRouter } from 'vue-router';
 import { Page, VbenButton } from '@vben/common-ui';
 import { DEFAULT_HOME_PATH } from '@vben/constants';
 import { ArrowLeft, ArrowRight, Check } from '@vben/icons';
+import { preferences } from '@vben/preferences';
 import { useUserStore } from '@vben/stores';
 
-import { Card, Flex, message, Steps, TypographyTitle } from 'ant-design-vue';
+import { Flex, message, Steps } from 'ant-design-vue';
 
 import { onboardFinished } from '#/api/onboard';
+
+import Cogs from './cogs.vue';
+import HandlingFees from './handlingFees.vue';
 
 const userStore = useUserStore();
 const router = useRouter();
 
 const state = reactive({
+  cogsRate: 0,
+  handlingFees: 0,
   currentStep: 0,
   loading: false,
 });
@@ -27,22 +33,8 @@ const prev = () => {
   state.currentStep--;
 };
 
-const steps = [
-  {
-    title: 'COGs & Handling Fees',
-    content: 'First-content',
-  },
-  {
-    title: 'Shipping Fees',
-    content: 'Second-content',
-  },
-  {
-    title: 'Transaction Fees',
-    content: 'Last-content',
-  },
-];
-
-const items = steps.map((item) => ({ key: item.title, title: item.title }));
+const steps = ['COGS', 'Handling Fees', 'Shipping Fees', 'Transaction Fees'];
+const items = steps.map((item) => ({ key: item, title: item }));
 
 const onboardFinish = (params: any) => {
   state.loading = true;
@@ -59,30 +51,38 @@ const onboardFinish = (params: any) => {
 };
 
 onMounted(() => {
+  // Redirect to the home page if the user has already completed the onboarding
   if (!userStore.isOnboarding) {
-    // Redirect to the dashboard
     router.push(DEFAULT_HOME_PATH);
   }
+
+  // Set the default values
+  state.cogsRate = userStore.settings.cogsRate * 100;
+  state.handlingFees = userStore.settings.handlingFees;
 });
 </script>
 
 <template>
-  <Page>
-    <Flex vertical justify="center" align="center" gap="large">
-      <TypographyTitle :level="3"> Setup </TypographyTitle>
+  <Page class="mt-10 h-full">
+    <Flex class="h-full" vertical align="center" gap="large">
+      <h2
+        class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0"
+      >
+        Welcome to the {{ preferences.app.name }}!
+      </h2>
 
-      <div class="w-full max-w-4xl">
-        <Steps :current="state.currentStep" :items="items" />
+      <small class="text-sm leading-none">
+        To calculate your profits, please provide your cost details.
+      </small>
 
-        <Card class="my-5">
-          {{ state.currentStep }}
-        </Card>
+      <div class="mt-5 w-full max-w-4xl">
+        <Steps :current="state.currentStep" :items="items" class="mb-10" />
 
-        <div class="flex items-center justify-center gap-5">
+        <div class="mb-10 flex items-center justify-center space-x-5">
           <VbenButton
             variant="outline"
             class="w-[150px]"
-            v-if="state.currentStep > 0"
+            :disabled="state.currentStep === 0"
             style="margin-left: 8px"
             @click="prev"
           >
@@ -111,6 +111,14 @@ onMounted(() => {
             <Check class="ml-2 size-4" />
           </VbenButton>
         </div>
+
+        <Cogs v-if="state.currentStep === 0" v-model="state.cogsRate" />
+        <HandlingFees
+          v-if="state.currentStep === 1"
+          v-model="state.handlingFees"
+        />
+
+        <!-- {{ state }} -->
       </div>
     </Flex>
   </Page>
