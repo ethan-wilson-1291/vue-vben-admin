@@ -16,13 +16,19 @@ interface IShop {
   plan: string;
 }
 
+interface IRegion {
+  countries: string[];
+  name: string;
+  shippingCostLevel: string;
+  shippingCostPrice: any;
+  uuid: string;
+}
+
 interface IShopSettings {
   [key: string]: any;
   cogsRate: number;
   handlingFees: any;
-  regions: {
-    [key: string]: any;
-  };
+  regions: IRegion[];
   transactionFees: {
     [key: string]: any;
   };
@@ -47,7 +53,6 @@ interface BasicUserInfo {
    * Customized by Ethan Wilson
    */
   settings: IShopSettings;
-
   /**
    * Customized by Ethan Wilson
    */
@@ -108,8 +113,14 @@ export const useUserStore = defineStore('core-user', {
   },
 
   getters: {
+    defaulRegion(): IRegion {
+      return this.settings.regions.find((region) => region.uuid === 'default');
+    },
     isOnboarding(): boolean {
       return this.userInfo?.state.onboard === ShopState.PROCESSING;
+    },
+    regions(): IRegion[] {
+      return this.settings.regions;
     },
     settings(): IShopSettings {
       return this.userInfo?.settings;

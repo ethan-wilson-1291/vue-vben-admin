@@ -22,7 +22,7 @@ const routes: RouteRecordRaw[] = [
       },
       {
         meta: {
-          title: 'Shipping Fees',
+          title: 'Shipping Costs',
           icon: 'carbon:car',
         },
         name: 'ShippingFees',

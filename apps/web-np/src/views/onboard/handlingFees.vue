@@ -3,6 +3,8 @@ import { useUserStore } from '@vben/stores';
 
 import { Card, InputNumber } from 'ant-design-vue';
 
+import { getCurrencySymbol } from '#/api';
+
 defineProps<{ modelValue: any }>();
 const emit = defineEmits(['update:modelValue']);
 
@@ -26,10 +28,11 @@ const handleChange = (e: any) => {
       <div class="font-semibold">Default handling fees for one product</div>
 
       <InputNumber
-        :addon-before="userStore.shop.currency"
+        :addon-after="userStore.shop.currency"
+        :prefix="getCurrencySymbol(userStore.shop.currency)"
         @change="handleChange"
         :value="modelValue"
-        class="max-w-32"
+        class="w-full max-w-40"
       />
     </div>
   </Card>
