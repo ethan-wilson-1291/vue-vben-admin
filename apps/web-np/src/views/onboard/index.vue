@@ -8,7 +8,7 @@ import { ArrowLeft, ArrowRight, Check } from '@vben/icons';
 import { preferences } from '@vben/preferences';
 import { useUserStore } from '@vben/stores';
 
-import { Flex, message, Steps } from 'ant-design-vue';
+import { Card, Flex, message, Steps } from 'ant-design-vue';
 
 import { onboardFinished } from '#/api/onboard';
 
@@ -112,12 +112,80 @@ onMounted(() => {
           </VbenButton>
         </div>
 
-        <Cogs v-if="state.currentStep === 0" v-model="state.cogsRate" />
-        <HandlingFees
-          v-if="state.currentStep === 1"
-          v-model="state.handlingFees"
-        />
+        <div class="flex flex-row space-x-5">
+          <Cogs v-if="state.currentStep === 0" v-model="state.cogsRate" />
+          <HandlingFees
+            v-if="state.currentStep === 1"
+            v-model="state.handlingFees"
+          />
 
+          <Card title="Example Order" class="min-w-56">
+            <div class="mb-2 flex justify-between font-bold">
+              <div>Net payment</div>
+              <div>85 {{ userStore.shop.currency }}</div>
+            </div>
+            <div class="flex justify-between">
+              <div>Total COGS</div>
+              <div>12 {{ userStore.shop.currency }}</div>
+            </div>
+            <div class="flex justify-between">
+              <div>Handling Fees</div>
+              <div>3 {{ userStore.shop.currency }}</div>
+            </div>
+            <div class="flex justify-between">
+              <div>Shipping Fees</div>
+              <div>5 {{ userStore.shop.currency }}</div>
+            </div>
+            <div class="flex justify-between">
+              <div>Transaction Fees</div>
+              <div>2 {{ userStore.shop.currency }}</div>
+            </div>
+            <div class="text-md mt-2 flex justify-between font-bold">
+              <div>Profit</div>
+              <div>{{ 85 - 12 - 3 - 5 - 2 }} {{ userStore.shop.currency }}</div>
+            </div>
+
+            <!-- <div class="font-semibold">Product B</div>
+            <ul class="list-inside list-disc">
+              <li>Revenue: $100</li>
+              <li>Total COGS: {{ state.cogsRate }}%</li>
+              <li>Handling Fees: ${{ state.handlingFees }}</li>
+              <li>Shipping Fees: $0</li>
+              <li>Transaction Fees: $0</li>
+              <li>Profit: $0</li>
+              <li class="flex items-center justify-between">
+                <span>+ Sale price</span>
+                <span class="text-right"> $100</span>
+              </li>
+            </ul> -->
+
+            <!-- <div class="mt-5 text-center">
+              <VbenButton variant="link" size="sm">View detail </VbenButton>
+            </div> -->
+            <!-- <Descriptions :column="1" bordered size="small">
+              <Descriptions.Item
+                label="Product Price"
+                :content-style="{
+                  margin: 0,
+                  padding: 0,
+                  'white-space': 'nowrap',
+                }"
+              >
+                100
+              </Descriptions.Item>
+              <Descriptions.Item label="COGS Rate">
+                {{ state.cogsRate }}%
+              </Descriptions.Item>
+              <Descriptions.Item label="Handling Fees">
+                {{ state.handlingFees }}
+              </Descriptions.Item>
+              <Descriptions.Item label="Shipping Fees">0</Descriptions.Item>
+              <Descriptions.Item label="Transaction Fees">0</Descriptions.Item>
+              <Descriptions.Item label="Total Cost">0</Descriptions.Item>
+              <Descriptions.Item label="Profit">0</Descriptions.Item>
+            </Descriptions> -->
+          </Card>
+        </div>
         <!-- {{ state }} -->
       </div>
     </Flex>
