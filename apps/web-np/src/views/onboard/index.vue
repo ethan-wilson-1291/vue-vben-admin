@@ -45,9 +45,17 @@ const prev = () => {
 const steps = ['COGS', 'Handling Fees', 'Shipping Costs', 'Transaction Fees'];
 const items = steps.map((item) => ({ key: item, title: item }));
 
-const onboardFinish = (params: any) => {
+const onboardFinish = () => {
   state.loading = true;
-  onboardFinished(params)
+  const payload = {
+    cogsRate: state.cogsRate / 100,
+    handlingFees: state.handlingFees,
+    shippingCostLevel: state.shippingFeeLevel,
+    shippingCostPrice: state.shippingFeePrice,
+    transactionFees: state.transactionFees,
+  };
+
+  onboardFinished(payload)
     .then(() => {
       message.success('Onboarding completed successfully');
 
