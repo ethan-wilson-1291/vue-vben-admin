@@ -7,28 +7,30 @@ import { Card } from 'ant-design-vue';
 
 import { formatMoney } from '#/utils';
 
+const props = defineProps<{
+  grossSales: number;
+  totalCogs: number;
+  totalQuantity: number;
+}>();
+
 const userStore = useUserStore();
 const currencySymbol = userStore.shop.currency;
-
 const state = reactive({
-  neyPayment: formatMoney(85.52, currencySymbol),
-  totalCOGS: formatMoney(12.3, currencySymbol),
   handlingFees: formatMoney(3.4, currencySymbol),
   shippingFees: formatMoney(5.2, currencySymbol),
   transactionFees: formatMoney(2.21, currencySymbol),
-  profit: formatMoney(85.52 - 12.3 - 3.4 - 5.2 - 2.21, currencySymbol),
 });
 </script>
 
 <template>
   <Card title="Example Order" class="min-w-56">
     <div class="mb-2 flex justify-between font-bold">
-      <div>Net payment</div>
-      <div>{{ state.neyPayment }}</div>
+      <div>Revenue</div>
+      <div>{{ formatMoney(props.grossSales, currencySymbol) }}</div>
     </div>
     <div class="flex justify-between">
       <div>Total COGS</div>
-      <div>{{ state.totalCOGS }}</div>
+      <div>{{ formatMoney(props.totalCogs, currencySymbol) }}</div>
     </div>
     <div class="flex justify-between">
       <div>Handling Fees</div>
@@ -44,7 +46,14 @@ const state = reactive({
     </div>
     <div class="text-md mt-2 flex justify-between font-bold">
       <div>Profit</div>
-      <div>{{ state.profit }}</div>
+      <div>
+        {{
+          formatMoney(
+            props.grossSales - props.totalCogs - 3.4 - 5.2 - 2.21,
+            currencySymbol,
+          )
+        }}
+      </div>
     </div>
   </Card>
 </template>

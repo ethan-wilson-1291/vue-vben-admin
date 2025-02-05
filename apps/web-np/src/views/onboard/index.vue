@@ -34,6 +34,15 @@ const state = reactive({
   transactionFees: [] as ITransactionFee[],
 });
 
+const sampleOrderState = reactive({
+  grossSales: 0,
+  totalQuantity: 0,
+  totalCogs: 0,
+});
+
+const steps = ['COGS', 'Handling Fees', 'Shipping Costs', 'Transaction Fees'];
+const items = steps.map((item) => ({ key: item, title: item }));
+
 const next = () => {
   state.currentStep++;
 };
@@ -42,8 +51,15 @@ const prev = () => {
   state.currentStep--;
 };
 
-const steps = ['COGS', 'Handling Fees', 'Shipping Costs', 'Transaction Fees'];
-const items = steps.map((item) => ({ key: item, title: item }));
+const handleOrderChange = (payload: {
+  grossSales: number;
+  totalCogs: number;
+  totalQuantity: number;
+}) => {
+  sampleOrderState.grossSales = payload.grossSales;
+  sampleOrderState.totalQuantity = payload.totalQuantity;
+  sampleOrderState.totalCogs = payload.totalCogs;
+};
 
 const onboardFinish = () => {
   state.loading = true;
@@ -135,7 +151,11 @@ onMounted(() => {
         </div>
 
         <div class="flex flex-row space-x-5">
-          <Cogs v-if="state.currentStep === 0" v-model="state.cogsRate" />
+          <Cogs
+            v-if="state.currentStep === 0"
+            v-model="state.cogsRate"
+            @total-cogs-change="handleOrderChange"
+          />
           <HandlingFees
             v-if="state.currentStep === 1"
             v-model="state.handlingFees"
@@ -152,9 +172,14 @@ onMounted(() => {
             :model-value="state.transactionFees"
           />
 
-          <ExampleOrder />
+          <ExampleOrder
+            :gross-sales="sampleOrderState.grossSales"
+            :total-cogs="sampleOrderState.totalCogs"
+            :total-quantity="sampleOrderState.totalQuantity"
+          />
         </div>
         <!-- {{ state }} -->
+        <!-- {{ sampleOrderState }} -->
       </div>
     </Flex>
   </Page>
