@@ -16,16 +16,29 @@ interface IShop {
   plan: string;
 }
 
+export interface ITransactionFee {
+  externalFeePercentage: any;
+  fixedFee: any;
+  handleName: string;
+  name: string;
+  percentageFee: any;
+  uuid: string;
+}
+
+interface IRegion {
+  countries: string[];
+  name: string;
+  shippingCostLevel: any;
+  shippingCostPrice: any;
+  uuid: string;
+}
+
 interface IShopSettings {
   [key: string]: any;
   cogsRate: number;
   handlingFees: any;
-  regions: {
-    [key: string]: any;
-  };
-  transactionFees: {
-    [key: string]: any;
-  };
+  regions: IRegion[];
+  transactionFees: ITransactionFee[];
 }
 
 interface BasicUserInfo {
@@ -47,7 +60,6 @@ interface BasicUserInfo {
    * Customized by Ethan Wilson
    */
   settings: IShopSettings;
-
   /**
    * Customized by Ethan Wilson
    */
@@ -108,14 +120,23 @@ export const useUserStore = defineStore('core-user', {
   },
 
   getters: {
+    defaulRegion(): IRegion {
+      return this.settings.regions.find((region) => region.uuid === 'default');
+    },
     isOnboarding(): boolean {
       return this.userInfo?.state.onboard === ShopState.PROCESSING;
+    },
+    regions(): IRegion[] {
+      return this.settings.regions;
     },
     settings(): IShopSettings {
       return this.userInfo?.settings;
     },
     shop(): IShop {
       return this.userInfo?.shop;
+    },
+    transactionFees(): ITransactionFee[] {
+      return this.settings.transactionFees;
     },
   },
 

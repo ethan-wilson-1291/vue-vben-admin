@@ -39,6 +39,7 @@ catalog:
   '@tanstack/vue-query': ^5.62.16
   '@tanstack/vue-store': ^0.7.0
   '@types/archiver': ^6.0.3
+  '@types/currency-formatter': ^1.5.4
   '@types/eslint': ^9.6.1
   '@types/html-minifier-terser': ^7.0.2
   '@types/jsonwebtoken': ^9.0.7
@@ -62,6 +63,7 @@ catalog:
   '@vueuse/core': ^12.3.0
   '@vueuse/integrations': ^12.3.0
   '@shopify/app-bridge': ^3.7.10
+  currency-formatter: ^1.5.5
   ant-design-vue: ^4.2.6
   archiver: ^7.0.1
   autoprefixer: ^10.4.20

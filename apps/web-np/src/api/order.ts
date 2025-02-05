@@ -1,6 +1,5 @@
 import { requestClient } from '#/api/request';
-
-import { calcGrossProfitMargin } from './helpers';
+import { calcGrossProfitMargin } from '#/utils';
 
 export namespace DemoTableApi {
   export interface PageFetchParams {

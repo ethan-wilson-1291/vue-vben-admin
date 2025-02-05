@@ -2,7 +2,8 @@ import type { VxeTableGridOptions } from '#/adapter/vxe-table';
 
 import { ref } from 'vue';
 
-import { calcGrossProfitMargin, getReportOrderApi } from '#/api';
+import { getReportOrderApi } from '#/api';
+import { calcGrossProfitMargin } from '#/utils';
 
 const settings = ref({
   footerData: <any>null,
