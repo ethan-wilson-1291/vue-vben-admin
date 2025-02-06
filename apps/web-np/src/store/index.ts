@@ -1,2 +1,3 @@
 export * from './auth';
-export * from './shopifyAppBridge';
+export * from './shop';
+export * from './shop-settings';

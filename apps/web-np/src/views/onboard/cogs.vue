@@ -1,62 +1,35 @@
 <script lang="ts" setup>
-import { onMounted, reactive } from 'vue';
-
-import { useUserStore } from '@vben/stores';
+import { onBeforeMount } from 'vue';
 
 import { Card, InputNumber, Slider } from 'ant-design-vue';
 
-import { formatMoney, getCurrencySymbol } from '#/utils';
+import { useShopStore } from '#/store';
+import { formatMoney } from '#/utils';
 
-const props = defineProps<{ modelValue: any }>();
-const emit = defineEmits(['update:modelValue', 'totalCogsChange']);
+import { onboardForm, sampleOrder } from './service';
 
-const userStore = useUserStore();
-const marks = {
-  0: '0%',
-  75: '75%',
-  100: '100%',
-};
-
-const state = reactive({
-  productAPrice: 10,
-  productAQuantity: 1,
-
-  productBPrice: 45,
-  productBQuantity: 2,
-});
-
-const currencySymbol = getCurrencySymbol(userStore.shop.currency);
+const shopStore = useShopStore();
 
 const calcCogs = (price: number, quantity: number) => {
-  return (price * quantity * props.modelValue) / 100;
+  return (price * quantity * onboardForm.cogsRate) / 100;
 };
 
-const handleTotalCogsChange = () => {
-  const totalCogs =
-    calcCogs(state.productAPrice, state.productAQuantity) +
-    calcCogs(state.productBPrice, state.productBQuantity);
-
-  const grossSales =
-    state.productAPrice * state.productAQuantity +
-    state.productBPrice * state.productBQuantity;
-
-  emit('totalCogsChange', {
-    grossSales,
-    totalQuantity: state.productAQuantity + state.productBQuantity,
-    totalCogs,
+const handleCogsRateChange = () => {
+  sampleOrder.lineItems.forEach((item) => {
+    item.cogs = calcCogs(item.price, item.quantity);
   });
+
+  sampleOrder.totalCogs =
+    sampleOrder.lineItems.reduce((acc, item) => acc + item.cogs, 0) || 0;
+
+  sampleOrder.grossSales = sampleOrder.lineItems.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0,
+  );
 };
 
-const handleChange = (e: any) => {
-  handleTotalCogsChange();
-
-  emit('update:modelValue', e);
-};
-
-onMounted(() => {
-  setTimeout(() => {
-    handleTotalCogsChange();
-  }, 500);
+onBeforeMount(() => {
+  handleCogsRateChange();
 });
 </script>
 
@@ -78,11 +51,19 @@ onMounted(() => {
     </p>
 
     <div class="mt-5 flex">
-      <div class="font-semibold">Set default COGS rate for one order item:</div>
-      <div class="ml-5 font-bold">{{ modelValue }}%</div>
+      <div class="font-semibold">Set default COGS rate for 1 item:</div>
+      <div class="ml-5 font-bold">{{ onboardForm.cogsRate }}%</div>
     </div>
 
-    <Slider @change="handleChange" :value="modelValue" :marks="marks" />
+    <Slider
+      @change="handleCogsRateChange"
+      v-model:value="onboardForm.cogsRate"
+      :marks="{
+        0: '0%',
+        75: '75%',
+        100: '100%',
+      }"
+    />
 
     <table class="min-w-full divide-y">
       <thead>
@@ -100,62 +81,31 @@ onMounted(() => {
         </tr>
       </thead>
       <tbody class="divide-y">
-        <tr>
+        <tr v-for="(item, index) in sampleOrder.lineItems" :key="index">
           <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">
-            T-Shirt
+            {{ item.name }}
           </td>
           <td class="px-6 py-4 text-start text-sm">
             <InputNumber
-              :prefix="currencySymbol"
-              v-model:value="state.productAPrice"
-              @change="handleTotalCogsChange"
+              :min="0"
+              :prefix="shopStore.shop.currencySymbol"
+              v-model:value="item.price"
+              @change="handleCogsRateChange"
               class="w-full max-w-48"
               size="small"
             />
           </td>
           <td class="px-6 py-4 text-start text-sm">
             <InputNumber
+              :min="0"
               class="w-full max-w-48"
               size="small"
-              v-model:value="state.productAQuantity"
-              @change="handleTotalCogsChange"
-            />
-          </td>
-          <td class="px-6 py-4 text-end text-sm">
-            {{
-              formatMoney(
-                calcCogs(state.productAPrice, state.productAQuantity),
-                userStore.shop.currency,
-              )
-            }}
-          </td>
-        </tr>
-        <tr>
-          <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">Shoes</td>
-          <td class="px-6 py-4 text-start text-sm">
-            <InputNumber
-              :prefix="currencySymbol"
-              v-model:value="state.productBPrice"
-              @change="handleTotalCogsChange"
-              class="w-full max-w-48"
-              size="small"
-            />
-          </td>
-          <td class="px-6 py-4 text-start text-sm">
-            <InputNumber
-              class="w-full max-w-48"
-              size="small"
-              v-model:value="state.productBQuantity"
-              @change="handleTotalCogsChange"
+              v-model:value="item.quantity"
+              @change="handleCogsRateChange"
             />
           </td>
           <td class="px-6 py-4 text-end text-sm">
-            {{
-              formatMoney(
-                calcCogs(state.productBPrice, state.productBQuantity),
-                userStore.shop.currency,
-              )
-            }}
+            {{ formatMoney(item.cogs, shopStore.shop.currency) }}
           </td>
         </tr>
       </tbody>

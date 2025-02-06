@@ -1,55 +1,49 @@
 <script lang="ts" setup>
-import { reactive } from 'vue';
-
-import { useUserStore } from '@vben/stores';
-
 import { Card } from 'ant-design-vue';
 
+import { useShopStore } from '#/store';
 import { formatMoney } from '#/utils';
 
-const props = defineProps<{
-  grossSales: number;
-  totalCogs: number;
-  totalQuantity: number;
-}>();
+import { sampleOrder } from './service';
 
-const userStore = useUserStore();
-const currencySymbol = userStore.shop.currency;
-const state = reactive({
-  handlingFees: formatMoney(3.4, currencySymbol),
-  shippingFees: formatMoney(5.2, currencySymbol),
-  transactionFees: formatMoney(2.21, currencySymbol),
-});
+const shopStore = useShopStore();
+const currencySymbol = shopStore.shop.currencySymbol;
 </script>
 
 <template>
   <Card title="Example Order" class="min-w-56">
     <div class="mb-2 flex justify-between font-bold">
       <div>Revenue</div>
-      <div>{{ formatMoney(props.grossSales, currencySymbol) }}</div>
+      <div>{{ formatMoney(sampleOrder.grossSales, currencySymbol) }}</div>
     </div>
     <div class="flex justify-between">
       <div>Total COGS</div>
-      <div>{{ formatMoney(props.totalCogs, currencySymbol) }}</div>
+      <div>{{ formatMoney(sampleOrder.totalCogs, currencySymbol) }}</div>
     </div>
     <div class="flex justify-between">
       <div>Handling Fees</div>
-      <div>{{ state.handlingFees }}</div>
+      <div>
+        {{ formatMoney(sampleOrder.totalHandlingFees, currencySymbol) }}
+      </div>
     </div>
     <div class="flex justify-between">
       <div>Shipping Costs</div>
-      <div>{{ state.shippingFees }}</div>
+      <div>{{ formatMoney(sampleOrder.shippingFees, currencySymbol) }}</div>
     </div>
     <div class="flex justify-between">
       <div>Transaction Fees</div>
-      <div>{{ state.transactionFees }}</div>
+      <div>{{ formatMoney(sampleOrder.transactionFees, currencySymbol) }}</div>
     </div>
     <div class="text-md mt-2 flex justify-between font-bold">
       <div>Profit</div>
       <div>
         {{
           formatMoney(
-            props.grossSales - props.totalCogs - 3.4 - 5.2 - 2.21,
+            sampleOrder.grossSales -
+              sampleOrder.totalCogs -
+              sampleOrder.totalHandlingFees -
+              sampleOrder.shippingFees -
+              sampleOrder.transactionFees,
             currencySymbol,
           )
         }}

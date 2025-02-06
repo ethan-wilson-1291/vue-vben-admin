@@ -1,46 +1,5 @@
 import { acceptHMRUpdate, defineStore } from 'pinia';
 
-enum ShopState {
-  PENDING = 'pending',
-  PROCESSED = 'processed',
-  PROCESSING = 'processing',
-}
-
-interface IShop {
-  [key: string]: any;
-  countryCode: string;
-  countryName: string;
-  currency: string;
-  domain: string;
-  myshopifyDomain: string;
-  plan: string;
-}
-
-export interface ITransactionFee {
-  externalFeePercentage: any;
-  fixedFee: any;
-  handleName: string;
-  name: string;
-  percentageFee: any;
-  uuid: string;
-}
-
-interface IRegion {
-  countries: string[];
-  name: string;
-  shippingCostLevel: any;
-  shippingCostPrice: any;
-  uuid: string;
-}
-
-interface IShopSettings {
-  [key: string]: any;
-  cogsRate: number;
-  handlingFees: any;
-  regions: IRegion[];
-  transactionFees: ITransactionFee[];
-}
-
 interface BasicUserInfo {
   [key: string]: any;
   /**
@@ -55,31 +14,6 @@ interface BasicUserInfo {
    * 用户角色
    */
   roles?: string[];
-
-  /**
-   * Customized by Ethan Wilson
-   */
-  settings: IShopSettings;
-  /**
-   * Customized by Ethan Wilson
-   */
-  shop: IShop;
-
-  /**
-   * Customized by Ethan Wilson
-   */
-  state: {
-    [key: string]: any;
-
-    cogs_config: string;
-    customer_sync: string;
-    handling_fees_config: string;
-    onboard: string;
-    order_sync: string;
-    product_sync: string;
-    shipping_fee_config: string;
-    transaction_fee_config: string;
-  };
 
   /**
    * 用户id
@@ -119,26 +53,7 @@ export const useUserStore = defineStore('core-user', {
     },
   },
 
-  getters: {
-    defaulRegion(): IRegion {
-      return this.settings.regions.find((region) => region.uuid === 'default');
-    },
-    isOnboarding(): boolean {
-      return this.userInfo?.state.onboard === ShopState.PROCESSING;
-    },
-    regions(): IRegion[] {
-      return this.settings.regions;
-    },
-    settings(): IShopSettings {
-      return this.userInfo?.settings;
-    },
-    shop(): IShop {
-      return this.userInfo?.shop;
-    },
-    transactionFees(): ITransactionFee[] {
-      return this.settings.transactionFees;
-    },
-  },
+  getters: {},
 
   state: (): AccessState => ({
     userInfo: null,

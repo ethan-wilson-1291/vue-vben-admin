@@ -1,16 +1,13 @@
 <script lang="ts" setup>
-import type { ITransactionFee } from '@vben/stores';
-
-import { useUserStore } from '@vben/stores';
+import type { ITransactionFee } from '#/store';
 
 import { Card, InputNumber } from 'ant-design-vue';
 
-import { getCurrencySymbol } from '#/utils';
+import { useShopStore } from '#/store';
 
 defineProps<{ modelValue: ITransactionFee[] }>();
 
-const userStore = useUserStore();
-const currencySymbol = getCurrencySymbol(userStore.shop.currency);
+const shopStore = useShopStore();
 </script>
 
 <template>
@@ -45,7 +42,7 @@ const currencySymbol = getCurrencySymbol(userStore.shop.currency);
           </td>
           <td class="px-6 py-4 text-start text-sm">
             <InputNumber
-              :prefix="currencySymbol"
+              :prefix="shopStore.shop.currencySymbol"
               v-model:value="item.fixedFee"
               class="w-full max-w-48"
               size="small"

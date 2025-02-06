@@ -6,7 +6,7 @@ import { useAccessStore, useUserStore } from '@vben/stores';
 import { startProgress, stopProgress } from '@vben/utils';
 
 import { accessRoutes, coreRouteNames } from '#/router/routes';
-import { useAuthStore } from '#/store';
+import { useAuthStore, useShopStore } from '#/store';
 
 import { generateAccess } from './access';
 import { loginPaths } from './routes/core';
@@ -49,6 +49,7 @@ function setupAccessGuard(router: Router) {
   router.beforeEach(async (to, from) => {
     const accessStore = useAccessStore();
     const userStore = useUserStore();
+    const shopStore = useShopStore();
     const authStore = useAuthStore();
 
     // 基本路由，这些路由不需要进入权限拦截
@@ -97,7 +98,7 @@ function setupAccessGuard(router: Router) {
     const userRoles = userInfo.roles ?? [];
 
     // Customized by Ethan Wilson
-    if (userStore.isOnboarding && to.path !== ONBOARD_PATH) {
+    if (shopStore.isOnboarding && to.path !== ONBOARD_PATH) {
       return {
         path: ONBOARD_PATH,
         replace: true,

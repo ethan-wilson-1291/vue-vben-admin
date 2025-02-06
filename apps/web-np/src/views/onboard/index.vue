@@ -1,43 +1,31 @@
 <script lang="ts" setup>
-import type { ITransactionFee } from '@vben/stores';
-
-import { onMounted, reactive } from 'vue';
+import { onBeforeMount, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { Page, VbenButton } from '@vben/common-ui';
 import { DEFAULT_HOME_PATH } from '@vben/constants';
 import { ArrowLeft, ArrowRight, Check } from '@vben/icons';
 import { preferences } from '@vben/preferences';
-import { useUserStore } from '@vben/stores';
 
 import { Flex, message, Steps } from 'ant-design-vue';
 
 import { onboardFinished } from '#/api/onboard';
-import { ShippingCostLevel } from '#/constants';
+import { useShopSettingStore, useShopStore } from '#/store';
 
 import Cogs from './cogs.vue';
 import ExampleOrder from './exampleOrder.vue';
 import HandlingFees from './handlingFees.vue';
+import { onboardForm } from './service';
 import ShippingFees from './shippingFees.vue';
 import TransactionFees from './transactionFees.vue';
 
-const userStore = useUserStore();
+const shopStore = useShopStore();
+const shopSettingStore = useShopSettingStore();
 const router = useRouter();
 
 const state = reactive({
-  cogsRate: 0,
-  handlingFees: 0,
-  shippingFeeLevel: ShippingCostLevel.QUANTITY,
-  shippingFeePrice: 0,
   currentStep: 0,
   loading: false,
-  transactionFees: [] as ITransactionFee[],
-});
-
-const sampleOrderState = reactive({
-  grossSales: 0,
-  totalQuantity: 0,
-  totalCogs: 0,
 });
 
 const steps = ['COGS', 'Handling Fees', 'Shipping Costs', 'Transaction Fees'];
@@ -51,24 +39,14 @@ const prev = () => {
   state.currentStep--;
 };
 
-const handleOrderChange = (payload: {
-  grossSales: number;
-  totalCogs: number;
-  totalQuantity: number;
-}) => {
-  sampleOrderState.grossSales = payload.grossSales;
-  sampleOrderState.totalQuantity = payload.totalQuantity;
-  sampleOrderState.totalCogs = payload.totalCogs;
-};
-
 const onboardFinish = () => {
   state.loading = true;
   const payload = {
-    cogsRate: state.cogsRate / 100,
-    handlingFees: state.handlingFees,
-    shippingCostLevel: state.shippingFeeLevel,
-    shippingCostPrice: state.shippingFeePrice,
-    transactionFees: state.transactionFees,
+    cogsRate: onboardForm.cogsRate / 100,
+    handlingFees: onboardForm.handlingFees,
+    shippingCostLevel: onboardForm.shippingFeeLevel,
+    shippingCostPrice: onboardForm.shippingFeePrice,
+    transactionFees: onboardForm.transactionFees,
   };
 
   onboardFinished(payload)
@@ -83,20 +61,20 @@ const onboardFinish = () => {
     });
 };
 
-onMounted(() => {
+onBeforeMount(() => {
   // Redirect to the home page if the user has already completed the onboarding
-  if (!userStore.isOnboarding) {
+  if (!shopStore.isOnboarding) {
     router.push(DEFAULT_HOME_PATH);
   }
 
   // Set the default values
-  const defaultRegion = userStore.defaulRegion;
+  const defaultRegion = shopSettingStore.defaulRegion;
+  onboardForm.shippingFeeLevel = defaultRegion.shippingCostLevel;
+  onboardForm.shippingFeePrice = defaultRegion.shippingCostPrice;
 
-  state.cogsRate = userStore.settings.cogsRate * 100;
-  state.handlingFees = userStore.settings.handlingFees;
-  state.shippingFeeLevel = defaultRegion.shippingCostLevel;
-  state.shippingFeePrice = defaultRegion.shippingCostPrice;
-  state.transactionFees = userStore.transactionFees;
+  onboardForm.cogsRate = shopSettingStore.cogsRate * 100;
+  onboardForm.handlingFees = shopSettingStore.handlingFees;
+  onboardForm.transactionFees = shopSettingStore.transactionFees;
 });
 </script>
 
@@ -151,35 +129,22 @@ onMounted(() => {
         </div>
 
         <div class="flex flex-row space-x-5">
-          <Cogs
-            v-if="state.currentStep === 0"
-            v-model="state.cogsRate"
-            @total-cogs-change="handleOrderChange"
-          />
-          <HandlingFees
-            v-if="state.currentStep === 1"
-            v-model="state.handlingFees"
-          />
-          <ShippingFees
-            v-if="state.currentStep === 2"
-            :level="state.shippingFeeLevel"
-            :price="state.shippingFeePrice"
-            @level-change="state.shippingFeeLevel = $event"
-            @price-change="state.shippingFeePrice = $event"
-          />
+          <Cogs v-if="state.currentStep === 0" />
+          <HandlingFees v-if="state.currentStep === 1" />
+          <ShippingFees v-if="state.currentStep === 2" />
           <TransactionFees
             v-if="state.currentStep === 3"
             :model-value="state.transactionFees"
           />
 
-          <ExampleOrder
-            :gross-sales="sampleOrderState.grossSales"
-            :total-cogs="sampleOrderState.totalCogs"
-            :total-quantity="sampleOrderState.totalQuantity"
-          />
+          <ExampleOrder />
         </div>
-        <!-- {{ state }} -->
-        <!-- {{ sampleOrderState }} -->
+        <!-- <div>
+          {{ onboardForm }}
+        </div>
+        <div>
+          {{ sampleOrder }}
+        </div> -->
       </div>
     </Flex>
   </Page>

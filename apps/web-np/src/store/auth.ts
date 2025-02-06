@@ -1,4 +1,4 @@
-import type { Recordable, UserInfo } from '@vben/types';
+import type { Recordable } from '@vben/types';
 
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -18,95 +18,66 @@ import {
 } from '#/api';
 import { $t } from '#/locales';
 
+import { useShopStore } from './shop';
+import { useShopSettingStore } from './shop-settings';
+
 export const useAuthStore = defineStore('auth', () => {
   const accessStore = useAccessStore();
   const userStore = useUserStore();
+  const shopStore = useShopStore();
+  const shopSettingStore = useShopSettingStore();
+
   const router = useRouter();
 
   const loginLoading = ref(false);
 
-  /**
-   * 异步处理登录操作
-   * Asynchronously handle the login process
-   * @param params 登录表单数据
-   */
   async function authLogin(params: Recordable<any>) {
     loginLoading.value = true;
-
-    const url = generateAuthUrl(params);
-
-    window.location.href = url;
+    window.location.href = generateAuthUrl(params);
   }
 
-  async function authLoginViaShopifySession(
-    params: Recordable<any>,
-    onSuccess?: () => Promise<void> | void,
-  ) {
+  async function authLoginViaShopifySession(params: Recordable<any>) {
     loginLoading.value = true;
-
     const { accessToken } = await loginApiViaShopifySession(params);
 
-    return await authLoginViaToken(accessToken, onSuccess);
+    return await authLoginViaToken(accessToken);
   }
 
-  async function authLoginViaToken(
-    accessToken: string,
-    onSuccess?: () => Promise<void> | void,
-  ) {
-    let userInfo: null | UserInfo = null;
+  async function authLoginViaToken(accessToken: string) {
+    loginLoading.value = true;
+    accessStore.setAccessToken(accessToken);
 
-    try {
-      loginLoading.value = true;
+    const [fetchUserInfoResult, accessCodes] = await Promise.all([
+      fetchUserInfo(),
+      getAccessCodesApi(),
+    ]);
 
-      // 如果成功获取到 accessToken
-      if (accessToken) {
-        accessStore.setAccessToken(accessToken);
+    const userInfo: any = fetchUserInfoResult;
 
-        // 获取用户信息并存储到 accessStore 中
-        const [fetchUserInfoResult, accessCodes] = await Promise.all([
-          fetchUserInfo(),
-          getAccessCodesApi(),
-        ]);
+    accessStore.setAccessCodes(accessCodes);
 
-        userInfo = fetchUserInfoResult;
-
-        userStore.setUserInfo(userInfo);
-        accessStore.setAccessCodes(accessCodes);
-
-        if (accessStore.loginExpired) {
-          accessStore.setLoginExpired(false);
-        } else {
-          const url = userInfo.homePath || DEFAULT_HOME_PATH;
-          onSuccess ? await onSuccess?.() : await router.push(url);
-        }
-
-        if (userInfo?.realName && !userStore.isOnboarding) {
-          notification.success({
-            description: `${$t('authentication.loginSuccessDesc')}:${userInfo?.realName}`,
-            duration: 3,
-            message: $t('authentication.loginSuccess'),
-          });
-        }
-      }
-    } finally {
-      loginLoading.value = false;
+    if (accessStore.loginExpired) {
+      accessStore.setLoginExpired(false);
+    } else {
+      const url = userInfo.homePath || DEFAULT_HOME_PATH;
+      await router.push(url);
     }
 
-    return {
-      userInfo,
-    };
+    if (userInfo?.realName && !shopStore.isOnboarding) {
+      notification.success({
+        description: `${$t('authentication.loginSuccessDesc')}:${userInfo?.realName}`,
+        duration: 3,
+        message: $t('authentication.loginSuccess'),
+      });
+    }
   }
 
   async function logout(redirect: boolean = true) {
-    try {
-      await logoutApi();
-    } catch {
-      // 不做任何处理
-    }
+    await logoutApi();
+
     resetAllStores();
     accessStore.setLoginExpired(false);
 
-    // 回登录页带上当前路由地址
     await router.replace({
       path: LOGIN_PATH,
       query: redirect
@@ -118,10 +89,14 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function fetchUserInfo() {
-    let userInfo: null | UserInfo = null;
-    userInfo = await getUserInfoApi();
-    userStore.setUserInfo(userInfo);
-    return userInfo;
+    const res = await getUserInfoApi();
+
+    // Update stores
+    userStore.setUserInfo(res as any);
+    shopStore.setStates(res.shop, res.state);
+    shopSettingStore.setStates(res.settings);
+
+    return res;
   }
 
   function $reset() {

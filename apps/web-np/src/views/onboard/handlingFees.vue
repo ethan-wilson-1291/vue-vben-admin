@@ -1,18 +1,33 @@
 <script lang="ts" setup>
-import { useUserStore } from '@vben/stores';
+import { onBeforeMount } from 'vue';
 
 import { Card, InputNumber } from 'ant-design-vue';
 
-import { getCurrencySymbol } from '#/utils';
+import { useShopStore } from '#/store';
+import { formatMoney } from '#/utils';
 
-defineProps<{ modelValue: any }>();
-const emit = defineEmits(['update:modelValue']);
+import { onboardForm, sampleOrder } from './service';
 
-const userStore = useUserStore();
+const shopStore = useShopStore();
+const currencySymbol = shopStore.shop.currencySymbol;
 
-const handleChange = (e: any) => {
-  emit('update:modelValue', e);
+const calcFees = (quantity: number) => {
+  return quantity * onboardForm.handlingFees;
 };
+
+const handleChange = () => {
+  sampleOrder.lineItems.forEach((item) => {
+    item.handlingFees = calcFees(item.quantity);
+  });
+
+  sampleOrder.totalHandlingFees =
+    sampleOrder.lineItems.reduce((acc, item) => acc + item.handlingFees, 0) ||
+    0;
+};
+
+onBeforeMount(() => {
+  handleChange();
+});
 </script>
 
 <template>
@@ -25,15 +40,45 @@ const handleChange = (e: any) => {
     </p>
 
     <div class="mt-5 flex justify-between">
-      <div class="font-semibold">Default handling fees for one order item</div>
+      <div class="font-semibold">Default handling fees for 1 item</div>
 
       <InputNumber
-        :addon-after="userStore.shop.currency"
-        :prefix="getCurrencySymbol(userStore.shop.currency)"
+        :min="0"
+        :addon-after="shopStore.shop.currency"
+        :prefix="currencySymbol"
+        v-model:value="onboardForm.handlingFees"
         @change="handleChange"
-        :value="modelValue"
         class="w-full max-w-40"
       />
     </div>
+
+    <table class="min-w-full divide-y">
+      <thead>
+        <tr>
+          <th class="px-6 py-3 text-start text-xs font-medium uppercase">
+            Example product
+          </th>
+          <th class="px-6 py-3 text-start text-xs font-medium uppercase">
+            Quantity
+          </th>
+          <th class="px-6 py-3 text-end text-xs font-medium uppercase">
+            Hanlding fees
+          </th>
+        </tr>
+      </thead>
+      <tbody class="divide-y">
+        <tr v-for="(item, index) in sampleOrder.lineItems" :key="index">
+          <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">
+            {{ item.name }}
+          </td>
+          <td class="px-6 py-4 text-start text-sm">
+            {{ item.quantity }}
+          </td>
+          <td class="px-6 py-4 text-end text-sm">
+            {{ formatMoney(item.handlingFees, shopStore.shop.currency) }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </Card>
 </template>
