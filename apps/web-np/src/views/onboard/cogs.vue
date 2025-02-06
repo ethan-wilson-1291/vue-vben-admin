@@ -78,7 +78,7 @@ onMounted(() => {
     </p>
 
     <div class="mt-5 flex">
-      <div class="font-semibold">Set default COGS rate for one product:</div>
+      <div class="font-semibold">Set default COGS rate for one order item:</div>
       <div class="ml-5 font-bold">{{ modelValue }}%</div>
     </div>
 

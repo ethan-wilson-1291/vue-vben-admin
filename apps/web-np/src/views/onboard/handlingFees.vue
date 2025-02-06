@@ -25,7 +25,7 @@ const handleChange = (e: any) => {
     </p>
 
     <div class="mt-5 flex justify-between">
-      <div class="font-semibold">Default handling fees for one product</div>
+      <div class="font-semibold">Default handling fees for one order item</div>
 
       <InputNumber
         :addon-after="userStore.shop.currency"
