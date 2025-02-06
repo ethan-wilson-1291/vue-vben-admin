@@ -1809,6 +1809,9 @@ importers:
       '@vben-core/typings':
         specifier: workspace:*
         version: link:../@core/base/typings
+      currency-formatter:
+        specifier: 'catalog:'
+        version: 1.5.9
       pinia:
         specifier: ^2.3.0
         version: 2.3.0(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3))
