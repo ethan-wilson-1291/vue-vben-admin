@@ -12,6 +12,7 @@ export const sampleOrder = reactive({
   shippingFees: 0,
   transactionFees: 0,
   totalWeight: 0.5,
+  paymentGatewayName: 'other',
 
   lineItems: [
     {

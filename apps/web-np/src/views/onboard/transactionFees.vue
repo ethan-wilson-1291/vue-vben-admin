@@ -1,23 +1,39 @@
 <script lang="ts" setup>
-import type { ITransactionFee } from '#/store';
+import { onBeforeMount } from 'vue';
 
 import { Card, InputNumber } from 'ant-design-vue';
 
 import { useShopStore } from '#/store';
+import { formatMoney } from '#/utils';
 
-defineProps<{ modelValue: ITransactionFee[] }>();
+import { onboardForm, sampleOrder } from './service';
 
 const shopStore = useShopStore();
+
+const handleChange = () => {
+  const feeInfo = onboardForm.transactionFees.find(
+    (item) => item.handleName === sampleOrder.paymentGatewayName,
+  );
+
+  if (!feeInfo) {
+    sampleOrder.transactionFees = 0;
+    return;
+  }
+
+  sampleOrder.transactionFees =
+    (sampleOrder.grossSales *
+      (feeInfo.percentageFee + feeInfo.externalFeePercentage)) /
+      100 +
+    feeInfo.fixedFee;
+};
+
+onBeforeMount(() => {
+  handleChange();
+});
 </script>
 
 <template>
   <Card title="Transaction Fees">
-    <p>
-      A transaction fee is a charge for processing a financial transaction, such
-      as a purchase or money transfer. Transaction fees are usually collected by
-      payment processors or merchant banks.
-    </p>
-
     <table class="min-w-full divide-y">
       <thead>
         <tr>
@@ -36,12 +52,13 @@ const shopStore = useShopStore();
         </tr>
       </thead>
       <tbody class="divide-y">
-        <tr v-for="item in modelValue" :key="item.uuid">
+        <tr v-for="item in onboardForm.transactionFees" :key="item.uuid">
           <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">
             {{ item.name }}
           </td>
           <td class="px-6 py-4 text-start text-sm">
             <InputNumber
+              @change="handleChange"
               :prefix="shopStore.shop.currencySymbol"
               v-model:value="item.fixedFee"
               class="w-full max-w-48"
@@ -50,6 +67,7 @@ const shopStore = useShopStore();
           </td>
           <td class="px-6 py-4 text-start text-sm">
             <InputNumber
+              @change="handleChange"
               addon-after="%"
               v-model:value="item.percentageFee"
               class="w-full max-w-48"
@@ -58,11 +76,50 @@ const shopStore = useShopStore();
           </td>
           <td class="px-6 py-4 text-start text-sm">
             <InputNumber
+              @change="handleChange"
               addon-after="%"
               v-model:value="item.externalFeePercentage"
               class="w-full max-w-48"
               size="small"
             />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="mt-2">
+      An order will incur a transaction fee depending on the payment gateway
+      used, such as Stripe, PayPal, Shopify Payments, etc.
+    </div>
+
+    <table class="min-w-full divide-y">
+      <thead>
+        <tr>
+          <th class="px-6 py-3 text-start text-xs font-medium uppercase">
+            Example order
+          </th>
+          <th class="px-6 py-3 text-start text-xs font-medium uppercase">
+            Net Payment
+          </th>
+          <th class="px-6 py-3 text-start text-xs font-medium uppercase">
+            Payment gateways
+          </th>
+          <th class="px-6 py-3 text-end text-xs font-medium uppercase">
+            Transaction Fees
+          </th>
+        </tr>
+      </thead>
+      <tbody class="divide-y">
+        <tr>
+          <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">#9999</td>
+          <td class="px-6 py-4 text-start text-sm">
+            {{ formatMoney(sampleOrder.grossSales, shopStore.shop.currency) }}
+          </td>
+          <td class="px-6 py-4 text-start text-sm">Other</td>
+          <td class="px-6 py-4 text-end text-sm font-bold">
+            {{
+              formatMoney(sampleOrder.transactionFees, shopStore.shop.currency)
+            }}
           </td>
         </tr>
       </tbody>

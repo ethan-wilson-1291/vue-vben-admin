@@ -80,7 +80,7 @@ onBeforeMount(() => {
       />
     </div>
 
-    <table class="min-w-full divide-y">
+    <table class="mt-5 min-w-full divide-y">
       <thead>
         <tr>
           <th class="px-6 py-3 text-start text-xs font-medium uppercase">
@@ -106,7 +106,7 @@ onBeforeMount(() => {
           <td class="px-6 py-4 text-start text-sm">
             {{ sampleOrder.totalWeight }}
           </td>
-          <td class="px-6 py-4 text-end text-sm">
+          <td class="px-6 py-4 text-end text-sm font-bold">
             {{ formatMoney(sampleOrder.shippingFees, shopStore.shop.currency) }}
           </td>
         </tr>

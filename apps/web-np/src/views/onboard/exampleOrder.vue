@@ -13,7 +13,7 @@ const currencySymbol = shopStore.shop.currencySymbol;
 <template>
   <Card title="Example Order" class="min-w-56">
     <div class="mb-2 flex justify-between font-bold">
-      <div>Revenue</div>
+      <div>Net Payment</div>
       <div>{{ formatMoney(sampleOrder.grossSales, currencySymbol) }}</div>
     </div>
     <div class="flex justify-between">

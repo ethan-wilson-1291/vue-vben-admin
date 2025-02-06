@@ -52,7 +52,7 @@ onBeforeMount(() => {
       />
     </div>
 
-    <table class="min-w-full divide-y">
+    <table class="mt-2 min-w-full divide-y">
       <thead>
         <tr>
           <th class="px-6 py-3 text-start text-xs font-medium uppercase">
@@ -74,7 +74,7 @@ onBeforeMount(() => {
           <td class="px-6 py-4 text-start text-sm">
             {{ item.quantity }}
           </td>
-          <td class="px-6 py-4 text-end text-sm">
+          <td class="px-6 py-4 text-end text-sm font-bold">
             {{ formatMoney(item.handlingFees, shopStore.shop.currency) }}
           </td>
         </tr>

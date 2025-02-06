@@ -132,10 +132,7 @@ onBeforeMount(() => {
           <Cogs v-if="state.currentStep === 0" />
           <HandlingFees v-if="state.currentStep === 1" />
           <ShippingFees v-if="state.currentStep === 2" />
-          <TransactionFees
-            v-if="state.currentStep === 3"
-            :model-value="state.transactionFees"
-          />
+          <TransactionFees v-if="state.currentStep === 3" />
 
           <ExampleOrder />
         </div>

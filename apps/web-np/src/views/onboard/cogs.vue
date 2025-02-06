@@ -104,7 +104,7 @@ onBeforeMount(() => {
               @change="handleCogsRateChange"
             />
           </td>
-          <td class="px-6 py-4 text-end text-sm">
+          <td class="px-6 py-4 text-end text-sm font-bold">
             {{ formatMoney(item.cogs, shopStore.shop.currency) }}
           </td>
         </tr>
