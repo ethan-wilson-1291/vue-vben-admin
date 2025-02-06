@@ -23,3 +23,11 @@ export function getCurrencySymbol(currency: string) {
 export function formatMoney(val: any, currency: any) {
   return format(val, { code: currency });
 }
+
+export function toPercentage(rate: number): number {
+  return Number.parseFloat((rate * 100).toFixed(2));
+}
+
+export function toRate(number: number): number {
+  return number / 100;
+}

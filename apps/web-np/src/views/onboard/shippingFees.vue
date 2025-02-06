@@ -68,7 +68,7 @@ onBeforeMount(() => {
     </div>
 
     <div class="mt-2 flex justify-between">
-      <div class="font-semibold">Default shipping cost for one unit</div>
+      <div class="font-semibold">Default shipping cost for 1 unit</div>
 
       <InputNumber
         :addon-after="getUnitName()"

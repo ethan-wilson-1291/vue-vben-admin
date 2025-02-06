@@ -11,6 +11,7 @@ import { Flex, message, Steps } from 'ant-design-vue';
 
 import { onboardFinished } from '#/api/onboard';
 import { useShopSettingStore, useShopStore } from '#/store';
+import { toPercentage, toRate } from '#/utils';
 
 import Cogs from './cogs.vue';
 import ExampleOrder from './exampleOrder.vue';
@@ -42,11 +43,15 @@ const prev = () => {
 const onboardFinish = () => {
   state.loading = true;
   const payload = {
-    cogsRate: onboardForm.cogsRate / 100,
+    cogsRate: toRate(onboardForm.cogsRate),
     handlingFees: onboardForm.handlingFees,
     shippingCostLevel: onboardForm.shippingFeeLevel,
     shippingCostPrice: onboardForm.shippingFeePrice,
-    transactionFees: onboardForm.transactionFees,
+    transactionFees: onboardForm.transactionFees.map((item) => ({
+      ...item,
+      percentageFee: toRate(item.percentageFee),
+      externalFeePercentage: toRate(item.externalFeePercentage),
+    })),
   };
 
   onboardFinished(payload)
@@ -72,9 +77,16 @@ onBeforeMount(() => {
   onboardForm.shippingFeeLevel = defaultRegion.shippingCostLevel;
   onboardForm.shippingFeePrice = defaultRegion.shippingCostPrice;
 
-  onboardForm.cogsRate = shopSettingStore.cogsRate * 100;
+  onboardForm.cogsRate = toPercentage(shopSettingStore.cogsRate);
   onboardForm.handlingFees = shopSettingStore.handlingFees;
-  onboardForm.transactionFees = shopSettingStore.transactionFees;
+  onboardForm.transactionFees = shopSettingStore.transactionFees.map(
+    (item) => ({
+      ...item,
+      fixedFee: item.fixedFee,
+      percentageFee: toPercentage(item.percentageFee),
+      externalFeePercentage: toPercentage(item.externalFeePercentage),
+    }),
+  );
 });
 </script>
 

@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia';
 
 export interface ITransactionFee {
-  externalFeePercentage: any;
-  fixedFee: any;
+  externalFeePercentage: number;
+  fixedFee: number;
   handleName: string;
   name: string;
-  percentageFee: any;
+  percentageFee: number;
   uuid: string;
 }
 

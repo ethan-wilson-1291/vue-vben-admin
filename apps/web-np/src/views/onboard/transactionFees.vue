@@ -4,7 +4,7 @@ import { onBeforeMount } from 'vue';
 import { Card, InputNumber } from 'ant-design-vue';
 
 import { useShopStore } from '#/store';
-import { formatMoney } from '#/utils';
+import { formatMoney, toRate } from '#/utils';
 
 import { onboardForm, sampleOrder } from './service';
 
@@ -19,12 +19,9 @@ const handleChange = () => {
     sampleOrder.transactionFees = 0;
     return;
   }
-
+  const rate = toRate(feeInfo.percentageFee + feeInfo.externalFeePercentage);
   sampleOrder.transactionFees =
-    (sampleOrder.grossSales *
-      (feeInfo.percentageFee + feeInfo.externalFeePercentage)) /
-      100 +
-    feeInfo.fixedFee;
+    sampleOrder.grossSales * rate + feeInfo.fixedFee;
 };
 
 onBeforeMount(() => {
@@ -58,6 +55,7 @@ onBeforeMount(() => {
           </td>
           <td class="px-6 py-4 text-start text-sm">
             <InputNumber
+              :min="0"
               @change="handleChange"
               :prefix="shopStore.shop.currencySymbol"
               v-model:value="item.fixedFee"
@@ -67,6 +65,7 @@ onBeforeMount(() => {
           </td>
           <td class="px-6 py-4 text-start text-sm">
             <InputNumber
+              :min="0"
               @change="handleChange"
               addon-after="%"
               v-model:value="item.percentageFee"
@@ -76,6 +75,7 @@ onBeforeMount(() => {
           </td>
           <td class="px-6 py-4 text-start text-sm">
             <InputNumber
+              :min="0"
               @change="handleChange"
               addon-after="%"
               v-model:value="item.externalFeePercentage"
@@ -87,9 +87,9 @@ onBeforeMount(() => {
       </tbody>
     </table>
 
-    <div class="mt-2">
-      An order will incur a transaction fee depending on the payment gateway
-      used, such as Stripe, PayPal, Shopify Payments, etc.
+    <div class="my-5 text-center text-xs italic">
+      * Transaction fees = Fixed fees + [Net payment * (Percentage fees +
+      Shopify external fees) / 100]
     </div>
 
     <table class="min-w-full divide-y">
