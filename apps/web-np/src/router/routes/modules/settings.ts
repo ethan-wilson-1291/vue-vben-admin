@@ -9,7 +9,7 @@ const routes: RouteRecordRaw[] = [
       title: 'Settings',
     },
     name: 'settings',
-    path: '/setttings',
+    path: '/settings',
     children: [
       {
         meta: {
@@ -17,8 +17,9 @@ const routes: RouteRecordRaw[] = [
           icon: 'lsicon:goods-outline',
         },
         name: 'COGSAndHandling',
-        path: '/setttings/cogs-and-handling',
-        component: () => import('#/views/reports/order/index.vue'),
+        path: '/settings/cogs-and-handling',
+        component: () =>
+          import('#/views/settings/cogs-handling-fees/index.vue'),
       },
       {
         meta: {
@@ -26,7 +27,7 @@ const routes: RouteRecordRaw[] = [
           icon: 'carbon:car',
         },
         name: 'ShippingFees',
-        path: '/setttings/shipping-fees',
+        path: '/settings/shipping-fees',
         component: () => import('#/views/reports/order/index.vue'),
       },
       {
@@ -35,7 +36,7 @@ const routes: RouteRecordRaw[] = [
           icon: 'mdi:account-payment-outline',
         },
         name: 'Transaction Fees',
-        path: '/setttings/transcation-fees',
+        path: '/settings/transcation-fees',
         component: () => import('#/views/reports/order/index.vue'),
       },
       {
@@ -43,8 +44,8 @@ const routes: RouteRecordRaw[] = [
           title: 'Zones',
           icon: 'file-icons:moment-timezone',
         },
-        name: 'Zones',
-        path: '/setttings/zones',
+        name: 'settings.zones',
+        path: '/settings/zones',
         component: () => import('#/views/reports/order/index.vue'),
       },
       {
@@ -53,7 +54,7 @@ const routes: RouteRecordRaw[] = [
           icon: 'fluent-mdl2:all-currency',
         },
         name: 'Currency',
-        path: '/setttings/currency',
+        path: '/settings/currency',
         component: () => import('#/views/reports/order/index.vue'),
       },
     ],
