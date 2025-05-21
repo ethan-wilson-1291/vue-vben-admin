@@ -90,7 +90,6 @@ export const formOptions: VbenFormProps = {
     ['date', ['fromDate', 'toDate']],
     ['week', ['fromWeek', 'toWeek']],
     ['month', ['fromMonth', 'toMonth']],
-    ['quarter', ['fromQuarter', 'toQuarter']],
   ],
   schema: [
     {

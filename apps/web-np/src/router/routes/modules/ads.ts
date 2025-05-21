@@ -28,6 +28,16 @@ const routes: RouteRecordRaw[] = [
         path: '/ads/ad-costs',
         component: () => import('#/views/ads/ad-costs/index.vue'),
       },
+      {
+        meta: {
+          title: 'Ad Cost Insights',
+          order: 20,
+          icon: 'clarity:analytics-outline-badged',
+        },
+        name: 'ads.insights',
+        path: '/ads/ad-insights',
+        component: () => import('#/views/ads/ad-insights/index.vue'),
+      },
     ],
   },
 ];
