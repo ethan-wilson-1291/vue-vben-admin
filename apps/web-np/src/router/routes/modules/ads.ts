@@ -12,7 +12,7 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         meta: {
-          title: 'Ad Accounts',
+          title: 'Ad Connections',
           icon: 'ant-design:link-outlined',
         },
         name: 'ads.accounts',
@@ -21,7 +21,7 @@ const routes: RouteRecordRaw[] = [
       },
       {
         meta: {
-          title: 'Ad Costs',
+          title: 'Ad Cost Rules',
           icon: 'ant-design:dollar-circle-twotone',
         },
         name: 'ads.costs',

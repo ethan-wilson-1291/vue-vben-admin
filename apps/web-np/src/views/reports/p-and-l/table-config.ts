@@ -22,6 +22,9 @@ export const gridOptions: VxeTableGridOptions = {
   pagerConfig: {
     enabled: false,
   },
+  rowConfig: {
+    isHover: true,
+  },
   toolbarConfig: {
     search: true,
     refresh: true,
