@@ -10,6 +10,7 @@ import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import { useShopStore } from '#/store';
 
 import FormModalOrderDetail from './form-modal-order-detail.vue';
+import FormModalOrderSync from './form-modal-order-sync.vue';
 import FormModalRecalculate from './form-modal-recalculate.vue';
 import { orderTableOptions } from './table-config';
 import { formOptions } from './table-filter';
@@ -26,6 +27,10 @@ const [FormContentModal, formContentModalApi] = useVbenModal({
 
 const [FormOrdDetailModal, formDetailModalApi] = useVbenModal({
   connectedComponent: FormModalOrderDetail,
+});
+
+const [FormOrderSyncModal, formOrderSyncModalApi] = useVbenModal({
+  connectedComponent: FormModalOrderSync,
 });
 
 onMounted(() => {
@@ -59,6 +64,7 @@ const handleDetailOpen = (order: any) => {
   <Page auto-content-height>
     <FormContentModal />
     <FormOrdDetailModal />
+    <FormOrderSyncModal />
     <Grid>
       <template #name="{ row }">
         <VbenButton size="sm" variant="link" @click="handleDetailOpen(row)">
@@ -68,7 +74,17 @@ const handleDetailOpen = (order: any) => {
 
       <template #toolbar-tools>
         <VbenButton
-          class="mr-2"
+          class="mr-2 w-[150px]"
+          size="sm"
+          type="primary"
+          @click="formOrderSyncModalApi.open()"
+        >
+          <IconifyIcon class="mr-2 size-4" icon="ant-design:sync-outlined" />
+          Sync orders
+        </VbenButton>
+
+        <VbenButton
+          class="mr-2 w-[150px]"
           size="sm"
           type="primary"
           @click="formContentModalApi.open()"
