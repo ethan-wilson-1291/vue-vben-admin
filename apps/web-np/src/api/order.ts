@@ -35,3 +35,9 @@ export async function orderGetPAndLReport(params: any) {
 export async function orderGetDetail(params: any) {
   return requestClient.get('/api/order/detail', { params });
 }
+
+export async function orderDelete(ids: any) {
+  return requestClient.delete('/api/order', {
+    data: { ids },
+  });
+}

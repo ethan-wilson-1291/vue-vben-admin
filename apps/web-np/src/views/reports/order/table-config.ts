@@ -65,6 +65,7 @@ export const orderTableOptions: VxeTableGridOptions = {
   },
   columns: [
     {
+      type: 'checkbox',
       slots: { default: 'name' },
       field: 'name',
       footerClassName: 'font-semibold',
