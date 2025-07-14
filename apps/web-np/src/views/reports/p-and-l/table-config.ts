@@ -147,7 +147,10 @@ export const formOptions: VbenFormProps = {
         },
         triggerFields: ['groupBy'],
       },
-      defaultValue: [dayjsInGMT().subtract(7, 'days'), dayjsInGMT()],
+      defaultValue: [
+        dayjsInGMT().add(-6, 'days').endOf('day'),
+        dayjsInGMT().endOf('day'),
+      ],
       fieldName: 'date',
       label: 'Date',
     },
@@ -175,7 +178,10 @@ export const formOptions: VbenFormProps = {
         },
         triggerFields: ['groupBy'],
       },
-      defaultValue: [dayjsInGMT().subtract(7, 'days'), dayjsInGMT()],
+      defaultValue: [
+        dayjsInGMT().add(-6, 'days').endOf('day'),
+        dayjsInGMT().endOf('day'),
+      ],
       fieldName: 'week',
       label: 'Weekly',
     },

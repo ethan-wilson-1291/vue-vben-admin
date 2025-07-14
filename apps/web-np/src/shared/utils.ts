@@ -121,57 +121,57 @@ export const getDatePreset = (
     {
       id: 'today',
       label: 'Today',
-      value: dayjsInGMT().add(-1, 'd'),
+      value: dayjsInGMT().endOf('day'),
     },
     {
       id: 'last7Days',
       label: 'Last 7 Days',
-      value: dayjsInGMT().add(-7, 'd'),
+      value: dayjsInGMT().add(-6, 'd').endOf('day'),
     },
     {
       id: 'last14Days',
       label: 'Last 14 Days',
-      value: dayjsInGMT().add(-14, 'd'),
+      value: dayjsInGMT().add(-13, 'd').endOf('day'),
     },
     {
       id: 'lastMonth',
-      label: 'Last 30 Days',
-      value: dayjsInGMT().add(-30, 'd'),
+      label: 'Last 1 Month',
+      value: dayjsInGMT().add(-1, 'month').add(1, 'day').endOf('day'),
     },
     {
       id: 'last2Months',
-      label: 'Last 60 Days',
-      value: dayjsInGMT().add(-60, 'd'),
+      label: 'Last 2 Months',
+      value: dayjsInGMT().add(-2, 'month').add(1, 'day').endOf('day'),
     },
     {
       id: 'last3Months',
-      label: 'Last 90 Days',
-      value: dayjsInGMT().add(-90, 'd'),
+      label: 'Last 3 Months',
+      value: dayjsInGMT().add(-3, 'month').add(1, 'day').endOf('day'),
     },
     {
       id: 'last6Months',
-      label: 'Last 180 Days',
-      value: dayjsInGMT().add(-180, 'd'),
+      label: 'Last 6 Months',
+      value: dayjsInGMT().add(-6, 'month').add(1, 'day').endOf('day'),
     },
     {
       id: 'lastYear',
-      label: 'Last 365 Days',
-      value: dayjsInGMT().add(-365, 'd'),
+      label: 'Last 1 Year',
+      value: dayjsInGMT().add(-1, 'year').add(1, 'day').endOf('day'),
     },
     {
       id: 'previousMonth',
       label: 'Previous Month',
-      value: dayjsInGMT().add(-1, 'month').startOf('month'),
+      value: dayjsInGMT().add(-1, 'month').startOf('month').endOf('day'),
     },
     {
       id: 'thisMonth',
       label: 'This Month',
-      value: dayjsInGMT().startOf('month'),
+      value: dayjsInGMT().startOf('month').endOf('day'),
     },
     {
       id: 'thisYear',
       label: 'This Year',
-      value: dayjsInGMT().startOf('year'),
+      value: dayjsInGMT().startOf('year').endOf('day'),
     },
   ];
 

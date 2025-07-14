@@ -15,7 +15,11 @@ import { addExtraFields } from '../reports/p-and-l/table-config';
 const shopStore = useShopStore();
 
 export const state = reactive({
-  dateRange: [dayjsInGMT().subtract(1, 'month'), dayjsInGMT()],
+  dateRange: [dayjsInGMT().endOf('day'), dayjsInGMT().endOf('day')],
+  // previousDateRange: [
+  //   dayjsInGMT().add(-2, 'month').add(1, 'day').endOf('day'),
+  //   dayjsInGMT().add(-1, 'month').endOf('day'),
+  // ],
   rawOrders: [] as any[],
   rawCustomCosts: [] as any[],
   orderLoading: false,
