@@ -11,7 +11,7 @@ import {
 } from '@vben/common-ui';
 import { IconifyIcon } from '@vben/icons';
 
-import { Switch } from 'ant-design-vue';
+import { Image, Switch } from 'ant-design-vue';
 
 const mailTemplates = reactive([
   {
@@ -19,6 +19,8 @@ const mailTemplates = reactive([
     title: 'Weekly Report',
     checked: true,
     loading: false,
+    showSample: false,
+    sampleImage: '/static/images-sample-mail/weekly-report.png',
   },
   // {
   //   type: 'monthly',
@@ -27,11 +29,6 @@ const mailTemplates = reactive([
   //   loading: false,
   // },
 ]);
-
-const viewSample = (type: string) => {
-  // eslint-disable-next-line no-console
-  console.log(type);
-};
 
 const sendSample = (type: string) => {
   // eslint-disable-next-line no-console
@@ -67,10 +64,19 @@ const toggleSetting = (item: any, checked: boolean) => {
           </CardHeader>
 
           <CardContent class="flex items-center gap-2">
+            <Image
+              :style="{ display: 'none' }"
+              :preview="{
+                visible: item.showSample,
+                onVisibleChange: (visible: boolean) =>
+                  (item.showSample = visible),
+              }"
+              :src="item.sampleImage"
+            />
             <VbenButton
               variant="secondary"
               class="w-full"
-              @click="viewSample(item.type)"
+              @click="item.showSample = true"
             >
               <IconifyIcon class="mr-2 size-5" icon="ant-design:eye-twotone" />
               View Sample Email
