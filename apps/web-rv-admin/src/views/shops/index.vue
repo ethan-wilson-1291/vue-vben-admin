@@ -2,10 +2,10 @@
 import { Page, VbenButton } from '@vben/common-ui';
 import { IconifyIcon } from '@vben/icons';
 
-import { Dropdown, Menu, MenuItem, Tag } from 'ant-design-vue';
+import { Dropdown, Menu, MenuItem, message, Modal, Tag } from 'ant-design-vue';
 
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
-import { shopGenerateToken } from '#/api';
+import { shopGenerateToken, shopResetOnboarding, shopUpgradePlan } from '#/api';
 
 import { orderTableOptions } from './table-config';
 import { formOptions } from './table-filter';
@@ -24,11 +24,81 @@ const handleLogin = async (row: any) => {
   gridApi.setLoading(false);
   window.open(url, '_blank');
 };
+
+const handleExportReviews = (row: any) => {
+  const url = `${import.meta.env.VITE_GLOB_API_URL}/admin/shop/${row.id}/export-reviews`;
+  window.open(url, '_blank');
+};
+
+const handleResetOnboarding = (row: any) => {
+  Modal.confirm({
+    title: `Reset Onboarding for ${row.name}`,
+    okText: 'Yes',
+    cancelText: 'No',
+    onOk: async () => {
+      gridApi.setLoading(true);
+
+      shopResetOnboarding(row.id).finally(() => {
+        gridApi.setLoading(false);
+
+        message.success('Reset onboarding successfully');
+      });
+    },
+  });
+};
+
+const handleUpgradePlan = (row: any) => {
+  Modal.confirm({
+    title: `Upgrade to Free Pro Plan for ${row.name}`,
+    okText: 'Yes',
+    cancelText: 'No',
+    onOk: () => {
+      gridApi.setLoading(true);
+
+      shopUpgradePlan(row.id, true).finally(() => {
+        gridApi.query().finally(() => {
+          gridApi.setLoading(false);
+          message.success('Upgraded to Free Pro Plan successfully.');
+        });
+      });
+    },
+  });
+};
+
+const handleDowngradePlan = (row: any) => {
+  Modal.confirm({
+    title: `Downgrade to Free Plan for ${row.name}`,
+    okText: 'Yes',
+    cancelText: 'No',
+    onOk: () => {
+      gridApi.setLoading(true);
+
+      shopUpgradePlan(row.id, false).finally(() => {
+        gridApi.query().finally(() => {
+          gridApi.setLoading(false);
+          message.success('Downgraded to Free Plan successfully.');
+        });
+      });
+    },
+  });
+};
+
+const redirectToQueueManagement = () => {
+  const url = `${import.meta.env.VITE_GLOB_API_URL}/horizon-jobs`;
+  window.open(url, '_blank');
+};
 </script>
 
 <template>
   <Page auto-content-height>
     <Grid>
+      <template #toolbar-tools>
+        <VbenButton size="sm" type="primary" @click="redirectToQueueManagement">
+          <IconifyIcon class="mr-2 size-4" icon="ant-design:export-outlined" />
+          Queue Management
+        </VbenButton>
+      </template>
+
       <template #id="{ row }">
         <div class="flex flex-col gap-0">
           <div class="font-semibold">
@@ -103,22 +173,6 @@ const handleLogin = async (row: any) => {
       </template>
 
       <template #action="{ row }: { row: any }">
-        <!-- <VbenButton
-          @click="handleLogin(row)"
-          :loading="row.loading"
-          size="sm"
-          variant="outline"
-        >
-          <div class="flex items-center justify-start space-x-1">
-            <IconifyIcon
-              v-if="!row.loading"
-              icon="ant-design:safety-outlined"
-              class="mr-2"
-            />
-            Login
-          </div>
-        </VbenButton> -->
-
         <Dropdown>
           <VbenButton size="sm" variant="outline">
             <IconifyIcon class="mr-2 size-4" icon="ant-design:more-outlined" />
@@ -130,6 +184,36 @@ const handleLogin = async (row: any) => {
                 <div class="flex items-center justify-start space-x-1">
                   <IconifyIcon icon="ant-design:safety-outlined" />
                   <span>Login</span>
+                </div>
+              </MenuItem>
+              <MenuItem @click="handleExportReviews(row)">
+                <div class="flex items-center justify-start space-x-1">
+                  <IconifyIcon icon="ant-design:download-outlined" />
+                  <span>Export reviews</span>
+                </div>
+              </MenuItem>
+              <MenuItem @click="handleResetOnboarding(row)">
+                <div class="flex items-center justify-start space-x-1">
+                  <IconifyIcon icon="ant-design:fire-twotone" />
+                  <span>Reset onboarding</span>
+                </div>
+              </MenuItem>
+              <MenuItem
+                v-if="row.chargeName === 'Free'"
+                @click="handleUpgradePlan(row)"
+              >
+                <div class="flex items-center justify-start space-x-1">
+                  <IconifyIcon icon="ant-design:dollar-circle-twotone" />
+                  <span>Upgrade plan</span>
+                </div>
+              </MenuItem>
+              <MenuItem
+                v-if="row.chargeName === 'Free Pro'"
+                @click="handleDowngradePlan(row)"
+              >
+                <div class="flex items-center justify-start space-x-1">
+                  <IconifyIcon icon="ant-design:dollar-circle-twotone" />
+                  <span>Downgrade plan</span>
                 </div>
               </MenuItem>
             </Menu>
