@@ -25,6 +25,10 @@
       "path": "apps/web-np-admin",
     },
     {
+      "name": "@vben/web-rv-admin",
+      "path": "apps/web-rv-admin",
+    },
+    {
       "name": "@vben/docs",
       "path": "docs",
     },
