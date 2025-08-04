@@ -39,7 +39,7 @@ export const formOptions: VbenFormProps = {
             label: 'Active',
           },
           {
-            value: 'uninstalled',
+            value: 'uninstall',
             label: 'Uninstalled',
           },
           {
