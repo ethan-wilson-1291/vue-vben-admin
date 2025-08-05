@@ -33,7 +33,7 @@ cd packages/@core-rv/components
 pnpm dev
 
 # Develop the Shopify app
-cd apps/web-rv-shopify-embedded  
+cd apps/web-rv-shopify-embedded
 pnpm dev
 
 # Or from root:

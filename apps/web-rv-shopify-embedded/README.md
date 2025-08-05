@@ -47,16 +47,16 @@ After building the project, you'll get a `shopify-rv-app.umd.js` file that can b
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-  <title>My Page</title>
-</head>
-<body>
-  <!-- Include the web component script -->
-  <script src="./shopify-rv-app.umd.js"></script>
-  
-  <!-- Use the custom element -->
-  <shopify-rv-app></shopify-rv-app>
-</body>
+  <head>
+    <title>My Page</title>
+  </head>
+  <body>
+    <!-- Include the web component script -->
+    <script src="./shopify-rv-app.umd.js"></script>
+
+    <!-- Use the custom element -->
+    <shopify-rv-app></shopify-rv-app>
+  </body>
 </html>
 ```
 
@@ -85,7 +85,7 @@ The web component is self-contained and doesn't require external dependencies. I
 This project uses the `@core-rv/components` library which provides:
 
 - `RvButton` - Customizable button component
-- `RvCard` - Card container component  
+- `RvCard` - Card container component
 - `RvInput` - Form input component
 - Consistent design system
 - TypeScript support

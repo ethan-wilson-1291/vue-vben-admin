@@ -69,17 +69,17 @@ A versatile button component with multiple variants and states.
 <template>
   <!-- Basic usage -->
   <RvButton>Click me</RvButton>
-  
+
   <!-- With variants -->
   <RvButton variant="primary">Primary</RvButton>
   <RvButton variant="secondary">Secondary</RvButton>
   <RvButton variant="danger">Danger</RvButton>
-  
+
   <!-- With sizes -->
   <RvButton size="small">Small</RvButton>
   <RvButton size="medium">Medium</RvButton>
   <RvButton size="large">Large</RvButton>
-  
+
   <!-- With states -->
   <RvButton disabled>Disabled</RvButton>
   <RvButton loading>Loading</RvButton>
@@ -107,12 +107,12 @@ A container component for grouping related content.
   <RvCard>
     <p>Card content</p>
   </RvCard>
-  
+
   <!-- With title -->
   <RvCard title="Card Title">
     <p>Card content with title</p>
   </RvCard>
-  
+
   <!-- Elevated with custom padding -->
   <RvCard elevated padding="large">
     <p>Elevated card with large padding</p>
@@ -142,21 +142,21 @@ const error = ref('');
 <template>
   <!-- Basic input -->
   <RvInput v-model="email" label="Email" type="email" />
-  
+
   <!-- With validation -->
-  <RvInput 
-    v-model="password" 
-    label="Password" 
+  <RvInput
+    v-model="password"
+    label="Password"
     type="password"
     :error="error"
     required
   />
-  
+
   <!-- Disabled input -->
-  <RvInput 
-    v-model="value" 
-    label="Disabled" 
-    disabled 
+  <RvInput
+    v-model="value"
+    label="Disabled"
+    disabled
     placeholder="Cannot edit"
   />
 </template>
