@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopify RV App - Web Component Demo</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+      }
+      .demo-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .demo-section {
+        margin-bottom: 40px;
+        padding: 20px;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+      }
+      .demo-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #374151;
+      }
+      .demo-description {
+        color: #6b7280;
+        margin-bottom: 20px;
+      }
+      shopify-rv-app {
+        display: block;
+        border: 2px dashed #d1d5db;
+        border-radius: 8px;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="demo-container">
+      <h1>Shopify RV App - Web Component Demo</h1>
+      <p>This page demonstrates how to use the Shopify RV App as a Web Component.</p>
+
+      <div class="demo-section">
+        <div class="demo-title">Web Component Usage</div>
+        <div class="demo-description">
+          Simply include the script and use the &lt;shopify-rv-app&gt; tag:
+        </div>
+        <shopify-rv-app></shopify-rv-app>
+      </div>
+
+      <div class="demo-section">
+        <div class="demo-title">Integration Instructions</div>
+        <div class="demo-description">
+          <h3>1. Include the script in your HTML:</h3>
+          <pre><code>&lt;script src="./shopify-rv-app.umd.cjs"&gt;&lt;/script&gt;</code></pre>
+
+          <h3>2. Use the custom element anywhere in your HTML:</h3>
+          <pre><code>&lt;shopify-rv-app&gt;&lt;/shopify-rv-app&gt;</code></pre>
+
+          <h3>3. For Shopify themes, add to your liquid templates:</h3>
+          <pre><code>{% comment %} In your theme's liquid file {% endcomment %}
+&lt;script src="{{ 'shopify-rv-app.umd.cjs' | asset_url }}"&gt;&lt;/script&gt;
+&lt;shopify-rv-app&gt;&lt;/shopify-rv-app&gt;</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Load the web component -->
+    <script src="../dist/shopify-rv-app.umd.cjs"></script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+{
+  "name": "@core-rv/components",
+  "version": "1.0.0",
+  "description": "Vue components library for RV projects",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "vite build && vue-tsc --declaration --emitDeclarationOnly",
+    "dev": "vite build --watch",
+    "typecheck": "vue-tsc --noEmit"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./style.css": "./dist/index.css"
+  },
+  "peerDependencies": {
+    "vue": "^3.4.0"
+  },
+  "dependencies": {
+    "@vueuse/core": "catalog:"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vue": "catalog:",
+    "vue-tsc": "catalog:"
+  }
+}

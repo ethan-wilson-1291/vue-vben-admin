@@ -1,0 +1,10 @@
+{
+  "extends": "../../../internal/tsconfig/library.json",
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "./dist",
+    "outDir": "./dist"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

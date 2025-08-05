@@ -29,6 +29,10 @@
       "path": "apps/web-rv-admin",
     },
     {
+      "name": "@vben/web-rv-shopify-embedded",
+      "path": "apps/web-rv-shopify-embedded",
+    },
+    {
       "name": "@vben/docs",
       "path": "docs",
     },
@@ -63,6 +67,10 @@
     {
       "name": "@vben/vite-config",
       "path": "internal/vite-config",
+    },
+    {
+      "name": "@core-rv/components",
+      "path": "packages/@core-rv/components",
     },
     {
       "name": "@vben-core/design",
