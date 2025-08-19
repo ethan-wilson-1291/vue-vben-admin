@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { useRouter } from 'vue-router';
+
 import { Page, VbenButton } from '@vben/common-ui';
 import { IconifyIcon } from '@vben/icons';
 
@@ -14,6 +16,19 @@ const [Grid, gridApi] = useVbenVxeGrid({
   gridOptions: orderTableOptions,
   formOptions,
 });
+
+const route = useRouter();
+
+const handleEditTheme = (row: any) => {
+  route.push({
+    name: 'shops-theme',
+    query: { shopName: row.name },
+    params: {
+      id: row.id,
+      themeId: row.themeId,
+    },
+  });
+};
 
 const handleLogin = async (row: any) => {
   gridApi.setLoading(true);
@@ -184,6 +199,15 @@ const redirectToQueueManagement = () => {
                 <div class="flex items-center justify-start space-x-1">
                   <IconifyIcon icon="ant-design:safety-outlined" />
                   <span>Login</span>
+                </div>
+              </MenuItem>
+              <MenuItem
+                v-if="row.status === 'Active'"
+                @click="handleEditTheme(row)"
+              >
+                <div class="flex items-center justify-start space-x-1">
+                  <IconifyIcon icon="ant-design:layout-twotone" />
+                  <span>Edit theme</span>
                 </div>
               </MenuItem>
               <MenuItem @click="handleExportReviews(row)">
