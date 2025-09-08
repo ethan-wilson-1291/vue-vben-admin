@@ -35,6 +35,31 @@ export const formOptions: VbenFormProps = {
         mode: 'multiple',
         options: [
           {
+            value: 'basic',
+            label: 'Basic',
+          },
+          {
+            value: 'professional',
+            label: 'Professional',
+          },
+          {
+            value: 'partner_test',
+            label: 'Partner Test',
+          },
+        ],
+        placeholder: '',
+      },
+      defaultValue: ['partner_test'],
+      fieldName: 'exclude',
+      label: 'Exclude',
+    },
+    {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        mode: 'multiple',
+        options: [
+          {
             value: 'active',
             label: 'Active',
           },
@@ -58,5 +83,5 @@ export const formOptions: VbenFormProps = {
   submitOnChange: true,
   submitOnEnter: false,
   showDefaultActions: false,
-  wrapperClass: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
+  wrapperClass: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-5',
 };
