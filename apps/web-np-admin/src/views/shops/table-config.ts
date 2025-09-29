@@ -18,16 +18,27 @@ export const orderTableOptions: VxeTableGridOptions = {
   showFooter: true,
   mergeFooterItems: [{ row: 0, col: 0, rowspan: 1, colspan: 2 }],
   proxyConfig: {
+    sort: true,
     ajax: {
-      query: async ({ page }, formValues) => {
+      query: async ({ page, sort }, formValues) => {
         const res = await shopGetList({
           page: page.currentPage,
           pageSize: page.pageSize,
+          sortBy: sort.field,
+          sortOrder: sort.order,
           ...formValues,
         });
 
         return res;
       },
+    },
+  },
+  sortConfig: {
+    multiple: false,
+    remote: true,
+    defaultSort: {
+      field: 'lastLoginAt',
+      order: 'desc',
     },
   },
   columns: [
@@ -75,11 +86,13 @@ export const orderTableOptions: VxeTableGridOptions = {
     {
       field: 'createdAt',
       title: 'Created',
+      sortable: true,
       width: 110,
     },
     {
       field: 'lastLoginAt',
       title: 'Last Login',
+      sortable: true,
       width: 110,
     },
     {

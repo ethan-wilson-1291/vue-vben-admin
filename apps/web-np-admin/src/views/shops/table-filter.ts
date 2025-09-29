@@ -35,6 +35,26 @@ export const formOptions: VbenFormProps = {
         mode: 'multiple',
         options: [
           {
+            value: 'Free',
+            label: 'Free',
+          },
+          {
+            value: 'Pro',
+            label: 'Pro',
+          },
+        ],
+        placeholder: '',
+      },
+      fieldName: 'subscriptionName',
+      label: 'Charge',
+    },
+    {
+      component: 'Select',
+      componentProps: {
+        allowClear: true,
+        mode: 'multiple',
+        options: [
+          {
             value: 'basic',
             label: 'Basic',
           },
@@ -83,5 +103,5 @@ export const formOptions: VbenFormProps = {
   submitOnChange: true,
   submitOnEnter: false,
   showDefaultActions: false,
-  wrapperClass: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-5',
+  wrapperClass: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
 };

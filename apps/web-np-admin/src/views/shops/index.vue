@@ -24,11 +24,23 @@ const handleLogin = async (row: any) => {
   row.loading = false;
   window.open(url, '_blank');
 };
+
+const redirectToQueueManagement = () => {
+  const url = `${import.meta.env.VITE_GLOB_API_URL}/horizon-jobs`;
+  window.open(url, '_blank');
+};
 </script>
 
 <template>
   <Page auto-content-height>
     <Grid>
+      <template #toolbar-tools>
+        <VbenButton size="sm" type="primary" @click="redirectToQueueManagement">
+          <IconifyIcon class="mr-2 size-4" icon="ant-design:export-outlined" />
+          Queue Management
+        </VbenButton>
+      </template>
+
       <template #id="{ row }">
         <div class="flex flex-col gap-0">
           <div class="font-semibold">
