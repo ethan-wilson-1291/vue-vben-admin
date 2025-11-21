@@ -1,5 +1,7 @@
 import type { RouteRecordRaw } from 'vue-router';
 
+import { isShopifyEmbedded } from '#/shared/shopify-utils';
+
 const routes: RouteRecordRaw[] = [
   {
     meta: {
@@ -66,7 +68,7 @@ const routes: RouteRecordRaw[] = [
       title: 'View Fullscreen',
       order: 100_000,
       icon: 'ant-design:fullscreen-outlined',
-      hideInMenu: !shopify.environment.embedded,
+      hideInMenu: isShopifyEmbedded(),
     },
     name: 'fullscreen',
     path: '/fullscreen',

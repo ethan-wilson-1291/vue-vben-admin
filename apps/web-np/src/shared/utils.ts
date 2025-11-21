@@ -255,7 +255,3 @@ export const showWatermark = (parent: string = '.vxe-table--main-wrapper') => {
 export const calcLTV = (newCustomers: number, netPayment: number) => {
   return newCustomers ? netPayment / newCustomers : 0;
 };
-
-export const isShopifyEmbedded = () => {
-  return shopify.environment.embedded;
-};
