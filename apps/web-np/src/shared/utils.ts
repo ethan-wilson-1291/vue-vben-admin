@@ -2,17 +2,13 @@ import { useWatermark } from '@vben/hooks';
 import { $t } from '@vben/locales';
 import { useAccessStore } from '@vben/stores';
 
-import { isShopifyEmbedded } from '@shopify/app-bridge/utilities';
 import { findCurrency, format } from 'currency-formatter';
 
 import { router } from '#/router';
 import { useShopStore } from '#/store';
-import { useShopifyAppBridgeStore } from '#/store/shopify-app-bridge';
 
 import { adType } from './constants';
 import { dayjsInGMT } from './dayjs';
-
-export { isShopifyEmbedded } from '@shopify/app-bridge/utilities';
 
 export function calcPercentage(a: number, b: number) {
   if (!b) {
@@ -211,8 +207,8 @@ export const redirectToExternal = (
   force: boolean = false,
 ) => {
   if (isShopifyEmbedded() && !force) {
-    const shopifyAppBridgeStore = useShopifyAppBridgeStore();
-    shopifyAppBridgeStore.redirect(url, newTab);
+    // const shopifyAppBridgeStore = useShopifyAppBridgeStore();
+    // shopifyAppBridgeStore.redirect(url, newTab);
     return;
   }
 
@@ -258,4 +254,8 @@ export const showWatermark = (parent: string = '.vxe-table--main-wrapper') => {
 
 export const calcLTV = (newCustomers: number, netPayment: number) => {
   return newCustomers ? netPayment / newCustomers : 0;
+};
+
+export const isShopifyEmbedded = () => {
+  return shopify.environment.embedded;
 };

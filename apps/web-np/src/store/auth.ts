@@ -24,7 +24,6 @@ import dayjs from '#/shared/dayjs';
 import { useCurrencyStore } from './currency';
 import { useShopStore } from './shop';
 import { useShopSettingStore } from './shop-settings';
-import { useShopifyAppBridgeStore } from './shopify-app-bridge';
 
 export const useAuthStore = defineStore('auth', () => {
   const accessStore = useAccessStore();
@@ -43,11 +42,6 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function authLoginViaShopifySession(params: Recordable<any>) {
-    const shopifyAppBridgeStore = useShopifyAppBridgeStore();
-
-    // Verify Shopify token
-    shopifyAppBridgeStore.getSessionToken();
-
     loginLoading.value = true;
     const { accessToken } = await loginApiViaShopifySession(params);
 

@@ -1,6 +1,5 @@
 import type { Router } from 'vue-router';
 
-import { LOGIN_PATH } from '@vben/constants';
 import { preferences } from '@vben/preferences';
 import { useAccessStore, useUserStore } from '@vben/stores';
 import { startProgress, stopProgress } from '@vben/utils';
@@ -8,7 +7,6 @@ import { startProgress, stopProgress } from '@vben/utils';
 import { accessRoutes, coreRouteNames } from '#/router/routes';
 import { DefaultRoutes } from '#/shared/constants';
 import { useAuthStore, useShopStore } from '#/store';
-import { useShopifyAppBridgeStore } from '#/store/shopify-app-bridge';
 
 import { generateAccess } from './access';
 import { loginPaths } from './routes/core';
@@ -53,10 +51,10 @@ function setupAccessGuard(router: Router) {
     const userStore = useUserStore();
     const shopStore = useShopStore();
     const authStore = useAuthStore();
-    const shopifyAppBridgeStore = useShopifyAppBridgeStore();
 
-    // Always initialize App Bridge on TOP
-    shopifyAppBridgeStore.initAppBridge();
+    if (!accessStore.accessToken) {
+      await authStore.authLoginViaShopifySession(to.query);
+    }
 
     // 基本路由，这些路由不需要进入权限拦截
     if (coreRouteNames.includes(to.name as string)) {
@@ -68,29 +66,6 @@ function setupAccessGuard(router: Router) {
         );
       }
       return true;
-    }
-
-    // accessToken 检查
-    if (!accessStore.accessToken) {
-      // 明确声明忽略权限访问权限，则可以访问
-      if (to.meta.ignoreAccess) {
-        return true;
-      }
-
-      // 没有访问权限，跳转登录页面
-      if (to.fullPath !== LOGIN_PATH) {
-        return {
-          path: LOGIN_PATH,
-          // 如不需要，直接删除 query
-          query:
-            to.fullPath === DefaultRoutes.HOME
-              ? {}
-              : { redirect: encodeURIComponent(to.fullPath) },
-          // 携带当前跳转的页面，登录后重新跳转该页面
-          replace: true,
-        };
-      }
-      return to;
     }
 
     // 是否已经生成过动态路由

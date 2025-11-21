@@ -1,7 +1,5 @@
 import { defineOverridesPreferences } from '@vben/preferences';
 
-import { isShopifyEmbedded } from '@shopify/app-bridge/utilities';
-
 export const overridesPreferences = defineOverridesPreferences({
   app: {
     name: import.meta.env.VITE_APP_TITLE,
@@ -16,7 +14,7 @@ export const overridesPreferences = defineOverridesPreferences({
   widget: {
     languageToggle: false,
     lockScreen: false,
-    fullscreen: !isShopifyEmbedded(),
+    fullscreen: !shopify.environment.embedded,
   },
   tabbar: {
     enable: false,
