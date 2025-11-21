@@ -9,6 +9,7 @@ import { useShopStore } from '#/store';
 
 import { adType } from './constants';
 import { dayjsInGMT } from './dayjs';
+import { isShopifyEmbedded } from './shopify-utils';
 
 export function calcPercentage(a: number, b: number) {
   if (!b) {

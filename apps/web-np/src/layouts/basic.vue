@@ -7,7 +7,8 @@ import { BasicLayout, LockScreen, UserDropdown } from '@vben/layouts';
 import { preferences } from '@vben/preferences';
 import { useAccessStore, useUserStore } from '@vben/stores';
 
-import { isShopifyEmbedded, redirectToExternal } from '#/shared/utils';
+import { isShopifyEmbedded } from '#/shared/shopify-utils';
+import { redirectToExternal } from '#/shared/utils';
 import { useAuthStore, useShopStore } from '#/store';
 import LoginForm from '#/views/_core/authentication/login.vue';
 
