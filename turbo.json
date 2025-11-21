@@ -23,6 +23,14 @@
         ".vitepress/dist/**"
       ]
     },
+    "@vben/web-np-app#build:prod": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+    "@vben/web-np-app#build:uat": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
     "preview": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
