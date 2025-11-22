@@ -202,11 +202,6 @@ export const redirectToPath = (path: string) => {
 };
 
 export const redirectToExternal = (url: string, newTab: boolean = false) => {
-  // if (isShopifyEmbedded() && !force) {
-  //   redirectFromShopify(url, force);
-  //   return;
-  // }
-
   window.open(url, newTab ? '_blank' : '_top');
 };
 

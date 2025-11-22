@@ -6,9 +6,18 @@ export const isShopifyEmbedded = () => {
   }
 };
 
-export const redirectFromShopify = (url: string, force: boolean = false) => {
-  // eslint-disable-next-line no-console
-  console.log('Shopify redirect', url, force);
+export const getSessionID = async () => {
+  try {
+    return await shopify.idToken();
+  } catch {
+    return '';
+  }
+};
 
-  return null;
+export const getShopifyDomain = () => {
+  try {
+    return shopify.config.shop;
+  } catch {
+    return '';
+  }
 };

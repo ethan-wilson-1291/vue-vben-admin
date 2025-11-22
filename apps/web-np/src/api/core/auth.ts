@@ -32,10 +32,16 @@ export function generateAuthUrl(data: AuthApi.LoginParams) {
   return `${apiURL}/auth/generate?subdomain=${shopifyDomain}`;
 }
 
-export async function loginApiViaShopifySession(data: any) {
+export async function loginApiViaShopifySessionId(
+  myshopifyDomain: any,
+  sessionID: string,
+) {
   return requestClient.post<AuthApi.LoginResult>(
-    '/auth/verify-shopify-session',
-    data,
+    '/auth/verify-shopify-session-id',
+    {
+      shop: myshopifyDomain,
+      sessionId: sessionID,
+    },
   );
 }
 

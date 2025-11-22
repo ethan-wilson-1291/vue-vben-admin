@@ -7,6 +7,7 @@ import { startProgress, stopProgress } from '@vben/utils';
 
 import { accessRoutes, coreRouteNames } from '#/router/routes';
 import { DefaultRoutes } from '#/shared/constants';
+import { isShopifyEmbedded } from '#/shared/shopify-utils';
 import { useAuthStore, useShopStore } from '#/store';
 
 import { generateAccess } from './access';
@@ -53,9 +54,9 @@ function setupAccessGuard(router: Router) {
     const shopStore = useShopStore();
     const authStore = useAuthStore();
 
-    // if (isShopifyEmbedded() && !accessStore.accessToken) {
-    //   await authStore.authLoginViaShopifySession(to.query);
-    // }
+    if (isShopifyEmbedded() && !accessStore.accessToken) {
+      await authStore.authLoginViaShopifySession();
+    }
 
     // 基本路由，这些路由不需要进入权限拦截
     if (coreRouteNames.includes(to.name as string)) {
