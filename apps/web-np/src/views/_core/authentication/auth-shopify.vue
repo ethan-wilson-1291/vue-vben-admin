@@ -14,7 +14,7 @@ onBeforeMount(() => {
   const queryParams = route.query;
 
   isShopifyEmbedded()
-    ? authStore.authLoginViaShopifySession(queryParams)
+    ? authStore.authLoginViaShopifySession()
     : authStore.authInstall({ myshopifyDomain: queryParams.shop as string });
 });
 </script>
