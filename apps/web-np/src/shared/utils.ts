@@ -9,7 +9,7 @@ import { useShopStore } from '#/store';
 
 import { adType } from './constants';
 import { dayjsInGMT } from './dayjs';
-import { isShopifyEmbedded } from './shopify-utils';
+import { isShopifyEmbedded, redirectFromShopify } from './shopify-utils';
 
 export function calcPercentage(a: number, b: number) {
   if (!b) {
@@ -208,8 +208,7 @@ export const redirectToExternal = (
   force: boolean = false,
 ) => {
   if (isShopifyEmbedded() && !force) {
-    // const shopifyAppBridgeStore = useShopifyAppBridgeStore();
-    // shopifyAppBridgeStore.redirect(url, newTab);
+    redirectFromShopify(url, force);
     return;
   }
 

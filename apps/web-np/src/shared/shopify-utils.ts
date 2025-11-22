@@ -5,3 +5,10 @@ export const isShopifyEmbedded = () => {
     return false;
   }
 };
+
+export const redirectFromShopify = (url: string, force: boolean = false) => {
+  // eslint-disable-next-line no-console
+  console.log('Shopify redirect', url, force);
+
+  return null;
+};

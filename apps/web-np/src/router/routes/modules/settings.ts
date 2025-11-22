@@ -68,7 +68,7 @@ const routes: RouteRecordRaw[] = [
       title: 'View Fullscreen',
       order: 100_000,
       icon: 'ant-design:fullscreen-outlined',
-      hideInMenu: isShopifyEmbedded(),
+      hideInMenu: !isShopifyEmbedded(),
     },
     name: 'fullscreen',
     path: '/fullscreen',
