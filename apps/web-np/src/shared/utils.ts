@@ -9,7 +9,6 @@ import { useShopStore } from '#/store';
 
 import { adType } from './constants';
 import { dayjsInGMT } from './dayjs';
-import { isShopifyEmbedded, redirectFromShopify } from './shopify-utils';
 
 export function calcPercentage(a: number, b: number) {
   if (!b) {
@@ -202,22 +201,13 @@ export const redirectToPath = (path: string) => {
   router.push(path);
 };
 
-export const redirectToExternal = (
-  url: string,
-  newTab: boolean = false,
-  force: boolean = false,
-) => {
-  if (isShopifyEmbedded() && !force) {
-    redirectFromShopify(url, force);
-    return;
-  }
+export const redirectToExternal = (url: string, newTab: boolean = false) => {
+  // if (isShopifyEmbedded() && !force) {
+  //   redirectFromShopify(url, force);
+  //   return;
+  // }
 
-  if (newTab) {
-    window.open(url, '_blank');
-    return;
-  }
-
-  window.location.href = url;
+  window.open(url, newTab ? '_blank' : '_top');
 };
 
 export const authInNewTab = () => {
