@@ -1,6 +1,6 @@
 import { defineOverridesPreferences } from '@vben/preferences';
 
-import { isShopifyEmbedded } from '@shopify/app-bridge/utilities';
+import { isShopifyEmbedded } from '#/shared/shopify-utils';
 
 export const overridesPreferences = defineOverridesPreferences({
   app: {
@@ -16,6 +16,7 @@ export const overridesPreferences = defineOverridesPreferences({
   widget: {
     languageToggle: false,
     lockScreen: false,
+    timezone: false,
     fullscreen: !isShopifyEmbedded(),
   },
   tabbar: {

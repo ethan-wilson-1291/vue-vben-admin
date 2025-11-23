@@ -13,18 +13,18 @@ import {
   generateAuthUrl,
   getAccessCodesApi,
   getUserInfoApi,
-  loginApiViaShopifySession,
+  loginApiViaShopifySessionId,
   logoutApi,
 } from '#/api';
 import { $t } from '#/locales';
 import { DefaultRoutes } from '#/shared/constants';
 import { crispDisplay, crispSetShopInfo } from '#/shared/crisp';
 import dayjs from '#/shared/dayjs';
+import { getSessionID, getShopifyDomain } from '#/shared/shopify-utils';
 
 import { useCurrencyStore } from './currency';
 import { useShopStore } from './shop';
 import { useShopSettingStore } from './shop-settings';
-import { useShopifyAppBridgeStore } from './shopify-app-bridge';
 
 export const useAuthStore = defineStore('auth', () => {
   const accessStore = useAccessStore();
@@ -42,14 +42,15 @@ export const useAuthStore = defineStore('auth', () => {
     window.location.href = generateAuthUrl(params);
   }
 
-  async function authLoginViaShopifySession(params: Recordable<any>) {
-    const shopifyAppBridgeStore = useShopifyAppBridgeStore();
-
-    // Verify Shopify token
-    shopifyAppBridgeStore.getSessionToken();
-
+  async function authLoginViaShopifySession() {
     loginLoading.value = true;
-    const { accessToken } = await loginApiViaShopifySession(params);
+    const myshopifyDomain = getShopifyDomain();
+    const sessionID = await getSessionID();
+
+    const { accessToken } = await loginApiViaShopifySessionId(
+      myshopifyDomain,
+      sessionID,
+    );
 
     return await authLoginViaToken(accessToken);
   }

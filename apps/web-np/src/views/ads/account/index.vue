@@ -226,7 +226,7 @@ const handleSwitchCosts = (adAccount: any, checked: any) => {
                   <span>Tiktok</span>
                 </div>
               </MenuItem>
-              <MenuItem
+              <!-- <MenuItem
                 v-if="shopStore.shop.id === '62370414670'"
                 @click="addNewConnection('google')"
               >
@@ -234,7 +234,7 @@ const handleSwitchCosts = (adAccount: any, checked: any) => {
                   <IconifyIcon :icon="getAdsIcon('google')" />
                   <span>Google</span>
                 </div>
-              </MenuItem>
+              </MenuItem> -->
             </Menu>
           </template>
         </Dropdown>
@@ -253,7 +253,7 @@ const handleSwitchCosts = (adAccount: any, checked: any) => {
             <div class="font-semibold">
               {{ row.name }}
             </div>
-            <div class="text-muted-foreground text-xs italic">
+            <div class="text-xs italic text-muted-foreground">
               {{ row.email }}
             </div>
           </div>

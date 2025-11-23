@@ -2,17 +2,13 @@ import { useWatermark } from '@vben/hooks';
 import { $t } from '@vben/locales';
 import { useAccessStore } from '@vben/stores';
 
-import { isShopifyEmbedded } from '@shopify/app-bridge/utilities';
 import { findCurrency, format } from 'currency-formatter';
 
 import { router } from '#/router';
 import { useShopStore } from '#/store';
-import { useShopifyAppBridgeStore } from '#/store/shopify-app-bridge';
 
 import { adType } from './constants';
 import { dayjsInGMT } from './dayjs';
-
-export { isShopifyEmbedded } from '@shopify/app-bridge/utilities';
 
 export function calcPercentage(a: number, b: number) {
   if (!b) {
@@ -205,23 +201,8 @@ export const redirectToPath = (path: string) => {
   router.push(path);
 };
 
-export const redirectToExternal = (
-  url: string,
-  newTab: boolean = false,
-  force: boolean = false,
-) => {
-  if (isShopifyEmbedded() && !force) {
-    const shopifyAppBridgeStore = useShopifyAppBridgeStore();
-    shopifyAppBridgeStore.redirect(url, newTab);
-    return;
-  }
-
-  if (newTab) {
-    window.open(url, '_blank');
-    return;
-  }
-
-  window.location.href = url;
+export const redirectToExternal = (url: string, newTab: boolean = false) => {
+  window.open(url, newTab ? '_blank' : '_top');
 };
 
 export const authInNewTab = () => {

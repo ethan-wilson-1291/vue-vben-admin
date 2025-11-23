@@ -4,7 +4,7 @@ import { useRoute } from 'vue-router';
 
 import { VbenLoading } from '@vben/common-ui';
 
-import { isShopifyEmbedded } from '#/shared/utils';
+import { isShopifyEmbedded } from '#/shared/shopify-utils';
 import { useAuthStore } from '#/store';
 
 const authStore = useAuthStore();
@@ -14,7 +14,7 @@ onBeforeMount(() => {
   const queryParams = route.query;
 
   isShopifyEmbedded()
-    ? authStore.authLoginViaShopifySession(queryParams)
+    ? authStore.authLoginViaShopifySession()
     : authStore.authInstall({ myshopifyDomain: queryParams.shop as string });
 });
 </script>
