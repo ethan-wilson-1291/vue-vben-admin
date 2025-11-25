@@ -518,7 +518,7 @@ const getBulkActionTitle = () => {
         >
           <div class="h-[35px] w-[35px] flex-none">
             <AImage
-              :src="row.image"
+              :src="row.image ?? ''"
               fallback="/static/images/no-image.png"
               class="!h-[35px] !w-[35px] rounded-lg border"
             />
@@ -527,7 +527,7 @@ const getBulkActionTitle = () => {
             <!-- Two line: title & sub title -->
             <div>{{ row.name }}</div>
             <div
-              class="text-muted-foreground text-xs"
+              class="text-xs text-muted-foreground"
               v-if="
                 row.feeLevel === EFeeLevel.PRODUCT && row.variants.length > 1
               "
