@@ -15,7 +15,7 @@ onBeforeMount(() => {
 
   isShopifyEmbedded()
     ? authStore.authLoginViaShopifySession()
-    : authStore.authInstall({ myshopifyDomain: queryParams.shop as string });
+    : authStore.authInstall({ myshopifyDomain: queryParams.shop as string }); // Should change this - redirect to admin page.
 });
 </script>
 
