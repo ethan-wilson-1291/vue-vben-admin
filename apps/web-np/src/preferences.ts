@@ -30,6 +30,7 @@ export const overridesPreferences = defineOverridesPreferences({
     companySiteLink: 'https://www.finily.com',
   },
   logo: {
+    enable: !isShopifyEmbedded(),
     source: '/static/images/logo.png',
   },
 });
