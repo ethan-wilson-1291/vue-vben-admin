@@ -34,7 +34,7 @@ const handleLogin = async (row: any) => {
   gridApi.setLoading(true);
 
   const { accessToken } = await shopGenerateToken(row.id);
-  const url = `${import.meta.env.VITE_APP_FE_URL}?token=${accessToken}`;
+  const url = `${import.meta.env.VITE_APP_FE_URL}/auth/token?token=${accessToken}`;
 
   gridApi.setLoading(false);
   window.open(url, '_blank');
