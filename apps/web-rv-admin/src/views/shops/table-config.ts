@@ -80,8 +80,18 @@ export const orderTableOptions: VxeTableGridOptions = {
       width: 150,
     },
     {
+      field: 'freeProTrialEndAt',
+      title: 'Trial Ends',
+      width: 110,
+    },
+    {
       field: 'createdAt',
       title: 'Created',
+      width: 110,
+    },
+    {
+      field: 'lastLoginAt',
+      title: 'Last Login',
       width: 110,
     },
     {
