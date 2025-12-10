@@ -12,6 +12,14 @@ export async function shopResetOnboarding(shopId: any) {
   return requestClient.post(`/admin/shop/${shopId}/reset-onboarding`);
 }
 
+export async function shopMailNewReviews(shopId: any) {
+  return requestClient.post(`/admin/shop/${shopId}/new-review`);
+}
+
+export async function shopMailLimitedQuota(shopId: any) {
+  return requestClient.post(`/admin/shop/${shopId}/quota-limit`);
+}
+
 export async function shopUpgradePlan(shopId: any, checked: boolean) {
   return requestClient.put(`/admin/shop/${shopId}/change-plan`, {
     isPro: checked,

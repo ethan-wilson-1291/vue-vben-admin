@@ -7,7 +7,13 @@ import { IconifyIcon } from '@vben/icons';
 import { Dropdown, Menu, MenuItem, message, Modal, Tag } from 'ant-design-vue';
 
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
-import { shopGenerateToken, shopResetOnboarding, shopUpgradePlan } from '#/api';
+import {
+  shopGenerateToken,
+  shopMailLimitedQuota,
+  shopMailNewReviews,
+  shopResetOnboarding,
+  shopUpgradePlan,
+} from '#/api';
 
 import { orderTableOptions } from './table-config';
 import { formOptions } from './table-filter';
@@ -57,6 +63,40 @@ const handleResetOnboarding = (row: any) => {
         gridApi.setLoading(false);
 
         message.success('Reset onboarding successfully');
+      });
+    },
+  });
+};
+
+const handleMailNewReviews = (row: any) => {
+  Modal.confirm({
+    title: `Mail New Reviews for ${row.name}`,
+    okText: 'Yes',
+    cancelText: 'No',
+    onOk: async () => {
+      gridApi.setLoading(true);
+
+      shopMailNewReviews(row.id).finally(() => {
+        gridApi.setLoading(false);
+
+        message.success('Mailed new reviews successfully');
+      });
+    },
+  });
+};
+
+const handleMailLimitedQuota = (row: any) => {
+  Modal.confirm({
+    title: `Mail Limited Quota for ${row.name}`,
+    okText: 'Yes',
+    cancelText: 'No',
+    onOk: async () => {
+      gridApi.setLoading(true);
+
+      shopMailLimitedQuota(row.id).finally(() => {
+        gridApi.setLoading(false);
+
+        message.success('Mailed limited quota successfully');
       });
     },
   });
@@ -220,6 +260,18 @@ const redirectToQueueManagement = () => {
                 <div class="flex items-center justify-start space-x-1">
                   <IconifyIcon icon="ant-design:fire-twotone" />
                   <span>Reset onboarding</span>
+                </div>
+              </MenuItem>
+              <MenuItem @click="handleMailNewReviews(row)">
+                <div class="flex items-center justify-start space-x-1">
+                  <IconifyIcon icon="ant-design:mail-outlined" />
+                  <span>Mail new reviews</span>
+                </div>
+              </MenuItem>
+              <MenuItem @click="handleMailLimitedQuota(row)">
+                <div class="flex items-center justify-start space-x-1">
+                  <IconifyIcon icon="ant-design:mail-outlined" />
+                  <span>Mail limited quota</span>
                 </div>
               </MenuItem>
               <MenuItem
