@@ -46,7 +46,7 @@ const chartOptions = [
 onMounted(() => {
   setTimeout(() => {
     reload();
-  }, 1000);
+  }, 2000);
 });
 
 const handleChangeGroupBy = (val: any) => {
@@ -61,7 +61,7 @@ watch(
   () => {
     setTimeout(() => {
       reload();
-    }, 1000);
+    }, 2000);
   },
 );
 
