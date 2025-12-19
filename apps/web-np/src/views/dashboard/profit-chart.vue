@@ -44,7 +44,9 @@ const chartOptions = [
 ];
 
 onMounted(() => {
-  reload();
+  setTimeout(() => {
+    reload();
+  }, 1000);
 });
 
 const handleChangeGroupBy = (val: any) => {
@@ -57,7 +59,9 @@ const handleChangeGroupBy = (val: any) => {
 watch(
   () => dashboardState.profitChart.netProfit,
   () => {
-    reload();
+    setTimeout(() => {
+      reload();
+    }, 1000);
   },
 );
 
