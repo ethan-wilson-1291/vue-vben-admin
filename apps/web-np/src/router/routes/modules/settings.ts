@@ -35,7 +35,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     meta: {
-      title: 'Custom Costs',
+      title: 'Custom Costs/Tax',
       icon: 'ant-design:dollar-circle-twotone',
       order: 80,
     },
