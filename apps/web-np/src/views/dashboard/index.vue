@@ -98,7 +98,7 @@ const VNodes = defineComponent({
         <Select
           class="min-w-[150px]"
           mode="multiple"
-          placeholder="Payment status"
+          placeholder="Order status"
           v-model:value="dashboardState.paymentStatusFilter"
           :allow-clear="true"
           :options="orderStatusList"
@@ -106,7 +106,7 @@ const VNodes = defineComponent({
           @change="handlePaymentStatusFilterChange"
         >
           <template #dropdownRender="{ menuNode: menu }">
-            <div class="my-2 text-center italic">Payment Status</div>
+            <div class="my-2 text-center italic">Order Status</div>
             <Divider class="my-2" />
             <VNodes :vnodes="menu" />
           </template>
