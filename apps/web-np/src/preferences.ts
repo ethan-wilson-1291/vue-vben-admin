@@ -12,6 +12,8 @@ export const overridesPreferences = defineOverridesPreferences({
   theme: {
     mode: 'light',
     radius: '0.25',
+    builtinType: 'zinc',
+    colorPrimary: 'hsl(240 5.9% 10%)',
   },
   sidebar: {
     width: 200,
