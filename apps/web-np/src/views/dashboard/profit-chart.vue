@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { EchartsUIType } from '@vben/plugins/echarts';
 
-import { ref, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 
 import {
   Card,
@@ -48,6 +48,12 @@ const handleChangeGroupBy = (val: any) => {
 
   generateDashboardData(currentPeriod);
 };
+
+onMounted(() => {
+  setTimeout(() => {
+    reload();
+  }, 2000);
+});
 
 // Call reload when dashboardState.loading change from false to true
 watch(
@@ -150,6 +156,15 @@ const reload = () => {
             @click="redirect('reports-p-and-l')"
           >
             View details
+          </VbenButton>
+
+          <VbenButton
+            class="w-[100px] !p-0 text-right"
+            size="xs"
+            variant="link"
+            @click="reload"
+          >
+            Reload chart
           </VbenButton>
 
           <Select
