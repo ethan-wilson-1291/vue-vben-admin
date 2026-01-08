@@ -367,8 +367,7 @@ const handleWriteReview = () => {
       </span>
     </template>
     <template #description>
-      Love our app? Help others discover it too! Leave us a ⭐️⭐️⭐️⭐️⭐️
-      review.
+      Love our app? Help others discover it too! Leave us a ⭐️⭐️⭐️⭐️⭐️ review.
       <div>
         Then, take a screenshot of your review and send it to us via the
         chatbox. We’ll extend your Pro trial by another
@@ -385,7 +384,7 @@ const handleWriteReview = () => {
           @click="handleWriteReview"
         >
           <IconifyIcon class="mr-2" icon="ant-design:export-outlined" />
-          Move to Shopify App Store
+          Write a Review
         </VbenButton>
       </div>
     </template>
