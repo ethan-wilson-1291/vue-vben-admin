@@ -83,6 +83,16 @@ const coreRoutes: RouteRecordRaw[] = [
       title: 'Auth With Token',
     },
   },
+  // This route will be used by Admin Staff to login to the shop.
+  {
+    name: 'auth.demo',
+    path: '/auth/demo',
+    component: () => import('#/views/_core/authentication/auth-demo.vue'),
+    meta: {
+      ignoreAccess: true,
+      title: 'Auth With Demo',
+    },
+  },
 ];
 
 const loginPaths = [LOGIN_PATH];
