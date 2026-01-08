@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { EchartsUIType } from '@vben/plugins/echarts';
 
-import { onMounted, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 
 import {
   Card,
@@ -43,25 +43,20 @@ const chartOptions = [
   },
 ];
 
-onMounted(() => {
-  setTimeout(() => {
-    reload();
-  }, 2000);
-});
-
 const handleChangeGroupBy = (val: any) => {
   dashboardState.profitChart.groupBy = val;
 
   generateDashboardData(currentPeriod);
 };
 
-// Call reload when state.charts.profit.netProfit change
+// Call reload when dashboardState.loading change from false to true
 watch(
-  () => dashboardState.profitChart.netProfit,
-  () => {
-    setTimeout(() => {
-      reload();
-    }, 2000);
+  () => dashboardState.loading,
+  (newVal, _) => {
+    if (newVal === true) {
+      return;
+    }
+    reload();
   },
 );
 
@@ -69,7 +64,6 @@ const reload = () => {
   renderEcharts({
     grid: {
       bottom: 0,
-      containLabel: true,
       left: '1%',
       right: '1%',
       top: '8%',
