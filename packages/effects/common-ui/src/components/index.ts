@@ -9,31 +9,24 @@ export * from './loading';
 export * from './page';
 export * from './resize';
 export * from './tippy';
+export * from './tree';
 export * from '@vben-core/form-ui';
 export * from '@vben-core/popup-ui';
 
 // 给文档用
 export {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
   VbenAvatar,
   VbenButton,
   VbenButtonGroup,
   VbenCheckbox,
   VbenCheckButtonGroup,
+  VbenContextMenu,
   VbenCountToAnimator,
   VbenFullScreen,
-  VbenIcon,
-  VbenIconButton,
   VbenInputPassword,
   VbenLoading,
   VbenLogo,
   VbenPinInput,
-  VbenPopover,
-  VbenScrollbar,
   VbenSelect,
   VbenSpinner,
 } from '@vben-core/shadcn-ui';
