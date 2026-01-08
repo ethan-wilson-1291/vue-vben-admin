@@ -15,6 +15,15 @@ export * from '@vben-core/popup-ui';
 
 // 给文档用
 export {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  VbenIcon,
+  VbenIconButton,
+  VbenPopover,
+  VbenScrollbar,
   VbenAvatar,
   VbenButton,
   VbenButtonGroup,
