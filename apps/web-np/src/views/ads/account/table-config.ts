@@ -54,9 +54,7 @@ export const gridOptions: VxeTableGridOptions = {
           'For security reasons, the connection will expire, and you will need to reconnect manually.',
       },
       formatter: (time: any) => {
-        return time.cellValue
-          ? formatReportDate(time.cellValue)
-          : (null as any);
+        return time.cellValue ? formatReportDate(time.cellValue) : ('' as any);
       },
       minWidth: 110,
     },
