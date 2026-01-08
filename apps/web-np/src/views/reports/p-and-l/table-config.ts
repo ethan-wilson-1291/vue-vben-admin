@@ -218,6 +218,7 @@ export const formOptions: VbenFormProps = {
     },
     {
       component: 'Select',
+      defaultValue: ['PAID'],
       componentProps: {
         allowClear: true,
         mode: 'multiple',
@@ -226,7 +227,7 @@ export const formOptions: VbenFormProps = {
         disabled: shopStore.isFreeSubscription,
       },
       fieldName: 'financialStatus',
-      label: 'Status',
+      label: 'Order status',
     },
   ],
   showCollapseButton: true,

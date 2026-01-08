@@ -21,6 +21,7 @@ import { DefaultRoutes } from '#/shared/constants';
 import { crispDisplay, crispSetShopInfo } from '#/shared/crisp';
 import dayjs from '#/shared/dayjs';
 import { getSessionID, getShopifyDomain } from '#/shared/shopify-utils';
+import { redirectToExternal } from '#/shared/utils';
 
 import { useCurrencyStore } from './currency';
 import { useShopStore } from './shop';
@@ -39,7 +40,8 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function authInstall(params: Recordable<any>) {
     loginLoading.value = true;
-    window.location.href = generateAuthUrl(params);
+    const url = generateAuthUrl(params);
+    redirectToExternal(url);
   }
 
   async function authLoginViaShopifySession() {

@@ -13,6 +13,9 @@ export const overridesPreferences = defineOverridesPreferences({
     mode: 'light',
     radius: '0.25',
   },
+  sidebar: {
+    width: 200,
+  },
   widget: {
     languageToggle: false,
     lockScreen: false,
@@ -30,6 +33,7 @@ export const overridesPreferences = defineOverridesPreferences({
     companySiteLink: 'https://www.finily.com',
   },
   logo: {
+    enable: !isShopifyEmbedded(),
     source: '/static/images/logo.png',
   },
 });

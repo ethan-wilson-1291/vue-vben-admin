@@ -16,6 +16,7 @@ const shopStore = useShopStore();
 
 export const dashboardState = reactive({
   loading: false,
+  paymentStatusFilter: ['PAID'],
   changePercent: {
     quantityOrder: '',
     netPayment: '',
@@ -157,6 +158,7 @@ export const loadDataByPeriod = (payload: DashboardData) => {
   const toDate = payload.dateRange[1].format('YYYY-MM-DDTHH:mm:ssZ');
 
   orderGetPAndLReport({
+    financialStatus: dashboardState.paymentStatusFilter,
     groupBy: 'daily',
     fromDate,
     toDate,

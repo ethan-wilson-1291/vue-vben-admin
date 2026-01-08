@@ -58,7 +58,7 @@ const handleDelete = (row: ICustomCost) => {
   <Page auto-content-height>
     <FormContentModal />
 
-    <Grid table-title="Custom Costs">
+    <Grid table-title="Custom Costs/Tax">
       <template #toolbar-tools>
         <UpgradeBtn class="mr-2 w-[150px]" />
 
@@ -113,7 +113,7 @@ const handleDelete = (row: ICustomCost) => {
         </VbenButton>
         <VbenButton variant="outline" size="icon" class="size-7">
           <IconifyIcon
-            class="text-primary-500 size-4"
+            class="size-4 text-primary-500"
             icon="ant-design:edit-twotone"
             @click="openFormModal(row)"
           />

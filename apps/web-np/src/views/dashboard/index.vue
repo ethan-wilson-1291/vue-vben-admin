@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import type { DashboardData } from './service';
 
-import { computed, onBeforeMount } from 'vue';
+import { computed, defineComponent, onBeforeMount } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { Button } from 'ant-design-vue';
+import { Button, Divider, Select } from 'ant-design-vue';
 
-import { DefaultRoutes } from '#/shared/constants';
+import { DefaultRoutes, orderStatusList } from '#/shared/constants';
 import { getDatePreset } from '#/shared/utils';
 import { useShopStore } from '#/store';
 import DateRangePicker from '#/views/shared-components/date-range-picker.vue';
@@ -42,6 +42,10 @@ const loadAllData = () => {
   loadDataByPeriod(previousPeriod);
 };
 
+const handlePaymentStatusFilterChange = () => {
+  currentPeriod.dateRangeChanged = true; // Trigger to show the submit button as enabled
+};
+
 const handleDateChange = (
   date: any,
   payload: DashboardData,
@@ -70,6 +74,18 @@ const generateSamePeriodPreset = computed(() => {
     },
   ];
 });
+
+const VNodes = defineComponent({
+  props: {
+    vnodes: {
+      type: Object,
+      required: true,
+    },
+  },
+  render() {
+    return this.vnodes;
+  },
+});
 </script>
 
 <template>
@@ -78,7 +94,24 @@ const generateSamePeriodPreset = computed(() => {
       <div class="flex items-start space-x-5">
         <h1 class="text-md font-semibold md:text-2xl">Dashboard</h1>
       </div>
-      <div class="flex flex-wrap items-center justify-end space-x-0">
+      <div class="flex flex-wrap items-center justify-end space-x-2">
+        <Select
+          class="min-w-[150px]"
+          mode="multiple"
+          placeholder="Order status"
+          v-model:value="dashboardState.paymentStatusFilter"
+          :allow-clear="true"
+          :options="orderStatusList"
+          :disabled="shopStore.isFreeSubscription"
+          @change="handlePaymentStatusFilterChange"
+        >
+          <template #dropdownRender="{ menuNode: menu }">
+            <div class="my-2 text-center italic">Order Status</div>
+            <Divider class="my-2" />
+            <VNodes :vnodes="menu" />
+          </template>
+        </Select>
+
         <DateRangePicker
           picker-limit-name="1 year"
           :model-value="currentPeriod.dateRange"
@@ -105,7 +138,7 @@ const generateSamePeriodPreset = computed(() => {
             (val) => handleDateChange(val, currentPeriod, true)
           "
         />
-        <div class="text-nowrap px-5">Compare with</div>
+        <div class="text-nowrap">Compare with</div>
         <DateRangePicker
           picker-limit-name="1 year"
           :model-value="previousPeriod.dateRange"

@@ -1,8 +1,4 @@
-import { useAppConfig } from '@vben/hooks';
-
 import { baseRequestClient, requestClient } from '#/api/request';
-
-const { apiURL } = useAppConfig(import.meta.env, import.meta.env.PROD);
 
 export namespace AuthApi {
   /** 登录接口参数 */
@@ -29,7 +25,7 @@ export function generateAuthUrl(data: AuthApi.LoginParams) {
       .replace('http://', '')
       .replace('.myshopify.com', '') ?? '';
 
-  return `${apiURL}/auth/generate?subdomain=${shopifyDomain}`;
+  return `https://admin.shopify.com/store/${shopifyDomain}/apps/${import.meta.env.VITE_GLOB_SHOPIFY_APP_HANDLE}`;
 }
 
 export async function loginApiViaShopifySessionId(
