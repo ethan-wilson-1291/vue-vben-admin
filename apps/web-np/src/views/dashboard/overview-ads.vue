@@ -57,6 +57,16 @@ const getData = computed(() => {
       ),
     },
     {
+      title: 'Google Ads',
+      value: formatMoney(currentPeriod.pAndLReport.google, currency, rate),
+      changePercent: dashboardState.changePercent.google,
+      previousValue: formatMoney(
+        previousPeriod.pAndLReport.google,
+        currency,
+        rate,
+      ),
+    },
+    {
       title: $t('field-name.roas'),
       explain: $t('field-name.roasExplain'),
       value: formatMoney(currentPeriod.pAndLReport.roas, currency, rate),

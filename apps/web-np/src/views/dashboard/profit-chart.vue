@@ -55,13 +55,9 @@ onMounted(() => {
   }, 2000);
 });
 
-// Call reload when dashboardState.loading change from false to true
 watch(
-  () => dashboardState.loading,
-  (newVal, _) => {
-    if (newVal === true) {
-      return;
-    }
+  () => dashboardState.profitChart.revenue,
+  (__, _) => {
     reload();
   },
 );
@@ -69,10 +65,10 @@ watch(
 const reload = () => {
   renderEcharts({
     grid: {
-      bottom: 0,
+      bottom: '20%',
       left: '1%',
       right: '1%',
-      top: '8%',
+      top: '0%',
     },
     series: [
       {

@@ -60,7 +60,8 @@ const reload = () => {
     grid: {
       left: '3%',
       right: '4%',
-      bottom: '3%',
+      top: '0%',
+      bottom: '30%',
     },
     xAxis: {
       type: 'value',
@@ -96,8 +97,23 @@ const reload = () => {
           focus: 'series',
         },
         data: [
+          Number(previousPeriod.pAndLReport.tiktok.toFixed(2)),
           Number(currentPeriod.pAndLReport.tiktok.toFixed(2)),
-          Number(currentPeriod.pAndLReport.tiktok.toFixed(2)),
+        ],
+      },
+      {
+        name: 'Google',
+        type: 'bar',
+        stack: 'total',
+        label: {
+          show: true,
+        },
+        emphasis: {
+          focus: 'series',
+        },
+        data: [
+          Number(previousPeriod.pAndLReport.google.toFixed(2)),
+          Number(currentPeriod.pAndLReport.google.toFixed(2)),
         ],
       },
     ],
