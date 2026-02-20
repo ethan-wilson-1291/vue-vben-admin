@@ -90,11 +90,6 @@ const VNodes = defineComponent({
 
 <template>
   <div class="p-5">
-    <s-app-nav>
-      <s-link href="/" rel="home">Home</s-link>
-      <s-link href="/templates">Templates</s-link>
-      <s-link href="/settings">Settings</s-link>
-    </s-app-nav>
     <div class="mb-5 flex flex-wrap justify-between">
       <div class="flex items-start space-x-5">
         <h1 class="text-md font-semibold md:text-2xl">Dashboard</h1>
