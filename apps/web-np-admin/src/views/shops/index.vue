@@ -94,7 +94,14 @@ const redirectToQueueManagement = () => {
           <div class="font-semibold">
             {{ row.plan }}
           </div>
-          <div class="italic">{{ row.subscriptionName }} (App)</div>
+          <div class="italic">
+            <Tag v-if="row.subscriptionName === 'Pro'" color="#108ee9">
+              {{ row.subscriptionName }} (App)
+            </Tag> 
+            <template v-else>
+              {{ row.subscriptionName }} (App)
+            </template>
+          </div>
         </div>
       </template>
 

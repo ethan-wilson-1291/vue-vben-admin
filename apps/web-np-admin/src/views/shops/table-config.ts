@@ -7,7 +7,7 @@ export const orderTableOptions: VxeTableGridOptions = {
   height: 'auto',
   keepSource: true,
   rowConfig: {
-    height: 48,
+    height: 55,
     isHover: true,
   },
   toolbarConfig: {
