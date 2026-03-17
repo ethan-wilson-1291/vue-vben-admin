@@ -65,6 +65,16 @@ const routes: RouteRecordRaw[] = [
   },
   {
     meta: {
+      title: 'Pricing & Plans',
+      icon: 'ant-design:sketch-outlined',
+      order: 110,
+    },
+    name: 'settings.pricing',
+    path: '/settings/pricing',
+    component: () => import('#/views/settings/pricing/index.vue'),
+  },
+  {
+    meta: {
       title: 'View Fullscreen',
       order: 100_000,
       icon: 'ant-design:fullscreen-outlined',

@@ -69,10 +69,10 @@ watch(
 const reload = () => {
   renderEcharts({
     grid: {
-      bottom: 0,
+      // bottom: 0,
       left: '1%',
       right: '1%',
-      top: '8%',
+      top: '5%',
     },
     series: [
       {
