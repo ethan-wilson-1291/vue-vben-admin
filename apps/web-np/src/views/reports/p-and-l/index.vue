@@ -60,7 +60,15 @@ const formatVal = (rowName: string, val: any) => {
         </div>
       </template>
       <template #date="{ row, column: { field } }">
-        <div :class="[{ 'font-semibold': hasBold(row.id) }]">
+        <div
+          :class="[
+            { 'font-semibold': hasBold(row.id) },
+            {
+              'pointer-events-none select-none blur-sm':
+                shopStore.isFreeSubscription,
+            },
+          ]"
+        >
           {{ formatVal(row.id, row[field]) }}
         </div>
       </template>

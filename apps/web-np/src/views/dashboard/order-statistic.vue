@@ -332,6 +332,15 @@ const handleWriteReview = () => {
               <span
                 class="text-sm"
                 :class="getChangePercentColor(item.changePercent)"
+                :style="
+                  shopStore.isFreeSubscription
+                    ? {
+                        filter: 'blur(4px)',
+                        pointerEvents: 'none',
+                        userSelect: 'none',
+                      }
+                    : undefined
+                "
                 v-tippy="{
                   content: item.previousValue
                     ? `Compared with ${item.previousValue}`
@@ -344,7 +353,13 @@ const handleWriteReview = () => {
           </CardTitle>
         </CardHeader>
 
-        <CardContent class="flex items-center justify-between text-lg">
+        <CardContent
+          class="flex items-center justify-between text-lg"
+          :class="{
+            'pointer-events-none select-none blur-sm':
+              shopStore.isFreeSubscription,
+          }"
+        >
           {{ item.value }}
         </CardContent>
       </Card>
@@ -367,7 +382,8 @@ const handleWriteReview = () => {
       </span>
     </template>
     <template #description>
-      Love our app? Help others discover it too! Leave us a ⭐️⭐️⭐️⭐️⭐️ review.
+      Love our app? Help others discover it too! Leave us a ⭐️⭐️⭐️⭐️⭐️
+      review.
       <div>
         Then, take a screenshot of your review and send it to us via the
         chatbox. We’ll extend your Pro trial by another
@@ -418,6 +434,15 @@ const handleWriteReview = () => {
             <template v-if="item.changePercent">
               <span
                 :class="getChangePercentColor(item.changePercent)"
+                :style="
+                  shopStore.isFreeSubscription
+                    ? {
+                        filter: 'blur(4px)',
+                        pointerEvents: 'none',
+                        userSelect: 'none',
+                      }
+                    : undefined
+                "
                 v-tippy="{
                   content: item.previousValue
                     ? `Compared with ${item.previousValue}`
@@ -430,7 +455,13 @@ const handleWriteReview = () => {
           </CardTitle>
         </CardHeader>
 
-        <CardContent class="pb-0 !text-lg">
+        <CardContent
+          class="pb-0 !text-lg"
+          :class="{
+            'pointer-events-none select-none blur-sm':
+              shopStore.isFreeSubscription,
+          }"
+        >
           {{ item.value }}
         </CardContent>
       </Card>

@@ -178,10 +178,17 @@ const reload = () => {
       </CardTitle>
     </CardHeader>
     <CardContent>
-      <EchartsUI
-        ref="chartRef"
-        v-show="dashboardState.profitChart.netProfit.length > 0"
-      />
+      <div
+        :class="{
+          'pointer-events-none select-none blur-sm':
+            shopStore.isFreeSubscription,
+        }"
+      >
+        <EchartsUI
+          ref="chartRef"
+          v-show="dashboardState.profitChart.netProfit.length > 0"
+        />
+      </div>
 
       <Empty v-show="dashboardState.profitChart.netProfit.length === 0" />
     </CardContent>
