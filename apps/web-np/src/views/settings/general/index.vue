@@ -239,7 +239,7 @@ function onSubmit(values: Record<string, any>) {
     });
 
     setTimeout(() => {
-      // window.location.reload();
+      window.location.reload();
     }, 1000);
   });
 }

@@ -5,8 +5,12 @@ import { preferences, updatePreferences } from '@vben/preferences';
 
 import { Card, Select } from 'ant-design-vue';
 
+import { shopUpdateAppLocale } from '#/api';
+
 const handleLocaleChange = async (value: string) => {
   const locale = value as any;
+
+  await shopUpdateAppLocale({ appLocale: locale });
 
   updatePreferences({
     app: {

@@ -31,6 +31,10 @@ export async function shopToggleNewFeatureNotice(data: any) {
   );
 }
 
+export async function shopUpdateAppLocale(data: any) {
+  return requestClient.put('/api/shop/settings/app-locale', data);
+}
+
 export async function shopUpdateSubscriptionInfo() {
   return requestClient.post('/api/shop/subscription/sync');
 }
