@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { ITransactionFee } from '#/store';
 
-import { onBeforeMount, reactive } from 'vue';
+import { onBeforeMount, onMounted, onUnmounted, reactive } from 'vue';
 
 import { Page, VbenButton } from '@vben/common-ui';
 import { ArrowLeft, Check } from '@vben/icons';
@@ -13,6 +13,7 @@ import { Flex, message, Steps } from 'ant-design-vue';
 import { onboardFinished } from '#/api';
 import { ArrowRight } from '#/icons';
 import { DefaultRoutes } from '#/shared/constants';
+import { crispDisplay } from '#/shared/crisp';
 import { redirectToPath, toPercentage, toRate } from '#/shared/utils';
 import { useShopSettingStore, useShopStore } from '#/store';
 
@@ -95,6 +96,14 @@ onBeforeMount(() => {
       externalFeePercentage: toPercentage(item.externalFeePercentage) as any,
     }),
   );
+});
+
+onMounted(() => {
+  crispDisplay(true);
+});
+
+onUnmounted(() => {
+  crispDisplay(shopSettingStore.showChatPopup);
 });
 </script>
 
