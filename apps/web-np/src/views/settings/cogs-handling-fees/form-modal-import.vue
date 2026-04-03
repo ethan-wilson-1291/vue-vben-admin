@@ -7,6 +7,7 @@ import { message, TypographyParagraph } from 'ant-design-vue';
 
 import { useVbenForm } from '#/adapter/form';
 import { importCogsHandlingFees } from '#/api';
+import { $t } from '#/locales';
 import { useShopSettingStore } from '#/store';
 
 import UploadCmp from './modules/upload.vue';
@@ -22,10 +23,7 @@ function onSubmit(values: Record<string, any>) {
 
   importCogsHandlingFees(values)
     .then(() => {
-      message.success(
-        'The file has been uploaded successfully and is being processed',
-        5,
-      );
+      message.success($t('page.settings-cogs.message.importUploaded'), 5);
     })
     .finally(() => {
       modalApi.setData({ processing: true });
@@ -52,7 +50,7 @@ const [Form, formApi] = useVbenForm({
         };
       },
       fieldName: 'zoneUUID',
-      label: 'Zone name',
+      label: $t('page.settings-cogs.filter.zone'),
     },
     {
       component: markRaw(UploadCmp),
@@ -91,16 +89,17 @@ const [Modal, modalApi] = useVbenModal({
 <template>
   <Modal
     class="w-[700px]"
-    confirm-text="Submit"
-    title="Import products"
+    :confirm-text="$t('page.settings-cogs.action.submit')"
+    :title="$t('page.settings-cogs.modal.importProducts.title')"
     :close-on-click-modal="false"
   >
     <Form />
 
     <TypographyParagraph class="mt-5 px-5 italic">
-      <span class="font-semibold">Note:</span> After uploading the file, the
-      system will process the data and update the fees in the system. Please
-      make sure the file is correct before uploading.
+      <span class="font-semibold">{{
+        $t('page.settings-cogs.common.note')
+      }}</span>
+      {{ $t('page.settings-cogs.modal.importProducts.note') }}
     </TypographyParagraph>
   </Modal>
 </template>

@@ -10,6 +10,7 @@ import {
   CardTitle,
   VbenButton,
 } from '@vben/common-ui';
+import { $t } from '@vben/locales';
 import { EchartsUI, useEcharts } from '@vben/plugins/echarts';
 
 import { formatMoney, redirect } from '#/shared/utils';
@@ -67,11 +68,14 @@ const reload = () => {
     },
     yAxis: {
       type: 'category',
-      data: ['Previous Period', 'Current Period'],
+      data: [
+        $t('page.dashboard.previousPeriod'),
+        $t('page.dashboard.currentPeriod'),
+      ],
     },
     series: [
       {
-        name: 'Facebook',
+        name: $t('field-name.facebookAds'),
         type: 'bar',
         stack: 'total',
         label: {
@@ -86,7 +90,7 @@ const reload = () => {
         ],
       },
       {
-        name: 'Tiktok',
+        name: $t('field-name.tiktokAds'),
         type: 'bar',
         stack: 'total',
         label: {
@@ -96,8 +100,23 @@ const reload = () => {
           focus: 'series',
         },
         data: [
+          Number(previousPeriod.pAndLReport.tiktok.toFixed(2)),
           Number(currentPeriod.pAndLReport.tiktok.toFixed(2)),
-          Number(currentPeriod.pAndLReport.tiktok.toFixed(2)),
+        ],
+      },
+      {
+        name: 'Google',
+        type: 'bar',
+        stack: 'total',
+        label: {
+          show: true,
+        },
+        emphasis: {
+          focus: 'series',
+        },
+        data: [
+          Number(previousPeriod.pAndLReport.google.toFixed(2)),
+          Number(currentPeriod.pAndLReport.google.toFixed(2)),
         ],
       },
     ],
@@ -109,7 +128,7 @@ const reload = () => {
   <Card>
     <CardHeader>
       <CardTitle class="flex items-center justify-between space-x-1">
-        <span> Ad Analytics </span>
+        <span>{{ $t('page.dashboard.adAnalytics') }}</span>
 
         <VbenButton
           class="w-[100px] !p-0 text-right"
@@ -117,7 +136,7 @@ const reload = () => {
           variant="link"
           @click="redirect('reports-p-and-l')"
         >
-          View details
+          {{ $t('page.dashboard.viewDetails') }}
         </VbenButton>
       </CardTitle>
     </CardHeader>

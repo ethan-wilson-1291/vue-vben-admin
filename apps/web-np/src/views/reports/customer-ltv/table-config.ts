@@ -3,6 +3,8 @@ import type { VxeTableGridOptions } from '#/adapter/vxe-table';
 
 import { markRaw, reactive } from 'vue';
 
+import { $t } from '@vben/locales';
+
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import { customerGetLTVReport } from '#/api';
 import dayjs, { dayjsInGMT } from '#/shared/dayjs';
@@ -96,7 +98,7 @@ const formOptions: VbenFormProps = {
       },
       defaultValue: [dayjsInGMT().add(-5, 'months'), dayjsInGMT()],
       fieldName: 'month',
-      label: 'Month',
+      label: $t('page.reports-customer.filter.month'),
     },
   ],
   showCollapseButton: true,

@@ -36,13 +36,13 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <Card title="Cost of goods sold (COGS)">
+  <Card :title="$t('page.onboard.stepCogs.title')">
     <template #extra>
       <a
         href="https://www.shopify.com/retail/cost-of-goods-sold"
         target="_blank"
       >
-        More
+        {{ $t('page.onboard.common.more') }}
       </a>
     </template>
     <p>
@@ -51,8 +51,8 @@ onBeforeMount(() => {
 
     <div class="mt-5 w-full text-center">
       <Switch
-        checked-children="Sync from Shopify"
-        un-checked-children="Manual"
+        :checked-children="$t('page.onboard.stepCogs.syncFromShopify')"
+        :un-checked-children="$t('page.onboard.stepCogs.manual')"
         :class="{
           '!bg-green-500': !onboardForm.cogsFromShopify,
         }"
@@ -66,16 +66,21 @@ onBeforeMount(() => {
     </div>
 
     <div class="mt-5" v-show="onboardForm.cogsFromShopify">
-      The system will automatically sync the
-      <span class="font-semibold italic">"Cost per item"</span> value from
-      Shopify and use it as the COGS value. For example:
+      {{ $t('page.onboard.stepCogs.syncDescriptionPrefix') }}
+      <span class="font-semibold italic">
+        {{ $t('page.onboard.stepCogs.costPerItem') }}
+      </span>
+      {{ $t('page.onboard.stepCogs.syncDescriptionSuffix') }}
+      {{ $t('page.onboard.common.forExample') }}:
 
       <Image class="mt-2" src="/static/images/cogs-from-shopify.png" />
     </div>
 
     <div class="mt-5" v-show="!onboardForm.cogsFromShopify">
       <div class="flex">
-        <div class="font-semibold">Set default COGS rate for 1 item:</div>
+        <div class="font-semibold">
+          {{ $t('page.onboard.stepCogs.defaultCogsRate') }}
+        </div>
         <div class="ml-5 font-bold">{{ onboardForm.cogsRate }}%</div>
       </div>
 
@@ -93,13 +98,13 @@ onBeforeMount(() => {
         <thead>
           <tr>
             <th class="px-6 py-3 text-start text-xs font-medium uppercase">
-              Example product
+              {{ $t('page.onboard.common.exampleProduct') }}
             </th>
             <th class="px-6 py-3 text-start text-xs font-medium uppercase">
-              Sale price
+              {{ $t('page.onboard.common.salePrice') }}
             </th>
             <th class="px-6 py-3 text-start text-xs font-medium uppercase">
-              Quantity
+              {{ $t('page.onboard.common.quantity') }}
             </th>
             <th class="px-6 py-3 text-end text-xs font-medium uppercase">
               COGS

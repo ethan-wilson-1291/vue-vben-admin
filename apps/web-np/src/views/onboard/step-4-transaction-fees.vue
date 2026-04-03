@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { onBeforeMount } from 'vue';
 
+import { $t } from '@vben/locales';
+
 import { Card, InputNumber } from 'ant-design-vue';
 
 import { formatMoney, toRate } from '#/shared/utils';
@@ -33,21 +35,23 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <Card title="Transaction Fees">
+  <Card :title="$t('page.settings-transaction-fees.title')">
     <table class="min-w-full divide-y">
       <thead>
         <tr>
           <th class="px-2 py-3 text-start text-xs font-semibold uppercase">
-            Payment gateways
+            {{ $t('page.settings-transaction-fees.onboard.paymentGateways') }}
           </th>
           <th class="px-2 py-3 text-start text-xs font-semibold uppercase">
-            Fixed fees
+            {{ $t('page.settings-transaction-fees.onboard.fixedFees') }}
           </th>
           <th class="px-2 py-3 text-start text-xs font-semibold uppercase">
-            Percentage fees
+            {{ $t('page.settings-transaction-fees.onboard.percentageFees') }}
           </th>
           <th class="px-2 py-3 text-start text-xs font-semibold uppercase">
-            Shopify external fees
+            {{
+              $t('page.settings-transaction-fees.onboard.shopifyExternalFees')
+            }}
           </th>
         </tr>
       </thead>
@@ -92,24 +96,23 @@ onBeforeMount(() => {
     </table>
 
     <div class="my-5 text-center text-xs italic">
-      * Transaction fees = Fixed fees + [Net payment * (Percentage fees +
-      Shopify external fees) / 100]
+      {{ $t('page.settings-transaction-fees.onboard.formula') }}
     </div>
 
     <table class="min-w-full divide-y">
       <thead>
         <tr>
           <th class="px-2 py-3 text-start text-xs font-semibold uppercase">
-            Example order
+            {{ $t('page.settings-transaction-fees.onboard.exampleOrder') }}
           </th>
           <th class="px-2 py-3 text-center text-xs font-semibold uppercase">
-            Net Payment
+            {{ $t('field-name.netPayment') }}
           </th>
           <th class="px-2 py-3 text-center text-xs font-semibold uppercase">
-            Payment gateways
+            {{ $t('page.settings-transaction-fees.onboard.paymentGateways') }}
           </th>
           <th class="px-2 py-3 text-end text-xs font-semibold uppercase">
-            Transaction Fees
+            {{ $t('field-name.transactionFees') }}
           </th>
         </tr>
       </thead>
@@ -121,7 +124,9 @@ onBeforeMount(() => {
           <td class="px-2 py-4 text-center text-sm">
             {{ formatMoney(sampleOrder.grossSales, shopStore.shop.currency) }}
           </td>
-          <td class="px-2 py-4 text-center text-sm">Other</td>
+          <td class="px-2 py-4 text-center text-sm">
+            {{ $t('page.settings-transaction-fees.onboard.other') }}
+          </td>
           <td class="px-2 py-4 text-end text-sm font-bold">
             {{
               formatMoney(sampleOrder.transactionFees, shopStore.shop.currency)

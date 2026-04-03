@@ -5,6 +5,7 @@ import { onBeforeMount, reactive } from 'vue';
 
 import { Page, useVbenModal, VbenButton } from '@vben/common-ui';
 import { IconifyIcon } from '@vben/icons';
+import { $t } from '@vben/locales';
 
 import { message } from 'ant-design-vue';
 
@@ -47,7 +48,7 @@ const handleSubmit = () => {
   shopSettingStore
     .setTransactionsFees(onboardForm.transactionFees)
     .then(() => {
-      message.success('The transaction fees have been updated successfully');
+      message.success($t('page.settings-transaction-fees.message.updated'));
     })
     .finally(() => {
       state.loading = false;
@@ -62,7 +63,7 @@ const handleSubmit = () => {
     <div class="mt-5 flex items-center justify-between">
       <VbenButton type="primary" @click="recalculateFormModalApi.open()">
         <IconifyIcon class="mr-2 size-4" icon="ant-design:calculator-twotone" />
-        Recalculate costs
+        {{ $t('page.settings-transaction-fees.action.recalculateCosts') }}
       </VbenButton>
       <div class="flex justify-end space-x-5">
         <VbenButton
@@ -71,14 +72,14 @@ const handleSubmit = () => {
           @click="handleReset"
           :disabled="state.loading"
         >
-          Reset
+          {{ $t('page.settings-transaction-fees.action.reset') }}
         </VbenButton>
         <VbenButton
           :loading="state.loading"
           class="w-[100px]"
           @click="handleSubmit"
         >
-          Save
+          {{ $t('page.settings-transaction-fees.action.submit') }}
         </VbenButton>
       </div>
     </div>

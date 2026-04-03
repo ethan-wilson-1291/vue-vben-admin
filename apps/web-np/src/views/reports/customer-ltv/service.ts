@@ -1,6 +1,7 @@
 import type { ExtendedVxeGridApi } from 'node_modules/@vben/plugins/src/vxe-table/types';
 import type { VxeGridPropTypes } from 'vxe-table';
 
+import { $t } from '#/locales';
 import dayjs from '#/shared/dayjs';
 
 function getOrdinalSuffix(n: number): any {
@@ -16,21 +17,20 @@ export const generateDateColumns = (
 ) => {
   const ymCols: VxeGridPropTypes.Columns = [
     {
-      title: 'First Purchase In',
+      title: $t('page.reports-customer.table.firstPurchaseIn'),
       field: 'id',
       slots: { default: 'id' },
       minWidth: 150,
       align: 'left',
     },
+    {
+      field: 'totalRevenue',
+      title: $t('page.reports-customer.table.totalRevenue'),
+      width: 150,
+      align: 'right',
+      slots: { default: 'totalRevenue' },
+    },
   ];
-
-  ymCols.push({
-    field: 'totalRevenue',
-    title: 'Total Revenue',
-    width: 150,
-    align: 'right',
-    slots: { default: 'totalRevenue' },
-  });
 
   const fromMonth = formValues.fromMonth.slice(0, 7);
   const toMonth = formValues.toMonth.slice(0, 7);
@@ -42,7 +42,10 @@ export const generateDateColumns = (
     const monthDifference = dayjs(currentMonth).diff(fromMonth, 'month') + 1;
 
     // Create the title with the correct ordinal suffix
-    const title = `${monthDifference}${getOrdinalSuffix(monthDifference)} Month`;
+    const title = $t('page.reports-customer.table.nthMonth', [
+      monthDifference,
+      getOrdinalSuffix(monthDifference),
+    ]);
 
     ymCols.push({
       field: monthDifference.toString(),

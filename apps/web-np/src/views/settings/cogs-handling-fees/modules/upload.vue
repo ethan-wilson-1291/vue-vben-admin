@@ -6,12 +6,14 @@ import { IconifyIcon } from '@vben/icons';
 
 import { message, Upload } from 'ant-design-vue';
 
+import { $t } from '#/locales';
+
 const selectedFile = defineModel();
 
 const beforeUpload: UploadProps['beforeUpload'] = (file) => {
   const isCSV = file.type === 'text/csv';
   if (!isCSV) {
-    message.error(`${file.name} is not a CSV file`);
+    message.error($t('page.settings-cogs.message.fileNotCsv', [file.name]));
     return false;
   }
 
@@ -33,7 +35,7 @@ const handleRemove: UploadProps['onRemove'] = () => {
     >
       <VbenButton variant="outline">
         <IconifyIcon icon="ant-design:upload-outlined" class="mr-2 size-5" />
-        Choose *.csv file to import
+        {{ $t('page.settings-cogs.action.chooseCsv') }}
       </VbenButton>
     </Upload>
   </div>

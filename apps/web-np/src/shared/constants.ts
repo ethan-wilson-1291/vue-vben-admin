@@ -43,26 +43,32 @@ export const defaultRegionUUID = 'default';
 export const orderStatusList = [
   {
     value: 'AUTHORIZED',
+    labelKey: 'page.common.orderStatus.authorized',
     label: 'Authorized',
   },
   {
     value: 'PAID',
+    labelKey: 'page.common.orderStatus.paid',
     label: 'Paid',
   },
   {
     value: 'PARTIALLY_PAID',
+    labelKey: 'page.common.orderStatus.partiallyPaid',
     label: 'Partially Paid',
   },
   {
     value: 'PARTIALLY_REFUNDED',
+    labelKey: 'page.common.orderStatus.partiallyRefunded',
     label: 'Partially Refunded',
   },
   {
     value: 'PENDING',
+    labelKey: 'page.common.orderStatus.pending',
     label: 'Pending',
   },
   {
     value: 'VOIDED',
+    labelKey: 'page.common.orderStatus.voided',
     label: 'Voided',
   },
 ];
@@ -345,8 +351,16 @@ export enum ECogsSource {
 }
 
 export const cogsSoures = [
-  { value: ECogsSource.MANUAL, label: 'Manual' },
-  { value: ECogsSource.SHOPIFY, label: 'Shopify' },
+  {
+    value: ECogsSource.MANUAL,
+    labelKey: 'page.settings-cogs.option.manual',
+    label: 'Manual',
+  },
+  {
+    value: ECogsSource.SHOPIFY,
+    labelKey: 'page.settings-cogs.option.shopify',
+    label: 'Shopify',
+  },
 ];
 
 export const timezones = [

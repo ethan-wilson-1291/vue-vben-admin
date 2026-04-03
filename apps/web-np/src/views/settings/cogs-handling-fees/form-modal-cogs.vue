@@ -15,6 +15,7 @@ import {
 } from 'ant-design-vue';
 
 import { productUpdateCogsByDateRange } from '#/api';
+import { $t } from '#/locales';
 import dayjs, { dayjsInGMT } from '#/shared/dayjs';
 import { formatReportDate } from '#/shared/utils';
 import { useShopStore } from '#/store';
@@ -40,7 +41,7 @@ const [Modal, modalApi] = useVbenModal({
       cogs: state.cogsArr,
     })
       .then(() => {
-        message.success('Cost of Goods Sold updated successfully');
+        message.success($t('page.settings-cogs.message.cogsUpdated'));
       })
       .finally(() => {
         modalApi.setData({ reload: true, row: state.formValue });
@@ -76,7 +77,7 @@ const showRemoveBtn = (counter: any) => {
 
 const getNextDate = (counter: any) => {
   if (!counter) {
-    return 'Ongoing';
+    return $t('page.settings-cogs.common.ongoing');
   }
 
   const previousDate = state.cogsArr[counter - 1]?.date.subtract(1, 'day');
@@ -95,7 +96,11 @@ const addNewRow = () => {
 };
 </script>
 <template>
-  <Modal class="w-[700px]" title="Cost of Goods Sold" confirm-text="Submit">
+  <Modal
+    class="w-[700px]"
+    :title="$t('page.settings-cogs.modal.cogsHistory.title')"
+    :confirm-text="$t('page.settings-cogs.action.submit')"
+  >
     <div class="mb-5 w-full text-center">
       <Image
         v-if="state.formValue?.image"
@@ -114,7 +119,11 @@ const addNewRow = () => {
         :level="5"
         v-if="state.formValue?.variantTitle"
       >
-        Variant - {{ state.formValue?.variantTitle }}
+        {{
+          $t('page.settings-cogs.modal.cogsHistory.variant', [
+            state.formValue?.variantTitle,
+          ])
+        }}
       </TypographyTitle>
     </div>
 
@@ -126,9 +135,15 @@ const addNewRow = () => {
           class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400"
         >
           <tr>
-            <th scope="col" class="px-6 py-3 text-center">From</th>
-            <th scope="col" class="px-6 py-3 text-center">To</th>
-            <th scope="col" class="px-6 py-3">Price</th>
+            <th scope="col" class="px-6 py-3 text-center">
+              {{ $t('page.settings-cogs.common.from') }}
+            </th>
+            <th scope="col" class="px-6 py-3 text-center">
+              {{ $t('page.settings-cogs.common.to') }}
+            </th>
+            <th scope="col" class="px-6 py-3">
+              {{ $t('page.settings-cogs.common.price') }}
+            </th>
             <th scope="col" class="px-6 py-3"></th>
           </tr>
         </thead>
@@ -144,7 +159,7 @@ const addNewRow = () => {
                 v-model:value="_item.date"
                 class="w-full"
                 format="YYYY-MM-DD"
-                placeholder="Select date"
+                :placeholder="$t('page.settings-cogs.common.selectDate')"
               />
               <div v-else>{{ _item.date.format('YYYY-MM-DD') }}</div>
             </td>
@@ -183,7 +198,7 @@ const addNewRow = () => {
                   @click="addNewRow()"
                 >
                   <IconifyIcon
-                    class="text-foreground size-6"
+                    class="size-6 text-foreground"
                     icon="ic:baseline-plus"
                   />
                 </VbenButton>

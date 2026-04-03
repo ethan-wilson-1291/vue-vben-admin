@@ -2,6 +2,7 @@
 import { markRaw } from 'vue';
 
 import { useVbenModal } from '@vben/common-ui';
+import { $t } from '@vben/locales';
 
 import { message, TypographyParagraph } from 'ant-design-vue';
 
@@ -20,10 +21,7 @@ function onSubmit(values: Record<string, any>) {
 
   orderSyncManually(values)
     .then(() => {
-      message.success(
-        'Your request has been submitted successfully. Once the job is completed, the system will send a notification.',
-        5,
-      );
+      message.success($t('page.reports-order.syncModal.submitSuccess'), 5);
       modalApi.setData({ reload: true });
       modalApi.close();
 
@@ -68,7 +66,7 @@ const [Form, formApi] = useVbenForm({
       },
       defaultValue: [dayjsInGMT().add(-1, 'month').add(1, 'day'), dayjsInGMT()],
       fieldName: 'date',
-      label: 'Date',
+      label: $t('page.reports-order.syncModal.date'),
       rules: 'required',
     },
   ],
@@ -84,13 +82,18 @@ const [Modal, modalApi] = useVbenModal({
 });
 </script>
 <template>
-  <Modal class="w-[700px]" title="Sync Shopify Manually" confirm-text="Submit">
+  <Modal
+    class="w-[700px]"
+    :title="$t('page.reports-order.syncModal.title')"
+    :confirm-text="$t('page.reports-order.syncModal.submit')"
+  >
     <Form />
 
     <TypographyParagraph class="mt-5 px-5 italic">
-      <span class="font-semibold">Note:</span> All orders are automatically
-      synced to the app. If you still wish to sync manually, please use this
-      form.
+      <span class="font-semibold">{{
+        $t('page.reports-order.syncModal.noteLabel')
+      }}</span>
+      {{ $t('page.reports-order.syncModal.note') }}
     </TypographyParagraph>
   </Modal>
 </template>

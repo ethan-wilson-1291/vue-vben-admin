@@ -6,6 +6,7 @@ import { onMounted } from 'vue';
 import { Page, VbenButton } from '@vben/common-ui';
 import { useAppConfig } from '@vben/hooks';
 import { IconifyIcon } from '@vben/icons';
+import { $t } from '@vben/locales';
 import { capitalizeFirstLetter } from '@vben/utils';
 
 import { Dropdown, Menu, MenuItem, Modal, Switch, Tag } from 'ant-design-vue';
@@ -32,8 +33,8 @@ import { formOptions } from './table-filter';
 const shopStore = useShopStore();
 
 const [Grid, gridApi] = useVbenVxeGrid({
-  gridOptions,
-  formOptions,
+  gridOptions: gridOptions as any,
+  formOptions: formOptions as any,
 });
 
 onMounted(() => {
@@ -55,56 +56,61 @@ onMounted(() => {
 });
 
 const addNewConnection = (type: string) => {
-  const { apiURL } = useAppConfig(import.meta.env, import.meta.env.PROD);
+  const metaEnv = (import.meta as any).env;
+  const { apiURL } = useAppConfig(metaEnv, metaEnv.PROD);
   const url = `${apiURL}/auth-social/generate?type=${type}&shopId=${shopStore.shop.id}`;
 
   redirectToExternal(url);
 };
 
+const isGoogleAdsEnabled =
+  String((import.meta as any).env.VITE_ENABLE_GOOGLE_ADS).toLowerCase() ===
+  'true';
+
 const statusList = [
   // Sync Status
   {
     value: 'pending',
-    label: 'Sync pending',
+    label: $t('page.ad-connections.status.syncPending'),
     className: 'warning',
   },
   {
     value: 'processing',
-    label: 'Syncing',
+    label: $t('page.ad-connections.status.syncing'),
     className: 'warning',
   },
   {
     value: 'processed',
-    label: 'Synced',
+    label: $t('page.ad-connections.status.synced'),
     className: 'success',
   },
   {
     value: 'failed',
-    label: 'Sync failed',
+    label: $t('page.ad-connections.status.syncFailed'),
     className: 'error',
   },
 
   // Account - Status
   {
     value: 'connected',
-    label: 'Connected',
+    label: $t('page.ad-connections.status.connected'),
     className: 'success',
   },
   {
     value: 'disconnected',
-    label: 'Disconnected',
+    label: $t('page.ad-connections.status.disconnected'),
     className: 'error',
   },
 
   // Ad Account - Status
   {
     value: 'active',
-    label: 'Active',
+    label: $t('page.ad-connections.status.active'),
     className: 'success',
   },
   {
     value: 'inactive',
-    label: 'Inactive',
+    label: $t('page.ad-connections.status.inactive'),
     className: 'error',
   },
 ];
@@ -121,12 +127,11 @@ const getStatusLabel = (val: string) => {
 
 const handleDelete = (row: any) => {
   Modal.confirm({
-    title: 'Remove Connection',
-    content:
-      'Are you sure you want to remove this connection? This action cannot be undone.',
+    title: $t('page.ad-connections.modal.removeConnection.title'),
+    content: $t('page.ad-connections.modal.removeConnection.content'),
     okType: 'danger',
-    okText: 'Yes',
-    cancelText: 'No',
+    okText: $t('page.common.confirm'),
+    cancelText: $t('page.common.cancel'),
     onOk: async () => {
       await deleteAccount(row.id).then(() => {
         gridApi.query();
@@ -137,10 +142,9 @@ const handleDelete = (row: any) => {
 
 const handleManualSync = (row: any) => {
   Modal.confirm({
-    title: 'Sync Account Information',
-    content:
-      'Would you like to synchronize all data and insights for Ad Accounts?',
-    okText: 'Sync',
+    title: $t('page.ad-connections.modal.syncAccountInformation.title'),
+    content: $t('page.ad-connections.modal.syncAccountInformation.content'),
+    okText: $t('page.ad-connections.action.sync'),
     onOk: async () => {
       await syncAccount(row.id).then(() => {
         gridApi.query();
@@ -151,9 +155,11 @@ const handleManualSync = (row: any) => {
 
 const handleManualSyncAdInsight = (row: any) => {
   Modal.confirm({
-    title: 'Sync Ad Insights',
-    content: `Would you like to synchronize all insights for '${row.name}'?`,
-    okText: 'Sync',
+    title: $t('page.ad-connections.modal.syncAdInsights.title'),
+    content: $t('page.ad-connections.modal.syncAdInsights.content', {
+      name: row.name,
+    }),
+    okText: $t('page.ad-connections.action.sync'),
     onOk: async () => {
       await syncAdInsight(row.parentId, row.id).then(() => {
         gridApi.query().then(() => {
@@ -176,8 +182,12 @@ const handleSwitchCosts = (adAccount: any, checked: any) => {
   adAccount.loading = true;
 
   Modal.confirm({
-    title: checked ? 'Attach to Cost Tracking' : 'Detach from Cost Tracking',
-    content: `Would you like to perform this action for '${adAccount.name}'? It will affect cost tracking for this Ad Account.`,
+    title: checked
+      ? $t('page.ad-connections.modal.attachToCostTracking.title')
+      : $t('page.ad-connections.modal.detachFromCostTracking.title'),
+    content: $t('page.ad-connections.modal.switchCostTracking.content', {
+      name: adAccount.name,
+    }),
     onOk: async () => {
       adAttachToCosts(
         'ad_account_id',
@@ -210,31 +220,31 @@ const handleSwitchCosts = (adAccount: any, checked: any) => {
               class="mr-2 size-4"
               icon="ant-design:plus-circle-outlined"
             />
-            Add Ad Connection
+            {{ $t('page.ad-connections.action.addAdConnection') }}
           </VbenButton>
           <template #overlay>
             <Menu>
               <MenuItem @click="addNewConnection('facebook')">
                 <div class="flex items-center justify-start space-x-2">
                   <IconifyIcon :icon="getAdsIcon('facebook')" />
-                  <span>Facebook</span>
+                  <span>{{ $t('page.ad-connections.channel.facebook') }}</span>
                 </div>
               </MenuItem>
               <MenuItem @click="addNewConnection('tiktok')">
                 <div class="flex items-center justify-start space-x-2">
                   <IconifyIcon :icon="getAdsIcon('tiktok')" />
-                  <span>Tiktok</span>
+                  <span>{{ $t('page.ad-connections.channel.tiktok') }}</span>
                 </div>
               </MenuItem>
-              <!-- <MenuItem
-                v-if="shopStore.shop.id === '62370414670'"
+              <MenuItem
+                v-if="isGoogleAdsEnabled"
                 @click="addNewConnection('google')"
               >
                 <div class="flex items-center justify-start space-x-2">
                   <IconifyIcon :icon="getAdsIcon('google')" />
-                  <span>Google</span>
+                  <span>{{ $t('page.ad-connections.channel.google') }}</span>
                 </div>
-              </MenuItem> -->
+              </MenuItem>
             </Menu>
           </template>
         </Dropdown>
@@ -265,7 +275,7 @@ const handleSwitchCosts = (adAccount: any, checked: any) => {
 
       <template #status="{ row }: { row: any }">
         <Tag :color="getStatusClass(row.status)" class="w-[100px] text-center">
-          {{ capitalizeFirstLetter(row.status) }}
+          {{ getStatusLabel(row.status) || capitalizeFirstLetter(row.status) }}
         </Tag>
       </template>
 
@@ -307,7 +317,7 @@ const handleSwitchCosts = (adAccount: any, checked: any) => {
             :disabled="row.loading"
             variant="link"
           >
-            View Detail
+            {{ $t('page.ad-connections.action.viewDetail') }}
           </VbenButton>
         </template>
         <template v-else>
@@ -327,7 +337,7 @@ const handleSwitchCosts = (adAccount: any, checked: any) => {
         <Dropdown v-if="row.parentId === undefined">
           <VbenButton size="sm" variant="outline">
             <IconifyIcon class="mr-2 size-4" icon="ant-design:more-outlined" />
-            Actions
+            {{ $t('page.ad-connections.action.actions') }}
           </VbenButton>
           <template #overlay>
             <Menu>
@@ -340,19 +350,21 @@ const handleSwitchCosts = (adAccount: any, checked: any) => {
               >
                 <div class="flex items-center justify-start space-x-1">
                   <IconifyIcon icon="ant-design:sync-outlined" />
-                  <span>Sync Ad Accounts</span>
+                  <span>
+                    {{ $t('page.ad-connections.action.syncAdAccounts') }}
+                  </span>
                 </div>
               </MenuItem>
               <MenuItem @click="addNewConnection(row.type)">
                 <div class="flex items-center justify-start space-x-1">
                   <IconifyIcon icon="ant-design:link-outlined" />
-                  <span>Reconnect</span>
+                  <span>{{ $t('page.ad-connections.action.reconnect') }}</span>
                 </div>
               </MenuItem>
               <MenuItem @click="handleDelete(row)">
                 <div class="flex items-center justify-start space-x-1">
                   <IconifyIcon icon="ant-design:delete-twotone" />
-                  <span>Remove</span>
+                  <span>{{ $t('page.ad-connections.action.remove') }}</span>
                 </div>
               </MenuItem>
             </Menu>
@@ -371,7 +383,7 @@ const handleSwitchCosts = (adAccount: any, checked: any) => {
           @click="handleManualSyncAdInsight(row)"
         >
           <IconifyIcon icon="ant-design:sync-outlined" class="mr-2" />
-          <span>Sync insights</span>
+          <span>{{ $t('page.ad-connections.action.syncInsights') }}</span>
         </VbenButton>
       </template>
     </Grid>

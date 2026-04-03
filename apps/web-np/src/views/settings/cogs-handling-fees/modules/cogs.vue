@@ -8,6 +8,7 @@ import { VbenButton } from '@vben/common-ui';
 import { InputNumber } from 'ant-design-vue';
 
 import { AntHistory } from '#/icons';
+import { $t } from '#/locales';
 import { formatMoney } from '#/shared/utils';
 import { useShopStore } from '#/store';
 
@@ -51,7 +52,7 @@ onMounted(() => {
       size="icon"
       class="size-6"
       v-tippy="{
-        content: 'Set COGS based on historical date',
+        content: $t('page.settings-cogs.tooltip.cogsHistory'),
       }"
     >
       <AntHistory class="size-4" />

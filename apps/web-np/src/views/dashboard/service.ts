@@ -37,6 +37,7 @@ export const dashboardState = reactive({
     totalAdSpend: '',
     facebook: '',
     tiktok: '',
+    google: '',
     roas: '',
     poas: '',
     newCustomers: '',
@@ -59,6 +60,7 @@ export type DashboardData = {
     cogs: number;
     discount: number;
     facebook: number;
+    google: number;
     grossProfit: number;
     grossSales: number;
     handlingFees: number;
@@ -113,6 +115,7 @@ export const currentPeriod = reactive<DashboardData>({
     poas: 0,
     facebook: 0,
     tiktok: 0,
+    google: 0,
   },
   hasProfitChart: true,
 });
@@ -147,6 +150,7 @@ export const previousPeriod = reactive<DashboardData>({
     poas: 0,
     facebook: 0,
     tiktok: 0,
+    google: 0,
   },
   hasProfitChart: false,
 });
@@ -164,7 +168,7 @@ export const loadDataByPeriod = (payload: DashboardData) => {
     toDate,
   })
     .then((res) => {
-      const items = res.items.reverse();
+      const items = res.items.toReversed();
 
       if (payload.hasProfitChart) {
         if (items.length > 62) {
@@ -284,6 +288,11 @@ export const calcChangePercent = () => {
     previousPeriod.pAndLReport.tiktok,
   );
 
+  dashboardState.changePercent.google = formatChange(
+    currentPeriod.pAndLReport.google,
+    previousPeriod.pAndLReport.google,
+  );
+
   dashboardState.changePercent.roas = formatChange(
     currentPeriod.pAndLReport.roas,
     previousPeriod.pAndLReport.roas,
@@ -371,6 +380,7 @@ const calcOrderStatistic = (data: any, payload: DashboardData) => {
   payload.pAndLReport.totalAdSpend = itemTotal.totalAdSpend ?? 0;
   payload.pAndLReport.facebook = itemTotal.totalAdSpend_facebook ?? 0;
   payload.pAndLReport.tiktok = itemTotal.totalAdSpend_tiktok ?? 0;
+  payload.pAndLReport.google = itemTotal.totalAdSpend_google ?? 0;
   payload.pAndLReport.totalTax = itemTotal.totalTax ?? 0;
   payload.pAndLReport.totalCosts = itemTotal.totalCosts ?? 0;
   payload.pAndLReport.netProfit = itemTotal.netProfit ?? 0;

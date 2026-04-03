@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { onMounted, reactive } from 'vue';
 
+import { $t } from '@vben/locales';
+
 import { useDebounceFn } from '@vueuse/core';
 import { Select as ASelect, Image, Spin } from 'ant-design-vue';
 
@@ -52,7 +54,7 @@ const handleSearch = useDebounceFn((value: string) => {
       :options="state.data"
       mode="multiple"
       style="width: 100%"
-      placeholder="Select at least one product"
+      :placeholder="$t('page.common.selectAtLeastOneProduct')"
       :disabled="shopStore.isFreeSubscription"
     >
       <template #option="{ label, image }">

@@ -1,12 +1,14 @@
 <script lang="ts" setup>
+import { $t } from '@vben/locales';
+
 import { formatMoney } from '#/shared/utils';
 import { useShopStore } from '#/store';
 
 import { CustomCostType } from './service';
 
 interface Props {
-  type: CustomCostType;
-  amount: number;
+  type?: CustomCostType;
+  amount?: number;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -25,13 +27,13 @@ interface IReport {
 
 const sampleReport: IReport[] = [
   {
-    date: 'Date 1',
+    date: $t('page.settings-custom-costs.example.date1'),
     grossSale: 750,
     revenue: 700,
     grossProfit: 300,
   },
   {
-    date: 'Date 2',
+    date: $t('page.settings-custom-costs.example.date2'),
     grossSale: 920,
     revenue: 870,
     grossProfit: 520,
@@ -83,22 +85,22 @@ const calcNetProfit = (item: IReport) => {
     <thead>
       <tr>
         <th class="px-6 py-3 text-center text-xs font-medium uppercase">
-          Example Date
+          {{ $t('page.settings-custom-costs.example.exampleDate') }}
         </th>
         <th class="px-6 py-3 text-end text-xs font-medium uppercase">
-          Gross sale
+          {{ $t('page.settings-custom-costs.example.grossSale') }}
         </th>
         <th class="px-6 py-3 text-end text-xs font-medium uppercase">
-          Revenue
+          {{ $t('page.settings-custom-costs.example.revenue') }}
         </th>
         <th class="px-6 py-3 text-end text-xs font-medium uppercase">
-          Gross profit
+          {{ $t('page.settings-custom-costs.example.grossProfit') }}
         </th>
         <th class="px-6 py-3 text-end text-xs font-medium uppercase">
-          Daily Cost
+          {{ $t('page.settings-custom-costs.example.dailyCost') }}
         </th>
         <th class="px-6 py-3 text-end text-xs font-medium uppercase">
-          Net profit
+          {{ $t('page.settings-custom-costs.example.netProfit') }}
         </th>
       </tr>
     </thead>

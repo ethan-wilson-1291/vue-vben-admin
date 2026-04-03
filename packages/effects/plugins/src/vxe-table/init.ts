@@ -111,6 +111,7 @@ export function setupVbenVxeTable(setupOptions: SetupVxeTable) {
   const localMap = {
     'zh-CN': zhCN,
     'en-US': enUS,
+    'vi-VN': enUS,
   };
 
   watch(

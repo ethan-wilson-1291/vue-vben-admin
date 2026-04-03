@@ -32,6 +32,8 @@
   "totalCustomCostExplain": "Custom Costs are the costs associated with the production of goods, including the cost of labor, tax, advertising, and other expenses.",
 
   "totalAdSpend": "Ad Spends",
+  "facebookAds": "Facebook Ads",
+  "tiktokAds": "TikTok Ads",
 
   "roas": "ROAS",
   "roasExplain": "ROAS = Total Revenue / Ad Spends. ROAS stands for Return on Ad Spend. It's a digital marketing metric that measures how much revenue a business generates for every dollar spent on advertising.",

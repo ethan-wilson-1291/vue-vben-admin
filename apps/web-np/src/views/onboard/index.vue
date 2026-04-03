@@ -1,10 +1,11 @@
 <script lang="ts" setup>
 import type { ITransactionFee } from '#/store';
 
-import { onBeforeMount, reactive } from 'vue';
+import { computed, onBeforeMount, onMounted, onUnmounted, reactive } from 'vue';
 
 import { Page, VbenButton } from '@vben/common-ui';
 import { ArrowLeft, Check } from '@vben/icons';
+import { $t } from '@vben/locales';
 import { preferences } from '@vben/preferences';
 
 import { Flex, message, Steps } from 'ant-design-vue';
@@ -12,11 +13,13 @@ import { Flex, message, Steps } from 'ant-design-vue';
 import { onboardFinished } from '#/api';
 import { ArrowRight } from '#/icons';
 import { DefaultRoutes } from '#/shared/constants';
+import { crispDisplay } from '#/shared/crisp';
 import { redirectToPath, toPercentage, toRate } from '#/shared/utils';
 import { useShopSettingStore, useShopStore } from '#/store';
 
 import ExampleOrder from './example-order.vue';
 import { onboardForm } from './service';
+import ChooseLanguage from './step-0-language.vue';
 import Cogs from './step-1-cogs.vue';
 import HandlingFees from './step-2-handling-fees.vue';
 import ShippingFees from './step-3-shipping-fees.vue';
@@ -30,8 +33,20 @@ const state = reactive({
   loading: false,
 });
 
-const steps = ['COGS', 'Handling Fees', 'Shipping Costs', 'Transaction Fees'];
-const items = steps.map((item) => ({ key: item, title: item }));
+const steps = computed(() => [
+  $t('page.onboard.steps.language'),
+  $t('page.onboard.steps.cogs'),
+  $t('page.onboard.steps.handlingFees'),
+  $t('page.onboard.steps.shippingCosts'),
+  $t('page.onboard.steps.transactionFees'),
+]);
+
+const items = computed(() =>
+  steps.value.map((title, index) => ({
+    key: `step-${index}`,
+    title,
+  })),
+);
 
 const next = () => {
   state.currentStep++;
@@ -58,7 +73,7 @@ const onboardFinish = () => {
 
   onboardFinished(payload)
     .then(() => {
-      message.success('Onboarding completed successfully');
+      message.success($t('page.onboard.index.completedSuccess'));
 
       // Reload the page
       window.location.reload();
@@ -90,6 +105,14 @@ onBeforeMount(() => {
     }),
   );
 });
+
+onMounted(() => {
+  crispDisplay(true);
+});
+
+onUnmounted(() => {
+  crispDisplay(shopSettingStore.showChatPopup);
+});
 </script>
 
 <template>
@@ -98,11 +121,12 @@ onBeforeMount(() => {
       <h2
         class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0"
       >
-        Welcome to the {{ preferences.app.name }}!
+        {{ $t('page.onboard.index.welcomePrefix') }} {{ preferences.app.name
+        }}{{ $t('page.onboard.index.welcomeSuffix') }}
       </h2>
 
       <small class="text-sm leading-none">
-        To calculate your profits, we need your cost details.
+        {{ $t('page.onboard.index.subtitle') }}
       </small>
 
       <div class="mt-5 w-full max-w-4xl">
@@ -117,7 +141,7 @@ onBeforeMount(() => {
             @click="prev"
           >
             <ArrowLeft class="mr-2 size-4" />
-            Previous
+            {{ $t('page.onboard.index.previous') }}
           </VbenButton>
 
           <VbenButton
@@ -126,7 +150,7 @@ onBeforeMount(() => {
             type="primary"
             @click="next"
           >
-            Next
+            {{ $t('page.onboard.index.next') }}
             <ArrowRight class="ml-2 size-4" />
           </VbenButton>
 
@@ -137,18 +161,19 @@ onBeforeMount(() => {
             type="primary"
             @click="onboardFinish"
           >
-            Finish
+            {{ $t('page.onboard.index.finish') }}
             <Check class="ml-2 size-4" />
           </VbenButton>
         </div>
 
         <div class="flex flex-row space-x-5">
-          <Cogs v-if="state.currentStep === 0" />
-          <HandlingFees v-if="state.currentStep === 1" />
-          <ShippingFees v-if="state.currentStep === 2" />
-          <TransactionFees v-if="state.currentStep === 3" />
+          <ChooseLanguage v-if="state.currentStep === 0" />
+          <Cogs v-if="state.currentStep === 1" />
+          <HandlingFees v-if="state.currentStep === 2" />
+          <ShippingFees v-if="state.currentStep === 3" />
+          <TransactionFees v-if="state.currentStep === 4" />
 
-          <ExampleOrder />
+          <ExampleOrder v-if="state.currentStep > 0" />
         </div>
       </div>
     </Flex>

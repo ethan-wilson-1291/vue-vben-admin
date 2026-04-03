@@ -1,5 +1,7 @@
 import type { VxeTableGridOptions } from '#/adapter/vxe-table';
 
+import { $t } from '@vben/locales';
+
 import { getCustomCostList } from '#/api';
 import { formatReportDate } from '#/shared/utils';
 
@@ -14,12 +16,12 @@ export const gridOptions: VxeTableGridOptions = {
     {
       field: 'name',
       footerClassName: 'font-semibold',
-      title: 'Name',
+      title: $t('page.settings-custom-costs.table.name'),
       minWidth: 200,
     },
     {
       field: 'startDate',
-      title: 'Start date',
+      title: $t('page.settings-custom-costs.table.startDate'),
       formatter: (time: any) => {
         return formatReportDate(time.cellValue);
       },
@@ -27,10 +29,10 @@ export const gridOptions: VxeTableGridOptions = {
     },
     {
       field: 'endDate',
-      title: 'End date',
+      title: $t('page.settings-custom-costs.table.endDate'),
       formatter: (time: any) => {
         if (!time.cellValue) {
-          return 'On going';
+          return $t('page.settings-custom-costs.table.onGoing');
         }
 
         return formatReportDate(time.cellValue);
@@ -39,30 +41,33 @@ export const gridOptions: VxeTableGridOptions = {
     },
     {
       field: 'type',
-      title: 'Type',
+      title: $t('page.settings-custom-costs.table.type'),
       formatter: (val: any): any => {
-        return customCostTypes.find((item) => item.value === val.cellValue)
-          ?.label;
+        const type = customCostTypes.find(
+          (item) => item.value === val.cellValue,
+        );
+
+        return type ? $t(type.labelKey) : '';
       },
       width: 200,
     },
     {
       field: 'dailyCost',
-      title: 'Daily Cost',
+      title: $t('page.settings-custom-costs.table.dailyCost'),
       slots: { default: 'dailyCost' },
       align: 'left',
       width: 200,
     },
     {
       field: 'note',
-      title: 'Note',
+      title: $t('page.settings-custom-costs.table.note'),
       align: 'left',
       width: 200,
     },
     {
       field: 'action',
       slots: { default: 'action' },
-      title: 'Action',
+      title: $t('page.settings-custom-costs.table.action'),
       fixed: 'right',
       align: 'right',
       width: 100,

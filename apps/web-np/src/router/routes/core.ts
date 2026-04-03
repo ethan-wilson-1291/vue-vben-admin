@@ -59,7 +59,7 @@ const coreRoutes: RouteRecordRaw[] = [
     ],
     props: {
       toolbar: true,
-      toolbarList: ['theme'],
+      toolbarList: ['language', 'theme'],
     },
   },
   // This route will remove all pinia stores and then login to the shop.

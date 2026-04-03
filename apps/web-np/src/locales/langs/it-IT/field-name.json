@@ -1,0 +1,60 @@
+{
+  "grossSales": "Vendite lorde",
+  "grossSalesExplain": "  Vendite lorde = Subtotale + Spedizione + Mancia + Tasse riscosse",
+
+  "totalDiscount": "Sconto",
+  "totalShipping": "Spedizione riscossa",
+  "totalTip": "Mancia riscossa",
+  "totalRefund": "Rimborso",
+
+  "netPayment": "Ricavi",
+  "netPaymentExplain": "Ricavi (Pagamento netto) = Vendite lorde - Sconto - Rimborso",
+
+  "cogs": "COGS",
+  "cogsExplain": "Il costo del venduto (COGS) rappresenta i costi diretti attribuibili alla produzione dei beni venduti da un'azienda. Questo importo include il costo dei materiali utilizzati per creare il bene insieme ai costi diretti della manodopera impiegata per produrlo.",
+
+  "handlingFees": "Costi di gestione",
+  "handlingFeesExplain": "I costi di gestione sono i costi associati alla movimentazione dei beni, inclusi i costi di manodopera, imballaggio e spedizione.",
+
+  "shippingCosts": "Costi di spedizione",
+
+  "paymentGateway": "Gateway di pagamento",
+  "transactionFees": "Commissioni di transazione",
+  "transactionFeesExplain": "Le commissioni di transazione sono i costi che un commerciante deve pagare ogni volta che un cliente effettua un acquisto con carta di credito. Queste commissioni possono variare in base alla società della carta di credito e al provider dell'account commerciante.",
+
+  "grossProfit": "Utile lordo",
+  "grossProfitExplain": "Utile lordo = Ricavi - COGS - Costi di gestione - Costi di spedizione - Commissioni di transazione",
+
+  "grossProfitMargin": "Margine di utile lordo",
+  "grossProfitMarginExplain": "Margine di utile lordo = (Utile lordo / Ricavi) * 100%",
+
+  "totalCustomCost": "Costi personalizzati",
+  "totalCustomCostExplain": "I costi personalizzati sono i costi associati alla produzione dei beni, inclusi i costi di manodopera, tasse, pubblicità e altre spese.",
+
+  "totalAdSpend": "Spesa pubblicitaria",
+  "facebookAds": "Annunci Facebook",
+  "tiktokAds": "Annunci TikTok",
+
+  "roas": "ROAS",
+  "roasExplain": "ROAS = Ricavi totali / Spesa pubblicitaria. ROAS significa Return on Ad Spend. È una metrica di marketing digitale che misura quanti ricavi un'azienda genera per ogni euro speso in pubblicità.",
+
+  "poas": "POAS",
+  "poasExplain": "POAS = Utile lordo / Spesa pubblicitaria. POAS (Profit on Ad Spend) è una metrica di marketing che misura la redditività di una campagna pubblicitaria concentrandosi sull'utile netto ottenuto per ogni euro speso in pubblicità.",
+
+  "totalTax": "Tasse riscosse",
+  "totalTaxExplain": "Le tasse riscosse sono l'importo delle imposte che un'azienda raccoglie dai propri clienti per conto del governo. Questo importo è in genere una percentuale del prezzo di vendita e viene aggiunto al costo totale dei beni o servizi venduti.",
+
+  "netProfit": "Utile netto",
+  "netProfitExplain": "Utile netto = Utile lordo - Tasse riscosse - Costi personalizzati - Spesa pubblicitaria",
+
+  "netProfitMargin": "Margine di utile netto",
+  "netProfitMarginExplain": "Margine di utile netto = (Utile netto / Ricavi) * 100%",
+
+  "totalCosts": "Costi totali",
+  "totalCostsExplain": "Costi totali = COGS + Costi di gestione + Costi di spedizione + Commissioni di transazione + Costi personalizzati + Spesa pubblicitaria",
+
+  "ltv": "Valore nel tempo (LTV)",
+  "ltvExplain": "Il valore nel tempo (LTV) rappresenta il ricavo medio che un cliente genera durante l'intero periodo in cui rimane un cliente pagante.",
+
+  "totalOrders": "Ordini totali"
+}

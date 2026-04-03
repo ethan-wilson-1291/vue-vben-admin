@@ -35,7 +35,7 @@ const rate = shopStore.shop.currencyRate;
 const getOverview = computed(() => {
   return [
     {
-      title: 'Orders',
+      title: $t('field-name.totalOrders'),
       value: currentPeriod.pAndLReport.quantityOrder,
       changePercent: dashboardState.changePercent.quantityOrder,
       previousValue: previousPeriod.pAndLReport.quantityOrder,
@@ -343,7 +343,9 @@ const handleWriteReview = () => {
                 "
                 v-tippy="{
                   content: item.previousValue
-                    ? `Compared with ${item.previousValue}`
+                    ? $t('page.dashboard.comparedWithValue', [
+                        item.previousValue,
+                      ])
                     : '',
                 }"
               >
@@ -378,16 +380,15 @@ const handleWriteReview = () => {
     </template>
     <template #message>
       <span class="font-semibold">
-        Get 45 More Days of Pro – Just for Sharing the Love!
+        {{ $t('page.dashboard.reviewPromoTitle') }}
       </span>
     </template>
     <template #description>
-      Love our app? Help others discover it too! Leave us a ⭐️⭐️⭐️⭐️⭐️
-      review.
+      {{ $t('page.dashboard.reviewPromoLine1') }}
       <div>
-        Then, take a screenshot of your review and send it to us via the
-        chatbox. We’ll extend your Pro trial by another
-        <strong>45 days – totally free</strong>!
+        {{ $t('page.dashboard.reviewPromoLine2') }}
+        <strong>{{ $t('page.dashboard.reviewPromoBonus') }}</strong>
+        !
       </div>
 
       <div class="flex items-center space-x-2">
@@ -400,7 +401,7 @@ const handleWriteReview = () => {
           @click="handleWriteReview"
         >
           <IconifyIcon class="mr-2" icon="ant-design:export-outlined" />
-          Write a Review
+          {{ $t('page.dashboard.writeReview') }}
         </VbenButton>
       </div>
     </template>
@@ -445,7 +446,9 @@ const handleWriteReview = () => {
                 "
                 v-tippy="{
                   content: item.previousValue
-                    ? `Compared with ${item.previousValue}`
+                    ? $t('page.dashboard.comparedWithValue', [
+                        item.previousValue,
+                      ])
                     : '',
                 }"
               >

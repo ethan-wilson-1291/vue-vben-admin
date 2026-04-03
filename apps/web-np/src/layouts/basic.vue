@@ -7,6 +7,7 @@ import { BasicLayout, LockScreen, UserDropdown } from '@vben/layouts';
 import { preferences } from '@vben/preferences';
 import { useAccessStore, useUserStore } from '@vben/stores';
 
+import { $t } from '#/locales';
 import { isShopifyEmbedded } from '#/shared/shopify-utils';
 import { redirectToExternal } from '#/shared/utils';
 import { useAuthStore, useShopStore } from '#/store';
@@ -21,6 +22,7 @@ const userStore = useUserStore();
 const authStore = useAuthStore();
 const accessStore = useAccessStore();
 const { destroyWatermark, updateWatermark } = useWatermark();
+const metaEnv = (import.meta as any).env;
 
 const menus = computed(() => {
   const profileMenus = [
@@ -30,22 +32,22 @@ const menus = computed(() => {
         redirectToExternal(url);
       },
       icon: 'ic:baseline-shopify',
-      text: 'Shopify store',
+      text: $t('page.layout.profileMenu.shopifyStore'),
       order: 20,
     },
     {
       handler: () => {
-        const url = `https://apps.shopify.com/${import.meta.env.VITE_GLOB_SHOPIFY_APP_HANDLE}`;
+        const url = `https://apps.shopify.com/${metaEnv.VITE_GLOB_SHOPIFY_APP_HANDLE}`;
         redirectToExternal(url);
       },
       icon: 'ant-design:global-outlined',
-      text: 'Finily app page',
+      text: $t('page.layout.profileMenu.finilyAppPage'),
       order: 30,
     },
     {
       handler: shopStore.redirectToPricing,
-      icon: 'ant-design:rocket-twotone',
-      text: 'Pricing plans',
+      icon: 'ant-design:sketch-outlined',
+      text: $t('page.settings-pricing.title'),
       order: 50,
     },
   ];
@@ -56,7 +58,7 @@ const menus = computed(() => {
         shopStore.redirectToAdmin();
       },
       icon: 'ic:baseline-shopify',
-      text: 'Shopify admin page',
+      text: $t('page.layout.profileMenu.shopifyAdminPage'),
       order: 10,
     });
   }

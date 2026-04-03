@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { Page } from '@vben/common-ui';
+import { $t } from '@vben/locales';
 
 import { dayjsInGMT } from '#/shared/dayjs';
 import { formatMoney } from '#/shared/utils';
@@ -33,7 +34,7 @@ const formatVal = (val: number) => {
 
 <template>
   <Page>
-    <Grid table-title="Customer Analytics">
+    <Grid :table-title="$t('page.reports-customer.title')">
       <template #toolbar-tools>
         <UpgradeBtn class="mr-2 w-[150px]" />
       </template>
@@ -43,7 +44,11 @@ const formatVal = (val: number) => {
           <div class="font-semibold">
             {{ row.id }}
           </div>
-          <div class="text-xs">{{ row.quantityNew }} customer(s)</div>
+          <div class="text-xs">
+            {{
+              $t('page.reports-customer.newCustomersCount', [row.quantityNew])
+            }}
+          </div>
         </div>
       </template>
       <template #date="{ row, column: { field } }">
