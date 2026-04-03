@@ -13,6 +13,7 @@ import { $t } from '@vben/locales';
 
 import { Alert } from 'ant-design-vue';
 
+import { shopToggleNewFeatureNotice } from '#/api';
 import { formatMoney, redirectToExternal } from '#/shared/utils';
 import { useShopSettingStore, useShopStore } from '#/store';
 
@@ -303,6 +304,9 @@ const handleWriteReview = () => {
 
 const closeNewFeatureNotice = () => {
   shopSettingStore.showNewFeatureNotice = false;
+  shopToggleNewFeatureNotice({
+    showNewFeatureNotice: false,
+  });
 };
 </script>
 

@@ -24,6 +24,13 @@ export async function shopToggleShowChatPopup(data: any) {
   return requestClient.put('/api/shop/settings/toggle-chat-popup', data);
 }
 
+export async function shopToggleNewFeatureNotice(data: any) {
+  return requestClient.put(
+    '/api/shop/settings/toggle-new-feature-notice',
+    data,
+  );
+}
+
 export async function shopUpdateSubscriptionInfo() {
   return requestClient.post('/api/shop/subscription/sync');
 }
