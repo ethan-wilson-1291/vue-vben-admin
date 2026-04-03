@@ -4,11 +4,12 @@ import type { IRegion } from '#/store';
 import { markRaw } from 'vue';
 
 import { useVbenModal } from '@vben/common-ui';
+import { $t } from '@vben/locales';
 
 import { message, TypographyParagraph } from 'ant-design-vue';
 
 import { useVbenForm } from '#/adapter/form';
-import { ShippingCostLevel, ShippingCostLevelList } from '#/shared/constants';
+import { ShippingCostLevel } from '#/shared/constants';
 import { useShopSettingStore, useShopStore } from '#/store';
 
 import Countries from './modules/countries.vue';
@@ -16,13 +17,28 @@ import Countries from './modules/countries.vue';
 const shopStore = useShopStore();
 const shopSettingStore = useShopSettingStore();
 
+const shippingCostLevelOptions = [
+  {
+    label: $t('page.settings-shipping-fees.level.quantity'),
+    value: ShippingCostLevel.QUANTITY,
+  },
+  {
+    label: $t('page.settings-shipping-fees.level.weight'),
+    value: ShippingCostLevel.WEIGHT,
+  },
+  {
+    label: $t('page.settings-shipping-fees.level.order'),
+    value: ShippingCostLevel.ORDER,
+  },
+];
+
 function onSubmit(values: Record<string, any>) {
   modalApi.lock();
 
   shopSettingStore
     .setRegion(values)
     .then(() => {
-      message.success('The zone has been updated successfully');
+      message.success($t('page.settings-cogs.message.zoneUpdated'));
     })
     .finally(() => {
       modalApi.setData({ reload: true });
@@ -52,7 +68,7 @@ const [Form, formApi] = useVbenForm({
     {
       component: 'Input',
       fieldName: 'name',
-      label: 'Name',
+      label: $t('page.settings-shipping-fees.form.name'),
       rules: 'required',
       dependencies: {
         if(values) {
@@ -65,10 +81,10 @@ const [Form, formApi] = useVbenForm({
       component: 'Select' as any,
       defaultValue: ShippingCostLevel.WEIGHT,
       componentProps: {
-        options: ShippingCostLevelList,
+        options: shippingCostLevelOptions,
       },
       fieldName: 'shippingCostLevel',
-      label: 'Shipping cost by',
+      label: $t('page.settings-shipping-fees.form.shippingCostBy'),
       rules: 'required',
     },
     {
@@ -80,14 +96,14 @@ const [Form, formApi] = useVbenForm({
         min: 0,
       },
       fieldName: 'shippingCostPrice',
-      label: 'Shipping cost',
+      label: $t('page.settings-shipping-fees.form.shippingCost'),
       rules: 'required',
     },
     {
       component: markRaw(Countries),
       defaultValue: [],
       fieldName: 'countries',
-      label: 'Countries',
+      label: $t('page.settings-shipping-fees.form.countries'),
       rules: 'required',
       dependencies: {
         if(values) {
@@ -121,22 +137,32 @@ const [Modal, modalApi] = useVbenModal({
 });
 </script>
 <template>
-  <Modal class="w-[700px]" title="Zone - Shipping Cost " confirm-text="Submit">
+  <Modal
+    class="w-[700px]"
+    :title="$t('page.settings-shipping-fees.modal.formTitle')"
+    :confirm-text="$t('page.settings-cogs.action.submit')"
+  >
     <Form />
     <TypographyParagraph class="mt-5 px-5 italic">
-      <span class="font-semibold">Example:</span>
-      Order A has <span class="font-semibold">2 items</span> with a total weight
-      of <span class="font-semibold">1.5kg</span>
+      <span class="font-semibold">{{
+        $t('page.settings-shipping-fees.common.example')
+      }}</span>
+      {{ $t('page.settings-shipping-fees.example.base') }}
       <div
         v-if="
           formApi.form.values.shippingCostLevel === ShippingCostLevel.WEIGHT
         "
         class="ml-10"
       >
-        If the cost is set to
-        <span class="font-semibold">$5 for every 1kg (weight)</span>, the total
-        shipping cost for Order A will be
-        <span class="font-semibold">$7.5</span> (1.5 x $5)
+        {{ $t('page.settings-shipping-fees.example.weightPrefix') }}
+        <span class="font-semibold">{{
+          $t('page.settings-shipping-fees.example.weightRate')
+        }}</span>
+        {{ $t('page.settings-shipping-fees.example.weightMiddle') }}
+        <span class="font-semibold">{{
+          $t('page.settings-shipping-fees.example.weightResult')
+        }}</span>
+        {{ $t('page.settings-shipping-fees.example.weightSuffix') }}
       </div>
       <div
         v-if="
@@ -144,19 +170,28 @@ const [Modal, modalApi] = useVbenModal({
         "
         class="ml-10"
       >
-        If the cost is set to
-        <span class="font-semibold">$3 for every 1 item (quantity)</span>, the
-        total shipping cost for Order A will be
-        <span class="font-semibold">$6</span> (2 x $3)
+        {{ $t('page.settings-shipping-fees.example.quantityPrefix') }}
+        <span class="font-semibold">{{
+          $t('page.settings-shipping-fees.example.quantityRate')
+        }}</span>
+        {{ $t('page.settings-shipping-fees.example.quantityMiddle') }}
+        <span class="font-semibold">{{
+          $t('page.settings-shipping-fees.example.quantityResult')
+        }}</span>
+        {{ $t('page.settings-shipping-fees.example.quantitySuffix') }}
       </div>
       <div
         v-if="formApi.form.values.shippingCostLevel === ShippingCostLevel.ORDER"
         class="ml-10"
       >
-        If the cost is set to
-        <span class="font-semibold">$1 for every 1 order</span>, the total
-        shipping cost for Order A will be
-        <span class="font-semibold">$1</span>
+        {{ $t('page.settings-shipping-fees.example.orderPrefix') }}
+        <span class="font-semibold">{{
+          $t('page.settings-shipping-fees.example.orderRate')
+        }}</span>
+        {{ $t('page.settings-shipping-fees.example.orderMiddle') }}
+        <span class="font-semibold">{{
+          $t('page.settings-shipping-fees.example.orderResult')
+        }}</span>
       </div>
     </TypographyParagraph>
   </Modal>

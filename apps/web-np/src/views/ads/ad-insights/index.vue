@@ -9,8 +9,8 @@ import { gridOptions } from './table-config';
 import { formOptions } from './table-filter';
 
 const [Grid] = useVbenVxeGrid({
-  gridOptions,
-  formOptions,
+  gridOptions: gridOptions as any,
+  formOptions: formOptions as any,
 });
 </script>
 

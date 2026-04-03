@@ -50,7 +50,9 @@ export const orderTableOptions: VxeTableGridOptions = {
           state.footerData = res.summary;
 
           // Reset some fields
-          state.footerData.name = `${res.total} order(s)`;
+          state.footerData.name = $t('page.reports-order.summaryOrders', [
+            res.total,
+          ]);
           state.footerData.processedAt = '';
           state.footerData.grossProfitMargin = calcGrossProfitMargin(
             state.footerData,
@@ -69,7 +71,7 @@ export const orderTableOptions: VxeTableGridOptions = {
       slots: { default: 'name' },
       field: 'name',
       footerClassName: 'font-semibold',
-      title: 'Order ID',
+      title: $t('page.reports-order.table.orderId'),
       showOverflow: false,
       minWidth: 180,
       fixed: 'left',
@@ -77,7 +79,7 @@ export const orderTableOptions: VxeTableGridOptions = {
     },
     {
       field: 'processedAt',
-      title: 'Date',
+      title: $t('page.reports-order.table.date'),
       formatter: (time: any) => {
         return formatReportDate(time.cellValue);
       },
@@ -86,7 +88,7 @@ export const orderTableOptions: VxeTableGridOptions = {
     {
       field: 'financialStatus',
       cellRender: { name: 'cellTitle' },
-      title: 'Status',
+      title: $t('page.reports-order.table.status'),
       align: 'left',
       minWidth: 200,
       visible: false,
@@ -94,27 +96,27 @@ export const orderTableOptions: VxeTableGridOptions = {
     {
       field: 'quantityCurrent',
       footerClassName: 'font-semibold',
-      title: 'Current Items',
+      title: $t('page.reports-order.table.currentItems'),
       minWidth: 130,
       visible: false,
     },
     {
       field: 'quantityRefund',
       footerClassName: 'font-semibold',
-      title: 'Refund Items',
+      title: $t('page.reports-order.table.refundItems'),
       minWidth: 130,
       visible: false,
     },
     {
       field: 'quantityTotal',
       footerClassName: 'font-semibold',
-      title: 'Total Items',
+      title: $t('page.reports-order.table.totalItems'),
       minWidth: 100,
       visible: false,
     },
     {
       field: 'weight',
-      title: 'Weight (Kg)',
+      title: $t('page.reports-order.table.weightKg'),
       minWidth: 100,
       visible: false,
     },

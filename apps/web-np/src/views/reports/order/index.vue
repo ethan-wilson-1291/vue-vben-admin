@@ -5,6 +5,7 @@ import { onMounted, reactive } from 'vue';
 
 import { Page, useVbenModal, VbenButton } from '@vben/common-ui';
 import { IconifyIcon } from '@vben/icons';
+import { $t } from '@vben/locales';
 
 import { Modal } from 'ant-design-vue';
 
@@ -86,11 +87,11 @@ const handleDeleteOrders = () => {
   const selectRecords: any[] = state.checkedItems.map((item) => item.id) || [];
 
   Modal.confirm({
-    title: 'Delete Selected Orders',
-    content: 'Are you sure you want to delete the selected orders?',
+    title: $t('page.reports-order.bulkDeleteModal.title'),
+    content: $t('page.reports-order.bulkDeleteModal.content'),
     okType: 'danger',
-    okText: 'Yes',
-    cancelText: 'No',
+    okText: $t('page.reports-order.bulkDeleteModal.confirm'),
+    cancelText: $t('page.reports-order.bulkDeleteModal.cancel'),
     onOk: async () => {
       await orderDelete(selectRecords).then(() => {
         gridApi.query();
@@ -115,7 +116,7 @@ const handleDeleteOrders = () => {
             $event?.stopPropagation();
           "
           v-tippy="{
-            content: `View details for ${row.name}`,
+            content: $t('page.reports-order.viewDetailsFor', [row.name]),
           }"
         >
           <span class="max-w-[120px] overflow-hidden text-ellipsis">
@@ -137,7 +138,11 @@ const handleDeleteOrders = () => {
           v-if="state.checkedItems.length > 0"
         >
           <IconifyIcon class="mr-2 size-4" icon="ant-design:delete-twotone" />
-          Delete {{ state.checkedItems.length || 0 }} orders
+          {{
+            $t('page.reports-order.deleteSelectedOrders', [
+              state.checkedItems.length || 0,
+            ])
+          }}
         </VbenButton>
 
         <VbenButton
@@ -151,7 +156,7 @@ const handleDeleteOrders = () => {
             class="mr-2 size-4"
             icon="ant-design:calculator-twotone"
           />
-          Recalculate costs
+          {{ $t('page.reports-order.recalculateCosts') }}
         </VbenButton>
       </template>
     </Grid>

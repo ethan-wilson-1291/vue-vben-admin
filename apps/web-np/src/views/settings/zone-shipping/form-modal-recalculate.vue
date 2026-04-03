@@ -2,6 +2,7 @@
 import { markRaw } from 'vue';
 
 import { useVbenModal, VbenButton } from '@vben/common-ui';
+import { $t } from '@vben/locales';
 
 import { message, TypographyParagraph } from 'ant-design-vue';
 
@@ -23,10 +24,7 @@ function onSubmit(values: Record<string, any>) {
     costTypes: [RecalculateCostsType.SHIPPING_COSTS],
   })
     .then(() => {
-      message.success(
-        'Your request has been submitted successfully. Once the job is completed, the system will send a notification.',
-        5,
-      );
+      message.success($t('page.settings-cogs.message.recalculateSubmitted'), 5);
       modalApi.setData({ reload: true });
       modalApi.close();
 
@@ -71,7 +69,7 @@ const [Form, formApi] = useVbenForm({
       },
       defaultValue: [dayjsInGMT().add(-1, 'month').add(1, 'day'), dayjsInGMT()],
       fieldName: 'date',
-      label: 'Date',
+      label: $t('page.reports-order.filter.date'),
       rules: 'required',
     },
   ],
@@ -94,8 +92,8 @@ const redirectToOrderReport = () => {
 <template>
   <Modal
     class="w-[700px]"
-    title="Recalculate Shipping Cost"
-    confirm-text="Submit"
+    :title="$t('page.settings-shipping-fees.modal.recalculate.title')"
+    :confirm-text="$t('page.settings-cogs.action.submit')"
   >
     <template #prepend-footer>
       <div class="flex-auto">
@@ -105,22 +103,23 @@ const redirectToOrderReport = () => {
           class="w-[110px]"
           @click="redirectToOrderReport()"
         >
-          View order report
+          {{ $t('page.settings-cogs.action.viewOrderReport') }}
         </VbenButton>
       </div>
     </template>
     <Form />
 
     <TypographyParagraph class="mt-5 px-5 italic">
-      <span class="font-semibold">Note:</span> After submitting the
-      recalculation request, the system will schedule the recalculation of all
-      related costs. Once the job is completed, the system will send a
-      notification.
+      <span class="font-semibold">{{
+        $t('page.settings-cogs.common.note')
+      }}</span>
+      {{ $t('page.settings-cogs.message.recalculateSubmitted') }}
     </TypographyParagraph>
 
     <TypographyParagraph class="mt-5 px-5 italic">
-      To review the result, please go to the
-      <span class="font-semibold">Order Report</span> page.
+      {{ $t('page.settings-cogs.modal.recalculate.resultHintPrefix') }}
+      <span class="font-semibold">{{ $t('page.reports-order.title') }}</span>
+      {{ $t('page.settings-cogs.modal.recalculate.resultHintSuffix') }}
     </TypographyParagraph>
   </Modal>
 </template>

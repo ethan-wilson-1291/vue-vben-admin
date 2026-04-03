@@ -30,15 +30,15 @@ const { renderEcharts } = useEcharts(chartRef);
 
 const chartOptions = [
   {
-    label: 'Daily',
+    label: $t('page.dashboard.chartGroupDaily'),
     value: 'daily',
   },
   {
-    label: 'Weekly',
+    label: $t('page.dashboard.chartGroupWeekly'),
     value: 'weekly',
   },
   {
-    label: 'Monthly',
+    label: $t('page.dashboard.chartGroupMonthly'),
     value: 'monthly',
   },
 ];
@@ -146,7 +146,9 @@ const reload = () => {
   <Card class="mt-5">
     <CardHeader>
       <CardTitle class="flex items-center justify-between space-x-1">
-        <span class="text-lg"> Profit Performance </span>
+        <span class="text-lg">
+          {{ $t('page.dashboard.profitPerformance') }}
+        </span>
 
         <div class="flex items-center">
           <VbenButton
@@ -155,7 +157,7 @@ const reload = () => {
             variant="link"
             @click="redirect('reports-p-and-l')"
           >
-            View details
+            {{ $t('page.dashboard.viewDetails') }}
           </VbenButton>
 
           <VbenButton
@@ -164,7 +166,7 @@ const reload = () => {
             variant="link"
             @click="reload"
           >
-            Reload chart
+            {{ $t('page.dashboard.reloadChart') }}
           </VbenButton>
 
           <Select

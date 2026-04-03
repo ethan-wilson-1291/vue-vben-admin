@@ -37,7 +37,7 @@ const getData = computed(() => {
       isBold: true,
     },
     {
-      title: 'Facebook Ads',
+      title: $t('field-name.facebookAds'),
       value: formatMoney(currentPeriod.pAndLReport.facebook, currency, rate),
       changePercent: dashboardState.changePercent.facebook,
       previousValue: formatMoney(
@@ -47,7 +47,7 @@ const getData = computed(() => {
       ),
     },
     {
-      title: 'Tiktok Ads',
+      title: $t('field-name.tiktokAds'),
       value: formatMoney(currentPeriod.pAndLReport.tiktok, currency, rate),
       changePercent: dashboardState.changePercent.tiktok,
       previousValue: formatMoney(
@@ -86,7 +86,7 @@ const getData = computed(() => {
   <Card class="w-full">
     <CardHeader class="pb-2">
       <CardTitle class="text-md flex items-center justify-between">
-        <span>Ad Summary</span>
+        <span>{{ $t('page.dashboard.adSummary') }}</span>
       </CardTitle>
     </CardHeader>
 
@@ -121,7 +121,7 @@ const getData = computed(() => {
               :class="getChangePercentColor(item.changePercent)"
               v-tippy="{
                 content: item.previousValue
-                  ? `Compared with ${item.previousValue}`
+                  ? $t('page.dashboard.comparedWithValue', [item.previousValue])
                   : '',
               }"
             >

@@ -2,6 +2,7 @@
 import { markRaw } from 'vue';
 
 import { useVbenModal } from '@vben/common-ui';
+import { $t } from '@vben/locales';
 
 import { message, TypographyParagraph } from 'ant-design-vue';
 
@@ -21,7 +22,7 @@ function onSubmit(values: Record<string, any>) {
   orderRecalculateCosts(values)
     .then(() => {
       message.success(
-        'Your request has been submitted successfully. Once the job is completed, the system will send a notification.',
+        $t('page.reports-order.recalculateModal.submitSuccess'),
         5,
       );
       modalApi.setData({ reload: true });
@@ -68,7 +69,7 @@ const [Form, formApi] = useVbenForm({
       },
       defaultValue: [dayjsInGMT().add(-1, 'month').add(1, 'day'), dayjsInGMT()],
       fieldName: 'date',
-      label: 'Date',
+      label: $t('page.reports-order.recalculateModal.date'),
       rules: 'required',
     },
     {
@@ -77,21 +78,21 @@ const [Form, formApi] = useVbenForm({
         name: 'costTypes',
         options: [
           {
-            label: 'COGS - Handling fees',
+            label: $t('page.reports-order.recalculateModal.cogsHandlingFees'),
             value: RecalculateCostsType.COGS_HANDLING_FEES,
           },
           {
-            label: 'Shipping cost',
+            label: $t('page.reports-order.recalculateModal.shippingCost'),
             value: RecalculateCostsType.SHIPPING_COSTS,
           },
           {
-            label: 'Transaction fees',
+            label: $t('page.reports-order.recalculateModal.transactionFees'),
             value: RecalculateCostsType.TRANSACTION_FEES,
           },
         ],
       },
       fieldName: 'costTypes',
-      label: 'Costs',
+      label: $t('page.reports-order.recalculateModal.costs'),
       rules: 'required',
     },
   ],
@@ -107,14 +108,18 @@ const [Modal, modalApi] = useVbenModal({
 });
 </script>
 <template>
-  <Modal class="w-[700px]" title="Recalculate Costs" confirm-text="Submit">
+  <Modal
+    class="w-[700px]"
+    :title="$t('page.reports-order.recalculateModal.title')"
+    :confirm-text="$t('page.reports-order.recalculateModal.submit')"
+  >
     <Form />
 
     <TypographyParagraph class="mt-5 px-5 italic">
-      <span class="font-semibold">Note:</span> After submitting the
-      recalculation request, the system will schedule the recalculation of all
-      related costs. Once the job is completed, the system will send a
-      notification.
+      <span class="font-semibold">{{
+        $t('page.reports-order.recalculateModal.noteLabel')
+      }}</span>
+      {{ $t('page.reports-order.recalculateModal.note') }}
     </TypographyParagraph>
   </Modal>
 </template>

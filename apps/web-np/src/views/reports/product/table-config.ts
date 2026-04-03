@@ -52,7 +52,7 @@ export const gridOptions: VxeTableGridOptions = {
   columns: [
     {
       field: 'productName',
-      title: 'Name',
+      title: $t('page.reports-product.table.name'),
       slots: { default: 'productName' },
       minWidth: 300,
       align: 'left',
@@ -60,13 +60,13 @@ export const gridOptions: VxeTableGridOptions = {
     {
       field: 'quantityCurrent',
       className: 'font-semibold',
-      title: 'Units Sold',
+      title: $t('page.reports-product.table.unitsSold'),
       minWidth: 130,
       sortable: true,
     },
     {
       field: 'quantityRefund',
-      title: 'Refund',
+      title: $t('page.reports-product.table.refund'),
       minWidth: 130,
       sortable: true,
     },
@@ -87,7 +87,7 @@ export const gridOptions: VxeTableGridOptions = {
         content: $t('field-name.cogsExplain'),
       },
       align: 'right',
-      minWidth: 150,
+      minWidth: 200,
       sortable: true,
     },
     {
@@ -107,7 +107,7 @@ export const gridOptions: VxeTableGridOptions = {
       field: 'grossProfit',
       title: $t('field-name.grossProfit'),
       titlePrefix: {
-        content: 'Gross profit = Revenue - COGS - Handling',
+        content: $t('field-name.grossProfitExplain'),
       },
       align: 'right',
       minWidth: 150,
@@ -122,7 +122,7 @@ export const gridOptions: VxeTableGridOptions = {
         content: $t('field-name.grossProfitMarginExplain'),
       },
       align: 'right',
-      minWidth: 170,
+      minWidth: 200,
       sortable: true,
     },
   ],
@@ -154,13 +154,13 @@ export const formOptions: VbenFormProps = {
       },
       defaultValue: [dayjsInGMT().add(-1, 'month').add(1, 'day'), dayjsInGMT()],
       fieldName: 'date',
-      label: 'Date',
+      label: $t('page.reports-product.filter.date'),
     },
     {
       component: markRaw(Products),
       defaultValue: [],
       fieldName: 'productIds',
-      label: 'Products',
+      label: $t('page.reports-product.filter.products'),
     },
   ],
   showCollapseButton: true,

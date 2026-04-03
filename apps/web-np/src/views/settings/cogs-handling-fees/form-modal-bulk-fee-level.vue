@@ -9,6 +9,7 @@ import { message, TypographyParagraph } from 'ant-design-vue';
 
 import { useVbenForm } from '#/adapter/form';
 import { productBulkUpdateFees } from '#/api';
+import { $t } from '#/locales';
 
 const state = reactive({
   zoneUUID: '' as string,
@@ -19,7 +20,7 @@ function onSubmit(values: Record<string, any>) {
   modalApi.lock();
 
   if (state.checkedItems.length === 0) {
-    message.error('Please select at least one product.');
+    message.error($t('page.common.selectAtLeastOneProduct'));
     modalApi.lock(false);
     return;
   }
@@ -38,7 +39,7 @@ function onSubmit(values: Record<string, any>) {
     type: 'FEE_LEVEL',
   })
     .then(() => {
-      message.success('Bulk fee level updated successfully.');
+      message.success($t('page.settings-cogs.message.bulkFeeLevelUpdated'));
       modalApi.setData({ reload: true });
       modalApi.close();
     })
@@ -61,12 +62,12 @@ const [Form, formApi] = useVbenForm({
     {
       component: 'Select',
       fieldName: 'feeLevel',
-      label: 'Fee Level',
+      label: $t('page.settings-cogs.table.feeLevel'),
       defaultValue: 'PRODUCT',
       componentProps: {
         options: [
-          { label: 'Product', value: 'PRODUCT' },
-          { label: 'Variant', value: 'VARIANT' },
+          { label: $t('page.settings-cogs.option.product'), value: 'PRODUCT' },
+          { label: $t('page.settings-cogs.option.variant'), value: 'VARIANT' },
         ],
       },
     },
@@ -93,14 +94,16 @@ const [Modal, modalApi] = useVbenModal({
 <template>
   <Modal
     class="w-[700px]"
-    title="Bulk Action - Update Fee Level"
-    confirm-text="Submit"
+    :title="$t('page.settings-cogs.modal.bulkFeeLevel.title')"
+    :confirm-text="$t('page.settings-cogs.action.submit')"
   >
     <Form />
 
     <TypographyParagraph class="mt-5 px-5 text-center italic">
-      <span class="font-semibold">Note:</span> Please recalculate the costs
-      after updating the fee level.
+      <span class="font-semibold">{{
+        $t('page.settings-cogs.common.note')
+      }}</span>
+      {{ $t('page.settings-cogs.modal.bulkFeeLevel.note') }}
     </TypographyParagraph>
   </Modal>
 </template>

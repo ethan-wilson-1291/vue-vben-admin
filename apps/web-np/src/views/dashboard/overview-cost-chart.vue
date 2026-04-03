@@ -107,7 +107,7 @@ const reload = () => {
   <Card>
     <CardHeader>
       <CardTitle class="flex items-center justify-between space-x-1">
-        <span> Cost Analytics </span>
+        <span>{{ $t('page.dashboard.costAnalytics') }}</span>
       </CardTitle>
     </CardHeader>
     <CardContent>

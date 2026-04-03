@@ -7,6 +7,7 @@ import { Button, message } from 'ant-design-vue';
 
 import { useVbenForm } from '#/adapter/form';
 import { updateRegionProducts } from '#/api';
+import { $t } from '#/locales';
 import { useShopSettingStore } from '#/store';
 
 import Products from './modules/products.vue';
@@ -23,7 +24,7 @@ function onSubmit(values: Record<string, any>) {
 
   updateRegionProducts(values)
     .then(() => {
-      message.success('The zone has been updated successfully');
+      message.success($t('page.settings-cogs.message.zoneUpdated'));
     })
     .finally(() => {
       modalApi.setData({ reload: true });
@@ -58,15 +59,15 @@ const [Form, formApi] = useVbenForm({
         };
       },
       fieldName: 'zoneUUID',
-      label: 'Zone name',
+      label: $t('page.settings-cogs.filter.zone'),
     },
     {
       component: 'Checkbox' as any,
       fieldName: 'allProducts',
-      label: 'Products',
+      label: $t('page.settings-cogs.modal.products.labelProducts'),
       renderComponentContent: () => {
         return {
-          default: () => ['All products'],
+          default: () => [$t('page.settings-cogs.modal.products.allProducts')],
         };
       },
     },
@@ -116,8 +117,12 @@ const [Modal, modalApi] = useVbenModal({
 <template>
   <Modal
     class="w-[700px]"
-    confirm-text="Add"
-    :title="state.deleteMode ? 'Remove products' : 'Add products'"
+    :confirm-text="$t('page.settings-cogs.action.add')"
+    :title="
+      state.deleteMode
+        ? $t('page.settings-cogs.modal.products.removeTitle')
+        : $t('page.settings-cogs.modal.products.addTitle')
+    "
     :show-confirm-button="!state.deleteMode"
     :close-on-click-modal="false"
   >
@@ -129,7 +134,7 @@ const [Modal, modalApi] = useVbenModal({
           danger
           @click="modalApi.onConfirm"
         >
-          Remove
+          {{ $t('page.settings-cogs.action.remove') }}
         </Button>
       </div>
     </template>

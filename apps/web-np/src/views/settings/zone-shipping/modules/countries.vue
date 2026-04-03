@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { $t } from '@vben/locales';
+
 import { Select as ASelect, Tag } from 'ant-design-vue';
 
 import { countries } from '#/shared/constants';
@@ -29,7 +31,9 @@ const filterOption = (input: string, option: any) => {
       @change="onChange"
       mode="multiple"
       style="width: 100%"
-      placeholder="Select at least one country"
+      :placeholder="
+        $t('page.settings-shipping-fees.form.selectAtLeastOneCountry')
+      "
     >
       <template #option="{ value: val, label, icon }">
         <span role="img" :aria-label="val"> {{ icon }} </span>

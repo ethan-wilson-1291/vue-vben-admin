@@ -4,6 +4,7 @@ import type { IRegion } from '#/store';
 
 import { Page, useVbenModal, VbenButton } from '@vben/common-ui';
 import { IconifyIcon } from '@vben/icons';
+import { $t } from '@vben/locales';
 
 import { Modal, Tag } from 'ant-design-vue';
 
@@ -50,29 +51,28 @@ const gridOptions: VxeTableGridOptions = {
     {
       field: 'name',
       footerClassName: 'font-semibold',
-      title: 'Name',
+      title: $t('page.settings-shipping-fees.table.name'),
       minWidth: 200,
     },
     {
       field: 'shippingCostLevel',
-      title: 'Shipping Cost By',
+      title: $t('page.settings-shipping-fees.table.shippingCostBy'),
       titlePrefix: {
-        content:
-          'Shipping cost will be calculated based on the weight or quantity of the items in the cart.',
+        content: $t('page.settings-shipping-fees.table.shippingCostByExplain'),
       },
       slots: { default: 'shippingCostLevel' },
       width: 180,
     },
     {
       field: 'shippingCostPrice',
-      title: 'Shipping Cost',
+      title: $t('page.settings-shipping-fees.table.shippingCost'),
       slots: { default: 'shippingCostPrice' },
       width: 150,
       align: 'left',
     },
     {
       field: 'countries',
-      title: 'Countries',
+      title: $t('page.settings-shipping-fees.table.countries'),
       slots: { default: 'countries' },
       minWidth: 200,
       align: 'left',
@@ -80,7 +80,7 @@ const gridOptions: VxeTableGridOptions = {
     {
       field: 'action',
       slots: { default: 'action' },
-      title: 'Action',
+      title: $t('page.settings-shipping-fees.table.action'),
       fixed: 'right',
       align: 'right',
       width: 100,
@@ -92,16 +92,17 @@ const gridOptions: VxeTableGridOptions = {
   data: shopSettingStore.regions,
 };
 
-const [Grid, gridApi] = useVbenVxeGrid({ gridOptions });
+const [Grid, gridApi] = useVbenVxeGrid({
+  gridOptions: gridOptions as any,
+});
 
 const handleDelete = (row: IRegion) => {
   Modal.confirm({
-    title: 'Delete Zone',
-    content:
-      'Are you sure you want to delete this zone? All COGS, handling fees, and shipping fees will be deleted. The costs will be recalculated based on the Wordwide zones, and this action cannot be undone.',
+    title: $t('page.settings-shipping-fees.deleteModal.title'),
+    content: $t('page.settings-shipping-fees.deleteModal.content'),
     okType: 'danger',
-    okText: 'Yes',
-    cancelText: 'No',
+    okText: $t('page.common.confirm'),
+    cancelText: $t('page.common.cancel'),
     onOk: async () => {
       await shopSettingStore.removeRegion(row.uuid).then(() => {
         gridApi.setGridOptions({ data: shopSettingStore.regions });
@@ -130,7 +131,7 @@ const getCountries = (row: IRegion) => {
     <RecalculateFormContentModal />
     <FormContentModal />
 
-    <Grid table-title="Zone - Shipping Fees">
+    <Grid :table-title="$t('page.settings-shipping-fees.tableTitle')">
       <template #toolbar-tools>
         <UpgradeBtn class="mr-2 w-[150px]" />
 
@@ -144,7 +145,7 @@ const getCountries = (row: IRegion) => {
             class="mr-2 size-4"
             icon="ant-design:calculator-twotone"
           />
-          Recalculate costs
+          {{ $t('page.settings-shipping-fees.action.recalculateCosts') }}
         </VbenButton>
         <VbenButton
           class="mr-2"
@@ -157,24 +158,32 @@ const getCountries = (row: IRegion) => {
             class="mr-2 size-4"
             icon="ant-design:plus-circle-outlined"
           />
-          Add zone
+          {{ $t('page.settings-shipping-fees.action.addZone') }}
         </VbenButton>
       </template>
       <template #shippingCostLevel="{ row }: { row: IRegion }">
         {{
           row.shippingCostLevel === ShippingCostLevel.WEIGHT
-            ? 'Weight'
-            : 'Quantity'
+            ? $t('page.settings-shipping-fees.level.weight')
+            : row.shippingCostLevel === ShippingCostLevel.QUANTITY
+              ? $t('page.settings-shipping-fees.level.quantity')
+              : $t('page.settings-shipping-fees.level.order')
         }}
       </template>
       <template #shippingCostPrice="{ row }: { row: IRegion }">
         {{ formatMoney(row.shippingCostPrice, shopStore.shop.currency) }} /
         {{
-          row.shippingCostLevel === ShippingCostLevel.WEIGHT ? 'kg' : 'item(s)'
+          row.shippingCostLevel === ShippingCostLevel.WEIGHT
+            ? $t('page.settings-shipping-fees.unit.kg')
+            : row.shippingCostLevel === ShippingCostLevel.QUANTITY
+              ? $t('page.settings-shipping-fees.unit.items')
+              : $t('page.settings-shipping-fees.unit.order')
         }}
       </template>
       <template #countries="{ row }: { row: IRegion }">
-        <div v-if="row.uuid === defaultRegionUUID">All countries</div>
+        <div v-if="row.uuid === defaultRegionUUID">
+          {{ $t('page.settings-shipping-fees.table.allCountries') }}
+        </div>
         <template v-else>
           <template v-for="country in getCountries(row)" :key="country">
             <Tag>
@@ -201,7 +210,7 @@ const getCountries = (row: IRegion) => {
         </VbenButton>
         <VbenButton variant="outline" size="icon" class="size-7">
           <IconifyIcon
-            class="text-primary-500 size-4"
+            class="size-4 text-primary-500"
             icon="ant-design:edit-twotone"
             @click="openFormModal(row)"
           />

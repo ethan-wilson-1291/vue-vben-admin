@@ -4,6 +4,7 @@ import { defineComponent } from 'vue';
 import { Button, Divider, Select } from 'ant-design-vue';
 
 import { AntPlus } from '#/icons';
+import { $t } from '#/locales';
 import { redirect } from '#/shared/utils';
 import { useShopSettingStore } from '#/store';
 
@@ -54,7 +55,7 @@ function handleNewZone() {
           <template #icon>
             <AntPlus />
           </template>
-          New zone
+          {{ $t('page.settings-cogs.action.addZone') }}
         </Button>
       </div>
     </template>

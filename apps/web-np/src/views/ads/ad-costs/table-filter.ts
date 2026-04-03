@@ -1,5 +1,7 @@
 import type { VbenFormProps } from '@vben/common-ui';
 
+import { $t } from '@vben/locales';
+
 export const formOptions: VbenFormProps = {
   commonConfig: {
     colon: true,
@@ -12,33 +14,33 @@ export const formOptions: VbenFormProps = {
     {
       component: 'Input',
       fieldName: 'adName',
-      label: 'Ad',
+      label: $t('page.ad-cost-rules.filter.ad'),
       componentProps: {
-        placeholder: 'Search by Ad Name',
+        placeholder: $t('page.ad-cost-rules.filter.searchByAdName'),
       },
     },
     {
       component: 'Input',
       fieldName: 'adGroupName',
-      label: 'Group',
+      label: $t('page.ad-cost-rules.filter.group'),
       componentProps: {
-        placeholder: 'Search by Group Name',
+        placeholder: $t('page.ad-cost-rules.filter.searchByGroupName'),
       },
     },
     {
       component: 'Input',
       fieldName: 'adCampaignName',
-      label: 'Campaign',
+      label: $t('page.ad-cost-rules.filter.campaign'),
       componentProps: {
-        placeholder: 'Search by Campaign Name',
+        placeholder: $t('page.ad-cost-rules.filter.searchByCampaignName'),
       },
     },
     {
       component: 'Input',
       fieldName: 'adAccountName',
-      label: 'Ad Account',
+      label: $t('page.ad-cost-rules.filter.adAccount'),
       componentProps: {
-        placeholder: 'Search by Ad Account Name',
+        placeholder: $t('page.ad-cost-rules.filter.searchByAdAccountName'),
       },
     },
   ],

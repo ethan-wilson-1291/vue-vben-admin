@@ -1,5 +1,7 @@
 import type { VxeTableGridOptions } from '#/adapter/vxe-table';
 
+import { $t } from '@vben/locales';
+
 import { getAdList } from '#/api';
 
 export const gridOptions: VxeTableGridOptions = {
@@ -10,43 +12,43 @@ export const gridOptions: VxeTableGridOptions = {
   columns: [
     {
       field: 'accountType',
-      title: 'Ad Channel',
+      title: $t('page.ad-cost-rules.table.adChannel'),
       slots: { default: 'accountType' },
       width: 100,
     },
     {
       field: 'id',
-      title: 'Attach to costs',
+      title: $t('page.ad-cost-rules.table.attachToCosts'),
       slots: { default: 'addToCosts' },
       width: 150,
     },
     {
       field: 'adName',
-      title: 'Ad Name',
+      title: $t('page.ad-cost-rules.table.adName'),
       align: 'left',
       minWidth: 250,
     },
     {
       field: 'adGroupName',
-      title: 'Group Name',
+      title: $t('page.ad-cost-rules.table.groupName'),
       align: 'left',
       minWidth: 250,
     },
     {
       field: 'adCampaignName',
-      title: 'Campaign Name',
+      title: $t('page.ad-cost-rules.table.campaignName'),
       align: 'left',
       minWidth: 250,
     },
     {
       field: 'adAccountName',
-      title: 'Accoumt Name',
+      title: $t('page.ad-cost-rules.table.accountName'),
       align: 'left',
       minWidth: 150,
     },
     {
       field: 'createdAt',
-      title: 'Synced At',
+      title: $t('page.ad-cost-rules.table.syncedAt'),
       align: 'center',
       minWidth: 150,
     },

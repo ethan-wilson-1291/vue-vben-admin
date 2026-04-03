@@ -2,6 +2,7 @@ import type { VbenFormProps } from '@vben/common-ui';
 
 import { markRaw } from 'vue';
 
+import { $t } from '#/locales';
 import { defaultRegionUUID } from '#/shared/constants';
 import { useShopStore } from '#/store';
 
@@ -12,17 +13,17 @@ const shopStore = useShopStore();
 const statusList = [
   {
     value: 'ACTIVE',
-    label: 'Active',
+    label: $t('page.settings-cogs.status.active'),
     className: 'success',
   },
   {
     value: 'DRAFT',
-    label: 'Draft',
+    label: $t('page.settings-cogs.status.draft'),
     className: 'warning',
   },
   {
     value: 'ARCHIVED',
-    label: 'Archived',
+    label: $t('page.settings-cogs.status.archived'),
     className: 'error',
   },
 ];
@@ -41,23 +42,23 @@ export const formOptions: VbenFormProps = {
       },
       defaultValue: defaultRegionUUID,
       fieldName: 'zoneUUID',
-      label: 'Zone',
+      label: $t('page.settings-cogs.filter.zone'),
     },
     {
       component: 'Input',
       fieldName: 'id',
-      label: 'ID',
+      label: $t('page.settings-cogs.filter.id'),
       componentProps: {
-        placeholder: 'Search by Product ID',
+        placeholder: $t('page.settings-cogs.filter.searchProductId'),
         disabled: shopStore.isFreeSubscription,
       },
     },
     {
       component: 'Input',
       fieldName: 'name',
-      label: 'Name',
+      label: $t('page.settings-cogs.filter.name'),
       componentProps: {
-        placeholder: 'Search by Product Name',
+        placeholder: $t('page.settings-cogs.filter.searchProductName'),
         disabled: shopStore.isFreeSubscription,
       },
     },
@@ -68,11 +69,11 @@ export const formOptions: VbenFormProps = {
         allowClear: true,
         mode: 'multiple',
         options: statusList,
-        placeholder: 'Select status',
+        placeholder: $t('page.settings-cogs.filter.selectStatus'),
         disabled: shopStore.isFreeSubscription,
       },
       fieldName: 'status',
-      label: 'Status',
+      label: $t('page.settings-cogs.filter.status'),
     },
   ],
   showCollapseButton: false,

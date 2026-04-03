@@ -4,6 +4,8 @@ import type { DashboardData } from './service';
 import { computed, defineComponent, onBeforeMount } from 'vue';
 import { useRoute } from 'vue-router';
 
+import { $t } from '@vben/locales';
+
 import { Button, Divider, Select } from 'ant-design-vue';
 
 import { DefaultRoutes, orderStatusList } from '#/shared/constants';
@@ -28,6 +30,15 @@ import {
 
 const query = useRoute();
 const shopStore = useShopStore();
+
+const orderStatusOptions = computed(() => {
+  return orderStatusList.map((item: any) => {
+    return {
+      ...item,
+      label: item.labelKey ? $t(item.labelKey) : item.label,
+    };
+  });
+});
 
 onBeforeMount(() => {
   if (query.path === DefaultRoutes.PRICING) {
@@ -66,7 +77,7 @@ const generateSamePeriodPreset = computed(() => {
 
   return [
     {
-      label: 'Same Period',
+      label: $t('page.dashboard.samePeriod'),
       value: [
         currentPeriod.dateRange[0].add(-1 * days, 'days'),
         currentPeriod.dateRange[0].add(-1, 'days'),
@@ -92,21 +103,25 @@ const VNodes = defineComponent({
   <div class="p-5">
     <div class="mb-5 flex flex-wrap justify-between">
       <div class="flex items-start space-x-5">
-        <h1 class="text-md font-semibold md:text-2xl">Dashboard</h1>
+        <h1 class="text-md font-semibold md:text-2xl">
+          {{ $t('page.dashboard.title') }}
+        </h1>
       </div>
       <div class="flex flex-wrap items-center justify-end space-x-2">
         <Select
           class="min-w-[150px]"
           mode="multiple"
-          placeholder="Order status"
+          :placeholder="$t('page.dashboard.filterOrderStatus')"
           v-model:value="dashboardState.paymentStatusFilter"
           :allow-clear="true"
-          :options="orderStatusList"
+          :options="orderStatusOptions"
           :disabled="shopStore.isFreeSubscription"
           @change="handlePaymentStatusFilterChange"
         >
           <template #dropdownRender="{ menuNode: menu }">
-            <div class="my-2 text-center italic">Order Status</div>
+            <div class="my-2 text-center italic">
+              {{ $t('page.dashboard.dropdownOrderStatus') }}
+            </div>
             <Divider class="my-2" />
             <VNodes :vnodes="menu" />
           </template>
@@ -138,7 +153,7 @@ const VNodes = defineComponent({
             (val) => handleDateChange(val, currentPeriod, true)
           "
         />
-        <div class="text-nowrap">Compare with</div>
+        <div class="text-nowrap">{{ $t('page.dashboard.compareWith') }}</div>
         <DateRangePicker
           picker-limit-name="1 year"
           :model-value="previousPeriod.dateRange"
@@ -159,7 +174,7 @@ const VNodes = defineComponent({
           type="primary"
           class="!ml-2"
         >
-          Submit
+          {{ $t('page.dashboard.submit') }}
         </Button>
       </div>
     </div>

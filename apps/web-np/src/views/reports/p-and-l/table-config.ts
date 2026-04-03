@@ -3,6 +3,8 @@ import type { VxeTableGridOptions } from '#/adapter/vxe-table';
 
 import { markRaw } from 'vue';
 
+import { $t } from '@vben/locales';
+
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import { orderGetPAndLReport } from '#/api';
 import { orderStatusList } from '#/shared/constants';
@@ -19,6 +21,13 @@ import {
 } from './service';
 
 const shopStore = useShopStore();
+
+const orderStatusOptions = orderStatusList.map((item: any) => {
+  return {
+    ...item,
+    label: item.labelKey ? $t(item.labelKey) : item.label,
+  };
+});
 
 export const gridOptions: VxeTableGridOptions = {
   pagerConfig: {
@@ -112,21 +121,21 @@ export const formOptions: VbenFormProps = {
         options: [
           {
             value: 'daily',
-            label: 'Day',
+            label: $t('page.reports-p-and-l.form.groupByDay'),
           },
           {
             value: 'weekly',
-            label: 'Week',
+            label: $t('page.reports-p-and-l.form.groupByWeek'),
           },
           {
             value: 'monthly',
-            label: 'Month',
+            label: $t('page.reports-p-and-l.form.groupByMonth'),
           },
         ],
         disabled: shopStore.isFreeSubscription,
       },
       fieldName: 'groupBy',
-      label: 'Report type',
+      label: $t('page.reports-p-and-l.form.reportType'),
     },
     {
       component: markRaw(DateRangePicker),
@@ -156,7 +165,7 @@ export const formOptions: VbenFormProps = {
       },
       defaultValue: [dayjsInGMT().add(-6, 'days'), dayjsInGMT()],
       fieldName: 'date',
-      label: 'Date',
+      label: $t('page.reports-p-and-l.form.date'),
     },
     {
       component: markRaw(DateRangePicker),
@@ -185,7 +194,7 @@ export const formOptions: VbenFormProps = {
       },
       defaultValue: [dayjsInGMT().add(-6, 'days'), dayjsInGMT()],
       fieldName: 'week',
-      label: 'Weekly',
+      label: $t('page.reports-p-and-l.form.weekly'),
     },
     {
       component: markRaw(DateRangePicker),
@@ -214,7 +223,7 @@ export const formOptions: VbenFormProps = {
       },
       defaultValue: [dayjsInGMT().add(-2, 'month'), dayjsInGMT()],
       fieldName: 'month',
-      label: 'Month',
+      label: $t('page.reports-p-and-l.form.month'),
     },
     {
       component: 'Select',
@@ -222,12 +231,12 @@ export const formOptions: VbenFormProps = {
       componentProps: {
         allowClear: true,
         mode: 'multiple',
-        options: orderStatusList,
-        placeholder: 'Payment status',
+        options: orderStatusOptions,
+        placeholder: $t('page.reports-p-and-l.form.paymentStatus'),
         disabled: shopStore.isFreeSubscription,
       },
       fieldName: 'financialStatus',
-      label: 'Order status',
+      label: $t('page.reports-p-and-l.form.orderStatus'),
     },
   ],
   showCollapseButton: true,

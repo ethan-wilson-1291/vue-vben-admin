@@ -10,6 +10,7 @@ import {
   CardTitle,
   VbenIcon,
 } from '@vben/common-ui';
+import { $t } from '@vben/locales';
 
 import { convertRate, formatMoney, toPercentage } from '#/shared/utils';
 import { useShopStore } from '#/store';
@@ -33,7 +34,7 @@ interface ILTVReportItem {
 }
 
 interface Props {
-  items: any | ILTVReportItem[];
+  items?: any | ILTVReportItem[];
   loading?: boolean;
 }
 
@@ -66,28 +67,27 @@ const getItems = computed((): IAnalysisOverviewItem[] => {
   return [
     {
       icon: 'ant-design:usergroup-add-outlined',
-      title: 'New Customers',
+      title: $t('page.reports-customer.cards.newCustomers'),
       value: totalCutomer,
     },
     {
       icon: 'ant-design:user-switch-outlined',
-      title: 'Repurchase Rate',
+      title: $t('page.reports-customer.cards.repurchaseRate'),
       value: `${toPercentage(repurchase)}%`,
       suffix: '%',
-      explain: 'Repurchase Rate = (Repurchase customers / New customers) * 100',
+      explain: $t('page.reports-customer.cards.repurchaseRateExplain'),
     },
     {
       icon: 'ant-design:dollar-circle-outlined',
-      title: 'New customer revenue',
+      title: $t('page.reports-customer.cards.newCustomerRevenue'),
       value: formatMoney(totalRevenue, shopStore.shop.currencyFromApp),
-      explain: 'Total Revenue from the new customers',
+      explain: $t('page.reports-customer.cards.newCustomerRevenueExplain'),
     },
     {
       icon: 'ant-design:field-time-outlined',
-      title: 'Lifetime Value (LTV)',
+      title: $t('field-name.ltv'),
       value: formatMoney(ltv, shopStore.shop.currencyFromApp),
-      explain:
-        'Lifetime Value (LTV) represents the average revenue a customer generates over their entire duration as a paying customer.',
+      explain: $t('field-name.ltvExplain'),
     },
   ];
 });
