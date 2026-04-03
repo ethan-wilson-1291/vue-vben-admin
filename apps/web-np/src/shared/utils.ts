@@ -116,57 +116,57 @@ export const getDatePreset = (
   const datePresets = [
     {
       id: 'today',
-      label: 'Today',
+      label: $t('page.date-presets.today'),
       value: dayjsInGMT(),
     },
     {
       id: 'last7Days',
-      label: 'Last 7 Days',
+      label: $t('page.date-presets.last7Days'),
       value: dayjsInGMT().add(-6, 'd'),
     },
     {
       id: 'last14Days',
-      label: 'Last 14 Days',
+      label: $t('page.date-presets.last14Days'),
       value: dayjsInGMT().add(-13, 'd'),
     },
     {
       id: 'lastMonth',
-      label: 'Last 1 Month',
+      label: $t('page.date-presets.lastMonth'),
       value: dayjsInGMT().add(-1, 'month').add(1, 'day'),
     },
     {
       id: 'last2Months',
-      label: 'Last 2 Months',
+      label: $t('page.date-presets.last2Months'),
       value: dayjsInGMT().add(-2, 'month').add(1, 'day'),
     },
     {
       id: 'last3Months',
-      label: 'Last 3 Months',
+      label: $t('page.date-presets.last3Months'),
       value: dayjsInGMT().add(-3, 'month').add(1, 'day'),
     },
     {
       id: 'last6Months',
-      label: 'Last 6 Months',
+      label: $t('page.date-presets.last6Months'),
       value: dayjsInGMT().add(-6, 'month').add(1, 'day'),
     },
     {
       id: 'lastYear',
-      label: 'Last 1 Year',
+      label: $t('page.date-presets.lastYear'),
       value: dayjsInGMT().add(-1, 'year').add(1, 'day'),
     },
     {
       id: 'previousMonth',
-      label: 'Previous Month',
+      label: $t('page.date-presets.previousMonth'),
       value: dayjsInGMT().add(-1, 'month').startOf('month'),
     },
     {
       id: 'thisMonth',
-      label: 'This Month',
+      label: $t('page.date-presets.thisMonth'),
       value: dayjsInGMT().startOf('month'),
     },
     {
       id: 'thisYear',
-      label: 'This Year',
+      label: $t('page.date-presets.thisYear'),
       value: dayjsInGMT().startOf('year'),
     },
   ];

@@ -107,6 +107,25 @@
       "shoes": "鞋子"
     }
   },
+  "date-presets": {
+    "today": "今天",
+    "last7Days": "最近 7 天",
+    "last14Days": "最近 14 天",
+    "lastMonth": "最近 1 个月",
+    "last2Months": "最近 2 个月",
+    "last3Months": "最近 3 个月",
+    "last6Months": "最近 6 个月",
+    "lastYear": "最近 1 年",
+    "previousMonth": "上个月",
+    "thisMonth": "本月",
+    "thisYear": "今年"
+  },
+  "date-range-picker": {
+    "limitHint": "请选择日期范围，最大周期为",
+    "exampleFrom": "例如：从",
+    "exampleTo": "到",
+    "exampleValid": "是有效范围"
+  },
   "reports-p-and-l": {
     "title": "损益报表",
     "form": {

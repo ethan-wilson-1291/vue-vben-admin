@@ -107,6 +107,25 @@
       "shoes": "Giày"
     }
   },
+  "date-presets": {
+    "today": "Hôm nay",
+    "last7Days": "7 ngày gần đây",
+    "last14Days": "14 ngày gần đây",
+    "lastMonth": "1 tháng gần đây",
+    "last2Months": "2 tháng gần đây",
+    "last3Months": "3 tháng gần đây",
+    "last6Months": "6 tháng gần đây",
+    "lastYear": "1 năm gần đây",
+    "previousMonth": "Tháng trước",
+    "thisMonth": "Tháng này",
+    "thisYear": "Năm nay"
+  },
+  "date-range-picker": {
+    "limitHint": "Vui lòng chọn khoảng ngày trong phạm vi tối đa",
+    "exampleFrom": "Ví dụ: Từ",
+    "exampleTo": "đến",
+    "exampleValid": "là khoảng hợp lệ"
+  },
   "reports-p-and-l": {
     "title": "Báo cáo P&L",
     "form": {

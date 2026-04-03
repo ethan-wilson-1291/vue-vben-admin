@@ -107,6 +107,25 @@
       "shoes": "Shoes"
     }
   },
+  "date-presets": {
+    "today": "Today",
+    "last7Days": "Last 7 Days",
+    "last14Days": "Last 14 Days",
+    "lastMonth": "Last 1 Month",
+    "last2Months": "Last 2 Months",
+    "last3Months": "Last 3 Months",
+    "last6Months": "Last 6 Months",
+    "lastYear": "Last 1 Year",
+    "previousMonth": "Previous Month",
+    "thisMonth": "This Month",
+    "thisYear": "This Year"
+  },
+  "date-range-picker": {
+    "limitHint": "Please choose a date range within a maximum period of",
+    "exampleFrom": "Ex: From",
+    "exampleTo": "to",
+    "exampleValid": "is a valid range"
+  },
   "reports-p-and-l": {
     "title": "P&L Report",
     "form": {

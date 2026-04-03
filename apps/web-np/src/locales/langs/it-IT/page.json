@@ -1,0 +1,795 @@
+{
+  "auth": {
+    "login": "Accesso",
+    "register": "Registrati",
+    "codeLogin": "Accesso con codice",
+    "qrcodeLogin": "Accesso con codice QR",
+    "forgetPassword": "Password dimenticata"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "analytics": "Analisi",
+    "workspace": "Area di lavoro",
+    "filterOrderStatus": "Stato ordine",
+    "dropdownOrderStatus": "Stato ordine",
+    "compareWith": "Confronta con",
+    "comparedWithValue": "Confrontato con {0}",
+    "samePeriod": "Stesso periodo",
+    "submit": "Invia",
+    "reviewPromoTitle": "Ottieni altri 45 giorni Pro - solo per aver condiviso il tuo supporto!",
+    "reviewPromoLine1": "Ti piace la nostra app? Aiuta anche gli altri a scoprirla! Lasciaci una recensione a 5 stelle.",
+    "reviewPromoLine2": "Poi fai uno screenshot della tua recensione e invialocelo tramite la chat. Estenderemo il tuo periodo di prova Pro di altri ",
+    "reviewPromoBonus": "45 giorni - totalmente gratis",
+    "writeReview": "Scrivi una recensione",
+    "upgradeTooltip": "Passa al piano Pro per sbloccare tutte le funzionalita",
+    "purchasePro": "Acquista Pro",
+    "profitPerformance": "Performance dei profitti",
+    "viewDetails": "Visualizza dettagli",
+    "reloadChart": "Ricarica grafico",
+    "chartGroupDaily": "Giornaliero",
+    "chartGroupWeekly": "Settimanale",
+    "chartGroupMonthly": "Mensile",
+    "adAnalytics": "Analisi annunci",
+    "costAnalytics": "Analisi costi",
+    "adSummary": "Riepilogo annunci",
+    "costSummary": "Riepilogo costi",
+    "orderSummary": "Riepilogo ordini",
+    "mobileSignIn": "Accesso da mobile",
+    "showQrCode": "Mostra codice QR",
+    "qrCodeAlt": "Codice QR",
+    "previousPeriod": "Periodo precedente",
+    "currentPeriod": "Periodo corrente",
+    "avgOrderRevenue": "Ricavo medio per ordine",
+    "avgOrderRevenueExplain": "Ricavo medio per ordine = Ricavo totale / Ordini totali",
+    "avgOrderCost": "Costo medio per ordine",
+    "avgOrderCostExplain": "Costo medio per ordine = Costo totale / Ordini totali",
+    "totalNetProfit": "Utile netto totale",
+    "avgOrderProfit": "Utile medio per ordine",
+    "avgOrderProfitExplain": "Utile medio per ordine = Utile netto totale / Ordini totali"
+  },
+  "onboard": {
+    "steps": {
+      "language": "Lingua",
+      "cogs": "COGS",
+      "handlingFees": "Costi di gestione",
+      "shippingCosts": "Costi di spedizione",
+      "transactionFees": "Commissioni di transazione"
+    },
+    "index": {
+      "welcomePrefix": "Benvenuto su",
+      "welcomeSuffix": "!",
+      "subtitle": "Per calcolare i tuoi profitti, abbiamo bisogno dei dettagli dei tuoi costi.",
+      "previous": "Indietro",
+      "next": "Avanti",
+      "finish": "Fine",
+      "completedSuccess": "Onboarding completato con successo"
+    },
+    "common": {
+      "more": "Altro",
+      "forExample": "Per esempio",
+      "exampleProduct": "Prodotto di esempio",
+      "salePrice": "Prezzo di vendita",
+      "quantity": "Quantita",
+      "item": "articolo",
+      "order": "ordine",
+      "exampleOrder": "Ordine di esempio"
+    },
+    "exampleOrder": {
+      "title": "Ordine di esempio"
+    },
+    "stepLanguage": {
+      "title": "Scegli la lingua",
+      "description": "Seleziona la lingua preferita per la dashboard."
+    },
+    "stepCogs": {
+      "title": "Costo del venduto (COGS)",
+      "syncFromShopify": "Sincronizza da Shopify",
+      "manual": "Manuale",
+      "syncDescriptionPrefix": "Il sistema sincronizzera automaticamente il valore",
+      "costPerItem": "Costo per articolo",
+      "syncDescriptionSuffix": "da Shopify e lo usera come valore COGS.",
+      "defaultCogsRate": "Imposta il tasso COGS predefinito per 1 articolo:"
+    },
+    "stepHandlingFees": {
+      "title": "Costi di gestione",
+      "defaultHandlingFee": "Costo di gestione predefinito per 1 articolo"
+    },
+    "stepShippingFees": {
+      "title": "Costi di spedizione",
+      "description": "sono le tariffe addebitate per trasportare merci da un luogo a un altro. Vengono aggiunte al costo dei prodotti ordinati da un cliente.",
+      "calculateBy": "I costi di spedizione saranno calcolati in base a",
+      "defaultShippingCost": "Costo di spedizione predefinito per 1 unita",
+      "itemQuantity": "Quantita articoli",
+      "totalWeight": "Peso totale"
+    },
+    "products": {
+      "tShirt": "Maglietta",
+      "shoes": "Scarpe"
+    }
+  },
+  "date-presets": {
+    "today": "Oggi",
+    "last7Days": "Ultimi 7 giorni",
+    "last14Days": "Ultimi 14 giorni",
+    "lastMonth": "Ultimo 1 mese",
+    "last2Months": "Ultimi 2 mesi",
+    "last3Months": "Ultimi 3 mesi",
+    "last6Months": "Ultimi 6 mesi",
+    "lastYear": "Ultimo 1 anno",
+    "previousMonth": "Mese precedente",
+    "thisMonth": "Questo mese",
+    "thisYear": "Quest'anno"
+  },
+  "date-range-picker": {
+    "limitHint": "Scegli un intervallo di date entro un periodo massimo di",
+    "exampleFrom": "Es: Da",
+    "exampleTo": "a",
+    "exampleValid": "e un intervallo valido"
+  },
+  "reports-p-and-l": {
+    "title": "Report P&L",
+    "form": {
+      "groupByDay": "Giorno",
+      "groupByWeek": "Settimana",
+      "groupByMonth": "Mese",
+      "reportType": "Tipo di report",
+      "date": "Data",
+      "weekly": "Settimanale",
+      "month": "Mese",
+      "paymentStatus": "Stato pagamento",
+      "orderStatus": "Stato ordine"
+    },
+    "table": {
+      "date": "Data",
+      "total": "Totale",
+      "notAvailable": "N/D"
+    }
+  },
+  "reports-order": {
+    "title": "Report ordini",
+    "viewDetailsFor": "Visualizza dettagli per {0}",
+    "deleteSelectedOrders": "Elimina {0} ordini",
+    "recalculateCosts": "Ricalcola costi",
+    "summaryOrders": "{0} ordine/i",
+    "bulkDeleteModal": {
+      "title": "Elimina ordini selezionati",
+      "content": "Sei sicuro di voler eliminare gli ordini selezionati?",
+      "confirm": "Si",
+      "cancel": "No"
+    },
+    "table": {
+      "orderId": "ID ordine",
+      "date": "Data",
+      "status": "Stato",
+      "currentItems": "Articoli attuali",
+      "refundItems": "Articoli rimborsati",
+      "totalItems": "Articoli totali",
+      "weightKg": "Peso (Kg)"
+    },
+    "filter": {
+      "date": "Data",
+      "paymentStatus": "Stato pagamento",
+      "status": "Stato",
+      "orderId": "ID ordine"
+    },
+    "detailModal": {
+      "title": "Dettagli",
+      "save": "Salva",
+      "goToShopifyOrder": "Vai all'ordine Shopify",
+      "name": "Nome",
+      "country": "Paese",
+      "status": "Stato",
+      "processedDate": "Data elaborazione",
+      "totalQuantity": "Quantita totale",
+      "weight": "Peso",
+      "currentQuantity": "Quantita attuale",
+      "refundQuantity": "Quantita rimborsata",
+      "edit": "Modifica",
+      "lineItems": "Righe ordine",
+      "product": "Prodotto",
+      "price": "Prezzo",
+      "updateSuccess": "Costi ordine aggiornati con successo"
+    },
+    "recalculateModal": {
+      "title": "Ricalcola costi",
+      "submit": "Invia",
+      "submitSuccess": "La tua richiesta e stata inviata con successo. Al completamento del processo, il sistema inviera una notifica.",
+      "date": "Data",
+      "cogsHandlingFees": "COGS - Costi di gestione",
+      "shippingCost": "Costo di spedizione",
+      "transactionFees": "Commissioni di transazione",
+      "costs": "Costi",
+      "noteLabel": "Nota:",
+      "note": "Dopo l'invio della richiesta di ricalcolo, il sistema pianifichera il ricalcolo di tutti i costi correlati. Al completamento del processo, il sistema inviera una notifica."
+    },
+    "syncModal": {
+      "title": "Sincronizza Shopify manualmente",
+      "submit": "Invia",
+      "submitSuccess": "La tua richiesta e stata inviata con successo. Al completamento del processo, il sistema inviera una notifica.",
+      "date": "Data",
+      "noteLabel": "Nota:",
+      "note": "Tutti gli ordini vengono sincronizzati automaticamente con l'app. Se desideri comunque sincronizzare manualmente, usa questo modulo."
+    }
+  },
+  "reports-product": {
+    "title": "Analisi prodotti",
+    "table": {
+      "name": "Nome",
+      "unitsSold": "Unita vendute",
+      "refund": "Rimborso"
+    },
+    "filter": {
+      "date": "Data",
+      "products": "Prodotti"
+    }
+  },
+  "reports-customer": {
+    "title": "Analisi clienti",
+    "newCustomersCount": "{0} cliente/i",
+    "filter": {
+      "month": "Mese"
+    },
+    "table": {
+      "firstPurchaseIn": "Primo acquisto in",
+      "totalRevenue": "Ricavo totale",
+      "nthMonth": "{0}{1} mese"
+    },
+    "cards": {
+      "newCustomers": "Nuovi clienti",
+      "repurchaseRate": "Tasso di riacquisto",
+      "repurchaseRateExplain": "Tasso di riacquisto = (Clienti che riacquistano / Nuovi clienti) * 100",
+      "newCustomerRevenue": "Ricavo nuovi clienti",
+      "newCustomerRevenueExplain": "Ricavo totale dai nuovi clienti"
+    }
+  },
+  "settings-cogs": {
+    "title": "COGS e gestione",
+    "table": {
+      "name": "Nome",
+      "status": "Stato",
+      "feeLevel": "Livello commissione",
+      "cogsSource": "Fonte COGS",
+      "sellingPrice": "Prezzo di vendita",
+      "margin": "Margine"
+    },
+    "common": {
+      "note": "Nota:",
+      "from": "Da",
+      "to": "A",
+      "price": "Prezzo",
+      "selectDate": "Seleziona data",
+      "ongoing": "In corso"
+    },
+    "tooltip": {
+      "feeLevel": "Se il costo e calcolato per prodotto, il costo del prodotto si applichera a tutte le varianti. Se il costo e calcolato per variante, ogni variante avra il proprio costo.",
+      "cogsSource": "La fonte COGS indica da dove provengono i dati COGS. Puo essere inserita manualmente o sincronizzata da Shopify...",
+      "margin": "Margine = (Prezzo di vendita - COGS - Costi di gestione) / Prezzo di vendita",
+      "cogsHistory": "Imposta COGS in base alla data storica"
+    },
+    "help": {
+      "cogsSource": "Quando i prodotti vengono sincronizzati da Shopify, la fonte COGS verra presa da Shopify o impostata manualmente."
+    },
+    "filter": {
+      "zone": "Zona",
+      "id": "ID",
+      "name": "Nome",
+      "status": "Stato",
+      "searchProductId": "Cerca per ID prodotto",
+      "searchProductName": "Cerca per nome prodotto",
+      "selectStatus": "Seleziona stato"
+    },
+    "status": {
+      "active": "Attivo",
+      "draft": "Bozza",
+      "archived": "Archiviato"
+    },
+    "option": {
+      "product": "Prodotto",
+      "variant": "Variante",
+      "manual": "Manuale",
+      "shopify": "Shopify"
+    },
+    "message": {
+      "requestProcessed": "La richiesta e stata elaborata con successo.",
+      "pleaseRecalculate": "Ricalcola i costi dopo l'aggiornamento.",
+      "bulkCogsUpdated": "COGS in blocco aggiornato con successo.",
+      "bulkFeeLevelUpdated": "Livello commissione in blocco aggiornato con successo.",
+      "bulkHandlingFeeUpdated": "Costi di gestione in blocco aggiornati con successo.",
+      "bulkCogsSourceUpdated": "Fonte COGS in blocco aggiornata con successo.",
+      "cogsUpdated": "Costo del venduto aggiornato con successo.",
+      "importUploaded": "Il file e stato caricato con successo ed e in elaborazione.",
+      "zoneUpdated": "La zona e stata aggiornata con successo.",
+      "recalculateSubmitted": "La tua richiesta e stata inviata con successo. Al completamento del processo, il sistema inviera una notifica.",
+      "appliesToAllVariants": "Si applica a tutte le {0} varianti",
+      "fileNotCsv": "{0} non e un file CSV"
+    },
+    "confirm": {
+      "exportTitle": "Esporta tutte le commissioni dalla zona {0}",
+      "exportContent": "Durante l'elaborazione del file di download puoi continuare a usare l'applicazione. Il file verra scaricato automaticamente al termine."
+    },
+    "bulkAction": {
+      "productsVariants": "Azione di massa per {0} prodotti, {1} varianti",
+      "products": "Azione di massa per {0} prodotti",
+      "variants": "Azione di massa per {0} varianti"
+    },
+    "modal": {
+      "bulkCogs": {
+        "title": "Azione di massa - Aggiorna COGS per fonte COGS manuale",
+        "notePrefix": "Questa funzionalita riguarda solo gli articoli con",
+        "manualCogsSource": "Fonte COGS manuale",
+        "noteSuffix": ". Ricalcola i costi dopo aver aggiornato il COGS."
+      },
+      "bulkFeeLevel": {
+        "title": "Azione di massa - Aggiorna livello commissione",
+        "note": "Ricalcola i costi dopo aver aggiornato il livello commissione."
+      },
+      "bulkHandlingFees": {
+        "title": "Azione di massa - Aggiorna costi di gestione",
+        "note": "Ricalcola i costi dopo aver aggiornato i costi di gestione."
+      },
+      "bulkCogsSource": {
+        "title": "Azione di massa - Aggiorna fonte COGS",
+        "note": "Ricalcola i costi dopo aver aggiornato la fonte COGS."
+      },
+      "cogsHistory": {
+        "title": "Costo del venduto",
+        "variant": "Variante - {0}"
+      },
+      "importProducts": {
+        "title": "Importa prodotti",
+        "note": "Dopo il caricamento del file, il sistema elaborera i dati e aggiornera le commissioni nel sistema. Assicurati che il file sia corretto prima di caricarlo."
+      },
+      "products": {
+        "addTitle": "Aggiungi prodotti",
+        "removeTitle": "Rimuovi prodotti",
+        "labelProducts": "Prodotti",
+        "allProducts": "Tutti i prodotti"
+      },
+      "recalculate": {
+        "title": "Ricalcola COGS - Costi di gestione",
+        "resultHintPrefix": "Per vedere il risultato, vai alla pagina",
+        "resultHintSuffix": "."
+      }
+    },
+    "action": {
+      "newZone": "Nuova zona",
+      "addZone": "Nuova zona",
+      "submit": "Invia",
+      "add": "Aggiungi",
+      "remove": "Rimuovi",
+      "updateFeeLevel": "Aggiorna livello commissione",
+      "updateCogsSource": "Aggiorna fonte COGS",
+      "updateCogs": "Aggiorna COGS",
+      "updateHandlingFees": "Aggiorna costi di gestione",
+      "viewDetail": "Visualizza dettaglio",
+      "viewOrderReport": "Visualizza report ordini",
+      "chooseCsv": "Scegli file *.csv da importare"
+    }
+  },
+  "settings-transaction-fees": {
+    "title": "Commissioni di transazione",
+    "onboard": {
+      "paymentGateways": "Gateway di pagamento",
+      "fixedFees": "Commissioni fisse",
+      "percentageFees": "Commissioni percentuali",
+      "shopifyExternalFees": "Commissioni esterne Shopify",
+      "formula": "* Commissioni di transazione = Commissioni fisse + [Pagamento netto * (Commissioni percentuali + Commissioni esterne Shopify) / 100]",
+      "exampleOrder": "Ordine di esempio",
+      "other": "Altro"
+    },
+    "common": {
+      "note": "Nota:"
+    },
+    "action": {
+      "submit": "Invia",
+      "reset": "Reimposta",
+      "recalculateCosts": "Ricalcola costi",
+      "viewOrderReport": "Visualizza report ordini"
+    },
+    "message": {
+      "updated": "Le commissioni di transazione sono state aggiornate con successo",
+      "recalculateSubmitted": "La tua richiesta e stata inviata con successo. Al completamento del processo, il sistema inviera una notifica."
+    },
+    "modal": {
+      "recalculate": {
+        "title": "Ricalcola commissioni di transazione",
+        "date": "Data",
+        "resultHintPrefix": "Per vedere il risultato, vai alla pagina",
+        "resultHintSuffix": "."
+      }
+    }
+  },
+  "settings-shipping-fees": {
+    "title": "Zone e spedizione",
+    "tableTitle": "Zona - Costi di spedizione",
+    "table": {
+      "name": "Nome",
+      "shippingCostBy": "Costo di spedizione per",
+      "shippingCostByExplain": "Il costo di spedizione verra calcolato in base al peso o alla quantita degli articoli nel carrello.",
+      "shippingCost": "Costo di spedizione",
+      "countries": "Paesi",
+      "allCountries": "Tutti i paesi",
+      "action": "Azione"
+    },
+    "action": {
+      "recalculateCosts": "Ricalcola costi",
+      "addZone": "Aggiungi zona"
+    },
+    "deleteModal": {
+      "title": "Elimina zona",
+      "content": "Sei sicuro di voler eliminare questa zona? Tutti i COGS, costi di gestione e costi di spedizione verranno eliminati. I costi saranno ricalcolati in base alle zone mondiali e questa azione non puo essere annullata."
+    },
+    "level": {
+      "quantity": "Quantita",
+      "weight": "Peso",
+      "order": "Ordine"
+    },
+    "unit": {
+      "kg": "kg",
+      "items": "articolo/i",
+      "order": "ordine"
+    },
+    "form": {
+      "name": "Nome",
+      "shippingCostBy": "Costo di spedizione per",
+      "shippingCost": "Costo di spedizione",
+      "countries": "Paesi",
+      "selectAtLeastOneCountry": "Seleziona almeno un paese"
+    },
+    "modal": {
+      "formTitle": "Zona - Costo di spedizione",
+      "recalculate": {
+        "title": "Ricalcola costo di spedizione"
+      }
+    },
+    "common": {
+      "example": "Esempio:"
+    },
+    "example": {
+      "base": "L'ordine A ha 2 articoli con un peso totale di 1.5kg",
+      "weightPrefix": "Se il costo e impostato a ",
+      "weightRate": "$5 per ogni 1kg (peso)",
+      "weightMiddle": ", il costo totale di spedizione per l'ordine A sara ",
+      "weightResult": "$7.5",
+      "weightSuffix": " (1.5 x $5)",
+      "quantityPrefix": "Se il costo e impostato a ",
+      "quantityRate": "$3 per ogni 1 articolo (quantita)",
+      "quantityMiddle": ", il costo totale di spedizione per l'ordine A sara ",
+      "quantityResult": "$6",
+      "quantitySuffix": " (2 x $3)",
+      "orderPrefix": "Se il costo e impostato a ",
+      "orderRate": "$1 per ogni 1 ordine",
+      "orderMiddle": ", il costo totale di spedizione per l'ordine A sara ",
+      "orderResult": "$1"
+    }
+  },
+  "settings-custom-costs": {
+    "title": "Costi personalizzati/Tasse",
+    "tableTitle": "Costi personalizzati/Tasse",
+    "action": {
+      "addCustomCost": "Aggiungi costo personalizzato"
+    },
+    "deleteModal": {
+      "title": "Elimina costo personalizzato",
+      "content": "Sei sicuro di voler eliminare questo costo personalizzato?"
+    },
+    "table": {
+      "name": "Nome",
+      "startDate": "Data inizio",
+      "endDate": "Data fine",
+      "onGoing": "In corso",
+      "type": "Tipo",
+      "dailyCost": "Costo giornaliero",
+      "note": "Nota",
+      "action": "Azione"
+    },
+    "filter": {
+      "name": "Nome",
+      "date": "Data",
+      "type": "Tipo",
+      "searchByCostName": "Cerca per nome costo",
+      "selectCostType": "Seleziona tipo di costo"
+    },
+    "form": {
+      "title": "Costo personalizzato",
+      "submit": "Invia",
+      "name": "Nome",
+      "namePlaceholder": "Tasse, Affitto, Dipendente, Pubblicita ecc.",
+      "type": "Tipo",
+      "amount": "Importo",
+      "dailyCost": "Costo giornaliero",
+      "grossSaleRate": "% delle vendite lorde",
+      "revenueRate": "% dei ricavi",
+      "grossProfitRate": "% dell'utile lordo",
+      "startDate": "Data inizio",
+      "endDate": "Data fine",
+      "note": "Nota",
+      "show": "Mostra",
+      "hide": "Nascondi",
+      "example": "esempio",
+      "endDatePresets": {
+        "onGoing": "In corso",
+        "next30Days": "Prossimi 30 giorni",
+        "next7Days": "Prossimi 7 giorni"
+      }
+    },
+    "example": {
+      "exampleDate": "Data esempio",
+      "grossSale": "Vendita lorda",
+      "revenue": "Ricavi",
+      "grossProfit": "Utile lordo",
+      "dailyCost": "Costo giornaliero",
+      "netProfit": "Utile netto",
+      "date1": "Data 1",
+      "date2": "Data 2"
+    },
+    "typeOptions": {
+      "monthly": "Mensile",
+      "weekly": "Settimanale",
+      "daily": "Giornaliero",
+      "oneTime": "Una tantum",
+      "grossSalePercentage": "% delle vendite lorde",
+      "revenuePercentage": "% dei ricavi",
+      "grossProfitPercentage": "% dell'utile lordo"
+    },
+    "message": {
+      "savedSuccess": "Il costo personalizzato e stato salvato con successo"
+    }
+  },
+  "settings-auto-mail": {
+    "title": "Report email automatico",
+    "template": {
+      "weekly": {
+        "title": "Report settimanale",
+        "description": "Ogni lunedi"
+      },
+      "monthly": {
+        "title": "Report mensile",
+        "description": "Ogni primo giorno del mese"
+      }
+    },
+    "action": {
+      "viewSampleEmail": "Visualizza email di esempio",
+      "testEmail": "Email di test"
+    },
+    "message": {
+      "settingUpdated": "Le impostazioni sono state aggiornate con successo.",
+      "reportSent": "Il report e stato inviato. Controlla la tua email."
+    },
+    "errors": {
+      "unknownEmailType": "Tipo di email sconosciuto:"
+    },
+    "modal": {
+      "common": {
+        "email": "Email",
+        "send": "Invia",
+        "noteLabel": "Nota",
+        "notePrefix": "Assicurati che l'indirizzo email sia corretto per evitare l'invio di",
+        "noteHighlight": "spam o email duplicate"
+      },
+      "weekly": {
+        "title": "Report settimanale",
+        "week": "Settimana"
+      },
+      "monthly": {
+        "title": "Report mensile",
+        "month": "Mese"
+      }
+    }
+  },
+  "settings-general": {
+    "title": "Impostazioni",
+    "cardTitle": "Impostazioni",
+    "planSuffix": "Piano",
+    "section": {
+      "cogsAndHandlingFees": "Costo del venduto (COGS) e costi di gestione",
+      "currencyConverterDisplay": "Visualizzazione convertitore valuta"
+    },
+    "form": {
+      "shopId": "ID negozio",
+      "name": "Nome",
+      "domain": "Dominio",
+      "subscription": "Abbonamento",
+      "owner": "Proprietario",
+      "email": "Email",
+      "timezone": "Fuso orario",
+      "defaultRate": "Tasso predefinito",
+      "source": "Fonte",
+      "handlingFees": "Costi di gestione",
+      "fromShopify": "Da Shopify",
+      "appDisplay": "Visualizzazione app",
+      "rate": "Tasso"
+    },
+    "help": {
+      "timezone": "Questo fuso orario verra usato per calcolare l'intervallo date dei report e di altre funzionalita basate sul tempo.",
+      "defaultRate": "Esempio: il prodotto A e stato rimosso e aveva un prezzo di $100. Con un tasso COGS del 75%, il costo del venduto per quell'articolo nell'ordine originale sarebbe $75.",
+      "source": "Quando i prodotti vengono sincronizzati da Shopify, la fonte COGS verra presa da Shopify o impostata manualmente.",
+      "handlingFees": "Questo e il costo di gestione predefinito per i nuovi prodotti. Potrai modificarlo in seguito nelle impostazioni COGS e costi di gestione.",
+      "fromShopify": "La valuta sincronizzata da Shopify",
+      "appDisplay": "La valuta visualizzata nell'app"
+    },
+    "message": {
+      "savedSuccess": "Le impostazioni sono state salvate."
+    }
+  },
+  "settings-pricing": {
+    "title": "Prezzi e piani"
+  },
+  "settings-fullscreen": {
+    "title": "Visualizza a schermo intero"
+  },
+  "ad-management": {
+    "title": "Gestione annunci"
+  },
+  "ad-connections": {
+    "title": "Connessioni annunci",
+    "channel": {
+      "facebook": "Facebook",
+      "tiktok": "TikTok"
+    },
+    "status": {
+      "syncPending": "Sincronizzazione in attesa",
+      "syncing": "Sincronizzazione in corso",
+      "synced": "Sincronizzato",
+      "syncFailed": "Sincronizzazione fallita",
+      "connected": "Connesso",
+      "disconnected": "Disconnesso",
+      "active": "Attivo",
+      "inactive": "Inattivo"
+    },
+    "table": {
+      "channelAndAdAccounts": "Canale e account annunci",
+      "status": "Stato",
+      "nextSync": "Prossima sincronizzazione",
+      "lastSync": "Ultima sincronizzazione",
+      "expiredAt": "Scade il",
+      "expiredAtExplain": "Per motivi di sicurezza, la connessione scadra e dovrai ricollegarti manualmente.",
+      "attachToCosts": "Collega ai costi",
+      "attachToCostsExplain": "Collega/Scollega gli account annunci ai costi."
+    },
+    "filter": {
+      "search": "Cerca",
+      "searchPlaceholder": "Nome canale, email...",
+      "onlyShowValidAdAccounts": "Mostra solo account annunci validi"
+    },
+    "action": {
+      "addAdConnection": "Aggiungi connessione annunci",
+      "viewDetail": "Visualizza dettaglio",
+      "actions": "Azioni",
+      "sync": "Sincronizza",
+      "syncAdAccounts": "Sincronizza account annunci",
+      "syncInsights": "Sincronizza insight",
+      "reconnect": "Riconnetti",
+      "remove": "Rimuovi"
+    },
+    "modal": {
+      "removeConnection": {
+        "title": "Rimuovi connessione",
+        "content": "Sei sicuro di voler rimuovere questa connessione? Questa azione non puo essere annullata."
+      },
+      "syncAccountInformation": {
+        "title": "Sincronizza informazioni account",
+        "content": "Vuoi sincronizzare tutti i dati e gli insight per gli account annunci?"
+      },
+      "syncAdInsights": {
+        "title": "Sincronizza insight annunci",
+        "content": "Vuoi sincronizzare tutti gli insight per '{name}'?"
+      },
+      "attachToCostTracking": {
+        "title": "Collega al monitoraggio costi"
+      },
+      "detachFromCostTracking": {
+        "title": "Scollega dal monitoraggio costi"
+      },
+      "switchCostTracking": {
+        "content": "Vuoi eseguire questa azione per '{name}'? Influenzerà il monitoraggio costi di questo account annunci."
+      }
+    }
+  },
+  "ad-cost-rules": {
+    "title": "Regole costi annunci",
+    "table": {
+      "adChannel": "Canale annunci",
+      "attachToCosts": "Collega ai costi",
+      "adName": "Nome annuncio",
+      "groupName": "Nome gruppo",
+      "campaignName": "Nome campagna",
+      "accountName": "Nome account",
+      "syncedAt": "Sincronizzato il"
+    },
+    "filter": {
+      "ad": "Annuncio",
+      "group": "Gruppo",
+      "campaign": "Campagna",
+      "adAccount": "Account annunci",
+      "searchByAdName": "Cerca per nome annuncio",
+      "searchByGroupName": "Cerca per nome gruppo",
+      "searchByCampaignName": "Cerca per nome campagna",
+      "searchByAdAccountName": "Cerca per nome account annunci"
+    },
+    "action": {
+      "actions": "Azioni",
+      "sync": "Sincronizza",
+      "syncAdInformation": "Sincronizza informazioni annuncio",
+      "attachAdGroupToCosts": "Collega lo stesso gruppo annunci ai costi",
+      "detachAdGroupFromCosts": "Scollega lo stesso gruppo annunci dai costi",
+      "attachAdCampaignToCosts": "Collega la stessa campagna annunci ai costi",
+      "detachAdCampaignFromCosts": "Scollega la stessa campagna annunci dai costi"
+    },
+    "modal": {
+      "syncAdInformation": {
+        "title": "Sincronizza informazioni annuncio",
+        "content": "Vuoi sincronizzare le informazioni dell'annuncio?"
+      },
+      "attachAdGroupToCosts": {
+        "title": "Collega lo stesso gruppo annunci ai costi",
+        "content": "Vuoi collegare ai costi tutti gli annunci di questo gruppo? Questo abilitera il monitoraggio costi per tutti gli annunci dello stesso gruppo."
+      },
+      "detachAdGroupFromCosts": {
+        "title": "Scollega lo stesso gruppo annunci dai costi",
+        "content": "Vuoi scollegare dai costi tutti gli annunci di questo gruppo?"
+      },
+      "attachAdCampaignToCosts": {
+        "title": "Collega la stessa campagna annunci ai costi",
+        "content": "Vuoi collegare ai costi tutti gli annunci di questa campagna?"
+      },
+      "detachAdCampaignFromCosts": {
+        "title": "Scollega la stessa campagna annunci dai costi",
+        "content": "Vuoi scollegare dai costi tutti gli annunci di questa campagna?"
+      }
+    }
+  },
+  "ad-cost-insights": {
+    "title": "Insight costi annunci",
+    "table": {
+      "adChannel": "Canale annunci",
+      "date": "Data",
+      "adName": "Nome annuncio",
+      "adGroup": "Gruppo annunci",
+      "adCampaign": "Campagna annunci",
+      "adAccount": "Account annunci",
+      "impressions": "Impression",
+      "reach": "Copertura",
+      "clicks": "Clic",
+      "ctr": "CTR",
+      "spendUsd": "Spesa (USD)",
+      "cpcUsd": "CPC (USD)",
+      "cppUsd": "CPP (USD)",
+      "totalItems": "{count} articolo/i"
+    },
+    "filter": {
+      "date": "Data",
+      "ad": "Annuncio",
+      "group": "Gruppo",
+      "campaign": "Campagna",
+      "adAccount": "Account annunci",
+      "searchByAdName": "Cerca per nome annuncio",
+      "searchByGroupName": "Cerca per nome gruppo",
+      "searchByCampaignName": "Cerca per nome campagna",
+      "searchByAdAccountName": "Cerca per nome account annunci"
+    }
+  },
+  "layout": {
+    "profileMenu": {
+      "shopifyStore": "Negozio Shopify",
+      "finilyAppPage": "Pagina app Finily",
+      "shopifyAdminPage": "Pagina admin Shopify"
+    }
+  },
+  "common": {
+    "selectAtLeastOneProduct": "Seleziona almeno un prodotto",
+    "chatWithSupport": "Chatta con il supporto",
+    "confirm": "Si",
+    "cancel": "No",
+    "export": "Esporta",
+    "import": "Importa",
+    "orderStatus": {
+      "authorized": "Autorizzato",
+      "paid": "Pagato",
+      "partiallyPaid": "Parzialmente pagato",
+      "partiallyRefunded": "Parzialmente rimborsato",
+      "pending": "In attesa",
+      "voided": "Annullato"
+    }
+  }
+}
