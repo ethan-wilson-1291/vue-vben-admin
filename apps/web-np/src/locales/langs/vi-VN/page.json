@@ -1,0 +1,795 @@
+{
+  "auth": {
+    "login": "Đăng nhập",
+    "register": "Đăng ký",
+    "codeLogin": "Đăng nhập bằng mã",
+    "qrcodeLogin": "Đăng nhập bằng mã QR",
+    "forgetPassword": "Quên mật khẩu"
+  },
+  "dashboard": {
+    "title": "Bảng điều khiển",
+    "analytics": "Phân tích",
+    "workspace": "Không gian làm việc",
+    "filterOrderStatus": "Trạng thái đơn hàng",
+    "dropdownOrderStatus": "Trạng thái đơn hàng",
+    "compareWith": "So sánh với",
+    "comparedWithValue": "So với {0}",
+    "samePeriod": "Cùng kỳ",
+    "submit": "Gửi",
+    "reviewPromoTitle": "Nhận thêm 45 ngày Pro - chỉ cần chia sẻ đánh giá!",
+    "reviewPromoLine1": "Bạn yêu thích ứng dụng? Hãy giúp người khác biết đến nó bằng cách để lại đánh giá 5 sao.",
+    "reviewPromoLine2": "Sau đó chụp màn hình đánh giá và gửi cho chúng tôi qua khung chat. Chúng tôi sẽ gia hạn dùng thử Pro cho bạn thêm ",
+    "reviewPromoBonus": "45 ngày - hoàn toàn miễn phí",
+    "writeReview": "Viết đánh giá",
+    "upgradeTooltip": "Nâng cấp lên gói Pro để mở khóa tất cả tính năng",
+    "purchasePro": "Mua gói Pro",
+    "profitPerformance": "Hiệu suất lợi nhuận",
+    "viewDetails": "Xem chi tiết",
+    "reloadChart": "Tải lại biểu đồ",
+    "chartGroupDaily": "Ngày",
+    "chartGroupWeekly": "Tuần",
+    "chartGroupMonthly": "Tháng",
+    "adAnalytics": "Phân tích quảng cáo",
+    "costAnalytics": "Phân tích chi phí",
+    "adSummary": "Tổng quan quảng cáo",
+    "costSummary": "Tổng quan chi phí",
+    "orderSummary": "Tổng quan đơn hàng",
+    "mobileSignIn": "Đăng nhập trên di động",
+    "showQrCode": "Hiện mã QR",
+    "qrCodeAlt": "Mã QR",
+    "previousPeriod": "Kỳ trước",
+    "currentPeriod": "Kỳ hiện tại",
+    "avgOrderRevenue": "Doanh thu TB/đơn",
+    "avgOrderRevenueExplain": "Doanh thu TB/đơn = Tổng doanh thu / Tổng đơn hàng",
+    "avgOrderCost": "Chi phí TB/đơn",
+    "avgOrderCostExplain": "Chi phí TB/đơn = Tổng chi phí / Tổng đơn hàng",
+    "totalNetProfit": "Tổng lợi nhuận ròng",
+    "avgOrderProfit": "Lợi nhuận TB/đơn",
+    "avgOrderProfitExplain": "Lợi nhuận TB/đơn = Tổng lợi nhuận ròng / Tổng đơn hàng"
+  },
+  "onboard": {
+    "steps": {
+      "language": "Ngôn ngữ",
+      "cogs": "COGS",
+      "handlingFees": "Phí xử lý",
+      "shippingCosts": "Chi phí vận chuyển",
+      "transactionFees": "Phí giao dịch"
+    },
+    "index": {
+      "welcomePrefix": "Chào mừng đến với",
+      "welcomeSuffix": "!",
+      "subtitle": "Để tính lợi nhuận, chúng tôi cần thông tin chi phí của bạn.",
+      "previous": "Quay lại",
+      "next": "Tiếp theo",
+      "finish": "Hoàn tất",
+      "completedSuccess": "Hoàn tất thiết lập ban đầu thành công"
+    },
+    "common": {
+      "more": "Thêm",
+      "forExample": "Ví dụ",
+      "exampleProduct": "Sản phẩm mẫu",
+      "salePrice": "Giá bán",
+      "quantity": "Số lượng",
+      "item": "sản phẩm",
+      "order": "đơn",
+      "exampleOrder": "Đơn hàng mẫu"
+    },
+    "exampleOrder": {
+      "title": "Đơn hàng mẫu"
+    },
+    "stepLanguage": {
+      "title": "Chọn ngôn ngữ",
+      "description": "Chọn ngôn ngữ bạn muốn sử dụng cho bảng điều khiển."
+    },
+    "stepCogs": {
+      "title": "Giá vốn hàng bán (COGS)",
+      "syncFromShopify": "Đồng bộ từ Shopify",
+      "manual": "Thủ công",
+      "syncDescriptionPrefix": "Hệ thống sẽ tự động đồng bộ giá trị",
+      "costPerItem": "Chi phí mỗi sản phẩm",
+      "syncDescriptionSuffix": "từ Shopify và dùng làm giá trị COGS.",
+      "defaultCogsRate": "Thiết lập tỷ lệ COGS mặc định cho 1 sản phẩm:"
+    },
+    "stepHandlingFees": {
+      "title": "Phí xử lý",
+      "defaultHandlingFee": "Phí xử lý mặc định cho 1 sản phẩm"
+    },
+    "stepShippingFees": {
+      "title": "Chi phí vận chuyển",
+      "description": "là khoản phí để vận chuyển hàng hóa từ nơi này đến nơi khác và sẽ được cộng vào chi phí sản phẩm trong đơn hàng của khách.",
+      "calculateBy": "Chi phí vận chuyển sẽ được tính theo",
+      "defaultShippingCost": "Chi phí vận chuyển mặc định cho 1 đơn vị",
+      "itemQuantity": "Số lượng sản phẩm",
+      "totalWeight": "Tổng khối lượng"
+    },
+    "products": {
+      "tShirt": "Áo thun",
+      "shoes": "Giày"
+    }
+  },
+  "date-presets": {
+    "today": "Hôm nay",
+    "last7Days": "7 ngày gần đây",
+    "last14Days": "14 ngày gần đây",
+    "lastMonth": "1 tháng gần đây",
+    "last2Months": "2 tháng gần đây",
+    "last3Months": "3 tháng gần đây",
+    "last6Months": "6 tháng gần đây",
+    "lastYear": "1 năm gần đây",
+    "previousMonth": "Tháng trước",
+    "thisMonth": "Tháng này",
+    "thisYear": "Năm nay"
+  },
+  "date-range-picker": {
+    "limitHint": "Vui lòng chọn khoảng ngày trong phạm vi tối đa",
+    "exampleFrom": "Ví dụ: Từ",
+    "exampleTo": "đến",
+    "exampleValid": "là khoảng hợp lệ"
+  },
+  "reports-p-and-l": {
+    "title": "Báo cáo P&L",
+    "form": {
+      "groupByDay": "Ngày",
+      "groupByWeek": "Tuần",
+      "groupByMonth": "Tháng",
+      "reportType": "Loại báo cáo",
+      "date": "Ngày",
+      "weekly": "Theo tuần",
+      "month": "Tháng",
+      "paymentStatus": "Trạng thái thanh toán",
+      "orderStatus": "Trạng thái đơn hàng"
+    },
+    "table": {
+      "date": "Ngày",
+      "total": "Tổng",
+      "notAvailable": "Không có"
+    }
+  },
+  "reports-order": {
+    "title": "Báo cáo đơn hàng",
+    "viewDetailsFor": "Xem chi tiết cho {0}",
+    "deleteSelectedOrders": "Xóa {0} đơn hàng",
+    "recalculateCosts": "Tính lại chi phí",
+    "summaryOrders": "{0} đơn hàng",
+    "bulkDeleteModal": {
+      "title": "Xóa đơn hàng đã chọn",
+      "content": "Bạn có chắc chắn muốn xóa các đơn hàng đã chọn không?",
+      "confirm": "Có",
+      "cancel": "Không"
+    },
+    "table": {
+      "orderId": "Mã đơn hàng",
+      "date": "Ngày",
+      "status": "Trạng thái",
+      "currentItems": "Sản phẩm hiện tại",
+      "refundItems": "Sản phẩm hoàn",
+      "totalItems": "Tổng sản phẩm",
+      "weightKg": "Khối lượng (Kg)"
+    },
+    "filter": {
+      "date": "Ngày",
+      "paymentStatus": "Trạng thái thanh toán",
+      "status": "Trạng thái",
+      "orderId": "Mã đơn hàng"
+    },
+    "detailModal": {
+      "title": "Chi tiết",
+      "save": "Lưu",
+      "goToShopifyOrder": "Mở đơn hàng trên Shopify",
+      "name": "Tên",
+      "country": "Quốc gia",
+      "status": "Trạng thái",
+      "processedDate": "Ngày xử lý",
+      "totalQuantity": "Tổng số lượng",
+      "weight": "Khối lượng",
+      "currentQuantity": "Số lượng hiện tại",
+      "refundQuantity": "Số lượng hoàn",
+      "edit": "Chỉnh sửa",
+      "lineItems": "Chi tiết sản phẩm",
+      "product": "Sản phẩm",
+      "price": "Giá",
+      "updateSuccess": "Cập nhật chi phí đơn hàng thành công"
+    },
+    "recalculateModal": {
+      "title": "Tính lại chi phí",
+      "submit": "Gửi",
+      "submitSuccess": "Yêu cầu của bạn đã được gửi thành công. Khi hoàn tất, hệ thống sẽ gửi thông báo.",
+      "date": "Ngày",
+      "cogsHandlingFees": "COGS - Phí xử lý",
+      "shippingCost": "Chi phí vận chuyển",
+      "transactionFees": "Phí giao dịch",
+      "costs": "Chi phí",
+      "noteLabel": "Lưu ý:",
+      "note": "Sau khi gửi yêu cầu tính lại, hệ thống sẽ lên lịch tính lại toàn bộ chi phí liên quan. Khi hoàn tất, hệ thống sẽ gửi thông báo."
+    },
+    "syncModal": {
+      "title": "Đồng bộ Shopify thủ công",
+      "submit": "Gửi",
+      "submitSuccess": "Yêu cầu của bạn đã được gửi thành công. Khi hoàn tất, hệ thống sẽ gửi thông báo.",
+      "date": "Ngày",
+      "noteLabel": "Lưu ý:",
+      "note": "Tất cả đơn hàng được tự động đồng bộ vào ứng dụng. Nếu bạn vẫn muốn đồng bộ thủ công, vui lòng sử dụng biểu mẫu này."
+    }
+  },
+  "reports-product": {
+    "title": "Phân tích sản phẩm",
+    "table": {
+      "name": "Tên",
+      "unitsSold": "Số lượng đã bán",
+      "refund": "Hoàn"
+    },
+    "filter": {
+      "date": "Ngày",
+      "products": "Sản phẩm"
+    }
+  },
+  "reports-customer": {
+    "title": "Phân tích khách hàng",
+    "newCustomersCount": "{0} khách hàng",
+    "filter": {
+      "month": "Tháng"
+    },
+    "table": {
+      "firstPurchaseIn": "Mua đầu tiên vào",
+      "totalRevenue": "Tổng doanh thu",
+      "nthMonth": "Tháng thứ {0}{1}"
+    },
+    "cards": {
+      "newCustomers": "Khách hàng mới",
+      "repurchaseRate": "Tỷ lệ mua lại",
+      "repurchaseRateExplain": "Tỷ lệ mua lại = (Khách mua lại / Khách mới) * 100",
+      "newCustomerRevenue": "Doanh thu từ khách mới",
+      "newCustomerRevenueExplain": "Tổng doanh thu từ nhóm khách hàng mới"
+    }
+  },
+  "settings-cogs": {
+    "title": "COGS và Phí xử lý",
+    "table": {
+      "name": "Tên",
+      "status": "Trạng thái",
+      "feeLevel": "Cấp phí",
+      "cogsSource": "Nguồn COGS",
+      "sellingPrice": "Giá bán",
+      "margin": "Biên lợi nhuận"
+    },
+    "common": {
+      "note": "Lưu ý:",
+      "from": "Từ",
+      "to": "Đến",
+      "price": "Giá",
+      "selectDate": "Chọn ngày",
+      "ongoing": "Đang diễn ra"
+    },
+    "tooltip": {
+      "feeLevel": "Nếu tính chi phí theo sản phẩm, chi phí của sản phẩm sẽ áp dụng cho tất cả biến thể. Nếu tính theo biến thể, mỗi biến thể sẽ có chi phí riêng.",
+      "cogsSource": "Nguồn COGS cho biết dữ liệu COGS đến từ đâu. Có thể nhập thủ công hoặc đồng bộ từ Shopify...",
+      "margin": "Biên lợi nhuận = (Giá bán - COGS - Phí xử lý) / Giá bán",
+      "cogsHistory": "Đặt COGS theo mốc thời gian lịch sử"
+    },
+    "help": {
+      "cogsSource": "Khi đồng bộ sản phẩm từ Shopify, nguồn COGS sẽ được lấy từ Shopify hoặc đặt thủ công."
+    },
+    "filter": {
+      "zone": "Vùng",
+      "id": "ID",
+      "name": "Tên",
+      "status": "Trạng thái",
+      "searchProductId": "Tìm theo ID sản phẩm",
+      "searchProductName": "Tìm theo tên sản phẩm",
+      "selectStatus": "Chọn trạng thái"
+    },
+    "status": {
+      "active": "Đang hoạt động",
+      "draft": "Bản nháp",
+      "archived": "Lưu trữ"
+    },
+    "option": {
+      "product": "Sản phẩm",
+      "variant": "Biến thể",
+      "manual": "Thủ công",
+      "shopify": "Shopify"
+    },
+    "message": {
+      "requestProcessed": "Yêu cầu đã được xử lý thành công.",
+      "pleaseRecalculate": "Vui lòng tính lại chi phí sau khi cập nhật.",
+      "bulkCogsUpdated": "Cập nhật hàng loạt COGS thành công.",
+      "bulkFeeLevelUpdated": "Cập nhật hàng loạt cấp phí thành công.",
+      "bulkHandlingFeeUpdated": "Cập nhật hàng loạt phí xử lý thành công.",
+      "bulkCogsSourceUpdated": "Cập nhật hàng loạt nguồn COGS thành công.",
+      "cogsUpdated": "Cập nhật giá vốn hàng bán thành công.",
+      "importUploaded": "Tệp đã tải lên thành công và đang được xử lý.",
+      "zoneUpdated": "Cập nhật vùng thành công.",
+      "recalculateSubmitted": "Yêu cầu của bạn đã được gửi thành công. Khi hoàn tất, hệ thống sẽ gửi thông báo.",
+      "appliesToAllVariants": "Áp dụng cho tất cả {0} biến thể",
+      "fileNotCsv": "{0} không phải tệp CSV"
+    },
+    "confirm": {
+      "exportTitle": "Xuất tất cả phí từ vùng {0}",
+      "exportContent": "Trong khi xử lý tệp tải xuống, bạn vẫn có thể tiếp tục sử dụng ứng dụng. Tệp sẽ tự động tải xuống khi hoàn tất."
+    },
+    "bulkAction": {
+      "productsVariants": "Thao tác hàng loạt cho {0} sản phẩm, {1} biến thể",
+      "products": "Thao tác hàng loạt cho {0} sản phẩm",
+      "variants": "Thao tác hàng loạt cho {0} biến thể"
+    },
+    "modal": {
+      "bulkCogs": {
+        "title": "Thao tác hàng loạt - Cập nhật COGS cho nguồn COGS thủ công",
+        "notePrefix": "Tính năng này chỉ ảnh hưởng đến các mục có",
+        "manualCogsSource": "Nguồn COGS thủ công",
+        "noteSuffix": ". Vui lòng tính lại chi phí sau khi cập nhật COGS."
+      },
+      "bulkFeeLevel": {
+        "title": "Thao tác hàng loạt - Cập nhật cấp phí",
+        "note": "Vui lòng tính lại chi phí sau khi cập nhật cấp phí."
+      },
+      "bulkHandlingFees": {
+        "title": "Thao tác hàng loạt - Cập nhật phí xử lý",
+        "note": "Vui lòng tính lại chi phí sau khi cập nhật phí xử lý."
+      },
+      "bulkCogsSource": {
+        "title": "Thao tác hàng loạt - Cập nhật nguồn COGS",
+        "note": "Vui lòng tính lại chi phí sau khi cập nhật nguồn COGS."
+      },
+      "cogsHistory": {
+        "title": "Giá vốn hàng bán",
+        "variant": "Biến thể - {0}"
+      },
+      "importProducts": {
+        "title": "Nhập sản phẩm",
+        "note": "Sau khi tải tệp, hệ thống sẽ xử lý dữ liệu và cập nhật phí trong hệ thống. Vui lòng đảm bảo tệp chính xác trước khi tải lên."
+      },
+      "products": {
+        "addTitle": "Thêm sản phẩm",
+        "removeTitle": "Xóa sản phẩm",
+        "labelProducts": "Sản phẩm",
+        "allProducts": "Tất cả sản phẩm"
+      },
+      "recalculate": {
+        "title": "Tính lại COGS - Phí xử lý",
+        "resultHintPrefix": "Để xem kết quả, vui lòng vào trang",
+        "resultHintSuffix": "."
+      }
+    },
+    "action": {
+      "newZone": "Vùng mới",
+      "addZone": "Vùng mới",
+      "submit": "Gửi",
+      "add": "Thêm",
+      "remove": "Xóa",
+      "updateFeeLevel": "Cập nhật cấp phí",
+      "updateCogsSource": "Cập nhật nguồn COGS",
+      "updateCogs": "Cập nhật COGS",
+      "updateHandlingFees": "Cập nhật phí xử lý",
+      "viewDetail": "Xem chi tiết",
+      "viewOrderReport": "Xem báo cáo đơn hàng",
+      "chooseCsv": "Chọn tệp *.csv để nhập"
+    }
+  },
+  "settings-transaction-fees": {
+    "title": "Phí giao dịch",
+    "onboard": {
+      "paymentGateways": "Cổng thanh toán",
+      "fixedFees": "Phí cố định",
+      "percentageFees": "Phí theo tỷ lệ",
+      "shopifyExternalFees": "Phí bên ngoài Shopify",
+      "formula": "* Phí giao dịch = Phí cố định + [Thanh toán ròng * (Phí theo tỷ lệ + Phí bên ngoài Shopify) / 100]",
+      "exampleOrder": "Đơn hàng ví dụ",
+      "other": "Khác"
+    },
+    "common": {
+      "note": "Lưu ý:"
+    },
+    "action": {
+      "submit": "Gửi",
+      "reset": "Đặt lại",
+      "recalculateCosts": "Tính lại chi phí",
+      "viewOrderReport": "Xem báo cáo đơn hàng"
+    },
+    "message": {
+      "updated": "Cập nhật phí giao dịch thành công",
+      "recalculateSubmitted": "Yêu cầu của bạn đã được gửi thành công. Khi hoàn tất, hệ thống sẽ gửi thông báo."
+    },
+    "modal": {
+      "recalculate": {
+        "title": "Tính lại phí giao dịch",
+        "date": "Ngày",
+        "resultHintPrefix": "Để xem kết quả, vui lòng vào trang",
+        "resultHintSuffix": "."
+      }
+    }
+  },
+  "settings-shipping-fees": {
+    "title": "Vùng và Vận chuyển",
+    "tableTitle": "Vùng - Phí vận chuyển",
+    "table": {
+      "name": "Tên",
+      "shippingCostBy": "Tính phí vận chuyển theo",
+      "shippingCostByExplain": "Phí vận chuyển sẽ được tính dựa trên khối lượng hoặc số lượng sản phẩm trong giỏ hàng.",
+      "shippingCost": "Phí vận chuyển",
+      "countries": "Quốc gia",
+      "allCountries": "Tất cả quốc gia",
+      "action": "Thao tác"
+    },
+    "action": {
+      "recalculateCosts": "Tính lại chi phí",
+      "addZone": "Thêm vùng"
+    },
+    "deleteModal": {
+      "title": "Xóa vùng",
+      "content": "Bạn có chắc chắn muốn xóa vùng này không? Toàn bộ COGS, phí xử lý và phí vận chuyển sẽ bị xóa. Chi phí sẽ được tính lại dựa trên vùng toàn cầu và thao tác này không thể hoàn tác."
+    },
+    "level": {
+      "quantity": "Số lượng",
+      "weight": "Khối lượng",
+      "order": "Đơn hàng"
+    },
+    "unit": {
+      "kg": "kg",
+      "items": "sản phẩm",
+      "order": "đơn"
+    },
+    "form": {
+      "name": "Tên",
+      "shippingCostBy": "Tính phí vận chuyển theo",
+      "shippingCost": "Phí vận chuyển",
+      "countries": "Quốc gia",
+      "selectAtLeastOneCountry": "Chọn ít nhất một quốc gia"
+    },
+    "modal": {
+      "formTitle": "Vùng - Phí vận chuyển",
+      "recalculate": {
+        "title": "Tính lại phí vận chuyển"
+      }
+    },
+    "common": {
+      "example": "Ví dụ:"
+    },
+    "example": {
+      "base": "Đơn hàng A có 2 sản phẩm với tổng khối lượng 1.5kg",
+      "weightPrefix": "Nếu đặt chi phí là ",
+      "weightRate": "$5 cho mỗi 1kg (theo khối lượng)",
+      "weightMiddle": ", tổng phí vận chuyển của đơn hàng A sẽ là ",
+      "weightResult": "$7.5",
+      "weightSuffix": " (1.5 x $5)",
+      "quantityPrefix": "Nếu đặt chi phí là ",
+      "quantityRate": "$3 cho mỗi 1 sản phẩm (theo số lượng)",
+      "quantityMiddle": ", tổng phí vận chuyển của đơn hàng A sẽ là ",
+      "quantityResult": "$6",
+      "quantitySuffix": " (2 x $3)",
+      "orderPrefix": "Nếu đặt chi phí là ",
+      "orderRate": "$1 cho mỗi 1 đơn",
+      "orderMiddle": ", tổng phí vận chuyển của đơn hàng A sẽ là ",
+      "orderResult": "$1"
+    }
+  },
+  "settings-custom-costs": {
+    "title": "Chi phí tùy chỉnh/Thuế",
+    "tableTitle": "Chi phí tùy chỉnh/Thuế",
+    "action": {
+      "addCustomCost": "Thêm chi phí tùy chỉnh"
+    },
+    "deleteModal": {
+      "title": "Xóa chi phí tùy chỉnh",
+      "content": "Bạn có chắc chắn muốn xóa chi phí tùy chỉnh này không?"
+    },
+    "table": {
+      "name": "Tên",
+      "startDate": "Ngày bắt đầu",
+      "endDate": "Ngày kết thúc",
+      "onGoing": "Đang diễn ra",
+      "type": "Loại",
+      "dailyCost": "Chi phí mỗi ngày",
+      "note": "Ghi chú",
+      "action": "Thao tác"
+    },
+    "filter": {
+      "name": "Tên",
+      "date": "Ngày",
+      "type": "Loại",
+      "searchByCostName": "Tìm theo tên chi phí",
+      "selectCostType": "Chọn loại chi phí"
+    },
+    "form": {
+      "title": "Chi phí tùy chỉnh",
+      "submit": "Gửi",
+      "name": "Tên",
+      "namePlaceholder": "Thuế, tiền thuê mặt bằng, nhân viên, quảng cáo...",
+      "type": "Loại",
+      "amount": "Số tiền",
+      "dailyCost": "Chi phí mỗi ngày",
+      "grossSaleRate": "% trên tổng doanh thu",
+      "revenueRate": "% trên doanh thu",
+      "grossProfitRate": "% trên lợi nhuận gộp",
+      "startDate": "Ngày bắt đầu",
+      "endDate": "Ngày kết thúc",
+      "note": "Ghi chú",
+      "show": "Hiện",
+      "hide": "Ẩn",
+      "example": "ví dụ",
+      "endDatePresets": {
+        "onGoing": "Đang diễn ra",
+        "next30Days": "30 ngày tới",
+        "next7Days": "7 ngày tới"
+      }
+    },
+    "example": {
+      "exampleDate": "Ngày ví dụ",
+      "grossSale": "Tổng doanh thu",
+      "revenue": "Doanh thu",
+      "grossProfit": "Lợi nhuận gộp",
+      "dailyCost": "Chi phí mỗi ngày",
+      "netProfit": "Lợi nhuận ròng",
+      "date1": "Ngày 1",
+      "date2": "Ngày 2"
+    },
+    "typeOptions": {
+      "monthly": "Theo tháng",
+      "weekly": "Theo tuần",
+      "daily": "Theo ngày",
+      "oneTime": "Một lần",
+      "grossSalePercentage": "% của tổng doanh thu",
+      "revenuePercentage": "% của doanh thu",
+      "grossProfitPercentage": "% của lợi nhuận gộp"
+    },
+    "message": {
+      "savedSuccess": "Đã lưu chi phí tùy chỉnh thành công"
+    }
+  },
+  "settings-auto-mail": {
+    "title": "Báo cáo email tự động",
+    "template": {
+      "weekly": {
+        "title": "Báo cáo tuần",
+        "description": "Mỗi thứ Hai"
+      },
+      "monthly": {
+        "title": "Báo cáo tháng",
+        "description": "Ngày đầu tiên mỗi tháng"
+      }
+    },
+    "action": {
+      "viewSampleEmail": "Xem email mẫu",
+      "testEmail": "Gửi email thử"
+    },
+    "message": {
+      "settingUpdated": "Đã cập nhật cài đặt thành công.",
+      "reportSent": "Báo cáo đã được gửi. Vui lòng kiểm tra email."
+    },
+    "errors": {
+      "unknownEmailType": "Loại email không xác định:"
+    },
+    "modal": {
+      "common": {
+        "email": "Email",
+        "send": "Gửi",
+        "noteLabel": "Lưu ý",
+        "notePrefix": "Vui lòng đảm bảo địa chỉ email chính xác để tránh gửi",
+        "noteHighlight": "email rác hoặc email trùng lặp"
+      },
+      "weekly": {
+        "title": "Báo cáo tuần",
+        "week": "Tuần"
+      },
+      "monthly": {
+        "title": "Báo cáo tháng",
+        "month": "Tháng"
+      }
+    }
+  },
+  "settings-general": {
+    "title": "Cài đặt",
+    "cardTitle": "Cài đặt",
+    "planSuffix": "Gói",
+    "section": {
+      "cogsAndHandlingFees": "Giá vốn hàng bán (COGS) và Phí xử lý",
+      "currencyConverterDisplay": "Hiển thị quy đổi tiền tệ"
+    },
+    "form": {
+      "shopId": "ID cửa hàng",
+      "name": "Tên",
+      "domain": "Tên miền",
+      "subscription": "Gói đăng ký",
+      "owner": "Chủ sở hữu",
+      "email": "Email",
+      "timezone": "Múi giờ",
+      "defaultRate": "Tỷ lệ mặc định",
+      "source": "Nguồn",
+      "handlingFees": "Phí xử lý",
+      "fromShopify": "Từ Shopify",
+      "appDisplay": "Hiển thị trong ứng dụng",
+      "rate": "Tỷ giá"
+    },
+    "help": {
+      "timezone": "Múi giờ này sẽ được dùng để tính khoảng thời gian cho báo cáo và các tính năng liên quan đến thời gian.",
+      "defaultRate": "Ví dụ: Sản phẩm A đã bị xóa và có giá $100. Nếu tỷ lệ COGS là 75%, giá vốn cho mặt hàng đó trong đơn gốc sẽ là $75.",
+      "source": "Khi đồng bộ sản phẩm từ Shopify, nguồn COGS sẽ được lấy từ Shopify hoặc đặt thủ công.",
+      "handlingFees": "Đây là phí xử lý mặc định cho sản phẩm mới. Bạn có thể thay đổi sau trong cài đặt COGS và Phí xử lý.",
+      "fromShopify": "Loại tiền tệ đồng bộ từ Shopify",
+      "appDisplay": "Loại tiền tệ hiển thị trong ứng dụng"
+    },
+    "message": {
+      "savedSuccess": "Đã lưu cài đặt thành công."
+    }
+  },
+  "settings-pricing": {
+    "title": "Bảng giá và Gói"
+  },
+  "settings-fullscreen": {
+    "title": "Xem toàn màn hình"
+  },
+  "ad-management": {
+    "title": "Quản lý quảng cáo"
+  },
+  "ad-connections": {
+    "title": "Kết nối quảng cáo",
+    "channel": {
+      "facebook": "Facebook",
+      "tiktok": "TikTok"
+    },
+    "status": {
+      "syncPending": "Chờ đồng bộ",
+      "syncing": "Đang đồng bộ",
+      "synced": "Đã đồng bộ",
+      "syncFailed": "Đồng bộ thất bại",
+      "connected": "Đã kết nối",
+      "disconnected": "Đã ngắt kết nối",
+      "active": "Đang hoạt động",
+      "inactive": "Không hoạt động"
+    },
+    "table": {
+      "channelAndAdAccounts": "Kênh và tài khoản quảng cáo",
+      "status": "Trạng thái",
+      "nextSync": "Lần đồng bộ tiếp theo",
+      "lastSync": "Lần đồng bộ gần nhất",
+      "expiredAt": "Hết hạn lúc",
+      "expiredAtExplain": "Vì lý do bảo mật, kết nối sẽ hết hạn và bạn cần kết nối lại thủ công.",
+      "attachToCosts": "Gắn vào chi phí",
+      "attachToCostsExplain": "Gắn/bỏ gắn các tài khoản quảng cáo vào chi phí."
+    },
+    "filter": {
+      "search": "Tìm kiếm",
+      "searchPlaceholder": "Tên kênh, email...",
+      "onlyShowValidAdAccounts": "Chỉ hiển thị tài khoản quảng cáo hợp lệ"
+    },
+    "action": {
+      "addAdConnection": "Thêm kết nối quảng cáo",
+      "viewDetail": "Xem chi tiết",
+      "actions": "Thao tác",
+      "sync": "Đồng bộ",
+      "syncAdAccounts": "Đồng bộ tài khoản quảng cáo",
+      "syncInsights": "Đồng bộ chỉ số",
+      "reconnect": "Kết nối lại",
+      "remove": "Xóa"
+    },
+    "modal": {
+      "removeConnection": {
+        "title": "Xóa kết nối",
+        "content": "Bạn có chắc chắn muốn xóa kết nối này không? Hành động này không thể hoàn tác."
+      },
+      "syncAccountInformation": {
+        "title": "Đồng bộ thông tin tài khoản",
+        "content": "Bạn có muốn đồng bộ toàn bộ dữ liệu và chỉ số của tài khoản quảng cáo không?"
+      },
+      "syncAdInsights": {
+        "title": "Đồng bộ chỉ số quảng cáo",
+        "content": "Bạn có muốn đồng bộ tất cả chỉ số cho '{name}' không?"
+      },
+      "attachToCostTracking": {
+        "title": "Gắn vào theo dõi chi phí"
+      },
+      "detachFromCostTracking": {
+        "title": "Gỡ khỏi theo dõi chi phí"
+      },
+      "switchCostTracking": {
+        "content": "Bạn có muốn thực hiện hành động này cho '{name}' không? Việc này sẽ ảnh hưởng đến theo dõi chi phí của tài khoản quảng cáo này."
+      }
+    }
+  },
+  "ad-cost-rules": {
+    "title": "Quy tắc chi phí quảng cáo",
+    "table": {
+      "adChannel": "Kênh quảng cáo",
+      "attachToCosts": "Gắn vào chi phí",
+      "adName": "Tên quảng cáo",
+      "groupName": "Tên nhóm",
+      "campaignName": "Tên chiến dịch",
+      "accountName": "Tên tài khoản",
+      "syncedAt": "Đã đồng bộ lúc"
+    },
+    "filter": {
+      "ad": "Quảng cáo",
+      "group": "Nhóm",
+      "campaign": "Chiến dịch",
+      "adAccount": "Tài khoản quảng cáo",
+      "searchByAdName": "Tìm theo tên quảng cáo",
+      "searchByGroupName": "Tìm theo tên nhóm",
+      "searchByCampaignName": "Tìm theo tên chiến dịch",
+      "searchByAdAccountName": "Tìm theo tên tài khoản quảng cáo"
+    },
+    "action": {
+      "actions": "Thao tác",
+      "sync": "Đồng bộ",
+      "syncAdInformation": "Đồng bộ thông tin quảng cáo",
+      "attachAdGroupToCosts": "Gắn cùng nhóm quảng cáo vào chi phí",
+      "detachAdGroupFromCosts": "Gỡ cùng nhóm quảng cáo khỏi chi phí",
+      "attachAdCampaignToCosts": "Gắn cùng chiến dịch quảng cáo vào chi phí",
+      "detachAdCampaignFromCosts": "Gỡ cùng chiến dịch quảng cáo khỏi chi phí"
+    },
+    "modal": {
+      "syncAdInformation": {
+        "title": "Đồng bộ thông tin quảng cáo",
+        "content": "Bạn có muốn đồng bộ thông tin quảng cáo không?"
+      },
+      "attachAdGroupToCosts": {
+        "title": "Gắn cùng nhóm quảng cáo vào chi phí",
+        "content": "Bạn có muốn gắn tất cả quảng cáo trong nhóm này vào chi phí không? Điều này sẽ bật theo dõi chi phí cho toàn bộ quảng cáo trong nhóm."
+      },
+      "detachAdGroupFromCosts": {
+        "title": "Gỡ cùng nhóm quảng cáo khỏi chi phí",
+        "content": "Bạn có muốn gỡ tất cả quảng cáo trong nhóm này khỏi chi phí không?"
+      },
+      "attachAdCampaignToCosts": {
+        "title": "Gắn cùng chiến dịch quảng cáo vào chi phí",
+        "content": "Bạn có muốn gắn tất cả quảng cáo trong chiến dịch này vào chi phí không?"
+      },
+      "detachAdCampaignFromCosts": {
+        "title": "Gỡ cùng chiến dịch quảng cáo khỏi chi phí",
+        "content": "Bạn có muốn gỡ tất cả quảng cáo trong chiến dịch này khỏi chi phí không?"
+      }
+    }
+  },
+  "ad-cost-insights": {
+    "title": "Chỉ số chi phí quảng cáo",
+    "table": {
+      "adChannel": "Kênh quảng cáo",
+      "date": "Ngày",
+      "adName": "Tên quảng cáo",
+      "adGroup": "Nhóm quảng cáo",
+      "adCampaign": "Chiến dịch quảng cáo",
+      "adAccount": "Tài khoản quảng cáo",
+      "impressions": "Lượt hiển thị",
+      "reach": "Lượt tiếp cận",
+      "clicks": "Lượt nhấp",
+      "ctr": "CTR",
+      "spendUsd": "Chi tiêu (USD)",
+      "cpcUsd": "CPC (USD)",
+      "cppUsd": "CPP (USD)",
+      "totalItems": "{count} mục"
+    },
+    "filter": {
+      "date": "Ngày",
+      "ad": "Quảng cáo",
+      "group": "Nhóm",
+      "campaign": "Chiến dịch",
+      "adAccount": "Tài khoản quảng cáo",
+      "searchByAdName": "Tìm theo tên quảng cáo",
+      "searchByGroupName": "Tìm theo tên nhóm",
+      "searchByCampaignName": "Tìm theo tên chiến dịch",
+      "searchByAdAccountName": "Tìm theo tên tài khoản quảng cáo"
+    }
+  },
+  "layout": {
+    "profileMenu": {
+      "shopifyStore": "Cửa hàng Shopify",
+      "finilyAppPage": "Trang ứng dụng Finily",
+      "shopifyAdminPage": "Trang quản trị Shopify"
+    }
+  },
+  "common": {
+    "selectAtLeastOneProduct": "Chọn ít nhất một sản phẩm",
+    "chatWithSupport": "Trò chuyện với hỗ trợ",
+    "confirm": "Có",
+    "cancel": "Không",
+    "export": "Xuất",
+    "import": "Nhập",
+    "orderStatus": {
+      "authorized": "Đã ủy quyền",
+      "paid": "Đã thanh toán",
+      "partiallyPaid": "Thanh toán một phần",
+      "partiallyRefunded": "Hoàn tiền một phần",
+      "pending": "Đang chờ",
+      "voided": "Đã hủy"
+    }
+  }
+}

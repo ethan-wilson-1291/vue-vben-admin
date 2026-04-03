@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 
+import { $t } from '@vben/locales';
+
 import { Card, Divider } from 'ant-design-vue';
 
 import { formatMoney } from '#/shared/utils';
@@ -20,9 +22,9 @@ const totalCost = computed(() => {
 </script>
 
 <template>
-  <Card title="Example Order" class="min-w-56">
+  <Card :title="$t('page.onboard.exampleOrder.title')" class="min-w-56">
     <div class="mb-2 flex justify-between font-bold">
-      <div>Net payment</div>
+      <div>{{ $t('field-name.netPayment') }}</div>
       <div>
         {{ formatMoney(sampleOrder.grossSales, shopStore.shop.currency) }}
       </div>
@@ -31,22 +33,22 @@ const totalCost = computed(() => {
     <Divider class="!my-1" />
 
     <div class="text-md mb-1 flex justify-between font-bold">
-      <div>Total costs</div>
+      <div>{{ $t('field-name.totalCosts') }}</div>
       <div>
         {{ formatMoney(totalCost, shopStore.shop.currency) }}
       </div>
     </div>
     <div class="flex justify-between text-xs">
-      <div class="before:text-foreground mb-1 before:mr-1 before:content-['•']">
-        Total COGS
+      <div class="mb-1 before:mr-1 before:text-foreground before:content-['•']">
+        {{ $t('field-name.cogs') }}
       </div>
       <div>
         {{ formatMoney(sampleOrder.totalCogs, shopStore.shop.currency) }}
       </div>
     </div>
     <div class="flex justify-between text-xs">
-      <div class="before:text-foreground mb-1 before:mr-1 before:content-['•']">
-        Handling fees
+      <div class="mb-1 before:mr-1 before:text-foreground before:content-['•']">
+        {{ $t('field-name.handlingFees') }}
       </div>
       <div>
         {{
@@ -55,16 +57,16 @@ const totalCost = computed(() => {
       </div>
     </div>
     <div class="flex justify-between text-xs">
-      <div class="before:text-foreground mb-1 before:mr-1 before:content-['•']">
-        Shipping costs
+      <div class="mb-1 before:mr-1 before:text-foreground before:content-['•']">
+        {{ $t('field-name.shippingCosts') }}
       </div>
       <div>
         {{ formatMoney(sampleOrder.shippingFees, shopStore.shop.currency) }}
       </div>
     </div>
     <div class="flex justify-between text-xs">
-      <div class="before:text-foreground mb-1 before:mr-1 before:content-['•']">
-        Transaction fees
+      <div class="mb-1 before:mr-1 before:text-foreground before:content-['•']">
+        {{ $t('field-name.transactionFees') }}
       </div>
       <div>
         {{ formatMoney(sampleOrder.transactionFees, shopStore.shop.currency) }}
@@ -74,7 +76,7 @@ const totalCost = computed(() => {
     <Divider class="!my-1" />
 
     <div class="text-md mt-2 flex justify-between font-bold">
-      <div>Gross profit</div>
+      <div>{{ $t('field-name.grossProfit') }}</div>
       <div>
         {{
           formatMoney(

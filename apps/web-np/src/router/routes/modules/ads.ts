@@ -1,10 +1,12 @@
 import type { RouteRecordRaw } from 'vue-router';
 
+import { $t } from '#/locales';
+
 const routes: RouteRecordRaw[] = [
   {
     meta: {
       icon: 'mdi:ads',
-      title: 'Ad Management',
+      title: $t('page.ad-management.title'),
       order: 90,
     },
     name: 'ads',
@@ -12,7 +14,7 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         meta: {
-          title: 'Ad Connections',
+          title: $t('page.ad-connections.title'),
           icon: 'ant-design:link-outlined',
         },
         name: 'ads.accounts',
@@ -21,7 +23,7 @@ const routes: RouteRecordRaw[] = [
       },
       {
         meta: {
-          title: 'Ad Cost Rules',
+          title: $t('page.ad-cost-rules.title'),
           icon: 'ant-design:tags-twotone',
         },
         name: 'ads.costs',
@@ -30,7 +32,7 @@ const routes: RouteRecordRaw[] = [
       },
       {
         meta: {
-          title: 'Ad Cost Insights',
+          title: $t('page.ad-cost-insights.title'),
           order: 20,
           icon: 'clarity:analytics-outline-badged',
         },

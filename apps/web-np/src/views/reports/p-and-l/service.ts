@@ -1,6 +1,7 @@
 import type { ExtendedVxeGridApi } from 'node_modules/@vben/plugins/src/vxe-table/types';
 import type { VxeGridPropTypes } from 'vxe-table';
 
+import { $t } from '#/locales';
 import { adType } from '#/shared/constants';
 import dayjs from '#/shared/dayjs';
 
@@ -56,7 +57,7 @@ export const createTotalRow = (dataItems: any) => {
     return acc;
   }, {});
 
-  totalRow.date = 'Total';
+  totalRow.date = $t('page.reports-p-and-l.table.total');
 
   return totalRow;
 };
@@ -67,7 +68,7 @@ export const generateDateColumns = (
 ) => {
   const ymCols: VxeGridPropTypes.Columns = [
     {
-      title: 'Date',
+      title: $t('page.reports-p-and-l.table.date'),
       field: 'id',
       slots: { default: 'id' },
       width: 200,
@@ -117,7 +118,7 @@ export const transformDataRowToColumn = (data: any[], costName: any): any[] => {
       obj.parentId = 'totalCustomCost';
 
       const costId: any = key.split('_')[1];
-      obj.costName = 'N/A';
+      obj.costName = $t('page.reports-p-and-l.table.notAvailable');
 
       if (costName[costId]) {
         obj.costName = costName[costId];
@@ -129,7 +130,7 @@ export const transformDataRowToColumn = (data: any[], costName: any): any[] => {
       obj.parentId = 'totalAdSpend';
 
       const adChannel: any = key.split('_')[1];
-      obj.costName = 'N/A';
+      obj.costName = $t('page.reports-p-and-l.table.notAvailable');
 
       adType.forEach((type: any) => {
         if (type.value === adChannel) {

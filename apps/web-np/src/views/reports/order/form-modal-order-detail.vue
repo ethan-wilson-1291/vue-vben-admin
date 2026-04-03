@@ -41,25 +41,25 @@ const [Grid] = useVbenVxeGrid({
     columns: [
       {
         field: 'productTitle',
-        title: 'Product',
+        title: $t('page.reports-order.detailModal.product'),
         minWidth: 200,
         align: 'left',
         slots: { default: 'name' },
       },
       {
         field: 'quantityCurrent',
-        title: 'Current Quantity',
+        title: $t('page.reports-order.detailModal.currentQuantity'),
         minWidth: 150,
       },
       {
         field: 'quantityRefund',
-        title: 'Refund Quantity',
+        title: $t('page.reports-order.detailModal.refundQuantity'),
         minWidth: 150,
       },
       {
         cellRender: { name: 'cellMoney' },
         field: 'pricePerUnit',
-        title: 'Price',
+        title: $t('page.reports-order.detailModal.price'),
         minWidth: 200,
         align: 'right',
       },
@@ -135,7 +135,7 @@ const [Modal, modalApi] = useVbenModal({
       shippingCosts: state.order.shippingCosts,
     })
       .then(() => {
-        message.success('Order costs updated successfully');
+        message.success($t('page.reports-order.detailModal.updateSuccess'));
       })
       .finally(() => {
         modalApi.setData({ reload: true });
@@ -162,7 +162,11 @@ const calcGrossProfit = () => {
 };
 </script>
 <template>
-  <Modal class="w-[1024px]" title="Details" confirm-text="Save">
+  <Modal
+    class="w-[1024px]"
+    :title="$t('page.reports-order.detailModal.title')"
+    :confirm-text="$t('page.reports-order.detailModal.save')"
+  >
     <template #prepend-footer>
       <div class="flex-auto">
         <Button
@@ -170,34 +174,45 @@ const calcGrossProfit = () => {
           type="dashed"
           size="small"
         >
-          Go to Shopify Order
+          {{ $t('page.reports-order.detailModal.goToShopifyOrder') }}
         </Button>
       </div>
     </template>
 
     <Descriptions class="mx-2" size="small" bordered :column="2">
-      <DescriptionsItem label="Name" class="font-bold">
+      <DescriptionsItem
+        :label="$t('page.reports-order.detailModal.name')"
+        class="font-bold"
+      >
         {{ state.order.name }}
       </DescriptionsItem>
-      <DescriptionsItem label="Country">
+      <DescriptionsItem :label="$t('page.reports-order.detailModal.country')">
         {{ getCountryName(state.order.countryCode) }}
       </DescriptionsItem>
-      <DescriptionsItem label="Status">
+      <DescriptionsItem :label="$t('page.reports-order.detailModal.status')">
         {{ formatTitle(state.order.financialStatus) }}
       </DescriptionsItem>
-      <DescriptionsItem label="Processed Date">
+      <DescriptionsItem
+        :label="$t('page.reports-order.detailModal.processedDate')"
+      >
         {{ formatReportDate(state.order.processedAt) }}
       </DescriptionsItem>
-      <DescriptionsItem label="Total Quantity">
+      <DescriptionsItem
+        :label="$t('page.reports-order.detailModal.totalQuantity')"
+      >
         {{ state.order.quantityTotal }}
       </DescriptionsItem>
-      <DescriptionsItem label="Weight">
+      <DescriptionsItem :label="$t('page.reports-order.detailModal.weight')">
         {{ state.order.weight }} Kg
       </DescriptionsItem>
-      <DescriptionsItem label="Current Quantity">
+      <DescriptionsItem
+        :label="$t('page.reports-order.detailModal.currentQuantity')"
+      >
         {{ state.order.quantityCurrent }}
       </DescriptionsItem>
-      <DescriptionsItem label="Refund Quantity">
+      <DescriptionsItem
+        :label="$t('page.reports-order.detailModal.refundQuantity')"
+      >
         {{ state.order.quantityRefund }}
       </DescriptionsItem>
       <DescriptionsItem
@@ -259,7 +274,7 @@ const calcGrossProfit = () => {
           <InputNumber
             :min="0"
             :addon-after="shopStore.shop.currency"
-            addon-before="Edit"
+            :addon-before="$t('page.reports-order.detailModal.edit')"
             v-model:value="state.order.cogs"
             class="max-w-300 min-w-20"
             size="small"
@@ -281,7 +296,7 @@ const calcGrossProfit = () => {
           <InputNumber
             :min="0"
             :addon-after="shopStore.shop.currency"
-            addon-before="Edit"
+            :addon-before="$t('page.reports-order.detailModal.edit')"
             v-model:value="state.order.handlingFees"
             class="max-w-300 min-w-20"
             size="small"
@@ -303,7 +318,7 @@ const calcGrossProfit = () => {
           <InputNumber
             :min="0"
             :addon-after="shopStore.shop.currency"
-            addon-before="Edit"
+            :addon-before="$t('page.reports-order.detailModal.edit')"
             v-model:value="state.order.shippingCosts"
             class="max-w-300 min-w-20"
             size="small"
@@ -336,7 +351,10 @@ const calcGrossProfit = () => {
       </DescriptionsItem>
     </Descriptions>
 
-    <Grid class="my-5" table-title="Line Items">
+    <Grid
+      class="my-5"
+      :table-title="$t('page.reports-order.detailModal.lineItems')"
+    >
       <template #name="{ row }: { row: any }">
         <div class="my-1 flex items-center justify-start space-x-2">
           <div class="h-[35px] w-[35px] flex-none">
@@ -348,7 +366,7 @@ const calcGrossProfit = () => {
           </div>
           <div class="ml-1 shrink">
             <div>{{ row.productTitle }}</div>
-            <div class="text-muted-foreground text-xs">
+            <div class="text-xs text-muted-foreground">
               {{ row.variantTitle }}
             </div>
           </div>

@@ -10,6 +10,7 @@ import {
   CardTitle,
   VbenButton,
 } from '@vben/common-ui';
+import { $t } from '@vben/locales';
 import { EchartsUI, useEcharts } from '@vben/plugins/echarts';
 
 import { formatMoney, redirect } from '#/shared/utils';
@@ -61,18 +62,20 @@ const reload = () => {
       left: '3%',
       right: '4%',
       top: '0%',
-      bottom: '30%',
     },
     xAxis: {
       type: 'value',
     },
     yAxis: {
       type: 'category',
-      data: ['Previous Period', 'Current Period'],
+      data: [
+        $t('page.dashboard.previousPeriod'),
+        $t('page.dashboard.currentPeriod'),
+      ],
     },
     series: [
       {
-        name: 'Facebook',
+        name: $t('field-name.facebookAds'),
         type: 'bar',
         stack: 'total',
         label: {
@@ -87,7 +90,7 @@ const reload = () => {
         ],
       },
       {
-        name: 'Tiktok',
+        name: $t('field-name.tiktokAds'),
         type: 'bar',
         stack: 'total',
         label: {
@@ -125,7 +128,7 @@ const reload = () => {
   <Card>
     <CardHeader>
       <CardTitle class="flex items-center justify-between space-x-1">
-        <span> Ad Analytics </span>
+        <span>{{ $t('page.dashboard.adAnalytics') }}</span>
 
         <VbenButton
           class="w-[100px] !p-0 text-right"
@@ -133,7 +136,7 @@ const reload = () => {
           variant="link"
           @click="redirect('reports-p-and-l')"
         >
-          View details
+          {{ $t('page.dashboard.viewDetails') }}
         </VbenButton>
       </CardTitle>
     </CardHeader>

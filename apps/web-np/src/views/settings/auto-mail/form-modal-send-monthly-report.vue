@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useVbenModal } from '@vben/common-ui';
+import { $t } from '@vben/locales';
 import { useUserStore } from '@vben/stores';
 
 import { message, TypographyParagraph } from 'ant-design-vue';
@@ -16,7 +17,7 @@ function onSubmit(values: Record<string, any>) {
 
   shopMailReport(values)
     .then(() => {
-      message.success('The report has been sent. Please check your email.');
+      message.success($t('page.settings-auto-mail.message.reportSent'));
       modalApi.close();
     })
     .finally(() => {
@@ -34,7 +35,7 @@ const [Form, formApi] = useVbenForm({
     {
       component: 'Input',
       fieldName: 'email',
-      label: 'Email',
+      label: $t('page.settings-auto-mail.modal.common.email'),
       rules: 'required',
     },
     {
@@ -43,7 +44,7 @@ const [Form, formApi] = useVbenForm({
         picker: 'month',
       },
       fieldName: 'duration',
-      label: 'Month',
+      label: $t('page.settings-auto-mail.modal.monthly.month'),
       rules: 'required',
     },
   ],
@@ -67,14 +68,23 @@ const [Modal, modalApi] = useVbenModal({
 });
 </script>
 <template>
-  <Modal class="w-[700px]" title="Monthly Report" confirm-text="Send">
+  <Modal
+    class="w-[700px]"
+    :title="$t('page.settings-auto-mail.modal.monthly.title')"
+    :confirm-text="$t('page.settings-auto-mail.modal.common.send')"
+  >
     <Form />
 
     <TypographyParagraph class="mt-2 px-5 italic">
       <!-- Consider - Check - Validate your email - double spam mail -->
-      <span class="font-semibold">Note:</span> Please ensure that the email
-      address is correct to avoid sending
-      <span class="font-semibold">spam or duplicate emails</span>.
+      <span class="font-semibold">
+        {{ $t('page.settings-auto-mail.modal.common.noteLabel') }}:
+      </span>
+      {{ $t('page.settings-auto-mail.modal.common.notePrefix') }}
+      <span class="font-semibold">
+        {{ $t('page.settings-auto-mail.modal.common.noteHighlight') }}
+      </span>
+      .
     </TypographyParagraph>
   </Modal>
 </template>

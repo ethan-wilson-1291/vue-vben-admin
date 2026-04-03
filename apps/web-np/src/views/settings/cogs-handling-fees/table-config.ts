@@ -3,6 +3,7 @@ import type { VxeTableGridOptions } from '#/adapter/vxe-table';
 import { reactive } from 'vue';
 
 import { productGetList } from '#/api';
+import { $t } from '#/locales';
 import { ECogsSource, EFeeLevel } from '#/shared/constants';
 import { toPercentage } from '#/shared/utils';
 
@@ -27,7 +28,7 @@ export const gridOptions: VxeTableGridOptions = {
     },
     {
       field: 'name',
-      title: 'Name',
+      title: $t('page.settings-cogs.table.name'),
       align: 'left',
       minWidth: 200,
       treeNode: true,
@@ -35,43 +36,40 @@ export const gridOptions: VxeTableGridOptions = {
       resizable: true,
     },
     {
-      title: 'Status',
+      title: $t('page.settings-cogs.table.status'),
       width: 100,
       slots: { default: 'status' },
     },
     {
       field: 'calcBy',
-      title: 'Fee Level',
+      title: $t('page.settings-cogs.table.feeLevel'),
       titlePrefix: {
-        content:
-          'If the cost is calculated by product, the cost from the product will apply to all variants. If the cost is calculated by variant, each variant will have its own cost.',
+        content: $t('page.settings-cogs.tooltip.feeLevel'),
       },
       slots: { default: 'level' },
       width: 120,
     },
     {
       field: 'cogsSource',
-      title: 'COGS Source',
+      title: $t('page.settings-cogs.table.cogsSource'),
       titlePrefix: {
-        content:
-          'COGS Source indicates where the COGS data is coming from. It can be either manually entered or synced from Shopify...',
+        content: $t('page.settings-cogs.tooltip.cogsSource'),
       },
       minWidth: 120,
       slots: { default: 'cogsSource' },
     },
     {
       field: 'price',
-      title: 'Selling Price',
+      title: $t('page.settings-cogs.table.sellingPrice'),
       align: 'right',
       minWidth: 120,
       slots: { default: 'price' },
     },
     {
       field: 'cogs',
-      title: 'COGS',
+      title: $t('field-name.cogs'),
       titlePrefix: {
-        content:
-          'Cost of Goods Sold (COGS) is the direct costs attributable to the production of the goods sold in a company. This amount includes the cost of the materials used in creating the good along with the direct labor costs used to produce the good.',
+        content: $t('field-name.cogsExplain'),
       },
       align: 'right',
       minWidth: 200,
@@ -79,10 +77,9 @@ export const gridOptions: VxeTableGridOptions = {
     },
     {
       field: 'handlingFees',
-      title: 'Handling Fees',
+      title: $t('field-name.handlingFees'),
       titlePrefix: {
-        content:
-          'Handling fees are the costs associated with the handling of goods, including the cost of labor, packaging, and shipping.',
+        content: $t('field-name.handlingFeesExplain'),
       },
       align: 'right',
       minWidth: 150,
@@ -90,10 +87,9 @@ export const gridOptions: VxeTableGridOptions = {
     },
     {
       field: 'margin',
-      title: 'Margin',
+      title: $t('page.settings-cogs.table.margin'),
       titlePrefix: {
-        content:
-          'Margin = (Selling Price - COGS - Handling Fees) / Selling Price',
+        content: $t('page.settings-cogs.tooltip.margin'),
       },
       align: 'right',
       width: 90,
@@ -216,7 +212,7 @@ async function generateTableData(page: any, formValues: any): Promise<any> {
       }
 
       // Sort costs by date
-      regionFees.cogs = regionFees.cogs.sort((a, b) => b.date - a.date);
+      regionFees.cogs = regionFees.cogs.toSorted((a, b) => b.date - a.date);
       item.cogs = isShopifyCogsSource(item)
         ? item.cogsShopify
         : (regionFees.cogs[0]?.price ?? 0);

@@ -9,6 +9,7 @@ import {
   CardTitle,
   VbenButton,
 } from '@vben/common-ui';
+import { $t } from '@vben/locales';
 import { useAccessStore } from '@vben/stores';
 
 import { useQRCode } from '@vueuse/integrations/useQRCode';
@@ -37,14 +38,14 @@ const state = reactive({
   <Card class="w-full">
     <CardHeader class="pb-2">
       <CardTitle class="text-md flex items-center justify-between">
-        <span>Mobile Sign-In</span>
+        <span>{{ $t('page.dashboard.mobileSignIn') }}</span>
         <VbenButton
           @click="state.showQrCode = true"
           class="w-[100px] !p-0 text-right"
           size="xs"
           variant="link"
         >
-          Show QR Code
+          {{ $t('page.dashboard.showQrCode') }}
         </VbenButton>
       </CardTitle>
     </CardHeader>
@@ -54,7 +55,7 @@ const state = reactive({
         <Image
           src="/static/images/qr-code-blur.png"
           class="!w-[200px]"
-          alt="QR Code"
+          :alt="$t('page.dashboard.qrCodeAlt')"
           :preview="{
             visible: state.showQrCode,
             onVisibleChange: (visible: boolean) => (state.showQrCode = visible),

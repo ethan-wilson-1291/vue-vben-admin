@@ -35,7 +35,7 @@ const rate = shopStore.shop.currencyRate;
 const getOverview = computed(() => {
   return [
     {
-      title: 'Orders',
+      title: $t('field-name.totalOrders'),
       value: currentPeriod.pAndLReport.quantityOrder,
       changePercent: dashboardState.changePercent.quantityOrder,
       previousValue: previousPeriod.pAndLReport.quantityOrder,
@@ -332,9 +332,20 @@ const handleWriteReview = () => {
               <span
                 class="text-sm"
                 :class="getChangePercentColor(item.changePercent)"
+                :style="
+                  shopStore.isFreeSubscription
+                    ? {
+                        filter: 'blur(4px)',
+                        pointerEvents: 'none',
+                        userSelect: 'none',
+                      }
+                    : undefined
+                "
                 v-tippy="{
                   content: item.previousValue
-                    ? `Compared with ${item.previousValue}`
+                    ? $t('page.dashboard.comparedWithValue', [
+                        item.previousValue,
+                      ])
                     : '',
                 }"
               >
@@ -344,7 +355,13 @@ const handleWriteReview = () => {
           </CardTitle>
         </CardHeader>
 
-        <CardContent class="flex items-center justify-between text-lg">
+        <CardContent
+          class="flex items-center justify-between text-lg"
+          :class="{
+            'pointer-events-none select-none blur-sm':
+              shopStore.isFreeSubscription,
+          }"
+        >
           {{ item.value }}
         </CardContent>
       </Card>
@@ -363,15 +380,15 @@ const handleWriteReview = () => {
     </template>
     <template #message>
       <span class="font-semibold">
-        Get 45 More Days of Pro – Just for Sharing the Love!
+        {{ $t('page.dashboard.reviewPromoTitle') }}
       </span>
     </template>
     <template #description>
-      Love our app? Help others discover it too! Leave us a ⭐️⭐️⭐️⭐️⭐️ review.
+      {{ $t('page.dashboard.reviewPromoLine1') }}
       <div>
-        Then, take a screenshot of your review and send it to us via the
-        chatbox. We’ll extend your Pro trial by another
-        <strong>45 days – totally free</strong>!
+        {{ $t('page.dashboard.reviewPromoLine2') }}
+        <strong>{{ $t('page.dashboard.reviewPromoBonus') }}</strong>
+        !
       </div>
 
       <div class="flex items-center space-x-2">
@@ -384,7 +401,7 @@ const handleWriteReview = () => {
           @click="handleWriteReview"
         >
           <IconifyIcon class="mr-2" icon="ant-design:export-outlined" />
-          Write a Review
+          {{ $t('page.dashboard.writeReview') }}
         </VbenButton>
       </div>
     </template>
@@ -418,9 +435,20 @@ const handleWriteReview = () => {
             <template v-if="item.changePercent">
               <span
                 :class="getChangePercentColor(item.changePercent)"
+                :style="
+                  shopStore.isFreeSubscription
+                    ? {
+                        filter: 'blur(4px)',
+                        pointerEvents: 'none',
+                        userSelect: 'none',
+                      }
+                    : undefined
+                "
                 v-tippy="{
                   content: item.previousValue
-                    ? `Compared with ${item.previousValue}`
+                    ? $t('page.dashboard.comparedWithValue', [
+                        item.previousValue,
+                      ])
                     : '',
                 }"
               >
@@ -430,7 +458,13 @@ const handleWriteReview = () => {
           </CardTitle>
         </CardHeader>
 
-        <CardContent class="pb-0 !text-lg">
+        <CardContent
+          class="pb-0 !text-lg"
+          :class="{
+            'pointer-events-none select-none blur-sm':
+              shopStore.isFreeSubscription,
+          }"
+        >
           {{ item.value }}
         </CardContent>
       </Card>

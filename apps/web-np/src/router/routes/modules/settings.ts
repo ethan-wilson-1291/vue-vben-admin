@@ -1,11 +1,12 @@
 import type { RouteRecordRaw } from 'vue-router';
 
+import { $t } from '#/locales';
 import { isShopifyEmbedded } from '#/shared/shopify-utils';
 
 const routes: RouteRecordRaw[] = [
   {
     meta: {
-      title: 'COGS & Handling',
+      title: $t('page.settings-cogs.title'),
       icon: 'lsicon:goods-outline',
       order: 50,
     },
@@ -15,17 +16,17 @@ const routes: RouteRecordRaw[] = [
   },
   {
     meta: {
-      title: 'Transaction Fees',
+      title: $t('page.settings-transaction-fees.title'),
       icon: 'mdi:account-payment-outline',
       order: 60,
     },
     name: 'settings.transaction-fees',
-    path: '/settings/transcation-fees',
+    path: '/settings/transaction-fees',
     component: () => import('#/views/settings/transaction-fees/index.vue'),
   },
   {
     meta: {
-      title: 'Zone & Shipping',
+      title: $t('page.settings-shipping-fees.title'),
       icon: 'carbon:car',
       order: 70,
     },
@@ -35,7 +36,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     meta: {
-      title: 'Custom Costs/Tax',
+      title: $t('page.settings-custom-costs.title'),
       icon: 'ant-design:dollar-circle-twotone',
       order: 80,
     },
@@ -45,7 +46,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     meta: {
-      title: 'Auto Mail Report',
+      title: $t('page.settings-auto-mail.title'),
       order: 99,
       icon: 'ant-design:mail-twotone',
     },
@@ -55,7 +56,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     meta: {
-      title: 'Settings',
+      title: $t('page.settings-general.title'),
       icon: 'codicon:settings',
       order: 100,
     },
@@ -65,7 +66,17 @@ const routes: RouteRecordRaw[] = [
   },
   {
     meta: {
-      title: 'View Fullscreen',
+      title: $t('page.settings-pricing.title'),
+      icon: 'ant-design:sketch-outlined',
+      order: 110,
+    },
+    name: 'settings.pricing',
+    path: '/settings/pricing',
+    component: () => import('#/views/settings/pricing/index.vue'),
+  },
+  {
+    meta: {
+      title: $t('page.settings-fullscreen.title'),
       order: 100_000,
       icon: 'ant-design:fullscreen-outlined',
       hideInMenu: !isShopifyEmbedded(),

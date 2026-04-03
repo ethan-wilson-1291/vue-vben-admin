@@ -2,6 +2,8 @@ import type { VbenFormProps } from '#/adapter/form';
 
 import { markRaw } from 'vue';
 
+import { $t } from '@vben/locales';
+
 import { orderStatusList } from '#/shared/constants';
 import { dayjsInGMT } from '#/shared/dayjs';
 import { getDatePreset } from '#/shared/utils';
@@ -9,6 +11,13 @@ import { useShopStore } from '#/store';
 import DateRangePicker from '#/views/shared-components/date-range-picker.vue';
 
 const shopStore = useShopStore();
+
+const orderStatusOptions = orderStatusList.map((item: any) => {
+  return {
+    ...item,
+    label: item.labelKey ? $t(item.labelKey) : item.label,
+  };
+});
 
 export const formOptions: VbenFormProps = {
   collapsed: false,
@@ -36,24 +45,24 @@ export const formOptions: VbenFormProps = {
       },
       defaultValue: [dayjsInGMT().add(-1, 'month').add(1, 'day'), dayjsInGMT()],
       fieldName: 'date',
-      label: 'Date',
+      label: $t('page.reports-order.filter.date'),
     },
     {
       component: 'Select',
       componentProps: {
         allowClear: true,
         mode: 'multiple',
-        options: orderStatusList,
-        placeholder: 'Payment status',
+        options: orderStatusOptions,
+        placeholder: $t('page.reports-order.filter.paymentStatus'),
         disabled: shopStore.isFreeSubscription,
       },
       fieldName: 'financialStatus',
-      label: 'Status',
+      label: $t('page.reports-order.filter.status'),
     },
     {
       component: 'Input',
       fieldName: 'name',
-      label: 'Order ID',
+      label: $t('page.reports-order.filter.orderId'),
       componentProps: {
         placeholder: ' ',
         disabled: shopStore.isFreeSubscription,

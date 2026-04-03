@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { Page, VbenButton } from '@vben/common-ui';
 import { IconifyIcon } from '@vben/icons';
+import { $t } from '@vben/locales';
 
 import { Dropdown, Menu, MenuItem, Modal, Switch } from 'ant-design-vue';
 
@@ -14,15 +15,15 @@ import { formOptions } from './table-filter';
 
 const shopStore = useShopStore();
 const [Grid, gridApi] = useVbenVxeGrid({
-  gridOptions,
-  formOptions,
+  gridOptions: gridOptions as any,
+  formOptions: formOptions as any,
 });
 
 const handleSyncAdInfo = (row: any) => {
   Modal.confirm({
-    title: 'Sync Ad Information',
-    content: 'Would you like to synchronize the Ad information?',
-    okText: 'Sync',
+    title: $t('page.ad-cost-rules.modal.syncAdInformation.title'),
+    content: $t('page.ad-cost-rules.modal.syncAdInformation.content'),
+    okText: $t('page.ad-cost-rules.action.sync'),
     onOk: async () => {
       await syncAdInfo(row.accountType, row.accountId, row.id).then(() => {
         gridApi.query();
@@ -46,9 +47,8 @@ const handleSwitchCosts = (row: any, checked: any) => {
 
 const handleAttachAdGroupToCosts = (row: any) => {
   Modal.confirm({
-    title: 'Attach the same Ad Group to costs',
-    content:
-      'Would you like to attach all ads in this Ad Group to costs? This will enable cost tracking for all ads in the same group.',
+    title: $t('page.ad-cost-rules.modal.attachAdGroupToCosts.title'),
+    content: $t('page.ad-cost-rules.modal.attachAdGroupToCosts.content'),
     onOk: async () => {
       await adAttachToCosts(
         'ad_group_id',
@@ -65,8 +65,8 @@ const handleAttachAdGroupToCosts = (row: any) => {
 
 const handleDetachAdGroupFromCosts = (row: any) => {
   Modal.confirm({
-    title: 'Detach the same Ad Group from costs',
-    content: 'Would you like to detach all ads in this Ad Group from costs?',
+    title: $t('page.ad-cost-rules.modal.detachAdGroupFromCosts.title'),
+    content: $t('page.ad-cost-rules.modal.detachAdGroupFromCosts.content'),
     onOk: async () => {
       await adAttachToCosts(
         'ad_group_id',
@@ -83,8 +83,8 @@ const handleDetachAdGroupFromCosts = (row: any) => {
 
 const handleAttachAdCampaignToCosts = (row: any) => {
   Modal.confirm({
-    title: 'Attach the same Ad Campaign to costs',
-    content: 'Would you like to attach all ads in this Ad Campaign to costs?',
+    title: $t('page.ad-cost-rules.modal.attachAdCampaignToCosts.title'),
+    content: $t('page.ad-cost-rules.modal.attachAdCampaignToCosts.content'),
     onOk: async () => {
       await adAttachToCosts(
         'ad_campaign_id',
@@ -101,8 +101,8 @@ const handleAttachAdCampaignToCosts = (row: any) => {
 
 const handleDetachAdCampaignFromCosts = (row: any) => {
   Modal.confirm({
-    title: 'Detach the same Ad Campaign from costs',
-    content: 'Would you like to detach all ads in this Ad Campaign from costs?',
+    title: $t('page.ad-cost-rules.modal.detachAdCampaignFromCosts.title'),
+    content: $t('page.ad-cost-rules.modal.detachAdCampaignFromCosts.content'),
     onOk: async () => {
       await adAttachToCosts(
         'ad_campaign_id',
@@ -146,38 +146,48 @@ const handleDetachAdCampaignFromCosts = (row: any) => {
         <Dropdown v-if="row.parentId === undefined">
           <VbenButton size="sm" variant="outline">
             <IconifyIcon class="mr-2 size-4" icon="ant-design:more-outlined" />
-            Actions
+            {{ $t('page.ad-cost-rules.action.actions') }}
           </VbenButton>
           <template #overlay>
             <Menu>
               <MenuItem @click="handleSyncAdInfo(row)">
                 <div class="flex items-center justify-start space-x-2">
                   <IconifyIcon icon="ant-design:sync-outlined" />
-                  <span>Sync Ad information</span>
+                  <span>{{
+                    $t('page.ad-cost-rules.action.syncAdInformation')
+                  }}</span>
                 </div>
               </MenuItem>
               <MenuItem @click="handleAttachAdGroupToCosts(row)">
                 <div class="flex items-center justify-start space-x-2">
                   <IconifyIcon icon="ant-design:plus-outlined" />
-                  <span>Attach the same Ad Group to costs</span>
+                  <span>{{
+                    $t('page.ad-cost-rules.action.attachAdGroupToCosts')
+                  }}</span>
                 </div>
               </MenuItem>
               <MenuItem @click="handleDetachAdGroupFromCosts(row)">
                 <div class="flex items-center justify-start space-x-2">
                   <IconifyIcon icon="ant-design:minus-outlined" />
-                  <span>Detach the same Ad Group from costs</span>
+                  <span>{{
+                    $t('page.ad-cost-rules.action.detachAdGroupFromCosts')
+                  }}</span>
                 </div>
               </MenuItem>
               <MenuItem @click="handleAttachAdCampaignToCosts(row)">
                 <div class="flex items-center justify-start space-x-2">
                   <IconifyIcon icon="ant-design:plus-outlined" />
-                  <span>Attach the same Ad Campaign to costs</span>
+                  <span>{{
+                    $t('page.ad-cost-rules.action.attachAdCampaignToCosts')
+                  }}</span>
                 </div>
               </MenuItem>
               <MenuItem @click="handleDetachAdCampaignFromCosts(row)">
                 <div class="flex items-center justify-start space-x-2">
                   <IconifyIcon icon="ant-design:minus-outlined" />
-                  <span>Detach the same Ad Campaign from costs</span>
+                  <span>{{
+                    $t('page.ad-cost-rules.action.detachAdCampaignFromCosts')
+                  }}</span>
                 </div>
               </MenuItem>
             </Menu>

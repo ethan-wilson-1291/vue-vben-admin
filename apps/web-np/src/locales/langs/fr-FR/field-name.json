@@ -1,0 +1,60 @@
+{
+  "grossSales": "Ventes brutes",
+  "grossSalesExplain": "  Ventes brutes = Sous-total + Expédition + Pourboire + Taxes collectées",
+
+  "totalDiscount": "Remise",
+  "totalShipping": "Frais d'expédition collectés",
+  "totalTip": "Pourboires collectés",
+  "totalRefund": "Remboursements",
+
+  "netPayment": "Chiffre d'affaires",
+  "netPaymentExplain": "Chiffre d'affaires (paiement net) = Ventes brutes - Remise - Remboursements",
+
+  "cogs": "COGS",
+  "cogsExplain": "Le coût des marchandises vendues (COGS) correspond aux coûts directs attribuables à la production des biens vendus par une entreprise. Ce montant inclut le coût des matériaux utilisés pour fabriquer le produit ainsi que les coûts directs de main-d'œuvre utilisés pour le produire.",
+
+  "handlingFees": "Frais de manutention",
+  "handlingFeesExplain": "Les frais de manutention sont les coûts liés à la gestion des marchandises, notamment les coûts de main-d'œuvre, d'emballage et d'expédition.",
+
+  "shippingCosts": "Coûts d'expédition",
+
+  "paymentGateway": "Passerelle de paiement",
+  "transactionFees": "Frais de transaction",
+  "transactionFeesExplain": "Les frais de transaction sont des frais qu'un commerçant doit payer chaque fois qu'un client effectue un achat par carte de crédit. Ces frais peuvent varier selon l'émetteur de la carte et le fournisseur du compte marchand.",
+
+  "grossProfit": "Marge brute",
+  "grossProfitExplain": "Marge brute = Chiffre d'affaires - COGS - Frais de manutention - Coûts d'expédition - Frais de transaction",
+
+  "grossProfitMargin": "Taux de marge brute",
+  "grossProfitMarginExplain": "Taux de marge brute = (Marge brute / Chiffre d'affaires) * 100 %",
+
+  "totalCustomCost": "Coûts personnalisés",
+  "totalCustomCostExplain": "Les coûts personnalisés sont les coûts associés à la production des biens, notamment les coûts de main-d'œuvre, les taxes, la publicité et d'autres dépenses.",
+
+  "totalAdSpend": "Dépenses publicitaires",
+  "facebookAds": "Publicités Facebook",
+  "tiktokAds": "Publicités TikTok",
+
+  "roas": "ROAS",
+  "roasExplain": "ROAS = Chiffre d'affaires total / Dépenses publicitaires. ROAS signifie Return on Ad Spend (retour sur dépenses publicitaires). C'est un indicateur du marketing digital qui mesure le chiffre d'affaires généré pour chaque euro dépensé en publicité.",
+
+  "poas": "POAS",
+  "poasExplain": "POAS = Marge brute / Dépenses publicitaires. Le POAS (Profit on Ad Spend) est un indicateur marketing qui mesure la rentabilité d'une campagne publicitaire en se concentrant sur le bénéfice net obtenu pour chaque euro dépensé en publicité.",
+
+  "totalTax": "Taxes collectées",
+  "totalTaxExplain": "Les taxes collectées correspondent au montant des taxes qu'une entreprise perçoit auprès de ses clients pour le compte de l'État. Ce montant est généralement un pourcentage du prix de vente et s'ajoute au coût total des biens ou services vendus.",
+
+  "netProfit": "Bénéfice net",
+  "netProfitExplain": "Bénéfice net = Marge brute - Taxes collectées - Coûts personnalisés - Dépenses publicitaires",
+
+  "netProfitMargin": "Marge nette",
+  "netProfitMarginExplain": "Marge nette = (Bénéfice net / Chiffre d'affaires) * 100 %",
+
+  "totalCosts": "Coûts totaux",
+  "totalCostsExplain": "Coûts totaux = COGS + Frais de manutention + Coûts d'expédition + Frais de transaction + Coûts personnalisés + Dépenses publicitaires",
+
+  "ltv": "Valeur vie client (LTV)",
+  "ltvExplain": "La valeur vie client (LTV) représente le chiffre d'affaires moyen qu'un client génère sur toute sa durée en tant que client payant.",
+
+  "totalOrders": "Commandes totales"
+}

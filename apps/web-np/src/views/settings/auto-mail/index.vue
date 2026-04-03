@@ -11,6 +11,7 @@ import {
   VbenButton,
 } from '@vben/common-ui';
 import { IconifyIcon } from '@vben/icons';
+import { $t } from '@vben/locales';
 
 import { Image, message, Switch } from 'ant-design-vue';
 
@@ -23,8 +24,8 @@ const shopSettingStore = useShopSettingStore();
 const mailTemplates = reactive([
   {
     type: 'weekly',
-    title: 'Weekly Report',
-    description: 'Every monday',
+    titleKey: 'page.settings-auto-mail.template.weekly.title',
+    descriptionKey: 'page.settings-auto-mail.template.weekly.description',
     checked: shopSettingStore.mailWeeklyReport,
     loading: false,
     showSample: false,
@@ -32,8 +33,8 @@ const mailTemplates = reactive([
   },
   {
     type: 'monthly',
-    title: 'Monthly Report',
-    description: 'Every first day of the month',
+    titleKey: 'page.settings-auto-mail.template.monthly.title',
+    descriptionKey: 'page.settings-auto-mail.template.monthly.description',
     checked: shopSettingStore.mailMonthlyReport,
     loading: false,
     showSample: false,
@@ -60,7 +61,10 @@ const sendTestMail = (type: string) => {
       break;
     }
     default: {
-      console.error('Unknown email type:', type);
+      console.error(
+        $t('page.settings-auto-mail.errors.unknownEmailType'),
+        type,
+      );
     }
   }
 };
@@ -72,7 +76,7 @@ const toggleSetting = (item: any, checked: boolean) => {
     .toggleMailReport(checked, item.type)
     .then(() => {
       item.checked = checked;
-      message.success('The setting has been updated successfully.');
+      message.success($t('page.settings-auto-mail.message.settingUpdated'));
     })
     .finally(() => {
       item.loading = false;
@@ -85,15 +89,15 @@ const toggleSetting = (item: any, checked: boolean) => {
     <SendWeeklyReportModal />
     <SendMonthlyReportModal />
     <div class="grid grid-cols-1 gap-4 xl:grid-cols-2">
-      <template v-for="item in mailTemplates" :key="item.title">
-        <Card class="w-full" :title="item.title">
+      <template v-for="item in mailTemplates" :key="item.type">
+        <Card class="w-full" :title="$t(item.titleKey)">
           <CardHeader>
             <CardTitle class="flex items-center justify-between">
               <div>
-                <span class="text-xl">{{ item.title }}</span>
+                <span class="text-xl">{{ $t(item.titleKey) }}</span>
 
                 <span class="ml-2 text-sm font-normal italic text-gray-500">
-                  ( {{ item.description }} )
+                  ( {{ $t(item.descriptionKey) }} )
                 </span>
               </div>
               <Switch
@@ -124,7 +128,7 @@ const toggleSetting = (item: any, checked: boolean) => {
                   class="mr-2 size-5"
                   icon="ant-design:eye-twotone"
                 />
-                View Sample Email
+                {{ $t('page.settings-auto-mail.action.viewSampleEmail') }}
               </VbenButton>
 
               <VbenButton
@@ -136,7 +140,7 @@ const toggleSetting = (item: any, checked: boolean) => {
                   class="mr-2 size-5"
                   icon="ant-design:play-circle-twotone"
                 />
-                Test Email
+                {{ $t('page.settings-auto-mail.action.testEmail') }}
               </VbenButton>
             </div>
           </CardContent>

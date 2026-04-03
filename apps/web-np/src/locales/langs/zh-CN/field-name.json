@@ -1,0 +1,60 @@
+{
+  "grossSales": "总销售额",
+  "grossSalesExplain": "总销售额 = 小计 + 运费 + 小费 + 已收税费",
+
+  "totalDiscount": "折扣",
+  "totalShipping": "已收运费",
+  "totalTip": "已收小费",
+  "totalRefund": "退款",
+
+  "netPayment": "营收",
+  "netPaymentExplain": "营收（净支付）= 总销售额 - 折扣 - 退款",
+
+  "cogs": "商品成本（COGS）",
+  "cogsExplain": "商品成本（COGS）是指与已售商品生产直接相关的成本。该金额包括生产商品所使用的材料成本以及直接人工成本。",
+
+  "handlingFees": "处理费",
+  "handlingFeesExplain": "处理费是与商品处理相关的成本，包括人工、包装和运输等费用。",
+
+  "shippingCosts": "运输成本",
+
+  "paymentGateway": "支付网关",
+  "transactionFees": "交易手续费",
+  "transactionFeesExplain": "交易手续费是商家在客户每次使用信用卡购买时需要支付的费用。该费用会因信用卡公司和商家账户服务商而有所不同。",
+
+  "grossProfit": "毛利润",
+  "grossProfitExplain": "毛利润 = 营收 - 商品成本 - 处理费 - 运输成本 - 交易手续费",
+
+  "grossProfitMargin": "毛利率",
+  "grossProfitMarginExplain": "毛利率 =（毛利润 / 营收）* 100%",
+
+  "totalCustomCost": "自定义成本",
+  "totalCustomCostExplain": "自定义成本是与商品生产相关的成本，包括人工、税费、广告及其他支出。",
+
+  "totalAdSpend": "广告花费",
+  "facebookAds": "Facebook 广告",
+  "tiktokAds": "TikTok 广告",
+
+  "roas": "ROAS",
+  "roasExplain": "ROAS = 总营收 / 广告花费。ROAS（广告支出回报率）用于衡量每投入 1 美元广告费可带来多少营收。",
+
+  "poas": "POAS",
+  "poasExplain": "POAS = 毛利润 / 广告花费。POAS（广告利润回报）用于衡量广告活动中每投入 1 美元广告费可带来的净利润。",
+
+  "totalTax": "已收税费",
+  "totalTaxExplain": "已收税费是企业代表政府向客户收取的税额。通常按销售价格的一定比例计算，并计入商品或服务总价。",
+
+  "netProfit": "净利润",
+  "netProfitExplain": "净利润 = 毛利润 - 已收税费 - 自定义成本 - 广告花费",
+
+  "netProfitMargin": "净利率",
+  "netProfitMarginExplain": "净利率 =（净利润 / 营收）* 100%",
+
+  "totalCosts": "总成本",
+  "totalCostsExplain": "总成本 = 商品成本 + 处理费 + 运输成本 + 交易手续费 + 自定义成本 + 广告花费",
+
+  "ltv": "客户终身价值（LTV）",
+  "ltvExplain": "客户终身价值（LTV）表示一个客户在整个付费周期内平均带来的营收。",
+
+  "totalOrders": "总订单数"
+}

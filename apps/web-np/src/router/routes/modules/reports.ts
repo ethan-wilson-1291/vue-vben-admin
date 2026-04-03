@@ -5,7 +5,7 @@ import { $t } from '#/locales';
 const routes: RouteRecordRaw[] = [
   {
     meta: {
-      title: 'P&L Report',
+      title: $t('page.reports-p-and-l.title'),
       order: 10,
       icon: 'clarity:analytics-outline-badged',
     },
@@ -15,7 +15,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     meta: {
-      title: $t('reports.order.title'),
+      title: $t('page.reports-order.title'),
       order: 20,
       icon: 'fluent-mdl2:reservation-orders',
     },
@@ -25,7 +25,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     meta: {
-      title: 'Product Analytics',
+      title: $t('page.reports-product.title'),
       order: 30,
       icon: 'lsicon:goods-outline',
     },
@@ -35,7 +35,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     meta: {
-      title: 'Customer Analytics',
+      title: $t('page.reports-customer.title'),
       order: 40,
       icon: 'carbon:customer',
     },

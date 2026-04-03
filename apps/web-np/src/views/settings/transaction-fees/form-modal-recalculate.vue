@@ -2,6 +2,7 @@
 import { markRaw } from 'vue';
 
 import { useVbenModal, VbenButton } from '@vben/common-ui';
+import { $t } from '@vben/locales';
 
 import { message, TypographyParagraph } from 'ant-design-vue';
 
@@ -24,7 +25,7 @@ function onSubmit(values: Record<string, any>) {
   })
     .then(() => {
       message.success(
-        'Your request has been submitted successfully. Once the job is completed, the system will send a notification.',
+        $t('page.settings-transaction-fees.message.recalculateSubmitted'),
         5,
       );
       modalApi.setData({ reload: true });
@@ -71,7 +72,7 @@ const [Form, formApi] = useVbenForm({
       },
       defaultValue: [dayjsInGMT().add(-1, 'month').add(1, 'day'), dayjsInGMT()],
       fieldName: 'date',
-      label: 'Date',
+      label: $t('page.settings-transaction-fees.modal.recalculate.date'),
       rules: 'required',
     },
   ],
@@ -94,8 +95,8 @@ const redirectToOrderReport = () => {
 <template>
   <Modal
     class="w-[700px]"
-    title="Recalculate Transaction Fees"
-    confirm-text="Submit"
+    :title="$t('page.settings-transaction-fees.modal.recalculate.title')"
+    :confirm-text="$t('page.settings-transaction-fees.action.submit')"
   >
     <template #prepend-footer>
       <div class="flex-auto">
@@ -105,22 +106,27 @@ const redirectToOrderReport = () => {
           class="w-[110px]"
           @click="redirectToOrderReport()"
         >
-          View order report
+          {{ $t('page.settings-transaction-fees.action.viewOrderReport') }}
         </VbenButton>
       </div>
     </template>
     <Form />
 
     <TypographyParagraph class="mt-5 px-5 italic">
-      <span class="font-semibold">Note:</span> After submitting the
-      recalculation request, the system will schedule the recalculation of all
-      related costs. Once the job is completed, the system will send a
-      notification.
+      <span class="font-semibold">
+        {{ $t('page.settings-transaction-fees.common.note') }}
+      </span>
+      {{ $t('page.settings-transaction-fees.message.recalculateSubmitted') }}
     </TypographyParagraph>
 
     <TypographyParagraph class="mt-5 px-5 italic">
-      To review the result, please go to the
-      <span class="font-semibold">Order Report</span> page.
+      {{
+        $t('page.settings-transaction-fees.modal.recalculate.resultHintPrefix')
+      }}
+      <span class="font-semibold">{{ $t('page.reports-order.title') }}</span>
+      {{
+        $t('page.settings-transaction-fees.modal.recalculate.resultHintSuffix')
+      }}
     </TypographyParagraph>
   </Modal>
 </template>

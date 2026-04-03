@@ -9,6 +9,7 @@ import {
   VbenButton,
 } from '@vben/common-ui';
 import { IconifyIcon } from '@vben/icons';
+import { $t } from '@vben/locales';
 
 import { formatMoney, redirect } from '#/shared/utils';
 import { useShopStore } from '#/store';
@@ -37,38 +38,38 @@ const getData = computed(() => {
 
   return [
     {
-      title: 'Orders',
+      title: $t('field-name.totalOrders'),
       value: currentPeriod.pAndLReport.quantityOrder,
     },
     {
-      title: 'Revenue',
+      title: $t('field-name.netPayment'),
       value: formatMoney(currentPeriod.pAndLReport.netPayment, currency, rate),
     },
     {
-      title: 'Avg. order revenue',
+      title: $t('page.dashboard.avgOrderRevenue'),
       value: formatMoney(avgOrderRevenue, currency, rate),
       class: 'text-normal',
-      explain: 'Avg. order revenue = Total revenue / Total orders',
+      explain: $t('page.dashboard.avgOrderRevenueExplain'),
     },
     {
-      title: 'Total cost',
+      title: $t('field-name.totalCosts'),
       value: formatMoney(currentPeriod.pAndLReport.totalCosts, currency, rate),
     },
     {
-      title: 'Avg. order cost',
+      title: $t('page.dashboard.avgOrderCost'),
       value: formatMoney(avgOrderCost, currency, rate),
       class: 'text-normal',
-      explain: 'Avg. order cost = Total cost / Total orders',
+      explain: $t('page.dashboard.avgOrderCostExplain'),
     },
     {
-      title: 'Total net profit',
+      title: $t('page.dashboard.totalNetProfit'),
       value: formatMoney(currentPeriod.pAndLReport.netProfit, currency, rate),
     },
     {
-      title: 'Avg. order profit',
+      title: $t('page.dashboard.avgOrderProfit'),
       value: formatMoney(avgOrderNetProfit, currency, rate),
       class: 'text-normal',
-      explain: 'Avg. order profit = Total net profit / Total orders',
+      explain: $t('page.dashboard.avgOrderProfitExplain'),
     },
   ];
 });
@@ -78,14 +79,14 @@ const getData = computed(() => {
   <Card class="w-full">
     <CardHeader class="pb-2">
       <CardTitle class="text-md flex items-center justify-between">
-        <span>Order Summary</span>
+        <span>{{ $t('page.dashboard.orderSummary') }}</span>
         <VbenButton
           class="w-[100px] !p-0 text-right"
           size="xs"
           variant="link"
           @click="redirect('reports-order')"
         >
-          View details
+          {{ $t('page.dashboard.viewDetails') }}
         </VbenButton>
       </CardTitle>
     </CardHeader>

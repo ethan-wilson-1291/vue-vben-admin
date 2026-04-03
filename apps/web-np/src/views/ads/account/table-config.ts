@@ -1,5 +1,7 @@
 import type { VxeTableGridOptions } from '#/adapter/vxe-table';
 
+import { $t } from '@vben/locales';
+
 import { getAccounts } from '#/api';
 import { formatReportDate } from '#/shared/utils';
 
@@ -17,7 +19,7 @@ export const gridOptions: VxeTableGridOptions = {
   columns: [
     {
       field: 'type',
-      title: 'Channel & Ad Accounts',
+      title: $t('page.ad-connections.table.channelAndAdAccounts'),
       slots: { default: 'type' },
       align: 'left',
       treeNode: true,
@@ -25,20 +27,20 @@ export const gridOptions: VxeTableGridOptions = {
     },
     {
       field: 'status',
-      title: 'Status',
+      title: $t('page.ad-connections.table.status'),
       slots: { default: 'status' },
       align: 'center',
       minWidth: 110,
     },
     {
       field: 'nextSyncedAt',
-      title: 'Next Sync',
+      title: $t('page.ad-connections.table.nextSync'),
       slots: { default: 'nextSyncedAt' },
       minWidth: 110,
     },
     {
       field: 'lastSyncedAt',
-      title: 'Last Sync',
+      title: $t('page.ad-connections.table.lastSync'),
       formatter: (time: any) => {
         return time.cellValue
           ? formatReportDate(time.cellValue)
@@ -48,10 +50,9 @@ export const gridOptions: VxeTableGridOptions = {
     },
     {
       field: 'expiredAt',
-      title: 'Expired At',
+      title: $t('page.ad-connections.table.expiredAt'),
       titlePrefix: {
-        content:
-          'For security reasons, the connection will expire, and you will need to reconnect manually.',
+        content: $t('page.ad-connections.table.expiredAtExplain'),
       },
       formatter: (time: any) => {
         return time.cellValue ? formatReportDate(time.cellValue) : ('' as any);
@@ -60,9 +61,9 @@ export const gridOptions: VxeTableGridOptions = {
     },
     {
       field: 'id',
-      title: 'Attach to costs',
+      title: $t('page.ad-connections.table.attachToCosts'),
       titlePrefix: {
-        content: 'Attach/Detach the Ad Accounts to the costs.',
+        content: $t('page.ad-connections.table.attachToCostsExplain'),
       },
       slots: { default: 'addToCosts' },
       width: 150,

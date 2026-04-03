@@ -4,6 +4,7 @@ import type { ICustomCost } from '#/api';
 import { reactive } from 'vue';
 
 import { useVbenModal, z } from '@vben/common-ui';
+import { $t } from '@vben/locales';
 
 import { Button, message } from 'ant-design-vue';
 
@@ -23,6 +24,11 @@ const state = reactive({
   currenType: CustomCostType.DAILY as CustomCostType,
   currentAmount: 0,
 });
+
+const customCostTypeOptions = customCostTypes.map((item) => ({
+  ...item,
+  label: $t(item.labelKey),
+}));
 
 function onSubmit(values: Record<string, any>) {
   modalApi.lock();
@@ -45,7 +51,7 @@ function onSubmit(values: Record<string, any>) {
 
   storeCustomCost(values)
     .then(() => {
-      message.success('The custom cost has been saved successfully');
+      message.success($t('page.settings-custom-costs.message.savedSuccess'));
       modalApi.setData({ reload: true });
       modalApi.close();
     })
@@ -143,9 +149,9 @@ const [Form, formApi] = useVbenForm({
     {
       component: 'Input',
       fieldName: 'name',
-      label: 'Name',
+      label: $t('page.settings-custom-costs.form.name'),
       componentProps: {
-        placeholder: 'Tax, Rent, Employee, Advertisement etc.',
+        placeholder: $t('page.settings-custom-costs.form.namePlaceholder'),
       },
       dependencies: {
         if(values) {
@@ -159,7 +165,7 @@ const [Form, formApi] = useVbenForm({
       component: 'Select' as any,
       defaultValue: CustomCostType.DAILY,
       componentProps: {
-        options: customCostTypes,
+        options: customCostTypeOptions,
       },
       dependencies: {
         disabled(values) {
@@ -168,7 +174,7 @@ const [Form, formApi] = useVbenForm({
         triggerFields: ['id'],
       },
       fieldName: 'type',
-      label: 'Type',
+      label: $t('page.settings-custom-costs.form.type'),
       rules: 'required',
     },
     {
@@ -190,7 +196,7 @@ const [Form, formApi] = useVbenForm({
         triggerFields: ['type'],
       },
       fieldName: 'periodCost',
-      label: 'Amount',
+      label: $t('page.settings-custom-costs.form.amount'),
       rules: z.number().gt(0),
     },
     {
@@ -216,7 +222,7 @@ const [Form, formApi] = useVbenForm({
         triggerFields: ['type'],
       },
       fieldName: 'dailyCost',
-      label: 'Daily cost',
+      label: $t('page.settings-custom-costs.form.dailyCost'),
       rules: z.number().gt(0),
     },
     {
@@ -233,7 +239,7 @@ const [Form, formApi] = useVbenForm({
         triggerFields: ['type'],
       },
       fieldName: 'grossSaleRate',
-      label: '% of Gross sale',
+      label: $t('page.settings-custom-costs.form.grossSaleRate'),
       rules: z.number().gt(0).max(100),
     },
     {
@@ -250,7 +256,7 @@ const [Form, formApi] = useVbenForm({
         triggerFields: ['type'],
       },
       fieldName: 'revenueRate',
-      label: '% of Revenue',
+      label: $t('page.settings-custom-costs.form.revenueRate'),
       rules: z.number().gt(0).max(100),
     },
     {
@@ -267,7 +273,7 @@ const [Form, formApi] = useVbenForm({
         triggerFields: ['type'],
       },
       fieldName: 'grossProfitRate',
-      label: '% of Gross profit',
+      label: $t('page.settings-custom-costs.form.grossProfitRate'),
       rules: z.number().gt(0).max(100),
     },
     {
@@ -286,7 +292,7 @@ const [Form, formApi] = useVbenForm({
         ]),
       },
       fieldName: 'startDate',
-      label: 'Start date',
+      label: $t('page.settings-custom-costs.form.startDate'),
       rules: 'required',
     },
     {
@@ -294,15 +300,30 @@ const [Form, formApi] = useVbenForm({
       defaultValue: dayjsInGMT(),
       componentProps: {
         presets: [
-          { label: 'On going', value: onGoingDate },
-          { label: 'Next 30 Days', value: dayjsInGMT().add(30, 'd') },
-          { label: 'Next 7 Days', value: dayjsInGMT().add(7, 'd') },
+          {
+            label: $t('page.settings-custom-costs.form.endDatePresets.onGoing'),
+            value: onGoingDate,
+          },
+          {
+            label: $t(
+              'page.settings-custom-costs.form.endDatePresets.next30Days',
+            ),
+            value: dayjsInGMT().add(30, 'd'),
+          },
+          {
+            label: $t(
+              'page.settings-custom-costs.form.endDatePresets.next7Days',
+            ),
+            value: dayjsInGMT().add(7, 'd'),
+          },
           ...getDatePreset(['last7Days', 'lastMonth']),
         ],
         format: (value: any) => {
           const val = value.format('YYYY-MM-DD');
 
-          return onGoingDate.diff(value) ? val : 'On going';
+          return onGoingDate.diff(value)
+            ? val
+            : $t('page.settings-custom-costs.form.endDatePresets.onGoing');
         },
       },
       dependencies: {
@@ -312,12 +333,12 @@ const [Form, formApi] = useVbenForm({
         triggerFields: ['type'],
       },
       fieldName: 'endDate',
-      label: 'End date',
+      label: $t('page.settings-custom-costs.form.endDate'),
     },
     {
       component: 'Textarea' as any,
       fieldName: 'note',
-      label: 'Note',
+      label: $t('page.settings-custom-costs.form.note'),
     },
   ],
   showDefaultActions: false,
@@ -353,7 +374,11 @@ const [Modal, modalApi] = useVbenModal({
 });
 </script>
 <template>
-  <Modal class="w-[700px]" title="Custom Cost" confirm-text="Submit">
+  <Modal
+    class="w-[700px]"
+    :title="$t('page.settings-custom-costs.form.title')"
+    :confirm-text="$t('page.settings-custom-costs.form.submit')"
+  >
     <Form />
     <FormModalExample
       v-show="state.showExample"
@@ -368,7 +393,12 @@ const [Modal, modalApi] = useVbenModal({
           size="small"
           @click="state.showExample = !state.showExample"
         >
-          {{ state.showExample ? 'Hide' : 'Show' }} example
+          {{
+            state.showExample
+              ? $t('page.settings-custom-costs.form.hide')
+              : $t('page.settings-custom-costs.form.show')
+          }}
+          {{ $t('page.settings-custom-costs.form.example') }}
         </Button>
       </div>
     </template>

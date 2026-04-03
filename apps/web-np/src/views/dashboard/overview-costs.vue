@@ -117,7 +117,7 @@ const getData = computed(() => {
   <Card class="w-full">
     <CardHeader class="pb-2">
       <CardTitle class="text-md flex items-center justify-between">
-        <span>Cost Summary</span>
+        <span>{{ $t('page.dashboard.costSummary') }}</span>
       </CardTitle>
     </CardHeader>
 
@@ -152,7 +152,7 @@ const getData = computed(() => {
               :class="getChangePercentColor(item.changePercent)"
               v-tippy="{
                 content: item.previousValue
-                  ? `Compared with ${item.previousValue}`
+                  ? $t('page.dashboard.comparedWithValue', [item.previousValue])
                   : '',
               }"
             >

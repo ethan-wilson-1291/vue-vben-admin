@@ -17,7 +17,7 @@ export const overridesPreferences = defineOverridesPreferences({
     width: 200,
   },
   widget: {
-    languageToggle: false,
+    languageToggle: true,
     lockScreen: false,
     timezone: false,
     fullscreen: !isShopifyEmbedded(),

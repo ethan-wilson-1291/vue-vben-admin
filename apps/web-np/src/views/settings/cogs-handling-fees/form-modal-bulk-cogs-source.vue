@@ -9,6 +9,7 @@ import { message, TypographyParagraph } from 'ant-design-vue';
 
 import { useVbenForm } from '#/adapter/form';
 import { productBulkUpdateFees } from '#/api';
+import { $t } from '#/locales';
 import { cogsSoures } from '#/shared/constants';
 import { useShopSettingStore } from '#/store';
 
@@ -23,7 +24,7 @@ function onSubmit(values: Record<string, any>) {
   modalApi.lock();
 
   if (state.checkedItems.length === 0) {
-    message.error('Please select at least one product.');
+    message.error($t('page.common.selectAtLeastOneProduct'));
     modalApi.lock(false);
     return;
   }
@@ -42,7 +43,7 @@ function onSubmit(values: Record<string, any>) {
     type: 'COGS_SOURCE',
   })
     .then(() => {
-      message.success('Bulk COGS source updated successfully.');
+      message.success($t('page.settings-cogs.message.bulkCogsSourceUpdated'));
       modalApi.setData({ reload: true });
       modalApi.close();
     })
@@ -64,12 +65,15 @@ const [Form, formApi] = useVbenForm({
   schema: [
     {
       component: 'Select',
-      help: 'When syncing products from Shopify, the COGS source will either be pulled from the Shopify or set manually.',
+      help: $t('page.settings-cogs.help.cogsSource'),
       fieldName: 'cogsSource',
-      label: 'COGS Source',
+      label: $t('page.settings-cogs.table.cogsSource'),
       defaultValue: shopSettingStore.cogsSourceDefault,
       componentProps: {
-        options: cogsSoures,
+        options: cogsSoures.map((item) => ({
+          ...item,
+          label: item.labelKey ? $t(item.labelKey) : item.label,
+        })),
       },
     },
   ],
@@ -95,14 +99,16 @@ const [Modal, modalApi] = useVbenModal({
 <template>
   <Modal
     class="w-[700px]"
-    title="Bulk Action - Update COGS Source"
-    confirm-text="Submit"
+    :title="$t('page.settings-cogs.modal.bulkCogsSource.title')"
+    :confirm-text="$t('page.settings-cogs.action.submit')"
   >
     <Form />
 
     <TypographyParagraph class="mt-5 px-5 text-center italic">
-      <span class="font-semibold">Note:</span> Please recalculate the costs
-      after updating the COGS source.
+      <span class="font-semibold">{{
+        $t('page.settings-cogs.common.note')
+      }}</span>
+      {{ $t('page.settings-cogs.modal.bulkCogsSource.note') }}
     </TypographyParagraph>
   </Modal>
 </template>

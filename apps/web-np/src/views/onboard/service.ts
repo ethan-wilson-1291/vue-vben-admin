@@ -2,6 +2,8 @@ import type { ITransactionFee } from '#/store';
 
 import { reactive } from 'vue';
 
+import { $t } from '@vben/locales';
+
 import { ShippingCostLevel } from '#/shared/constants';
 
 export const sampleOrder = reactive({
@@ -16,14 +18,14 @@ export const sampleOrder = reactive({
 
   lineItems: [
     {
-      name: 'T-Shirt',
+      name: $t('page.onboard.products.tShirt'),
       price: 10,
       quantity: 1,
       cogs: 0,
       handlingFees: 0,
     },
     {
-      name: 'Shoes',
+      name: $t('page.onboard.products.shoes'),
       price: 45,
       quantity: 2,
       cogs: 0,

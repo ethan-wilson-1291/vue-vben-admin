@@ -30,15 +30,15 @@ const { renderEcharts } = useEcharts(chartRef);
 
 const chartOptions = [
   {
-    label: 'Daily',
+    label: $t('page.dashboard.chartGroupDaily'),
     value: 'daily',
   },
   {
-    label: 'Weekly',
+    label: $t('page.dashboard.chartGroupWeekly'),
     value: 'weekly',
   },
   {
-    label: 'Monthly',
+    label: $t('page.dashboard.chartGroupMonthly'),
     value: 'monthly',
   },
 ];
@@ -55,9 +55,13 @@ onMounted(() => {
   }, 2000);
 });
 
+// Call reload when dashboardState.loading change from false to true
 watch(
-  () => dashboardState.profitChart.revenue,
-  (__, _) => {
+  () => dashboardState.loading,
+  (newVal, _) => {
+    if (newVal === true) {
+      return;
+    }
     reload();
   },
 );
@@ -65,10 +69,10 @@ watch(
 const reload = () => {
   renderEcharts({
     grid: {
-      bottom: '20%',
+      // bottom: 0,
       left: '1%',
       right: '1%',
-      top: '0%',
+      top: '5%',
     },
     series: [
       {
@@ -142,7 +146,9 @@ const reload = () => {
   <Card class="mt-5">
     <CardHeader>
       <CardTitle class="flex items-center justify-between space-x-1">
-        <span class="text-lg"> Profit Performance </span>
+        <span class="text-lg">
+          {{ $t('page.dashboard.profitPerformance') }}
+        </span>
 
         <div class="flex items-center">
           <VbenButton
@@ -151,7 +157,7 @@ const reload = () => {
             variant="link"
             @click="redirect('reports-p-and-l')"
           >
-            View details
+            {{ $t('page.dashboard.viewDetails') }}
           </VbenButton>
 
           <VbenButton
@@ -160,7 +166,7 @@ const reload = () => {
             variant="link"
             @click="reload"
           >
-            Reload chart
+            {{ $t('page.dashboard.reloadChart') }}
           </VbenButton>
 
           <Select
@@ -174,10 +180,17 @@ const reload = () => {
       </CardTitle>
     </CardHeader>
     <CardContent>
-      <EchartsUI
-        ref="chartRef"
-        v-show="dashboardState.profitChart.netProfit.length > 0"
-      />
+      <div
+        :class="{
+          'pointer-events-none select-none blur-sm':
+            shopStore.isFreeSubscription,
+        }"
+      >
+        <EchartsUI
+          ref="chartRef"
+          v-show="dashboardState.profitChart.netProfit.length > 0"
+        />
+      </div>
 
       <Empty v-show="dashboardState.profitChart.netProfit.length === 0" />
     </CardContent>

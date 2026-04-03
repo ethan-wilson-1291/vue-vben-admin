@@ -1,13 +1,15 @@
 import type { VbenFormProps } from '@vben/common-ui';
 
+import { $t } from '@vben/locales';
+
 export const formOptions: VbenFormProps = {
   schema: [
     {
       component: 'Input',
       fieldName: 'name',
-      label: 'Search',
+      label: $t('page.ad-connections.filter.search'),
       componentProps: {
-        placeholder: 'Channel name, email...',
+        placeholder: $t('page.ad-connections.filter.searchPlaceholder'),
       },
     },
     {
@@ -17,7 +19,9 @@ export const formOptions: VbenFormProps = {
       defaultValue: false,
       renderComponentContent: () => {
         return {
-          default: () => ['Only show the valid Ad Accounts'],
+          default: () => [
+            $t('page.ad-connections.filter.onlyShowValidAdAccounts'),
+          ],
         };
       },
     },

@@ -14,6 +14,10 @@ import {
 import { preferences } from '@vben/preferences';
 
 import antdEnLocale from 'ant-design-vue/es/locale/en_US';
+import antdEsLocale from 'ant-design-vue/es/locale/es_ES';
+import antdFrLocale from 'ant-design-vue/es/locale/fr_FR';
+import antdItLocale from 'ant-design-vue/es/locale/it_IT';
+import antdViLocale from 'ant-design-vue/es/locale/vi_VN';
 import antdDefaultLocale from 'ant-design-vue/es/locale/zh_CN';
 
 import { dayjsInGMT } from '#/shared/dayjs';
@@ -58,6 +62,22 @@ async function loadDayjsLocale(lang: SupportedLanguagesType) {
       locale = await import('dayjs/locale/en');
       break;
     }
+    case 'es-ES': {
+      locale = await import('dayjs/locale/es');
+      break;
+    }
+    case 'fr-FR': {
+      locale = await import('dayjs/locale/fr');
+      break;
+    }
+    case 'it-IT': {
+      locale = await import('dayjs/locale/it');
+      break;
+    }
+    case 'vi-VN': {
+      locale = await import('dayjs/locale/vi');
+      break;
+    }
     case 'zh-CN': {
       locale = await import('dayjs/locale/zh-cn');
       break;
@@ -87,8 +107,28 @@ async function loadAntdLocale(lang: SupportedLanguagesType) {
       antdLocale.value = antdEnLocale;
       break;
     }
+    case 'es-ES': {
+      antdLocale.value = antdEsLocale;
+      break;
+    }
+    case 'fr-FR': {
+      antdLocale.value = antdFrLocale;
+      break;
+    }
+    case 'it-IT': {
+      antdLocale.value = antdItLocale;
+      break;
+    }
+    case 'vi-VN': {
+      antdLocale.value = antdViLocale;
+      break;
+    }
     case 'zh-CN': {
       antdLocale.value = antdDefaultLocale;
+      break;
+    }
+    default: {
+      antdLocale.value = antdEnLocale;
       break;
     }
   }

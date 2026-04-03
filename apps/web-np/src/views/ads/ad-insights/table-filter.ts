@@ -2,6 +2,8 @@ import type { VbenFormProps } from '@vben/common-ui';
 
 import { markRaw } from 'vue';
 
+import { $t } from '@vben/locales';
+
 import { dayjsInGMT } from '#/shared/dayjs';
 import { getDatePreset } from '#/shared/utils';
 import DateRangePicker from '#/views/shared-components/date-range-picker.vue';
@@ -37,38 +39,38 @@ export const formOptions: VbenFormProps = {
       },
       defaultValue: [dayjsInGMT().add(-1, 'month').add(1, 'day'), dayjsInGMT()],
       fieldName: 'date',
-      label: 'Date',
+      label: $t('page.ad-cost-insights.filter.date'),
     },
     {
       component: 'Input',
       fieldName: 'adName',
-      label: 'Ad',
+      label: $t('page.ad-cost-insights.filter.ad'),
       componentProps: {
-        placeholder: 'Search by Ad Name',
+        placeholder: $t('page.ad-cost-insights.filter.searchByAdName'),
       },
     },
     {
       component: 'Input',
       fieldName: 'adGroupName',
-      label: 'Group',
+      label: $t('page.ad-cost-insights.filter.group'),
       componentProps: {
-        placeholder: 'Search by Group Name',
+        placeholder: $t('page.ad-cost-insights.filter.searchByGroupName'),
       },
     },
     {
       component: 'Input',
       fieldName: 'adCampaignName',
-      label: 'Campaign',
+      label: $t('page.ad-cost-insights.filter.campaign'),
       componentProps: {
-        placeholder: 'Search by Campaign Name',
+        placeholder: $t('page.ad-cost-insights.filter.searchByCampaignName'),
       },
     },
     {
       component: 'Input',
       fieldName: 'adAccountName',
-      label: 'Ad Account',
+      label: $t('page.ad-cost-insights.filter.adAccount'),
       componentProps: {
-        placeholder: 'Search by Ad Account Name',
+        placeholder: $t('page.ad-cost-insights.filter.searchByAdAccountName'),
       },
     },
   ],

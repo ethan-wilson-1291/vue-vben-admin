@@ -2,6 +2,8 @@ import type { VxeTableGridOptions } from '#/adapter/vxe-table';
 
 import { reactive } from 'vue';
 
+import { $t } from '@vben/locales';
+
 import { format } from 'currency-formatter';
 
 import { getAdInsights } from '#/api';
@@ -28,7 +30,7 @@ export const gridOptions: VxeTableGridOptions = {
   columns: [
     {
       field: 'accountType',
-      title: 'Ad Channel',
+      title: $t('page.ad-cost-insights.table.adChannel'),
       footerClassName: 'font-semibold',
       slots: { default: 'accountType' },
       width: 100,
@@ -36,7 +38,7 @@ export const gridOptions: VxeTableGridOptions = {
     },
     {
       field: 'date',
-      title: 'Date',
+      title: $t('page.ad-cost-insights.table.date'),
       footerClassName: 'font-semibold',
       formatter: (time: any) => {
         return formatReportDate(time.cellValue);
@@ -46,60 +48,60 @@ export const gridOptions: VxeTableGridOptions = {
     },
     {
       field: 'adName',
-      title: 'Ad Name',
+      title: $t('page.ad-cost-insights.table.adName'),
       footerClassName: 'font-semibold',
       minWidth: 110,
       align: 'left',
     },
     {
       field: 'adGroupName',
-      title: 'Ad Group',
+      title: $t('page.ad-cost-insights.table.adGroup'),
       footerClassName: 'font-semibold',
       minWidth: 110,
       align: 'left',
     },
     {
       field: 'adCampaignName',
-      title: 'Ad Campaign',
+      title: $t('page.ad-cost-insights.table.adCampaign'),
       footerClassName: 'font-semibold',
       minWidth: 110,
       align: 'left',
     },
     {
       field: 'adAccountName',
-      title: 'Ad Account',
+      title: $t('page.ad-cost-insights.table.adAccount'),
       footerClassName: 'font-semibold',
       minWidth: 110,
       align: 'left',
     },
     {
       field: 'impressions',
-      title: 'Impressions',
+      title: $t('page.ad-cost-insights.table.impressions'),
       footerClassName: 'font-semibold',
       minWidth: 120,
     },
     {
       field: 'reach',
-      title: 'Reach',
+      title: $t('page.ad-cost-insights.table.reach'),
       footerClassName: 'font-semibold',
       minWidth: 120,
     },
     {
       field: 'clicks',
-      title: 'Clicks',
+      title: $t('page.ad-cost-insights.table.clicks'),
       footerClassName: 'font-semibold',
       minWidth: 120,
     },
     {
       field: 'ctr',
-      title: 'CTR',
+      title: $t('page.ad-cost-insights.table.ctr'),
       footerClassName: 'font-semibold',
       cellRender: { name: 'CellPercentage' },
       minWidth: 120,
     },
     {
       field: 'spendUSD',
-      title: 'Spend (USD)',
+      title: $t('page.ad-cost-insights.table.spendUsd'),
       className: 'font-semibold',
       footerClassName: 'font-semibold',
       align: 'right',
@@ -108,7 +110,7 @@ export const gridOptions: VxeTableGridOptions = {
     },
     {
       field: 'cpcUSD',
-      title: 'CPC (USD)',
+      title: $t('page.ad-cost-insights.table.cpcUsd'),
       footerClassName: 'font-semibold',
       align: 'right',
       cellRender: { name: 'cellMoney', props: { currency: 'USD', rate: 1 } },
@@ -116,7 +118,7 @@ export const gridOptions: VxeTableGridOptions = {
     },
     {
       field: 'cppUSD',
-      title: 'CPP (USD)',
+      title: $t('page.ad-cost-insights.table.cppUsd'),
       footerClassName: 'font-semibold',
       align: 'right',
       cellRender: { name: 'cellMoney', props: { currency: 'USD', rate: 1 } },
@@ -151,7 +153,12 @@ export const gridOptions: VxeTableGridOptions = {
             state.footerData = res.summary;
 
             // Reset some fields
-            state.footerData.accountType = `${res.total} Item(s)`;
+            state.footerData.accountType = $t(
+              'page.ad-cost-insights.table.totalItems',
+              {
+                count: res.total,
+              },
+            );
             state.footerData.date = null;
             state.footerData.ctr = format(state.footerData.ctr, {
               precision: 2,

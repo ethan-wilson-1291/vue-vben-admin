@@ -2,6 +2,8 @@ import type { VbenFormProps } from '@vben/common-ui';
 
 import { markRaw } from 'vue';
 
+import { $t } from '@vben/locales';
+
 import { getDatePreset } from '#/shared/utils';
 import { useShopStore } from '#/store';
 import DateRangePicker from '#/views/shared-components/date-range-picker.vue';
@@ -16,9 +18,9 @@ export const formOptions: VbenFormProps = {
     {
       component: 'Input',
       fieldName: 'name',
-      label: 'Name',
+      label: $t('page.settings-custom-costs.filter.name'),
       componentProps: {
-        placeholder: 'Search by cost name',
+        placeholder: $t('page.settings-custom-costs.filter.searchByCostName'),
         disabled: shopStore.isFreeSubscription,
       },
     },
@@ -41,19 +43,22 @@ export const formOptions: VbenFormProps = {
         disabled: shopStore.isFreeSubscription,
       },
       fieldName: 'date',
-      label: 'Date',
+      label: $t('page.settings-custom-costs.filter.date'),
     },
     {
       component: 'Select',
       componentProps: {
         allowClear: true,
         mode: 'multiple',
-        options: customCostTypes,
-        placeholder: 'Select cost type',
+        options: customCostTypes.map((item) => ({
+          ...item,
+          label: $t(item.labelKey),
+        })),
+        placeholder: $t('page.settings-custom-costs.filter.selectCostType'),
         disabled: shopStore.isFreeSubscription,
       },
       fieldName: 'type',
-      label: 'Type',
+      label: $t('page.settings-custom-costs.filter.type'),
     },
   ],
   showCollapseButton: false,

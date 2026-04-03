@@ -9,6 +9,787 @@
   "dashboard": {
     "title": "概览",
     "analytics": "分析页",
-    "workspace": "工作台"
+    "workspace": "工作台",
+    "filterOrderStatus": "订单状态",
+    "dropdownOrderStatus": "订单状态",
+    "compareWith": "对比",
+    "comparedWithValue": "对比 {0}",
+    "samePeriod": "同期",
+    "submit": "提交",
+    "reviewPromoTitle": "分享好评，额外赠送 45 天 Pro！",
+    "reviewPromoLine1": "喜欢我们的应用吗？欢迎留下五星好评，帮助更多商家发现我们。",
+    "reviewPromoLine2": "提交评价后，将截图通过聊天窗口发给我们，我们会为你的 Pro 试用期额外延长 ",
+    "reviewPromoBonus": "45 天（完全免费）",
+    "writeReview": "写评价",
+    "upgradeTooltip": "升级到 Pro 方案以解锁全部功能",
+    "purchasePro": "购买 Pro",
+    "profitPerformance": "利润表现",
+    "viewDetails": "查看详情",
+    "reloadChart": "刷新图表",
+    "chartGroupDaily": "按日",
+    "chartGroupWeekly": "按周",
+    "chartGroupMonthly": "按月",
+    "adAnalytics": "广告分析",
+    "costAnalytics": "成本分析",
+    "adSummary": "广告摘要",
+    "costSummary": "成本摘要",
+    "orderSummary": "订单摘要",
+    "mobileSignIn": "手机登录",
+    "showQrCode": "显示二维码",
+    "qrCodeAlt": "二维码",
+    "previousPeriod": "上一周期",
+    "currentPeriod": "当前周期",
+    "avgOrderRevenue": "平均订单营收",
+    "avgOrderRevenueExplain": "平均订单营收 = 总营收 / 总订单数",
+    "avgOrderCost": "平均订单成本",
+    "avgOrderCostExplain": "平均订单成本 = 总成本 / 总订单数",
+    "totalNetProfit": "净利润总额",
+    "avgOrderProfit": "平均订单利润",
+    "avgOrderProfitExplain": "平均订单利润 = 净利润总额 / 总订单数"
+  },
+  "onboard": {
+    "steps": {
+      "language": "语言",
+      "cogs": "COGS",
+      "handlingFees": "处理费",
+      "shippingCosts": "运费",
+      "transactionFees": "交易手续费"
+    },
+    "index": {
+      "welcomePrefix": "欢迎使用",
+      "welcomeSuffix": "！",
+      "subtitle": "为了计算你的利润，我们需要你的成本信息。",
+      "previous": "上一步",
+      "next": "下一步",
+      "finish": "完成",
+      "completedSuccess": "引导设置已成功完成"
+    },
+    "common": {
+      "more": "更多",
+      "forExample": "例如",
+      "exampleProduct": "示例商品",
+      "salePrice": "销售价格",
+      "quantity": "数量",
+      "item": "件",
+      "order": "单",
+      "exampleOrder": "示例订单"
+    },
+    "exampleOrder": {
+      "title": "示例订单"
+    },
+    "stepLanguage": {
+      "title": "选择语言",
+      "description": "请选择你在仪表盘中使用的语言。"
+    },
+    "stepCogs": {
+      "title": "商品成本（COGS）",
+      "syncFromShopify": "从 Shopify 同步",
+      "manual": "手动",
+      "syncDescriptionPrefix": "系统将自动从 Shopify 同步",
+      "costPerItem": "每件商品成本",
+      "syncDescriptionSuffix": "并将其作为 COGS 值。",
+      "defaultCogsRate": "设置单件商品默认 COGS 比例："
+    },
+    "stepHandlingFees": {
+      "title": "处理费",
+      "defaultHandlingFee": "单件商品默认处理费"
+    },
+    "stepShippingFees": {
+      "title": "运费",
+      "description": "是将商品从一个地点运输到另一个地点所收取的费用，并会计入客户订单商品成本。",
+      "calculateBy": "运费将按以下方式计算",
+      "defaultShippingCost": "每单位默认运费",
+      "itemQuantity": "商品数量",
+      "totalWeight": "总重量"
+    },
+    "products": {
+      "tShirt": "T 恤",
+      "shoes": "鞋子"
+    }
+  },
+  "date-presets": {
+    "today": "今天",
+    "last7Days": "最近 7 天",
+    "last14Days": "最近 14 天",
+    "lastMonth": "最近 1 个月",
+    "last2Months": "最近 2 个月",
+    "last3Months": "最近 3 个月",
+    "last6Months": "最近 6 个月",
+    "lastYear": "最近 1 年",
+    "previousMonth": "上个月",
+    "thisMonth": "本月",
+    "thisYear": "今年"
+  },
+  "date-range-picker": {
+    "limitHint": "请选择日期范围，最大周期为",
+    "exampleFrom": "例如：从",
+    "exampleTo": "到",
+    "exampleValid": "是有效范围"
+  },
+  "reports-p-and-l": {
+    "title": "损益报表",
+    "form": {
+      "groupByDay": "按日",
+      "groupByWeek": "按周",
+      "groupByMonth": "按月",
+      "reportType": "报表类型",
+      "date": "日期",
+      "weekly": "周",
+      "month": "月",
+      "paymentStatus": "支付状态",
+      "orderStatus": "订单状态"
+    },
+    "table": {
+      "date": "日期",
+      "total": "合计",
+      "notAvailable": "暂无"
+    }
+  },
+  "reports-order": {
+    "title": "订单报表",
+    "viewDetailsFor": "查看 {0} 的详情",
+    "deleteSelectedOrders": "删除 {0} 个订单",
+    "recalculateCosts": "重新计算成本",
+    "summaryOrders": "{0} 个订单",
+    "bulkDeleteModal": {
+      "title": "删除已选订单",
+      "content": "确定要删除已选订单吗？",
+      "confirm": "确认",
+      "cancel": "取消"
+    },
+    "table": {
+      "orderId": "订单 ID",
+      "date": "日期",
+      "status": "状态",
+      "currentItems": "当前商品数",
+      "refundItems": "退款商品数",
+      "totalItems": "商品总数",
+      "weightKg": "重量（Kg）"
+    },
+    "filter": {
+      "date": "日期",
+      "paymentStatus": "支付状态",
+      "status": "状态",
+      "orderId": "订单 ID"
+    },
+    "detailModal": {
+      "title": "详情",
+      "save": "保存",
+      "goToShopifyOrder": "前往 Shopify 订单",
+      "name": "名称",
+      "country": "国家",
+      "status": "状态",
+      "processedDate": "处理日期",
+      "totalQuantity": "总数量",
+      "weight": "重量",
+      "currentQuantity": "当前数量",
+      "refundQuantity": "退款数量",
+      "edit": "编辑",
+      "lineItems": "商品明细",
+      "product": "商品",
+      "price": "价格",
+      "updateSuccess": "订单成本更新成功"
+    },
+    "recalculateModal": {
+      "title": "重新计算成本",
+      "submit": "提交",
+      "submitSuccess": "你的请求已提交成功。任务完成后，系统会发送通知。",
+      "date": "日期",
+      "cogsHandlingFees": "商品成本 - 处理费",
+      "shippingCost": "运输成本",
+      "transactionFees": "交易手续费",
+      "costs": "成本项",
+      "noteLabel": "注意：",
+      "note": "提交重新计算请求后，系统会安排重新计算所有相关成本。任务完成后，系统会发送通知。"
+    },
+    "syncModal": {
+      "title": "手动同步 Shopify",
+      "submit": "提交",
+      "submitSuccess": "你的请求已提交成功。任务完成后，系统会发送通知。",
+      "date": "日期",
+      "noteLabel": "注意：",
+      "note": "所有订单都会自动同步到应用。如果你仍希望手动同步，请使用此表单。"
+    }
+  },
+  "reports-product": {
+    "title": "产品分析",
+    "table": {
+      "name": "名称",
+      "unitsSold": "售出数量",
+      "refund": "退款"
+    },
+    "filter": {
+      "date": "日期",
+      "products": "产品"
+    }
+  },
+  "reports-customer": {
+    "title": "客户分析",
+    "newCustomersCount": "{0} 位客户",
+    "filter": {
+      "month": "月份"
+    },
+    "table": {
+      "firstPurchaseIn": "首次购买于",
+      "totalRevenue": "总营收",
+      "nthMonth": "第 {0} 月"
+    },
+    "cards": {
+      "newCustomers": "新客户数",
+      "repurchaseRate": "复购率",
+      "repurchaseRateExplain": "复购率 =（复购客户数 / 新客户数）* 100",
+      "newCustomerRevenue": "新客户营收",
+      "newCustomerRevenueExplain": "来自新客户的总营收"
+    }
+  },
+  "settings-cogs": {
+    "title": "COGS 与处理费",
+    "table": {
+      "name": "名称",
+      "status": "状态",
+      "feeLevel": "费用层级",
+      "cogsSource": "COGS 来源",
+      "sellingPrice": "销售价格",
+      "margin": "利润率"
+    },
+    "common": {
+      "note": "注意：",
+      "from": "从",
+      "to": "至",
+      "price": "价格",
+      "selectDate": "选择日期",
+      "ongoing": "进行中"
+    },
+    "tooltip": {
+      "feeLevel": "如果按产品计算，产品成本将应用到所有变体；如果按变体计算，每个变体将有自己的成本。",
+      "cogsSource": "COGS 来源表示 COGS 数据来自哪里。可以是手动录入，也可以从 Shopify 同步。",
+      "margin": "利润率 =（销售价格 - COGS - 处理费）/ 销售价格",
+      "cogsHistory": "按历史日期设置 COGS"
+    },
+    "help": {
+      "cogsSource": "从 Shopify 同步产品时，COGS 来源可以来自 Shopify 或手动设置。"
+    },
+    "filter": {
+      "zone": "分区",
+      "id": "ID",
+      "name": "名称",
+      "status": "状态",
+      "searchProductId": "按产品 ID 搜索",
+      "searchProductName": "按产品名称搜索",
+      "selectStatus": "选择状态"
+    },
+    "status": {
+      "active": "启用",
+      "draft": "草稿",
+      "archived": "已归档"
+    },
+    "option": {
+      "product": "产品",
+      "variant": "变体",
+      "manual": "手动",
+      "shopify": "Shopify"
+    },
+    "message": {
+      "requestProcessed": "请求处理成功。",
+      "pleaseRecalculate": "更新后请重新计算成本。",
+      "bulkCogsUpdated": "批量更新 COGS 成功。",
+      "bulkFeeLevelUpdated": "批量更新费用层级成功。",
+      "bulkHandlingFeeUpdated": "批量更新处理费成功。",
+      "bulkCogsSourceUpdated": "批量更新 COGS 来源成功。",
+      "cogsUpdated": "商品成本更新成功。",
+      "importUploaded": "文件已上传成功，系统正在处理中。",
+      "zoneUpdated": "分区更新成功。",
+      "recalculateSubmitted": "你的请求已提交成功。任务完成后，系统会发送通知。",
+      "appliesToAllVariants": "应用于全部 {0} 个变体",
+      "fileNotCsv": "{0} 不是 CSV 文件"
+    },
+    "confirm": {
+      "exportTitle": "导出 {0} 分区的全部费用",
+      "exportContent": "系统处理下载文件期间，你可以继续使用应用。文件处理完成后将自动下载。"
+    },
+    "bulkAction": {
+      "productsVariants": "批量操作：{0} 个产品，{1} 个变体",
+      "products": "批量操作：{0} 个产品",
+      "variants": "批量操作：{0} 个变体"
+    },
+    "modal": {
+      "bulkCogs": {
+        "title": "批量操作 - 更新手动 COGS 来源的 COGS",
+        "notePrefix": "此功能仅影响",
+        "manualCogsSource": "手动 COGS 来源",
+        "noteSuffix": "的项目。更新后请重新计算成本。"
+      },
+      "bulkFeeLevel": {
+        "title": "批量操作 - 更新费用层级",
+        "note": "更新费用层级后请重新计算成本。"
+      },
+      "bulkHandlingFees": {
+        "title": "批量操作 - 更新处理费",
+        "note": "更新处理费后请重新计算成本。"
+      },
+      "bulkCogsSource": {
+        "title": "批量操作 - 更新 COGS 来源",
+        "note": "更新 COGS 来源后请重新计算成本。"
+      },
+      "cogsHistory": {
+        "title": "商品成本（COGS）",
+        "variant": "变体 - {0}"
+      },
+      "importProducts": {
+        "title": "导入产品",
+        "note": "上传文件后，系统会处理数据并更新费用。请在上传前确认文件内容正确。"
+      },
+      "products": {
+        "addTitle": "添加产品",
+        "removeTitle": "移除产品",
+        "labelProducts": "产品",
+        "allProducts": "全部产品"
+      },
+      "recalculate": {
+        "title": "重新计算 COGS 与处理费",
+        "resultHintPrefix": "若要查看结果，请前往",
+        "resultHintSuffix": "页面。"
+      }
+    },
+    "action": {
+      "newZone": "新建分区",
+      "addZone": "新建分区",
+      "submit": "提交",
+      "add": "添加",
+      "remove": "移除",
+      "updateFeeLevel": "更新费用层级",
+      "updateCogsSource": "更新 COGS 来源",
+      "updateCogs": "更新 COGS",
+      "updateHandlingFees": "更新处理费",
+      "viewDetail": "查看详情",
+      "viewOrderReport": "查看订单报表",
+      "chooseCsv": "选择要导入的 *.csv 文件"
+    }
+  },
+  "settings-transaction-fees": {
+    "title": "交易手续费",
+    "onboard": {
+      "paymentGateways": "支付网关",
+      "fixedFees": "固定费用",
+      "percentageFees": "百分比费用",
+      "shopifyExternalFees": "Shopify 外部费用",
+      "formula": "* 交易手续费 = 固定费用 + [净支付 * (百分比费用 + Shopify 外部费用) / 100]",
+      "exampleOrder": "示例订单",
+      "other": "其他"
+    },
+    "common": {
+      "note": "注意："
+    },
+    "action": {
+      "submit": "提交",
+      "reset": "重置",
+      "recalculateCosts": "重新计算成本",
+      "viewOrderReport": "查看订单报表"
+    },
+    "message": {
+      "updated": "交易手续费更新成功",
+      "recalculateSubmitted": "你的请求已提交成功。任务完成后，系统会发送通知。"
+    },
+    "modal": {
+      "recalculate": {
+        "title": "重新计算交易手续费",
+        "date": "日期",
+        "resultHintPrefix": "若要查看结果，请前往",
+        "resultHintSuffix": "页面。"
+      }
+    }
+  },
+  "settings-shipping-fees": {
+    "title": "分区与运费",
+    "tableTitle": "分区 - 运费",
+    "table": {
+      "name": "名称",
+      "shippingCostBy": "运费按",
+      "shippingCostByExplain": "运费将根据购物车中商品的重量或数量进行计算。",
+      "shippingCost": "运费",
+      "countries": "国家",
+      "allCountries": "所有国家",
+      "action": "操作"
+    },
+    "action": {
+      "recalculateCosts": "重新计算成本",
+      "addZone": "新增分区"
+    },
+    "deleteModal": {
+      "title": "删除分区",
+      "content": "确定要删除此分区吗？所有 COGS、处理费和运费将被删除。系统将基于全球分区重新计算成本，此操作不可撤销。"
+    },
+    "level": {
+      "quantity": "按数量",
+      "weight": "按重量",
+      "order": "按订单"
+    },
+    "unit": {
+      "kg": "kg",
+      "items": "件",
+      "order": "单"
+    },
+    "form": {
+      "name": "名称",
+      "shippingCostBy": "运费按",
+      "shippingCost": "运费",
+      "countries": "国家",
+      "selectAtLeastOneCountry": "请至少选择一个国家"
+    },
+    "modal": {
+      "formTitle": "分区 - 运费",
+      "recalculate": {
+        "title": "重新计算运费"
+      }
+    },
+    "common": {
+      "example": "示例："
+    },
+    "example": {
+      "base": "订单 A 有 2 件商品，总重量为 1.5kg",
+      "weightPrefix": "如果设置为 ",
+      "weightRate": "每 1kg（按重量）$5",
+      "weightMiddle": "，则订单 A 的总运费为 ",
+      "weightResult": "$7.5",
+      "weightSuffix": "（1.5 x $5）",
+      "quantityPrefix": "如果设置为 ",
+      "quantityRate": "每 1 件（按数量）$3",
+      "quantityMiddle": "，则订单 A 的总运费为 ",
+      "quantityResult": "$6",
+      "quantitySuffix": "（2 x $3）",
+      "orderPrefix": "如果设置为 ",
+      "orderRate": "每 1 单 $1",
+      "orderMiddle": "，则订单 A 的总运费为 ",
+      "orderResult": "$1"
+    }
+  },
+  "settings-custom-costs": {
+    "title": "自定义成本/税费",
+    "tableTitle": "自定义成本/税费",
+    "action": {
+      "addCustomCost": "添加自定义成本"
+    },
+    "deleteModal": {
+      "title": "删除自定义成本",
+      "content": "确定要删除此自定义成本吗？"
+    },
+    "table": {
+      "name": "名称",
+      "startDate": "开始日期",
+      "endDate": "结束日期",
+      "onGoing": "进行中",
+      "type": "类型",
+      "dailyCost": "日成本",
+      "note": "备注",
+      "action": "操作"
+    },
+    "filter": {
+      "name": "名称",
+      "date": "日期",
+      "type": "类型",
+      "searchByCostName": "按成本名称搜索",
+      "selectCostType": "选择成本类型"
+    },
+    "form": {
+      "title": "自定义成本",
+      "submit": "提交",
+      "name": "名称",
+      "namePlaceholder": "税费、租金、员工、广告等",
+      "type": "类型",
+      "amount": "金额",
+      "dailyCost": "日成本",
+      "grossSaleRate": "占销售总额百分比",
+      "revenueRate": "占收入百分比",
+      "grossProfitRate": "占毛利润百分比",
+      "startDate": "开始日期",
+      "endDate": "结束日期",
+      "note": "备注",
+      "show": "显示",
+      "hide": "隐藏",
+      "example": "示例",
+      "endDatePresets": {
+        "onGoing": "进行中",
+        "next30Days": "未来 30 天",
+        "next7Days": "未来 7 天"
+      }
+    },
+    "example": {
+      "exampleDate": "示例日期",
+      "grossSale": "销售总额",
+      "revenue": "收入",
+      "grossProfit": "毛利润",
+      "dailyCost": "日成本",
+      "netProfit": "净利润",
+      "date1": "日期 1",
+      "date2": "日期 2"
+    },
+    "typeOptions": {
+      "monthly": "按月",
+      "weekly": "按周",
+      "daily": "按日",
+      "oneTime": "一次性",
+      "grossSalePercentage": "占销售总额百分比",
+      "revenuePercentage": "占收入百分比",
+      "grossProfitPercentage": "占毛利润百分比"
+    },
+    "message": {
+      "savedSuccess": "自定义成本已保存成功"
+    }
+  },
+  "settings-auto-mail": {
+    "title": "自动邮件报表",
+    "template": {
+      "weekly": {
+        "title": "周报",
+        "description": "每周一"
+      },
+      "monthly": {
+        "title": "月报",
+        "description": "每月第一天"
+      }
+    },
+    "action": {
+      "viewSampleEmail": "查看示例邮件",
+      "testEmail": "测试邮件"
+    },
+    "message": {
+      "settingUpdated": "设置已更新成功。",
+      "reportSent": "报表已发送，请检查您的邮箱。"
+    },
+    "errors": {
+      "unknownEmailType": "未知邮件类型:"
+    },
+    "modal": {
+      "common": {
+        "email": "邮箱",
+        "send": "发送",
+        "noteLabel": "注意",
+        "notePrefix": "请确保邮箱地址正确，以避免发送",
+        "noteHighlight": "垃圾邮件或重复邮件"
+      },
+      "weekly": {
+        "title": "周报",
+        "week": "周"
+      },
+      "monthly": {
+        "title": "月报",
+        "month": "月"
+      }
+    }
+  },
+  "settings-general": {
+    "title": "设置",
+    "cardTitle": "设置",
+    "planSuffix": "套餐",
+    "section": {
+      "cogsAndHandlingFees": "商品成本（COGS）与处理费",
+      "currencyConverterDisplay": "货币转换显示"
+    },
+    "form": {
+      "shopId": "店铺 ID",
+      "name": "名称",
+      "domain": "域名",
+      "subscription": "订阅",
+      "owner": "所有者",
+      "email": "邮箱",
+      "timezone": "时区",
+      "defaultRate": "默认比例",
+      "source": "来源",
+      "handlingFees": "处理费",
+      "fromShopify": "来自 Shopify",
+      "appDisplay": "应用显示",
+      "rate": "汇率"
+    },
+    "help": {
+      "timezone": "此时区将用于计算报表和其他时间相关功能的日期范围。",
+      "defaultRate": "示例：产品 A 已被移除，售价为 $100。若 COGS 比例为 75%，则该商品在原订单中的商品成本为 $75。",
+      "source": "从 Shopify 同步产品时，COGS 来源可选择从 Shopify 获取或手动设置。",
+      "handlingFees": "这是新产品的默认处理费。你可以稍后在“COGS 与处理费”设置中修改。",
+      "fromShopify": "从 Shopify 同步的货币",
+      "appDisplay": "应用内显示的货币"
+    },
+    "message": {
+      "savedSuccess": "设置已保存。"
+    }
+  },
+  "settings-pricing": {
+    "title": "定价与套餐"
+  },
+  "settings-fullscreen": {
+    "title": "全屏查看"
+  },
+  "ad-management": {
+    "title": "广告管理"
+  },
+  "ad-connections": {
+    "title": "广告连接",
+    "channel": {
+      "facebook": "Facebook",
+      "tiktok": "TikTok"
+    },
+    "status": {
+      "syncPending": "等待同步",
+      "syncing": "同步中",
+      "synced": "已同步",
+      "syncFailed": "同步失败",
+      "connected": "已连接",
+      "disconnected": "已断开",
+      "active": "启用",
+      "inactive": "停用"
+    },
+    "table": {
+      "channelAndAdAccounts": "渠道与广告账户",
+      "status": "状态",
+      "nextSync": "下次同步",
+      "lastSync": "上次同步",
+      "expiredAt": "过期时间",
+      "expiredAtExplain": "出于安全原因，连接会过期，你需要手动重新连接。",
+      "attachToCosts": "关联到成本",
+      "attachToCostsExplain": "将广告账户关联/取消关联到成本。"
+    },
+    "filter": {
+      "search": "搜索",
+      "searchPlaceholder": "渠道名称、邮箱...",
+      "onlyShowValidAdAccounts": "仅显示有效的广告账户"
+    },
+    "action": {
+      "addAdConnection": "添加广告连接",
+      "viewDetail": "查看详情",
+      "actions": "操作",
+      "sync": "同步",
+      "syncAdAccounts": "同步广告账户",
+      "syncInsights": "同步洞察",
+      "reconnect": "重新连接",
+      "remove": "移除"
+    },
+    "modal": {
+      "removeConnection": {
+        "title": "移除连接",
+        "content": "确定要移除此连接吗？此操作不可撤销。"
+      },
+      "syncAccountInformation": {
+        "title": "同步账户信息",
+        "content": "是否同步广告账户的所有数据与洞察？"
+      },
+      "syncAdInsights": {
+        "title": "同步广告洞察",
+        "content": "是否同步 '{name}' 的所有洞察数据？"
+      },
+      "attachToCostTracking": {
+        "title": "关联到成本追踪"
+      },
+      "detachFromCostTracking": {
+        "title": "从成本追踪中移除"
+      },
+      "switchCostTracking": {
+        "content": "是否对 '{name}' 执行此操作？这将影响该广告账户的成本追踪。"
+      }
+    }
+  },
+  "ad-cost-rules": {
+    "title": "广告成本规则",
+    "table": {
+      "adChannel": "广告渠道",
+      "attachToCosts": "关联到成本",
+      "adName": "广告名称",
+      "groupName": "广告组名称",
+      "campaignName": "广告系列名称",
+      "accountName": "账户名称",
+      "syncedAt": "同步时间"
+    },
+    "filter": {
+      "ad": "广告",
+      "group": "广告组",
+      "campaign": "广告系列",
+      "adAccount": "广告账户",
+      "searchByAdName": "按广告名称搜索",
+      "searchByGroupName": "按广告组名称搜索",
+      "searchByCampaignName": "按广告系列名称搜索",
+      "searchByAdAccountName": "按广告账户名称搜索"
+    },
+    "action": {
+      "actions": "操作",
+      "sync": "同步",
+      "syncAdInformation": "同步广告信息",
+      "attachAdGroupToCosts": "将同组广告关联到成本",
+      "detachAdGroupFromCosts": "将同组广告从成本中移除",
+      "attachAdCampaignToCosts": "将同系列广告关联到成本",
+      "detachAdCampaignFromCosts": "将同系列广告从成本中移除"
+    },
+    "modal": {
+      "syncAdInformation": {
+        "title": "同步广告信息",
+        "content": "是否同步该广告信息？"
+      },
+      "attachAdGroupToCosts": {
+        "title": "将同组广告关联到成本",
+        "content": "是否将此广告组中的所有广告关联到成本？这将为同组所有广告启用成本追踪。"
+      },
+      "detachAdGroupFromCosts": {
+        "title": "将同组广告从成本中移除",
+        "content": "是否将此广告组中的所有广告从成本中移除？"
+      },
+      "attachAdCampaignToCosts": {
+        "title": "将同系列广告关联到成本",
+        "content": "是否将此广告系列中的所有广告关联到成本？"
+      },
+      "detachAdCampaignFromCosts": {
+        "title": "将同系列广告从成本中移除",
+        "content": "是否将此广告系列中的所有广告从成本中移除？"
+      }
+    }
+  },
+  "ad-cost-insights": {
+    "title": "广告成本洞察",
+    "table": {
+      "adChannel": "广告渠道",
+      "date": "日期",
+      "adName": "广告名称",
+      "adGroup": "广告组",
+      "adCampaign": "广告系列",
+      "adAccount": "广告账户",
+      "impressions": "展示次数",
+      "reach": "触达人数",
+      "clicks": "点击次数",
+      "ctr": "点击率",
+      "spendUsd": "花费（USD）",
+      "cpcUsd": "CPC（USD）",
+      "cppUsd": "CPP（USD）",
+      "totalItems": "{count} 条"
+    },
+    "filter": {
+      "date": "日期",
+      "ad": "广告",
+      "group": "广告组",
+      "campaign": "广告系列",
+      "adAccount": "广告账户",
+      "searchByAdName": "按广告名称搜索",
+      "searchByGroupName": "按广告组名称搜索",
+      "searchByCampaignName": "按广告系列名称搜索",
+      "searchByAdAccountName": "按广告账户名称搜索"
+    }
+  },
+  "layout": {
+    "profileMenu": {
+      "shopifyStore": "Shopify 店铺",
+      "finilyAppPage": "Finily 应用页面",
+      "shopifyAdminPage": "Shopify 管理后台"
+    }
+  },
+  "common": {
+    "selectAtLeastOneProduct": "请至少选择一个产品",
+    "chatWithSupport": "联系支持",
+    "confirm": "是",
+    "cancel": "否",
+    "export": "导出",
+    "import": "导入",
+    "orderStatus": {
+      "authorized": "已授权",
+      "paid": "已支付",
+      "partiallyPaid": "部分支付",
+      "partiallyRefunded": "部分退款",
+      "pending": "待处理",
+      "voided": "已作废"
+    }
   }
 }

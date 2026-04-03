@@ -24,6 +24,7 @@ import {
 
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import { exportCogsHandlingFees, productBulkUpdateFees } from '#/api';
+import { $t } from '#/locales';
 import { defaultRegionUUID, ECogsSource, EFeeLevel } from '#/shared/constants';
 import { formatMoney } from '#/shared/utils';
 import { useShopSettingStore, useShopStore } from '#/store';
@@ -204,7 +205,7 @@ const handleFeeLevelChanged = (row: IProduct) => {
       reloadGrid(row);
 
       message.success({
-        content: 'The request has been processed successfully.',
+        content: $t('page.settings-cogs.message.requestProcessed'),
       });
     })
     .finally(() => {
@@ -225,7 +226,7 @@ const handleCogsChanged = useDebounceFn(async (row: IProduct, val: any) => {
       reloadGrid(row);
 
       message.success({
-        content: 'The request has been processed successfully.',
+        content: $t('page.settings-cogs.message.requestProcessed'),
       });
     })
     .finally(() => {
@@ -246,7 +247,7 @@ const handleCogsSourceChanged = (row: IProduct, checked: any) => {
       reloadGrid(row);
 
       message.success({
-        content: 'The request has been processed successfully.',
+        content: $t('page.settings-cogs.message.requestProcessed'),
       });
     })
     .finally(() => {
@@ -268,7 +269,7 @@ const handleHandlingFeesChanged = useDebounceFn(
         reloadGrid(row);
 
         message.success({
-          content: 'The request has been processed successfully.',
+          content: $t('page.settings-cogs.message.requestProcessed'),
         });
       })
       .finally(() => {
@@ -281,7 +282,7 @@ const handleHandlingFeesChanged = useDebounceFn(
 const reloadGrid = (row: IProduct) => {
   gridApi.query().then(() => {
     message.success({
-      content: 'Please recalculate the cost after updating.',
+      content: $t('page.settings-cogs.message.pleaseRecalculate'),
     });
 
     if (row.isProductRow) {
@@ -306,11 +307,10 @@ const handleExport = () => {
   );
 
   Modal.confirm({
-    title: `Export all fees from the ${zoneName} zone`,
-    content:
-      "While we process the download file, you can continue using the application. The file will be automatically downloaded once it's complete.",
-    okText: 'Yes',
-    cancelText: 'No',
+    title: $t('page.settings-cogs.confirm.exportTitle', [zoneName]),
+    content: $t('page.settings-cogs.confirm.exportContent'),
+    okText: $t('page.common.confirm'),
+    cancelText: $t('page.common.cancel'),
     onOk: async () => {
       state.exporting = true;
 
@@ -337,17 +337,18 @@ const getBulkActionTitle = () => {
     (item: IProduct) => !!item.parentId,
   ).length;
 
-  const prefix = 'Bulk action for ';
-
   if (products > 0 && variants > 0) {
-    return `${prefix}${products} products, ${variants} variants`;
+    return $t('page.settings-cogs.bulkAction.productsVariants', [
+      products,
+      variants,
+    ]);
   }
 
   if (products > 0) {
-    return `${prefix}${products} products`;
+    return $t('page.settings-cogs.bulkAction.products', [products]);
   }
 
-  return `${prefix}${variants} variants`;
+  return $t('page.settings-cogs.bulkAction.variants', [variants]);
 };
 </script>
 
@@ -376,7 +377,7 @@ const getBulkActionTitle = () => {
               class="mr-2 size-4"
               icon="ant-design:minus-circle-twotone"
             />
-            Remove
+            {{ $t('page.settings-cogs.action.remove') }}
           </VbenButton>
           <VbenButton
             class="mr-2 w-[100px]"
@@ -388,7 +389,7 @@ const getBulkActionTitle = () => {
               class="mr-2 size-4"
               icon="ant-design:plus-circle-twotone"
             />
-            Add
+            {{ $t('page.settings-cogs.action.add') }}
           </VbenButton>
         </template>
 
@@ -409,7 +410,7 @@ const getBulkActionTitle = () => {
                     .open()
                 "
               >
-                Update Fee Level
+                {{ $t('page.settings-cogs.action.updateFeeLevel') }}
               </MenuItem>
               <MenuItem
                 @click="
@@ -421,7 +422,7 @@ const getBulkActionTitle = () => {
                     .open()
                 "
               >
-                Update COGS Source
+                {{ $t('page.settings-cogs.action.updateCogsSource') }}
               </MenuItem>
               <MenuItem
                 @click="
@@ -433,7 +434,7 @@ const getBulkActionTitle = () => {
                     .open()
                 "
               >
-                Update COGS Fees
+                {{ $t('page.settings-cogs.action.updateCogs') }}
               </MenuItem>
               <MenuItem
                 @click="
@@ -445,7 +446,7 @@ const getBulkActionTitle = () => {
                     .open()
                 "
               >
-                Update Handling Fees
+                {{ $t('page.settings-cogs.action.updateHandlingFees') }}
               </MenuItem>
             </Menu>
           </template>
@@ -461,7 +462,7 @@ const getBulkActionTitle = () => {
             class="mr-2 size-4"
             icon="ant-design:calculator-twotone"
           />
-          Recalculate costs
+          {{ $t('page.reports-order.recalculateCosts') }}
         </VbenButton>
         <VbenButton
           :loading="state.exporting"
@@ -476,7 +477,7 @@ const getBulkActionTitle = () => {
             icon="ant-design:download-outlined"
             class="mr-2 size-5"
           />
-          Export
+          {{ $t('page.common.export') }}
         </VbenButton>
         <VbenButton
           :loading="state.importing"
@@ -491,7 +492,7 @@ const getBulkActionTitle = () => {
             icon="ant-design:upload-outlined"
             class="mr-2 size-5"
           />
-          Import
+          {{ $t('page.common.import') }}
         </VbenButton>
       </template>
 
@@ -505,8 +506,8 @@ const getBulkActionTitle = () => {
             :disabled="row.variants.length <= 1"
             :loading="row.loading"
             :checked="row.feeLevelProduct"
-            checked-children="Product"
-            un-checked-children="Variant"
+            :checked-children="$t('page.settings-cogs.option.product')"
+            :un-checked-children="$t('page.settings-cogs.option.variant')"
           />
         </div>
       </template>
@@ -532,7 +533,11 @@ const getBulkActionTitle = () => {
                 row.feeLevel === EFeeLevel.PRODUCT && row.variants.length > 1
               "
             >
-              Applies to all {{ row.variants.length }} variants
+              {{
+                $t('page.settings-cogs.message.appliesToAllVariants', [
+                  row.variants.length,
+                ])
+              }}
             </div>
           </div>
         </div>
@@ -569,7 +574,7 @@ const getBulkActionTitle = () => {
             :disabled="row.loading"
             variant="link"
           >
-            View Detail
+            {{ $t('page.settings-cogs.action.viewDetail') }}
           </VbenButton>
         </div>
         <Switch
@@ -581,8 +586,8 @@ const getBulkActionTitle = () => {
           :disabled="row.loading"
           :loading="row.loading"
           :checked="isShopifyCogsSource(row)"
-          checked-children="Shopify"
-          un-checked-children="Manual"
+          :checked-children="$t('page.settings-cogs.option.shopify')"
+          :un-checked-children="$t('page.settings-cogs.option.manual')"
         />
       </template>
       <template #handlingFees="{ row }: { row: IProduct }">

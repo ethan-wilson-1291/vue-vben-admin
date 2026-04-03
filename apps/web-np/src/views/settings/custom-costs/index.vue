@@ -3,6 +3,7 @@ import type { ICustomCost } from '#/api';
 
 import { Page, useVbenModal, VbenButton } from '@vben/common-ui';
 import { IconifyIcon } from '@vben/icons';
+import { $t } from '@vben/locales';
 
 import { Modal } from 'ant-design-vue';
 
@@ -40,11 +41,11 @@ const [Grid, gridApi] = useVbenVxeGrid({
 
 const handleDelete = (row: ICustomCost) => {
   Modal.confirm({
-    title: 'Delete Custom Cost',
-    content: 'Are you sure you want to delete this custom cost?',
+    title: $t('page.settings-custom-costs.deleteModal.title'),
+    content: $t('page.settings-custom-costs.deleteModal.content'),
     okType: 'danger',
-    okText: 'Yes',
-    cancelText: 'No',
+    okText: $t('page.common.confirm'),
+    cancelText: $t('page.common.cancel'),
     onOk: async () => {
       await deleteCustomCost([row.id]).then(() => {
         gridApi.query();
@@ -58,7 +59,7 @@ const handleDelete = (row: ICustomCost) => {
   <Page auto-content-height>
     <FormContentModal />
 
-    <Grid table-title="Custom Costs/Tax">
+    <Grid :table-title="$t('page.settings-custom-costs.tableTitle')">
       <template #toolbar-tools>
         <UpgradeBtn class="mr-2 w-[150px]" />
 
@@ -73,7 +74,7 @@ const handleDelete = (row: ICustomCost) => {
             class="mr-2 size-4"
             icon="ant-design:plus-circle-outlined"
           />
-          Add Custom Cost
+          {{ $t('page.settings-custom-costs.action.addCustomCost') }}
         </VbenButton>
       </template>
 

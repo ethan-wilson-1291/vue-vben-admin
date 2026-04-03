@@ -3,6 +3,8 @@ import type { PickerMode } from 'ant-design-vue/es/vc-picker/interface';
 
 import { computed } from 'vue';
 
+import { $t } from '@vben/locales';
+
 import { RangePicker } from 'ant-design-vue';
 
 import { useShopStore } from '#/store';
@@ -59,12 +61,15 @@ const getLimitName = computed(() => {
           class="flex w-full flex-col space-y-1 py-2 text-center italic text-foreground"
         >
           <span class="leading-none">
-            Please choose a date range within a maximum period of
+            {{ $t('page.date-range-picker.limitHint') }}
             <strong>{{ getLimitName }}</strong>
           </span>
           <span class="text-xs">
-            Ex: From <strong>2022</strong>-01-01 to <strong>2022</strong>-01-15
-            is a valid range
+            {{ $t('page.date-range-picker.exampleFrom') }}
+            <strong>2022</strong>-01-01
+            {{ $t('page.date-range-picker.exampleTo') }}
+            <strong>2022</strong>-01-15
+            {{ $t('page.date-range-picker.exampleValid') }}
             <span class="font-bold">({{ shopStore.shop.timezone }})</span>
           </span>
         </div>

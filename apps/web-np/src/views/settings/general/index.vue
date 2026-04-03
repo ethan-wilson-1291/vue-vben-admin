@@ -7,6 +7,7 @@ import { useUserStore } from '@vben/stores';
 import { Card, message } from 'ant-design-vue';
 
 import { useVbenForm } from '#/adapter/form';
+import { $t } from '#/locales';
 import { cogsSoures, timezones } from '#/shared/constants';
 import { toPercentage } from '#/shared/utils';
 import { useCurrencyStore, useShopSettingStore, useShopStore } from '#/store';
@@ -57,12 +58,12 @@ const [ShopSettingForm, formApi] = useVbenForm({
     {
       component: h('span', shopStore.shop.id),
       fieldName: 'id',
-      label: 'Shop ID',
+      label: $t('page.settings-general.form.shopId'),
     },
     {
       component: h('span', userStore.userInfo?.username),
       fieldName: 'name',
-      label: 'Name',
+      label: $t('page.settings-general.form.name'),
     },
     {
       component: h(
@@ -70,24 +71,24 @@ const [ShopSettingForm, formApi] = useVbenForm({
         shopStore.shop.domain ?? shopStore.shop.myshopifyDomain,
       ),
       fieldName: 'domain',
-      label: 'Domain',
+      label: $t('page.settings-general.form.domain'),
     },
     {
       component: h('span'),
       labelClass: 'font-bold',
       formItemClass: 'font-bold',
       fieldName: 'subscriptionName',
-      label: 'Subscription',
+      label: $t('page.settings-general.form.subscription'),
     },
     {
       component: h('span', userStore.userInfo?.realName),
       fieldName: 'ownerName',
-      label: 'Owner',
+      label: $t('page.settings-general.form.owner'),
     },
     {
       component: h('span', userStore.userInfo?.email),
       fieldName: 'ownerEmail',
-      label: 'Email',
+      label: $t('page.settings-general.form.email'),
     },
     {
       component: 'Select',
@@ -101,15 +102,16 @@ const [ShopSettingForm, formApi] = useVbenForm({
       },
       defaultValue: shopStore.shop.timezone,
       fieldName: 'timezone',
-      help: 'This timezone will be used to calculate the date range for reports and other time-based features.',
-      label: 'Timezone',
+      help: $t('page.settings-general.help.timezone'),
+      label: $t('page.settings-general.form.timezone'),
     },
     {
       component: 'Divider',
       fieldName: '_dividerss',
       renderComponentContent: () => {
         return {
-          default: () => h('div', 'Cost of Goods Sold (COGS) & Handling Fees'),
+          default: () =>
+            h('div', $t('page.settings-general.section.cogsAndHandlingFees')),
         };
       },
       hideLabel: true,
@@ -128,19 +130,22 @@ const [ShopSettingForm, formApi] = useVbenForm({
         min: 0,
         addonAfter: '%',
       },
-      help: 'Example: Product A has been removed and was priced at $100. With a COGS rate of 75%, the cost of goods sold for that item in the original order would be $75.',
+      help: $t('page.settings-general.help.defaultRate'),
       defaultValue: toPercentage(shopSettingStore.cogsRate),
       fieldName: 'cogsRate',
-      label: 'Default Rate',
+      label: $t('page.settings-general.form.defaultRate'),
     },
     {
       component: 'Select',
-      help: 'When syncing products from Shopify, the COGS source will either be pulled from the Shopify or set manually.',
+      help: $t('page.settings-general.help.source'),
       fieldName: 'cogsSource',
-      label: 'Source',
+      label: $t('page.settings-general.form.source'),
       defaultValue: shopSettingStore.cogsSourceDefault,
       componentProps: {
-        options: cogsSoures,
+        options: cogsSoures.map((item) => ({
+          ...item,
+          label: item.labelKey ? $t(item.labelKey) : item.label,
+        })),
       },
     },
     {
@@ -149,17 +154,21 @@ const [ShopSettingForm, formApi] = useVbenForm({
         // controls: false,
         addonAfter: shopStore.shop.currency,
       },
-      help: 'This is the default handling fee for new products. You can change it later in the COGS & Handling Fees settings.',
+      help: $t('page.settings-general.help.handlingFees'),
       defaultValue: shopSettingStore.handlingFees,
       fieldName: 'handlingFees',
-      label: 'Handling Fees',
+      label: $t('page.settings-general.form.handlingFees'),
     },
     {
       component: 'Divider',
       fieldName: '_divider',
       renderComponentContent: () => {
         return {
-          default: () => h('div', 'Currency Converter Display'),
+          default: () =>
+            h(
+              'div',
+              $t('page.settings-general.section.currencyConverterDisplay'),
+            ),
         };
       },
       hideLabel: true,
@@ -173,9 +182,9 @@ const [ShopSettingForm, formApi] = useVbenForm({
     {
       component: h('span', shopStore.shop.currency),
       fieldName: 'shopCurrency',
-      help: 'The currency sync from Shopify',
+      help: $t('page.settings-general.help.fromShopify'),
       formItemClass: 'col-start-1',
-      label: 'From Shopify',
+      label: $t('page.settings-general.form.fromShopify'),
     },
     {
       component: 'Select',
@@ -189,13 +198,13 @@ const [ShopSettingForm, formApi] = useVbenForm({
       },
       defaultValue: shopStore.shop.currencyFromApp,
       fieldName: 'appCurrency',
-      help: 'The currency display in the app',
-      label: 'App display',
+      help: $t('page.settings-general.help.appDisplay'),
+      label: $t('page.settings-general.form.appDisplay'),
     },
     {
       component: h('span'),
       fieldName: 'currencyRate',
-      label: 'Rate',
+      label: $t('page.settings-general.form.rate'),
       hideLabel: state.appCurrency === shopStore.shop.currency,
     },
   ],
@@ -216,7 +225,7 @@ function onSubmit(values: Record<string, any>) {
       },
     });
     message.success({
-      content: 'The settings have been saved.',
+      content: $t('page.settings-general.message.savedSuccess'),
     });
   });
 }
@@ -224,7 +233,7 @@ function onSubmit(values: Record<string, any>) {
 
 <template>
   <Page auto-content-height>
-    <Card title="Settings">
+    <Card :title="$t('page.settings-general.cardTitle')">
       <ShopSettingForm>
         <template #currencyRate>
           <span v-if="state.appCurrency !== shopStore.shop.currency">{{
@@ -237,7 +246,8 @@ function onSubmit(values: Record<string, any>) {
             class="pl-0"
             @click="shopStore.redirectToPricing"
           >
-            {{ shopStore.shop.subscriptionName }} Plan
+            {{ shopStore.shop.subscriptionName }}
+            {{ $t('page.settings-general.planSuffix') }}
           </VbenButton>
         </template>
       </ShopSettingForm>
