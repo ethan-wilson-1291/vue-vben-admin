@@ -40,6 +40,7 @@ interface IShopSettings {
   mailWeeklyReport: boolean;
   mailMonthlyReport: boolean;
   showChatPopup: boolean;
+  showNewFeatureNotice: boolean;
 }
 
 export const useShopSettingStore = defineStore('np-shop-setting', {
@@ -53,6 +54,7 @@ export const useShopSettingStore = defineStore('np-shop-setting', {
       this.mailWeeklyReport = settings.mailWeeklyReport;
       this.mailMonthlyReport = settings.mailMonthlyReport;
       this.showChatPopup = settings.showChatPopup;
+      this.showNewFeatureNotice = settings.showNewFeatureNotice ?? false;
     },
     async setTransactionsFees(transactionFees: ITransactionFee[]) {
       const payload = cloneDeep(transactionFees).map((fee) => {
@@ -117,5 +119,6 @@ export const useShopSettingStore = defineStore('np-shop-setting', {
     mailWeeklyReport: true,
     mailMonthlyReport: true,
     showChatPopup: false,
+    showNewFeatureNotice: false,
   }),
 });
