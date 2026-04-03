@@ -1,0 +1,60 @@
+{
+  "grossSales": "Ventas brutas",
+  "grossSalesExplain": "  Ventas brutas = Subtotal + Envío + Propina + Impuestos recaudados",
+
+  "totalDiscount": "Descuento",
+  "totalShipping": "Envío cobrado",
+  "totalTip": "Propina cobrada",
+  "totalRefund": "Reembolso",
+
+  "netPayment": "Ingresos",
+  "netPaymentExplain": "Ingresos (pago neto) = Ventas brutas - Descuento - Reembolso",
+
+  "cogs": "COGS",
+  "cogsExplain": "El costo de los bienes vendidos (COGS) son los costos directos atribuibles a la producción de los bienes vendidos por una empresa. Este monto incluye el costo de los materiales utilizados para crear el producto junto con los costos directos de mano de obra utilizados para producirlo.",
+
+  "handlingFees": "Tarifas de gestión",
+  "handlingFeesExplain": "Las tarifas de gestión son los costos asociados con la manipulación de bienes, incluidos los costos de mano de obra, embalaje y envío.",
+
+  "shippingCosts": "Costos de envío",
+
+  "paymentGateway": "Pasarela de pago",
+  "transactionFees": "Comisiones por transacción",
+  "transactionFeesExplain": "Las comisiones por transacción son cargos que un comerciante debe pagar cada vez que un cliente realiza una compra con tarjeta de crédito. Estas comisiones pueden variar según la compañía de la tarjeta de crédito y el proveedor de la cuenta comercial.",
+
+  "grossProfit": "Beneficio bruto",
+  "grossProfitExplain": "Beneficio bruto = Ingresos - COGS - Tarifas de gestión - Costos de envío - Comisiones por transacción",
+
+  "grossProfitMargin": "Margen de beneficio bruto",
+  "grossProfitMarginExplain": "Margen de beneficio bruto = (Beneficio bruto / Ingresos) * 100%",
+
+  "totalCustomCost": "Costos personalizados",
+  "totalCustomCostExplain": "Los costos personalizados son los costos asociados con la producción de bienes, incluidos los costos de mano de obra, impuestos, publicidad y otros gastos.",
+
+  "totalAdSpend": "Gasto en anuncios",
+  "facebookAds": "Anuncios de Facebook",
+  "tiktokAds": "Anuncios de TikTok",
+
+  "roas": "ROAS",
+  "roasExplain": "ROAS = Ingresos totales / Gasto en anuncios. ROAS significa retorno sobre el gasto publicitario. Es una métrica de marketing digital que mide cuántos ingresos genera un negocio por cada dólar gastado en publicidad.",
+
+  "poas": "POAS",
+  "poasExplain": "POAS = Beneficio bruto / Gasto en anuncios. POAS (beneficio sobre el gasto publicitario) es una métrica de marketing que mide la rentabilidad de una campaña publicitaria al centrarse en el beneficio neto obtenido por cada dólar gastado en publicidad.",
+
+  "totalTax": "Impuestos recaudados",
+  "totalTaxExplain": "Los impuestos recaudados son el monto de impuestos que una empresa cobra a sus clientes en nombre del gobierno. Este monto suele ser un porcentaje del precio de venta y se añade al costo total de los bienes o servicios vendidos.",
+
+  "netProfit": "Beneficio neto",
+  "netProfitExplain": "Beneficio neto = Beneficio bruto - Impuestos recaudados - Costos personalizados - Gasto en anuncios",
+
+  "netProfitMargin": "Margen de beneficio neto",
+  "netProfitMarginExplain": "Margen de beneficio neto = (Beneficio neto / Ingresos) * 100%",
+
+  "totalCosts": "Costos totales",
+  "totalCostsExplain": "Costos totales = COGS + Tarifas de gestión + Costos de envío + Comisiones por transacción + Costos personalizados + Gasto en anuncios",
+
+  "ltv": "Valor de vida del cliente (LTV)",
+  "ltvExplain": "El valor de vida del cliente (LTV) representa el ingreso promedio que un cliente genera durante todo su período como cliente de pago.",
+
+  "totalOrders": "Pedidos totales"
+}
