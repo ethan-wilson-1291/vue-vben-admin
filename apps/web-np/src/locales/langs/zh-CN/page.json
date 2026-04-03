@@ -625,7 +625,8 @@
     "title": "广告连接",
     "channel": {
       "facebook": "Facebook",
-      "tiktok": "TikTok"
+      "tiktok": "TikTok",
+      "google": "Google"
     },
     "status": {
       "syncPending": "等待同步",

@@ -625,7 +625,8 @@
     "title": "Connessioni annunci",
     "channel": {
       "facebook": "Facebook",
-      "tiktok": "TikTok"
+      "tiktok": "TikTok",
+      "google": "Google"
     },
     "status": {
       "syncPending": "Sincronizzazione in attesa",

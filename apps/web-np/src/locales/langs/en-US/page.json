@@ -625,7 +625,8 @@
     "title": "Ad Connections",
     "channel": {
       "facebook": "Facebook",
-      "tiktok": "TikTok"
+      "tiktok": "TikTok",
+      "google": "Google"
     },
     "status": {
       "syncPending": "Sync pending",

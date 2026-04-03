@@ -625,7 +625,8 @@
     "title": "Connexions publicitaires",
     "channel": {
       "facebook": "Facebook",
-      "tiktok": "TikTok"
+      "tiktok": "TikTok",
+      "google": "Google"
     },
     "status": {
       "syncPending": "Synchronisation en attente",

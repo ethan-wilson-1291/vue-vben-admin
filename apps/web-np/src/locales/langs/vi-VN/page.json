@@ -625,7 +625,8 @@
     "title": "Kết nối quảng cáo",
     "channel": {
       "facebook": "Facebook",
-      "tiktok": "TikTok"
+      "tiktok": "TikTok",
+      "google": "Google"
     },
     "status": {
       "syncPending": "Chờ đồng bộ",
