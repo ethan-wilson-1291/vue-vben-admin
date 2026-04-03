@@ -49,6 +49,7 @@
   },
   "onboard": {
     "steps": {
+      "language": "Language",
       "cogs": "COGS",
       "handlingFees": "Handling Fees",
       "shippingCosts": "Shipping Costs",
@@ -75,6 +76,10 @@
     },
     "exampleOrder": {
       "title": "Example Order"
+    },
+    "stepLanguage": {
+      "title": "Choose language",
+      "description": "Select your preferred language for the dashboard."
     },
     "stepCogs": {
       "title": "Cost of goods sold (COGS)",

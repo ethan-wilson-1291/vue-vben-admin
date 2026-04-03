@@ -49,6 +49,7 @@
   },
   "onboard": {
     "steps": {
+      "language": "Ngôn ngữ",
       "cogs": "COGS",
       "handlingFees": "Phí xử lý",
       "shippingCosts": "Chi phí vận chuyển",
@@ -75,6 +76,10 @@
     },
     "exampleOrder": {
       "title": "Đơn hàng mẫu"
+    },
+    "stepLanguage": {
+      "title": "Chọn ngôn ngữ",
+      "description": "Chọn ngôn ngữ bạn muốn sử dụng cho bảng điều khiển."
     },
     "stepCogs": {
       "title": "Giá vốn hàng bán (COGS)",

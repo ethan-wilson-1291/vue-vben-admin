@@ -49,6 +49,7 @@
   },
   "onboard": {
     "steps": {
+      "language": "语言",
       "cogs": "COGS",
       "handlingFees": "处理费",
       "shippingCosts": "运费",
@@ -75,6 +76,10 @@
     },
     "exampleOrder": {
       "title": "示例订单"
+    },
+    "stepLanguage": {
+      "title": "选择语言",
+      "description": "请选择你在仪表盘中使用的语言。"
     },
     "stepCogs": {
       "title": "商品成本（COGS）",

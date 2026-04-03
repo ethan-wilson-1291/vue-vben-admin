@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { ITransactionFee } from '#/store';
 
-import { onBeforeMount, onMounted, onUnmounted, reactive } from 'vue';
+import { computed, onBeforeMount, onMounted, onUnmounted, reactive } from 'vue';
 
 import { Page, VbenButton } from '@vben/common-ui';
 import { ArrowLeft, Check } from '@vben/icons';
@@ -19,6 +19,7 @@ import { useShopSettingStore, useShopStore } from '#/store';
 
 import ExampleOrder from './example-order.vue';
 import { onboardForm } from './service';
+import ChooseLanguage from './step-0-language.vue';
 import Cogs from './step-1-cogs.vue';
 import HandlingFees from './step-2-handling-fees.vue';
 import ShippingFees from './step-3-shipping-fees.vue';
@@ -32,13 +33,20 @@ const state = reactive({
   loading: false,
 });
 
-const steps = [
+const steps = computed(() => [
+  $t('page.onboard.steps.language'),
   $t('page.onboard.steps.cogs'),
   $t('page.onboard.steps.handlingFees'),
   $t('page.onboard.steps.shippingCosts'),
   $t('page.onboard.steps.transactionFees'),
-];
-const items = steps.map((item) => ({ key: item, title: item }));
+]);
+
+const items = computed(() =>
+  steps.value.map((title, index) => ({
+    key: `step-${index}`,
+    title,
+  })),
+);
 
 const next = () => {
   state.currentStep++;
@@ -159,12 +167,13 @@ onUnmounted(() => {
         </div>
 
         <div class="flex flex-row space-x-5">
-          <Cogs v-if="state.currentStep === 0" />
-          <HandlingFees v-if="state.currentStep === 1" />
-          <ShippingFees v-if="state.currentStep === 2" />
-          <TransactionFees v-if="state.currentStep === 3" />
+          <ChooseLanguage v-if="state.currentStep === 0" />
+          <Cogs v-if="state.currentStep === 1" />
+          <HandlingFees v-if="state.currentStep === 2" />
+          <ShippingFees v-if="state.currentStep === 3" />
+          <TransactionFees v-if="state.currentStep === 4" />
 
-          <ExampleOrder />
+          <ExampleOrder v-if="state.currentStep > 0" />
         </div>
       </div>
     </Flex>
