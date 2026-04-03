@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import type { SupportedLanguagesType } from '@vben/locales';
-
 import { SUPPORT_LANGUAGES } from '@vben/constants';
 import { $t, loadLocaleMessages } from '@vben/locales';
 import { preferences, updatePreferences } from '@vben/preferences';
@@ -8,7 +6,7 @@ import { preferences, updatePreferences } from '@vben/preferences';
 import { Card, Select } from 'ant-design-vue';
 
 const handleLocaleChange = async (value: string) => {
-  const locale = value as SupportedLanguagesType;
+  const locale = value as any;
 
   updatePreferences({
     app: {

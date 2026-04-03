@@ -2,6 +2,7 @@
 import { computed, h, reactive } from 'vue';
 
 import { Page, VbenButton } from '@vben/common-ui';
+import { SUPPORT_LANGUAGES } from '@vben/constants';
 import { useUserStore } from '@vben/stores';
 
 import { Card, message } from 'ant-design-vue';
@@ -104,6 +105,15 @@ const [ShopSettingForm, formApi] = useVbenForm({
       fieldName: 'timezone',
       help: $t('page.settings-general.help.timezone'),
       label: $t('page.settings-general.form.timezone'),
+    },
+    {
+      component: 'Select',
+      componentProps: {
+        options: SUPPORT_LANGUAGES,
+      },
+      defaultValue: shopSettingStore.appLocale,
+      fieldName: 'appLocale',
+      label: $t('page.onboard.steps.language'),
     },
     {
       component: 'Divider',
@@ -227,6 +237,10 @@ function onSubmit(values: Record<string, any>) {
     message.success({
       content: $t('page.settings-general.message.savedSuccess'),
     });
+
+    setTimeout(() => {
+      // window.location.reload();
+    }, 1000);
   });
 }
 </script>

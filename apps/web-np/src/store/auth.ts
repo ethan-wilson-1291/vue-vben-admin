@@ -4,6 +4,8 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { LOGIN_PATH } from '@vben/constants';
+import { loadLocaleMessages } from '@vben/locales';
+import { updatePreferences } from '@vben/preferences';
 import { resetAllStores, useAccessStore, useUserStore } from '@vben/stores';
 
 import { notification } from 'ant-design-vue';
@@ -120,6 +122,14 @@ export const useAuthStore = defineStore('auth', () => {
       res.state,
     );
     shopSettingStore.setStates(res.settings);
+
+    updatePreferences({
+      app: {
+        locale: shopSettingStore.appLocale as any,
+      },
+    });
+
+    await loadLocaleMessages(shopSettingStore.appLocale as any);
 
     // Set timezone
     dayjs.tz.setDefault(shopStore.shop.timezone);

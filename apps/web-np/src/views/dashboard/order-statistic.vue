@@ -425,17 +425,19 @@ const closeNewFeatureNotice = () => {
       <IconifyIcon icon="lucide:languages" />
     </template>
     <template #message>
-      <span class="font-semibold">Multiple Language Supported</span>
+      <span class="font-semibold">
+        {{ $t('page.dashboard.newFeatureLanguageTitle') }}
+      </span>
     </template>
     <template #description>
       <div class="flex flex-col gap-3 md:flex-row md:items-start">
         <div class="md:w-3/5">
           <p class="mb-2">
-            You can now view the dashboard in multiple languages. Use the
-            language switcher in the top navigation to instantly update labels,
-            metrics, and dashboard content in your preferred language.
+            {{ $t('page.dashboard.newFeatureLanguageDescription') }}
           </p>
-          <p class="mb-1 text-sm">Supported languages:</p>
+          <p class="mb-1 text-sm">
+            {{ $t('page.dashboard.newFeatureLanguageListTitle') }}
+          </p>
           <ul class="m-0 list-disc pl-5 text-sm leading-6">
             <li>English</li>
             <li>Español</li>
@@ -446,8 +448,8 @@ const closeNewFeatureNotice = () => {
           </ul>
         </div>
         <img
-          alt="Guide to switch language"
-          class="w-full rounded border border-gray-200 md:w-2/5"
+          :alt="$t('page.dashboard.newFeatureLanguageImageAlt')"
+          class="w-full rounded border border-gray-200 md:w-3/5"
           src="/static/images/feature-multiple-language.png"
         />
       </div>

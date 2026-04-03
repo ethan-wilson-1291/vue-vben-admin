@@ -32,6 +32,7 @@ export interface IRegion {
 }
 
 interface IShopSettings {
+  appLocale: string;
   cogsRate: number;
   cogsSourceDefault: ECogsSource;
   handlingFees: any;
@@ -46,6 +47,7 @@ interface IShopSettings {
 export const useShopSettingStore = defineStore('np-shop-setting', {
   actions: {
     setStates(settings: any) {
+      this.appLocale = settings.appLocale ?? 'en-US';
       this.cogsRate = settings.cogsRate;
       this.cogsSourceDefault = settings.cogsSourceDefault;
       this.handlingFees = settings.handlingFees;
@@ -111,6 +113,7 @@ export const useShopSettingStore = defineStore('np-shop-setting', {
   },
 
   state: (): IShopSettings => ({
+    appLocale: 'en-US',
     cogsRate: 0,
     cogsSourceDefault: ECogsSource.SHOPIFY,
     handlingFees: {},
