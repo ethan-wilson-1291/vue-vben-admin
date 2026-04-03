@@ -47,6 +47,61 @@
     "avgOrderProfit": "Lợi nhuận TB/đơn",
     "avgOrderProfitExplain": "Lợi nhuận TB/đơn = Tổng lợi nhuận ròng / Tổng đơn hàng"
   },
+  "onboard": {
+    "steps": {
+      "cogs": "COGS",
+      "handlingFees": "Phí xử lý",
+      "shippingCosts": "Chi phí vận chuyển",
+      "transactionFees": "Phí giao dịch"
+    },
+    "index": {
+      "welcomePrefix": "Chào mừng đến với",
+      "welcomeSuffix": "!",
+      "subtitle": "Để tính lợi nhuận, chúng tôi cần thông tin chi phí của bạn.",
+      "previous": "Quay lại",
+      "next": "Tiếp theo",
+      "finish": "Hoàn tất",
+      "completedSuccess": "Hoàn tất thiết lập ban đầu thành công"
+    },
+    "common": {
+      "more": "Thêm",
+      "forExample": "Ví dụ",
+      "exampleProduct": "Sản phẩm mẫu",
+      "salePrice": "Giá bán",
+      "quantity": "Số lượng",
+      "item": "sản phẩm",
+      "order": "đơn",
+      "exampleOrder": "Đơn hàng mẫu"
+    },
+    "exampleOrder": {
+      "title": "Đơn hàng mẫu"
+    },
+    "stepCogs": {
+      "title": "Giá vốn hàng bán (COGS)",
+      "syncFromShopify": "Đồng bộ từ Shopify",
+      "manual": "Thủ công",
+      "syncDescriptionPrefix": "Hệ thống sẽ tự động đồng bộ giá trị",
+      "costPerItem": "Chi phí mỗi sản phẩm",
+      "syncDescriptionSuffix": "từ Shopify và dùng làm giá trị COGS.",
+      "defaultCogsRate": "Thiết lập tỷ lệ COGS mặc định cho 1 sản phẩm:"
+    },
+    "stepHandlingFees": {
+      "title": "Phí xử lý",
+      "defaultHandlingFee": "Phí xử lý mặc định cho 1 sản phẩm"
+    },
+    "stepShippingFees": {
+      "title": "Chi phí vận chuyển",
+      "description": "là khoản phí để vận chuyển hàng hóa từ nơi này đến nơi khác và sẽ được cộng vào chi phí sản phẩm trong đơn hàng của khách.",
+      "calculateBy": "Chi phí vận chuyển sẽ được tính theo",
+      "defaultShippingCost": "Chi phí vận chuyển mặc định cho 1 đơn vị",
+      "itemQuantity": "Số lượng sản phẩm",
+      "totalWeight": "Tổng khối lượng"
+    },
+    "products": {
+      "tShirt": "Áo thun",
+      "shoes": "Giày"
+    }
+  },
   "reports-p-and-l": {
     "title": "Báo cáo P&L",
     "form": {

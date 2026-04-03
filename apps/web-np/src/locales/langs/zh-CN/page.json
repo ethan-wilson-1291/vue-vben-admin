@@ -47,6 +47,61 @@
     "avgOrderProfit": "平均订单利润",
     "avgOrderProfitExplain": "平均订单利润 = 净利润总额 / 总订单数"
   },
+  "onboard": {
+    "steps": {
+      "cogs": "COGS",
+      "handlingFees": "处理费",
+      "shippingCosts": "运费",
+      "transactionFees": "交易手续费"
+    },
+    "index": {
+      "welcomePrefix": "欢迎使用",
+      "welcomeSuffix": "！",
+      "subtitle": "为了计算你的利润，我们需要你的成本信息。",
+      "previous": "上一步",
+      "next": "下一步",
+      "finish": "完成",
+      "completedSuccess": "引导设置已成功完成"
+    },
+    "common": {
+      "more": "更多",
+      "forExample": "例如",
+      "exampleProduct": "示例商品",
+      "salePrice": "销售价格",
+      "quantity": "数量",
+      "item": "件",
+      "order": "单",
+      "exampleOrder": "示例订单"
+    },
+    "exampleOrder": {
+      "title": "示例订单"
+    },
+    "stepCogs": {
+      "title": "商品成本（COGS）",
+      "syncFromShopify": "从 Shopify 同步",
+      "manual": "手动",
+      "syncDescriptionPrefix": "系统将自动从 Shopify 同步",
+      "costPerItem": "每件商品成本",
+      "syncDescriptionSuffix": "并将其作为 COGS 值。",
+      "defaultCogsRate": "设置单件商品默认 COGS 比例："
+    },
+    "stepHandlingFees": {
+      "title": "处理费",
+      "defaultHandlingFee": "单件商品默认处理费"
+    },
+    "stepShippingFees": {
+      "title": "运费",
+      "description": "是将商品从一个地点运输到另一个地点所收取的费用，并会计入客户订单商品成本。",
+      "calculateBy": "运费将按以下方式计算",
+      "defaultShippingCost": "每单位默认运费",
+      "itemQuantity": "商品数量",
+      "totalWeight": "总重量"
+    },
+    "products": {
+      "tShirt": "T 恤",
+      "shoes": "鞋子"
+    }
+  },
   "reports-p-and-l": {
     "title": "损益报表",
     "form": {

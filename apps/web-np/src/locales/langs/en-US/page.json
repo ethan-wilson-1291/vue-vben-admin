@@ -47,6 +47,61 @@
     "avgOrderProfit": "Avg. order profit",
     "avgOrderProfitExplain": "Avg. order profit = Total net profit / Total orders"
   },
+  "onboard": {
+    "steps": {
+      "cogs": "COGS",
+      "handlingFees": "Handling Fees",
+      "shippingCosts": "Shipping Costs",
+      "transactionFees": "Transaction Fees"
+    },
+    "index": {
+      "welcomePrefix": "Welcome to",
+      "welcomeSuffix": "!",
+      "subtitle": "To calculate your profits, we need your cost details.",
+      "previous": "Previous",
+      "next": "Next",
+      "finish": "Finish",
+      "completedSuccess": "Onboarding completed successfully"
+    },
+    "common": {
+      "more": "More",
+      "forExample": "For example",
+      "exampleProduct": "Example product",
+      "salePrice": "Sale price",
+      "quantity": "Quantity",
+      "item": "item",
+      "order": "order",
+      "exampleOrder": "Example order"
+    },
+    "exampleOrder": {
+      "title": "Example Order"
+    },
+    "stepCogs": {
+      "title": "Cost of goods sold (COGS)",
+      "syncFromShopify": "Sync from Shopify",
+      "manual": "Manual",
+      "syncDescriptionPrefix": "The system will automatically sync the",
+      "costPerItem": "Cost per item",
+      "syncDescriptionSuffix": "value from Shopify and use it as the COGS value.",
+      "defaultCogsRate": "Set default COGS rate for 1 item:"
+    },
+    "stepHandlingFees": {
+      "title": "Handling Fees",
+      "defaultHandlingFee": "Default handling fees for 1 item"
+    },
+    "stepShippingFees": {
+      "title": "Shipping Costs",
+      "description": "are the fees charged to transport goods from one location to another. They are added to the cost of the products ordered by a customer.",
+      "calculateBy": "The shipping costs will be calculated by",
+      "defaultShippingCost": "Default shipping cost for 1 unit",
+      "itemQuantity": "Item quantity",
+      "totalWeight": "Total weight"
+    },
+    "products": {
+      "tShirt": "T-Shirt",
+      "shoes": "Shoes"
+    }
+  },
   "reports-p-and-l": {
     "title": "P&L Report",
     "form": {

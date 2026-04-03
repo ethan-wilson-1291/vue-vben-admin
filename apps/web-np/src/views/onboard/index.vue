@@ -5,6 +5,7 @@ import { onBeforeMount, reactive } from 'vue';
 
 import { Page, VbenButton } from '@vben/common-ui';
 import { ArrowLeft, Check } from '@vben/icons';
+import { $t } from '@vben/locales';
 import { preferences } from '@vben/preferences';
 
 import { Flex, message, Steps } from 'ant-design-vue';
@@ -30,7 +31,12 @@ const state = reactive({
   loading: false,
 });
 
-const steps = ['COGS', 'Handling Fees', 'Shipping Costs', 'Transaction Fees'];
+const steps = [
+  $t('page.onboard.steps.cogs'),
+  $t('page.onboard.steps.handlingFees'),
+  $t('page.onboard.steps.shippingCosts'),
+  $t('page.onboard.steps.transactionFees'),
+];
 const items = steps.map((item) => ({ key: item, title: item }));
 
 const next = () => {
@@ -58,7 +64,7 @@ const onboardFinish = () => {
 
   onboardFinished(payload)
     .then(() => {
-      message.success('Onboarding completed successfully');
+      message.success($t('page.onboard.index.completedSuccess'));
 
       // Reload the page
       window.location.reload();
@@ -98,11 +104,12 @@ onBeforeMount(() => {
       <h2
         class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0"
       >
-        Welcome to the {{ preferences.app.name }}!
+        {{ $t('page.onboard.index.welcomePrefix') }} {{ preferences.app.name
+        }}{{ $t('page.onboard.index.welcomeSuffix') }}
       </h2>
 
       <small class="text-sm leading-none">
-        To calculate your profits, we need your cost details.
+        {{ $t('page.onboard.index.subtitle') }}
       </small>
 
       <div class="mt-5 w-full max-w-4xl">
@@ -117,7 +124,7 @@ onBeforeMount(() => {
             @click="prev"
           >
             <ArrowLeft class="mr-2 size-4" />
-            Previous
+            {{ $t('page.onboard.index.previous') }}
           </VbenButton>
 
           <VbenButton
@@ -126,7 +133,7 @@ onBeforeMount(() => {
             type="primary"
             @click="next"
           >
-            Next
+            {{ $t('page.onboard.index.next') }}
             <ArrowRight class="ml-2 size-4" />
           </VbenButton>
 
@@ -137,7 +144,7 @@ onBeforeMount(() => {
             type="primary"
             @click="onboardFinish"
           >
-            Finish
+            {{ $t('page.onboard.index.finish') }}
             <Check class="ml-2 size-4" />
           </VbenButton>
         </div>

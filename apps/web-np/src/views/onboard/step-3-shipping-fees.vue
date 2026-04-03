@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import { onBeforeMount } from 'vue';
 
+import { $t } from '@vben/locales';
+
 import { Card, InputNumber, Select } from 'ant-design-vue';
 
-import { ShippingCostLevel, ShippingCostLevelList } from '#/shared/constants';
+import { ShippingCostLevel } from '#/shared/constants';
 import { formatMoney } from '#/shared/utils';
 import { useShopStore } from '#/store';
 
@@ -14,16 +16,31 @@ const shopStore = useShopStore();
 const getUnitName = () => {
   switch (onboardForm.shippingFeeLevel) {
     case ShippingCostLevel.QUANTITY: {
-      return '/ Item';
+      return `/${$t('page.onboard.common.item')}`;
     }
     case ShippingCostLevel.WEIGHT: {
-      return '/ Kg';
+      return '/kg';
     }
     default: {
-      return '/ Order';
+      return `/${$t('page.onboard.common.order')}`;
     }
   }
 };
+
+const shippingLevelOptions = [
+  {
+    label: $t('page.settings-shipping-fees.level.quantity'),
+    value: ShippingCostLevel.QUANTITY,
+  },
+  {
+    label: $t('page.settings-shipping-fees.level.weight'),
+    value: ShippingCostLevel.WEIGHT,
+  },
+  {
+    label: $t('page.settings-shipping-fees.level.order'),
+    value: ShippingCostLevel.ORDER,
+  },
+];
 
 const handleChange = () => {
   let totalUnit = sampleOrder.totalWeight;
@@ -53,26 +70,29 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <Card title="Shipping Costs">
+  <Card :title="$t('page.onboard.stepShippingFees.title')">
     <p>
-      Shipping costs are the fees charged to transport goods from one location
-      to another. They are added to the cost of the products ordered by a
-      customer.
+      {{ $t('field-name.shippingCosts') }}
+      {{ $t('page.onboard.stepShippingFees.description') }}
     </p>
 
     <div class="mt-5 flex items-center justify-between">
-      <div class="font-semibold">The shipping costs will be calculated by</div>
+      <div class="font-semibold">
+        {{ $t('page.onboard.stepShippingFees.calculateBy') }}
+      </div>
 
       <Select
         v-model:value="onboardForm.shippingFeeLevel"
         class="w-full max-w-48"
-        :options="ShippingCostLevelList"
+        :options="shippingLevelOptions"
         @change="handleChange"
       />
     </div>
 
     <div class="mt-2 flex items-center justify-between">
-      <div class="font-semibold">Default shipping cost for 1 unit</div>
+      <div class="font-semibold">
+        {{ $t('page.onboard.stepShippingFees.defaultShippingCost') }}
+      </div>
 
       <InputNumber
         :addon-after="getUnitName()"
@@ -88,16 +108,16 @@ onBeforeMount(() => {
       <thead>
         <tr>
           <th class="px-6 py-3 text-start text-xs font-medium uppercase">
-            Example order
+            {{ $t('page.onboard.common.exampleOrder') }}
           </th>
           <th class="px-6 py-3 text-center text-xs font-medium uppercase">
-            Item Quantity
+            {{ $t('page.onboard.stepShippingFees.itemQuantity') }}
           </th>
           <th class="px-6 py-3 text-center text-xs font-medium uppercase">
-            Total Weight
+            {{ $t('page.onboard.stepShippingFees.totalWeight') }}
           </th>
           <th class="px-6 py-3 text-end text-xs font-medium uppercase">
-            Shipping costs
+            {{ $t('field-name.shippingCosts') }}
           </th>
         </tr>
       </thead>
@@ -108,7 +128,7 @@ onBeforeMount(() => {
             {{ totalQuantity }}
           </td>
           <td class="px-6 py-4 text-center text-sm">
-            {{ sampleOrder.totalWeight }} Kg
+            {{ sampleOrder.totalWeight }} kg
           </td>
           <td class="px-6 py-4 text-end text-sm font-bold">
             {{ formatMoney(sampleOrder.shippingFees, shopStore.shop.currency) }}

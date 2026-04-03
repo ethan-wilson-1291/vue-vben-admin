@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { onBeforeMount } from 'vue';
 
+import { $t } from '@vben/locales';
+
 import { Card, InputNumber } from 'ant-design-vue';
 
 import { formatMoney } from '#/shared/utils';
@@ -31,16 +33,15 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <Card title="Handling Fees">
+  <Card :title="$t('page.onboard.stepHandlingFees.title')">
     <p>
-      A handling fee is a charge added to an order total to cover the costs of
-      processing, packaging, and shipping. Handling fees are used by online
-      retailers and businesses to help offset the costs of fulfilling customer
-      orders.
+      {{ $t('field-name.handlingFeesExplain') }}
     </p>
 
     <div class="mt-5 flex justify-between">
-      <div class="font-semibold">Default handling fees for 1 item</div>
+      <div class="font-semibold">
+        {{ $t('page.onboard.stepHandlingFees.defaultHandlingFee') }}
+      </div>
 
       <InputNumber
         :min="0"
@@ -56,13 +57,13 @@ onBeforeMount(() => {
       <thead>
         <tr>
           <th class="px-6 py-3 text-start text-xs font-medium uppercase">
-            Example product
+            {{ $t('page.onboard.common.exampleProduct') }}
           </th>
           <th class="px-6 py-3 text-center text-xs font-medium uppercase">
-            Quantity
+            {{ $t('page.onboard.common.quantity') }}
           </th>
           <th class="px-6 py-3 text-end text-xs font-medium uppercase">
-            Hanlding fees
+            {{ $t('field-name.handlingFees') }}
           </th>
         </tr>
       </thead>
