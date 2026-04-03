@@ -1,0 +1,60 @@
+{
+  "grossSales": "Tổng doanh thu",
+  "grossSalesExplain": "Tổng doanh thu = Tạm tính + Phí vận chuyển thu + Tiền tip thu + Thuế thu",
+
+  "totalDiscount": "Giảm giá",
+  "totalShipping": "Phí vận chuyển thu",
+  "totalTip": "Tiền tip thu",
+  "totalRefund": "Hoàn tiền",
+
+  "netPayment": "Doanh thu",
+  "netPaymentExplain": "Doanh thu (Thanh toán ròng) = Tổng doanh thu - Giảm giá - Hoàn tiền",
+
+  "cogs": "COGS",
+  "cogsExplain": "Giá vốn hàng bán (COGS) là các chi phí trực tiếp liên quan đến việc sản xuất hàng hóa đã bán của doanh nghiệp. Khoản này bao gồm chi phí nguyên vật liệu và chi phí nhân công trực tiếp dùng để tạo ra sản phẩm.",
+
+  "handlingFees": "Phí xử lý",
+  "handlingFeesExplain": "Phí xử lý là các chi phí liên quan đến việc xử lý hàng hóa, bao gồm chi phí nhân công, đóng gói và vận chuyển.",
+
+  "shippingCosts": "Chi phí vận chuyển",
+
+  "paymentGateway": "Cổng thanh toán",
+  "transactionFees": "Phí giao dịch",
+  "transactionFeesExplain": "Phí giao dịch là khoản phí mà người bán phải trả mỗi khi khách hàng mua hàng bằng thẻ tín dụng. Mức phí có thể khác nhau tùy theo đơn vị phát hành thẻ và nhà cung cấp tài khoản người bán.",
+
+  "grossProfit": "Lợi nhuận gộp",
+  "grossProfitExplain": "Lợi nhuận gộp = Doanh thu - COGS - Phí xử lý - Chi phí vận chuyển - Phí giao dịch",
+
+  "grossProfitMargin": "Biên lợi nhuận gộp",
+  "grossProfitMarginExplain": "Biên lợi nhuận gộp = (Lợi nhuận gộp / Doanh thu) * 100%",
+
+  "totalCustomCost": "Chi phí tùy chỉnh",
+  "totalCustomCostExplain": "Chi phí tùy chỉnh là các chi phí liên quan đến hoạt động kinh doanh như nhân công, thuế, quảng cáo và các chi phí khác.",
+
+  "totalAdSpend": "Chi tiêu quảng cáo",
+  "facebookAds": "Quảng cáo Facebook",
+  "tiktokAds": "Quảng cáo TikTok",
+
+  "roas": "ROAS",
+  "roasExplain": "ROAS = Tổng doanh thu / Chi tiêu quảng cáo. ROAS là chỉ số tiếp thị số đo lường doanh thu doanh nghiệp tạo ra trên mỗi đô la chi cho quảng cáo.",
+
+  "poas": "POAS",
+  "poasExplain": "POAS = Lợi nhuận gộp / Chi tiêu quảng cáo. POAS (lợi nhuận trên chi tiêu quảng cáo) là chỉ số tiếp thị đo lường mức sinh lời của chiến dịch quảng cáo dựa trên lợi nhuận thu được trên mỗi đô la chi cho quảng cáo.",
+
+  "totalTax": "Thuế thu",
+  "totalTaxExplain": "Thuế thu là số tiền thuế doanh nghiệp thu từ khách hàng thay mặt cơ quan nhà nước. Khoản này thường là một tỷ lệ phần trăm của giá bán và được cộng vào tổng chi phí hàng hóa hoặc dịch vụ đã bán.",
+
+  "netProfit": "Lợi nhuận ròng",
+  "netProfitExplain": "Lợi nhuận ròng = Lợi nhuận gộp - Thuế thu - Chi phí tùy chỉnh - Chi tiêu quảng cáo",
+
+  "netProfitMargin": "Biên lợi nhuận ròng",
+  "netProfitMarginExplain": "Biên lợi nhuận ròng = (Lợi nhuận ròng / Doanh thu) * 100%",
+
+  "totalCosts": "Tổng chi phí",
+  "totalCostsExplain": "Tổng chi phí = COGS + Phí xử lý + Chi phí vận chuyển + Phí giao dịch + Chi phí tùy chỉnh + Chi tiêu quảng cáo",
+
+  "ltv": "Giá trị vòng đời (LTV)",
+  "ltvExplain": "Giá trị vòng đời (LTV) thể hiện doanh thu trung bình mà một khách hàng tạo ra trong toàn bộ thời gian họ là khách hàng trả phí.",
+
+  "totalOrders": "Tổng đơn hàng"
+}
