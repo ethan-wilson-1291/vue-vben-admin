@@ -13,8 +13,9 @@ import { $t } from '@vben/locales';
 
 import { Alert } from 'ant-design-vue';
 
+import { shopToggleNewFeatureNotice } from '#/api';
 import { formatMoney, redirectToExternal } from '#/shared/utils';
-import { useShopStore } from '#/store';
+import { useShopSettingStore, useShopStore } from '#/store';
 
 import UpgradeBtn from '../shared-components/upgrade-btn.vue';
 import {
@@ -29,6 +30,7 @@ defineOptions({
 });
 
 const shopStore = useShopStore();
+const shopSettingStore = useShopSettingStore();
 const currency = shopStore.shop.currencyFromApp;
 const rate = shopStore.shop.currencyRate;
 
@@ -299,6 +301,13 @@ const handleWriteReview = () => {
   const url = `https://apps.shopify.com/${import.meta.env.VITE_GLOB_SHOPIFY_APP_HANDLE}#modal-show=WriteReviewModal`;
   redirectToExternal(url);
 };
+
+const closeNewFeatureNotice = () => {
+  shopSettingStore.showNewFeatureNotice = false;
+  shopToggleNewFeatureNotice({
+    showNewFeatureNotice: false,
+  });
+};
 </script>
 
 <template>
@@ -406,6 +415,49 @@ const handleWriteReview = () => {
       </div>
     </template>
     <template #action> </template>
+  </Alert>
+
+  <Alert
+    v-if="shopSettingStore.showNewFeatureNotice"
+    :show-icon="true"
+    class="mt-5"
+    type="info"
+    closable
+    @close="closeNewFeatureNotice"
+  >
+    <template #icon>
+      <IconifyIcon icon="lucide:languages" />
+    </template>
+    <template #message>
+      <span class="font-semibold">
+        {{ $t('page.dashboard.newFeatureLanguageTitle') }}
+      </span>
+    </template>
+    <template #description>
+      <div class="flex flex-col gap-3 md:flex-row md:items-start">
+        <div class="md:w-3/5">
+          <p class="mb-2">
+            {{ $t('page.dashboard.newFeatureLanguageDescription') }}
+          </p>
+          <p class="mb-1 text-sm">
+            {{ $t('page.dashboard.newFeatureLanguageListTitle') }}
+          </p>
+          <ul class="m-0 list-disc pl-5 text-sm leading-6">
+            <li>English</li>
+            <li>Español</li>
+            <li>Français</li>
+            <li>Italiano</li>
+            <li>简体中文</li>
+            <li>Tiếng Việt</li>
+          </ul>
+        </div>
+        <img
+          :alt="$t('page.dashboard.newFeatureLanguageImageAlt')"
+          class="w-full rounded border border-gray-200 md:w-3/5"
+          src="/static/images/feature-multiple-language.png"
+        />
+      </div>
+    </template>
   </Alert>
 
   <Card

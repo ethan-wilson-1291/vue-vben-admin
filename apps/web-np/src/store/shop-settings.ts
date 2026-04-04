@@ -32,6 +32,7 @@ export interface IRegion {
 }
 
 interface IShopSettings {
+  appLocale: string;
   cogsRate: number;
   cogsSourceDefault: ECogsSource;
   handlingFees: any;
@@ -40,11 +41,13 @@ interface IShopSettings {
   mailWeeklyReport: boolean;
   mailMonthlyReport: boolean;
   showChatPopup: boolean;
+  showNewFeatureNotice: boolean;
 }
 
 export const useShopSettingStore = defineStore('np-shop-setting', {
   actions: {
     setStates(settings: any) {
+      this.appLocale = settings.appLocale ?? 'en-US';
       this.cogsRate = settings.cogsRate;
       this.cogsSourceDefault = settings.cogsSourceDefault;
       this.handlingFees = settings.handlingFees;
@@ -53,6 +56,7 @@ export const useShopSettingStore = defineStore('np-shop-setting', {
       this.mailWeeklyReport = settings.mailWeeklyReport;
       this.mailMonthlyReport = settings.mailMonthlyReport;
       this.showChatPopup = settings.showChatPopup;
+      this.showNewFeatureNotice = settings.showNewFeatureNotice ?? false;
     },
     async setTransactionsFees(transactionFees: ITransactionFee[]) {
       const payload = cloneDeep(transactionFees).map((fee) => {
@@ -109,6 +113,7 @@ export const useShopSettingStore = defineStore('np-shop-setting', {
   },
 
   state: (): IShopSettings => ({
+    appLocale: 'en-US',
     cogsRate: 0,
     cogsSourceDefault: ECogsSource.SHOPIFY,
     handlingFees: {},
@@ -117,5 +122,6 @@ export const useShopSettingStore = defineStore('np-shop-setting', {
     mailWeeklyReport: true,
     mailMonthlyReport: true,
     showChatPopup: false,
+    showNewFeatureNotice: false,
   }),
 });
