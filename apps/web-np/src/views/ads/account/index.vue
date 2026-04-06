@@ -63,10 +63,6 @@ const addNewConnection = (type: string) => {
   redirectToExternal(url);
 };
 
-const isGoogleAdsEnabled =
-  String((import.meta as any).env.VITE_ENABLE_GOOGLE_ADS).toLowerCase() ===
-  'true';
-
 const statusList = [
   // Sync Status
   {
@@ -236,10 +232,7 @@ const handleSwitchCosts = (adAccount: any, checked: any) => {
                   <span>{{ $t('page.ad-connections.channel.tiktok') }}</span>
                 </div>
               </MenuItem>
-              <MenuItem
-                v-if="isGoogleAdsEnabled"
-                @click="addNewConnection('google')"
-              >
+              <MenuItem @click="addNewConnection('google')">
                 <div class="flex items-center justify-start space-x-2">
                   <IconifyIcon :icon="getAdsIcon('google')" />
                   <span>{{ $t('page.ad-connections.channel.google') }}</span>
