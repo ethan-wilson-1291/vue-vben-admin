@@ -21,6 +21,7 @@ export const overridesPreferences = defineOverridesPreferences({
     lockScreen: false,
     timezone: false,
     fullscreen: !isShopifyEmbedded(),
+    logoutButtonPosition: 'none',
   },
   tabbar: {
     enable: false,
