@@ -9,9 +9,7 @@ import { Select as ASelect, Image, Spin } from 'ant-design-vue';
 import { productGetList } from '#/api';
 import { useShopStore } from '#/store';
 
-const products = defineModel<string[]>({
-  default: [],
-});
+const products = defineModel<string[]>();
 
 const shopStore = useShopStore();
 

@@ -23,9 +23,7 @@ const VNodes = defineComponent({
   },
 });
 
-const modelValue = defineModel<[string, string]>({
-  default: () => 'default',
-});
+const modelValue = defineModel<[string, string]>();
 
 function onChange() {
   emit('change', modelValue.value);

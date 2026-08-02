@@ -2,7 +2,7 @@ import type { AsTag } from 'reka-ui';
 
 import type { Component } from 'vue';
 
-import type { ButtonVariants, ButtonVariantSize } from '../../ui';
+import type { ButtonVariants } from '../../ui';
 
 export interface VbenButtonProps {
   /**
@@ -19,16 +19,18 @@ export interface VbenButtonProps {
   class?: any;
   disabled?: boolean;
   loading?: boolean;
-  size?: ButtonVariantSize;
-  variant?: ButtonVariants;
+  size?: ButtonVariants['size'];
+  variant?: ButtonVariants['variant'];
 }
 
 export type CustomRenderType = (() => Component | string) | string;
 
 export type ValueType = boolean | number | string;
 
-export interface VbenButtonGroupProps
-  extends Pick<VbenButtonProps, 'disabled'> {
+export interface VbenButtonGroupProps extends Pick<
+  VbenButtonProps,
+  'disabled'
+> {
   /** 单选模式下允许清除选中 */
   allowClear?: boolean;
   /** 值改变前的回调 */

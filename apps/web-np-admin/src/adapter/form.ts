@@ -1,5 +1,6 @@
 import type {
   VbenFormSchema as FormSchema,
+  FormValues,
   VbenFormProps,
 } from '@vben/common-ui';
 
@@ -39,9 +40,12 @@ setupVbenForm<ComponentType>({
   },
 });
 
-const useVbenForm = useForm<ComponentType>;
+function useVbenForm(options: Parameters<typeof useForm>[0]) {
+  return useForm(options);
+}
 
 export { useVbenForm, z };
 
-export type VbenFormSchema = FormSchema<ComponentType>;
+export type VbenFormSchema<TValues extends FormValues = FormValues> =
+  FormSchema<ComponentType, TValues>;
 export type { VbenFormProps };

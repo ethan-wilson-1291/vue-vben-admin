@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import type { VbenFormSchema } from '#/adapter/form';
 
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 
 import { ProfilePasswordSetting, z } from '@vben/common-ui';
 
 import { message } from 'ant-design-vue';
-
-const profilePasswordSettingRef = ref();
 
 const formSchema = computed((): VbenFormSchema[] => {
   return [
@@ -40,7 +38,7 @@ const formSchema = computed((): VbenFormSchema[] => {
         rules(values) {
           const { newPassword } = values;
           return z
-            .string({ required_error: '请再次输入新密码' })
+            .string({ error: '请再次输入新密码' })
             .min(1, { message: '请再次输入新密码' })
             .refine((value) => value === newPassword, {
               message: '两次输入的密码不一致',
@@ -58,7 +56,6 @@ function handleSubmit() {
 </script>
 <template>
   <ProfilePasswordSetting
-    ref="profilePasswordSettingRef"
     class="w-1/3"
     :form-schema="formSchema"
     @submit="handleSubmit"

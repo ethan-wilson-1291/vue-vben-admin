@@ -1,3 +1,5 @@
+import { ELEMENT_ID_LAYOUT_SCROLL } from '../constants/globals';
+
 export interface VisibleDomRect {
   bottom: number;
   height: number;
@@ -41,6 +43,18 @@ export function getElementVisibleRect(
   const left = Math.max(rect.left, 0);
   const right = Math.min(rect.right, viewWidth);
 
+  // 如果元素完全不可见，则返回一个空的矩形
+  if (top >= viewHeight || bottom <= 0 || left >= viewWidth || right <= 0) {
+    return {
+      bottom: 0,
+      height: 0,
+      left: 0,
+      right: 0,
+      top: 0,
+      width: 0,
+    };
+  }
+
   return {
     bottom,
     height: Math.max(0, bottom - top),
@@ -70,7 +84,24 @@ export function getScrollbarWidth() {
   return scrollbarWidth;
 }
 
-export function needsScrollbar() {
+export function getLayoutScrollElement() {
+  return document.querySelector<HTMLElement>(`#${ELEMENT_ID_LAYOUT_SCROLL}`);
+}
+
+function elementNeedsScrollbar(element: HTMLElement) {
+  const overflowY = window.getComputedStyle(element).overflowY;
+  if (overflowY === 'hidden' || overflowY === 'clip') {
+    return false;
+  }
+
+  return element.scrollHeight > element.clientHeight;
+}
+
+export function needsScrollbar(target?: HTMLElement | null) {
+  if (target) {
+    return elementNeedsScrollbar(target);
+  }
+
   const doc = document.documentElement;
   const body = document.body;
 
