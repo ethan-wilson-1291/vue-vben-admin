@@ -1,6 +1,11 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { getElementVisibleRect } from '../dom';
+import { ELEMENT_ID_LAYOUT_SCROLL } from '../../constants';
+import {
+  getElementVisibleRect,
+  getLayoutScrollElement,
+  needsScrollbar,
+} from '../dom';
 
 describe('getElementVisibleRect', () => {
   // 设置浏览器视口尺寸的 mock
@@ -13,6 +18,10 @@ describe('getElementVisibleRect', () => {
       1000,
     );
     vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(1000);
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
 
   it('should return default rect if element is undefined', () => {
@@ -116,12 +125,84 @@ describe('getElementVisibleRect', () => {
     } as HTMLElement;
 
     expect(getElementVisibleRect(element)).toEqual({
-      bottom: 800,
+      bottom: 0,
       height: 0,
-      left: 1100,
-      right: 1000,
-      top: 900,
+      left: 0,
+      right: 0,
+      top: 0,
       width: 0,
     });
+  });
+});
+
+describe('getLayoutScrollElement', () => {
+  afterEach(() => {
+    document.body.innerHTML = '';
+  });
+
+  it('should return the layout scroll element', () => {
+    const element = document.createElement('div');
+    element.id = ELEMENT_ID_LAYOUT_SCROLL;
+    document.body.append(element);
+
+    expect(getLayoutScrollElement()).toBe(element);
+  });
+
+  it('should return null when the layout scroll element is missing', () => {
+    expect(getLayoutScrollElement()).toBeNull();
+  });
+});
+
+describe('needsScrollbar', () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it('should check scrollbar state from target element', () => {
+    const element = document.createElement('div');
+    vi.spyOn(element, 'clientHeight', 'get').mockReturnValue(100);
+    vi.spyOn(element, 'scrollHeight', 'get').mockReturnValue(120);
+    vi.spyOn(window, 'getComputedStyle').mockReturnValue({
+      overflowY: 'auto',
+    } as CSSStyleDeclaration);
+
+    expect(needsScrollbar(element)).toBe(true);
+  });
+
+  it('should return false when target content does not overflow', () => {
+    const element = document.createElement('div');
+    vi.spyOn(element, 'clientHeight', 'get').mockReturnValue(100);
+    vi.spyOn(element, 'scrollHeight', 'get').mockReturnValue(100);
+    vi.spyOn(window, 'getComputedStyle').mockReturnValue({
+      overflowY: 'auto',
+    } as CSSStyleDeclaration);
+
+    expect(needsScrollbar(element)).toBe(false);
+  });
+
+  it.each(['clip', 'hidden'])(
+    'should ignore %s overflow targets',
+    (overflowY) => {
+      const element = document.createElement('div');
+      vi.spyOn(element, 'clientHeight', 'get').mockReturnValue(100);
+      vi.spyOn(element, 'scrollHeight', 'get').mockReturnValue(120);
+      vi.spyOn(window, 'getComputedStyle').mockReturnValue({
+        overflowY,
+      } as CSSStyleDeclaration);
+
+      expect(needsScrollbar(element)).toBe(false);
+    },
+  );
+
+  it('should fall back to document scrollbar state', () => {
+    vi.spyOn(document.documentElement, 'scrollHeight', 'get').mockReturnValue(
+      120,
+    );
+    vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(100);
+    vi.spyOn(window, 'getComputedStyle').mockReturnValue({
+      overflowY: 'auto',
+    } as CSSStyleDeclaration);
+
+    expect(needsScrollbar()).toBe(true);
   });
 });

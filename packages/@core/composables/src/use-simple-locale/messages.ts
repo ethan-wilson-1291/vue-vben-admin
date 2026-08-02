@@ -9,6 +9,7 @@ export const messages = {
     prompt: 'Prompt',
     reset: 'Reset',
     submit: 'Submit',
+    confirmTitle: 'Please Confirm',
   },
   'es-ES': {
     cancel: 'Cancelar',
@@ -45,6 +46,7 @@ export const messages = {
     prompt: '提示',
     reset: '重置',
     submit: '提交',
+    confirmTitle: '请确认',
   },
   'vi-VN': {
     cancel: 'Hủy',

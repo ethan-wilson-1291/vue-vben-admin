@@ -1,5 +1,6 @@
-import type { ExtendedVxeGridApi } from 'node_modules/@vben/plugins/src/vxe-table/types';
 import type { VxeGridPropTypes } from 'vxe-table';
+
+import type { ExtendedVxeGridApi } from '../../../../../../packages/effects/plugins/src/vxe-table/types';
 
 import { $t } from '#/locales';
 import { adType } from '#/shared/constants';
@@ -47,15 +48,14 @@ export const groupData = (dataItems: any, groupBy: string) => {
 };
 
 export const createTotalRow = (dataItems: any) => {
-  // eslint-disable-next-line unicorn/no-array-reduce
-  const totalRow = dataItems.reduce((acc: any, record: any) => {
+  const totalRow: any = {};
+  for (const record of dataItems) {
     for (const key in record) {
       if (key !== 'date') {
-        acc[key] = (acc[key] || 0) + record[key];
+        totalRow[key] = (totalRow[key] || 0) + record[key];
       }
     }
-    return acc;
-  }, {});
+  }
 
   totalRow.date = $t('page.reports-p-and-l.table.total');
 

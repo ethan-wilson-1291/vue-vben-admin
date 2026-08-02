@@ -1,5 +1,6 @@
-import type { ExtendedVxeGridApi } from 'node_modules/@vben/plugins/src/vxe-table/types';
 import type { VxeGridPropTypes } from 'vxe-table';
+
+import type { ExtendedVxeGridApi } from '../../../../../../packages/effects/plugins/src/vxe-table/types';
 
 import { $t } from '#/locales';
 import dayjs from '#/shared/dayjs';

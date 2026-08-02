@@ -100,8 +100,8 @@ const VNodes = defineComponent({
 </script>
 
 <template>
-  <div class="p-5">
-    <div class="mb-5 flex flex-wrap justify-between">
+  <div class="p-5 flex flex-col gap-5">
+    <div class="flex flex-wrap justify-between">
       <div class="flex items-start space-x-5">
         <h1 class="text-md font-semibold md:text-2xl">
           {{ $t('page.dashboard.title') }}
@@ -182,7 +182,7 @@ const VNodes = defineComponent({
     <OrderStatistic />
     <ProfitChart />
 
-    <div v-loading="dashboardState.loading" class="mt-5 grid grid-cols-4 gap-4">
+    <div v-loading="dashboardState.loading" class="grid grid-cols-4 gap-5">
       <OverviewAdsChart class="col-span-4 md:col-span-2 2xl:col-span-2" />
       <OverviewAds class="col-span-4 md:col-span-2 2xl:col-span-1" />
       <OverviewQrCode class="hidden md:col-span-2 2xl:col-span-1 2xl:block" />

@@ -7,7 +7,7 @@ import { Card, Select } from 'ant-design-vue';
 
 import { shopUpdateAppLocale } from '#/api';
 
-const handleLocaleChange = async (value: string) => {
+const handleLocaleChange = async (value: any) => {
   const locale = value as any;
 
   await shopUpdateAppLocale({ appLocale: locale });

@@ -97,7 +97,7 @@ const getItems = computed((): IAnalysisOverviewItem[] => {
   <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
     <template v-for="item in getItems" :key="item.title">
       <Card
-        class="w-full"
+        class="w-full gap-2"
         :title="item.title"
         v-loading="props.loading"
         v-tippy="{

@@ -16,7 +16,91 @@ import type {
   ThemeModeType,
 } from '@vben-core/typings';
 
-type SupportedLanguagesType = 'en-US' | 'zh-CN';
+type SupportedLanguagesType =
+  | 'en-US'
+  | 'es-ES'
+  | 'fr-FR'
+  | 'it-IT'
+  | 'vi-VN'
+  | 'zh-CN';
+type CustomPreferencesValue = boolean | number | string;
+
+interface CustomPreferencesOption<TValue extends string = string> {
+  label: string;
+  value: TValue;
+}
+
+interface BaseCustomPreferencesField<
+  TKey extends string = string,
+  TValue extends CustomPreferencesValue = CustomPreferencesValue,
+> {
+  componentProps?: Record<string, any>;
+  defaultValue: TValue;
+  disabled?: boolean;
+  key: TKey;
+  label: string;
+  placeholder?: string;
+  tip?: string;
+}
+
+interface CustomPreferencesInputField<
+  TKey extends string = string,
+> extends BaseCustomPreferencesField<TKey, string> {
+  component: 'input';
+}
+
+interface CustomPreferencesNumberField<
+  TKey extends string = string,
+> extends BaseCustomPreferencesField<TKey, number> {
+  component: 'number';
+}
+
+interface CustomPreferencesSelectField<
+  TKey extends string = string,
+> extends BaseCustomPreferencesField<TKey, string> {
+  component: 'select';
+  options: CustomPreferencesOption[];
+}
+
+interface CustomPreferencesSwitchField<
+  TKey extends string = string,
+> extends BaseCustomPreferencesField<TKey, boolean> {
+  component: 'switch';
+}
+
+type CustomPreferencesRecord = Record<string, CustomPreferencesValue>;
+
+type AnyCustomPreferencesField =
+  | CustomPreferencesInputField
+  | CustomPreferencesNumberField
+  | CustomPreferencesSelectField
+  | CustomPreferencesSwitchField;
+
+type CustomPreferencesField<
+  TCustomPreferences extends object = CustomPreferencesRecord,
+> =
+  string extends Extract<keyof TCustomPreferences, string>
+    ? AnyCustomPreferencesField
+    : {
+        [K in Extract<
+          keyof TCustomPreferences,
+          string
+        >]: TCustomPreferences[K] extends boolean
+          ? CustomPreferencesSwitchField<K>
+          : TCustomPreferences[K] extends number
+            ? CustomPreferencesNumberField<K>
+            : TCustomPreferences[K] extends string
+              ? CustomPreferencesInputField<K> | CustomPreferencesSelectField<K>
+              : never;
+      }[Extract<keyof TCustomPreferences, string>];
+
+interface PreferencesExtension<
+  TCustomPreferences extends object = CustomPreferencesRecord,
+> {
+  fields: Array<CustomPreferencesField<TCustomPreferences>>;
+  tabLabel: string;
+  title?: string;
+}
 
 interface AppPreferences {
   /** 权限模式 */
@@ -45,14 +129,16 @@ interface AppPreferences {
   contentPaddingRight: number;
   /** 内容顶部内边距 */
   contentPaddingTop: number;
-  // /** 应用默认头像 */
+  /** 应用默认头像 */
   defaultAvatar: string;
   /** 默认首页地址 */
   defaultHomePath: string;
-  // /** 开启动态标题 */
+  /** 开启动态标题 */
   dynamicTitle: boolean;
   /** 是否开启检查更新 */
   enableCheckUpdates: boolean;
+  /** 是否显示复制偏好设置按钮 */
+  enableCopyPreferences: boolean;
   /** 是否显示偏好设置 */
   enablePreferences: boolean;
   /**
@@ -75,6 +161,10 @@ interface AppPreferences {
   name: string;
   /** 偏好设置按钮位置 */
   preferencesButtonPosition: PreferencesButtonPositionType;
+  /**
+   * @zh_CN 应用时区
+   */
+  timezone: string;
   /**
    * @zh_CN 是否开启水印
    */
@@ -144,6 +234,12 @@ interface LogoPreferences {
   enable: boolean;
   /** logo图片适应方式 */
   fit: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
+  /** logo高度， 只在 logoMode=full时生效 */
+  fullLogoHeight?: number | string;
+  /** logo 展示类型，icon 图标模式， full 铺满logo区域 */
+  logoMode: 'full' | 'icon';
+  /** logo text是否展示 */
+  showText: boolean;
   /** logo地址 */
   source: string;
   /** 暗色主题logo地址 (可选，若不设置则使用 source) */
@@ -170,6 +266,8 @@ interface SidebarPreferences {
   collapsedShowTitle: boolean;
   /** 侧边栏折叠宽度 */
   collapseWidth: number;
+  /** 侧边栏菜单拖拽 */
+  draggable: boolean;
   /** 侧边栏是否可见 */
   enable: boolean;
   /** 菜单自动展开状态 */
@@ -191,6 +289,8 @@ interface SidebarPreferences {
 interface ShortcutKeyPreferences {
   /** 是否启用快捷键-全局 */
   enable: boolean;
+  /** 是否启用全局关闭窗口快捷键 */
+  globalEscape: boolean;
   /** 是否启用全局锁屏快捷键 */
   globalLockScreen: boolean;
   /** 是否启用全局注销快捷键 */
@@ -222,8 +322,12 @@ interface TabbarPreferences {
   showMaximize: boolean;
   /** 显示更多按钮 */
   showMore: boolean;
+  /** 显示刷新按钮 */
+  showRefresh: boolean;
   /** 标签页风格 */
   styleType: TabsStyleType;
+  /** 是否开启访问历史记录 */
+  visitHistory: boolean;
   /** 是否开启鼠标滚轮响应 */
   wheelable: boolean;
 }
@@ -249,6 +353,8 @@ interface ThemePreferences {
   semiDarkHeader: boolean;
   /** 是否开启半深色菜单（只在theme='light'时生效） */
   semiDarkSidebar: boolean;
+  /** 是否开启半深色子菜单（只在theme='light'时生效） */
+  semiDarkSidebarSub: boolean;
 }
 
 interface TransitionPreferences {
@@ -265,22 +371,42 @@ interface TransitionPreferences {
 interface WidgetPreferences {
   /** 是否启用全屏部件 */
   fullscreen: boolean;
+  /** 全屏按钮位置 */
+  fullscreenButtonPosition: 'header' | 'none' | 'user-dropdown';
   /** 是否启用全局搜索部件 */
   globalSearch: boolean;
+  /** 全局搜索按钮位置 */
+  globalSearchButtonPosition: 'header' | 'none' | 'user-dropdown';
   /** 是否启用语言切换部件 */
   languageToggle: boolean;
+  /** 语言切换按钮位置 */
+  languageToggleButtonPosition: 'header' | 'none' | 'user-dropdown';
   /** 是否开启锁屏功能 */
   lockScreen: boolean;
+  /** 锁屏按钮位置 */
+  lockScreenButtonPosition: 'header' | 'none' | 'user-dropdown';
+  /** 退出登录按钮位置 */
+  logoutButtonPosition: 'header' | 'none' | 'user-dropdown';
   /** 是否显示通知部件 */
   notification: boolean;
+  /** 通知按钮位置 */
+  notificationButtonPosition: 'header' | 'none' | 'user-dropdown';
+  /** 小部件排序 */
+  order: readonly string[];
   /** 显示刷新按钮 */
   refresh: boolean;
+  /** 刷新按钮位置 */
+  refreshButtonPosition: 'header' | 'none' | 'user-dropdown';
   /** 是否显示侧边栏显示/隐藏部件 */
   sidebarToggle: boolean;
   /** 是否显示主题切换部件 */
   themeToggle: boolean;
+  /** 主题切换按钮位置 */
+  themeToggleButtonPosition: 'header' | 'none' | 'user-dropdown';
   /** 是否显示时区部件 */
   timezone: boolean;
+  /** 时区按钮位置 */
+  timezoneButtonPosition: 'header' | 'none' | 'user-dropdown';
 }
 
 interface Preferences {
@@ -314,19 +440,33 @@ interface Preferences {
 
 type PreferencesKeys = keyof Preferences;
 
-interface InitialOptions {
+interface InitialOptions<
+  TCustomPreferences extends object = CustomPreferencesRecord,
+> {
+  extension?: PreferencesExtension<TCustomPreferences>;
   namespace: string;
   overrides?: DeepPartial<Preferences>;
 }
 export type {
+  AnyCustomPreferencesField,
   AppPreferences,
+  BaseCustomPreferencesField,
   BreadcrumbPreferences,
+  CustomPreferencesField,
+  CustomPreferencesInputField,
+  CustomPreferencesNumberField,
+  CustomPreferencesOption,
+  CustomPreferencesRecord,
+  CustomPreferencesSelectField,
+  CustomPreferencesSwitchField,
+  CustomPreferencesValue,
   FooterPreferences,
   HeaderPreferences,
   InitialOptions,
   LogoPreferences,
   NavigationPreferences,
   Preferences,
+  PreferencesExtension,
   PreferencesKeys,
   ShortcutKeyPreferences,
   SidebarPreferences,

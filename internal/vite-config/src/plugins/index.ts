@@ -8,23 +8,27 @@ import type {
 } from '../typing';
 
 import viteVueI18nPlugin from '@intlify/unplugin-vue-i18n/vite';
+import tailwindcss from '@tailwindcss/vite';
 import viteVue from '@vitejs/plugin-vue';
 import viteVueJsx from '@vitejs/plugin-vue-jsx';
 import { visualizer as viteVisualizerPlugin } from 'rollup-plugin-visualizer';
+import viteDtsPlugin from 'unplugin-dts/vite';
 import viteCompressPlugin from 'vite-plugin-compression';
-import viteDtsPlugin from 'vite-plugin-dts';
-import { createHtmlPlugin as viteHtmlPlugin } from 'vite-plugin-html';
 import { VitePWA } from 'vite-plugin-pwa';
 import viteVueDevTools from 'vite-plugin-vue-devtools';
 
 import { viteArchiverPlugin } from './archiver';
+import { viteDayjsPlugin } from './dayjs';
 import { viteExtraAppConfigPlugin } from './extra-app-config';
+import { viteFormFieldSlotMigrationWarningPlugin } from './form-field-slot-migration-warning';
+import { viteHtmlPlugin } from './html';
 import { viteImportMapPlugin } from './importmap';
 import { viteInjectAppLoadingPlugin } from './inject-app-loading';
 import { viteMetadataPlugin } from './inject-metadata';
 import { viteLicensePlugin } from './license';
 import { viteNitroMockPlugin } from './nitro-mock';
 import { vitePrintPlugin } from './print';
+import { viteTailwindReferencePlugin } from './tailwind-reference';
 import { viteVxeTableImportsPlugin } from './vxe-table';
 
 /**
@@ -60,6 +64,8 @@ async function loadCommonPlugins(
           },
         }),
         viteVueJsx(),
+        viteTailwindReferencePlugin(),
+        tailwindcss(),
       ],
     },
 
@@ -73,11 +79,13 @@ async function loadCommonPlugins(
     },
     {
       condition: isBuild && !!visualizer,
-      plugins: () => [<PluginOption>viteVisualizerPlugin({
+      plugins: () => [
+        viteVisualizerPlugin({
           filename: './node_modules/.cache/visualizer/stats.html',
           gzipSize: true,
           open: true,
-        })],
+        }) as PluginOption,
+      ],
     },
   ];
 }
@@ -99,6 +107,7 @@ async function loadApplicationPlugins(
     compressTypes,
     extraAppConfig,
     html,
+    dayjs,
     i18n,
     importmap,
     importmapOptions,
@@ -135,6 +144,10 @@ async function loadApplicationPlugins(
       plugins: async () => {
         return [await vitePrintPlugin({ infoMap: printInfoMap })];
       },
+    },
+    {
+      condition: !isBuild,
+      plugins: () => [viteFormFieldSlotMigrationWarningPlugin()],
     },
     {
       condition: vxeTableLazyImport,
@@ -193,7 +206,7 @@ async function loadApplicationPlugins(
     },
     {
       condition: !!html,
-      plugins: () => [viteHtmlPlugin({ minify: true })],
+      plugins: () => [viteHtmlPlugin(typeof html === 'object' ? html : {})],
     },
     {
       condition: isBuild && importmap,
@@ -213,6 +226,10 @@ async function loadApplicationPlugins(
         return [await viteArchiverPlugin(archiverPluginOptions)];
       },
     },
+    {
+      condition: dayjs,
+      plugins: () => [viteDayjsPlugin()],
+    },
   ]);
 }
 
@@ -225,21 +242,25 @@ async function loadLibraryPlugins(
   // 单独取，否则commonOptions拿不到
   const isBuild = options.isBuild;
   const { dts, ...commonOptions } = options;
+  const dtsOptions = typeof dts === 'object' ? dts : undefined;
   const commonPlugins = await loadCommonPlugins(commonOptions);
   return await loadConditionPlugins([
     ...commonPlugins,
     {
       condition: isBuild && !!dts,
-      plugins: () => [viteDtsPlugin({ logLevel: 'error' })],
+      plugins: () => [viteDtsPlugin(dtsOptions)],
     },
   ]);
 }
+
+export { viteCssLayerPlugin } from './css-layer';
 
 export {
   loadApplicationPlugins,
   loadLibraryPlugins,
   viteArchiverPlugin,
   viteCompressPlugin,
+  viteDayjsPlugin,
   viteDtsPlugin,
   viteHtmlPlugin,
   viteVisualizerPlugin,

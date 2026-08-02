@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { Page } from '@vben/common-ui';
 import { $t } from '@vben/locales';
 
 import { dayjsInGMT } from '#/shared/dayjs';
@@ -33,7 +32,7 @@ const formatVal = (val: number) => {
 </script>
 
 <template>
-  <Page>
+  <div class="p-5 flex flex-col gap-1">
     <Grid :table-title="$t('page.reports-customer.title')">
       <template #toolbar-tools>
         <UpgradeBtn class="mr-2 w-[150px]" />
@@ -67,10 +66,11 @@ const formatVal = (val: number) => {
         </div>
       </template>
     </Grid>
+
     <CustomerStatistic
       :items="state.tableData"
       :loading="state.loading"
       class="mt-4"
     />
-  </Page>
+  </div>
 </template>

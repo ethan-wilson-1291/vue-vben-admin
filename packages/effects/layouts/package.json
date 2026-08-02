@@ -1,6 +1,6 @@
 {
   "name": "@vben/layouts",
-  "version": "5.5.9",
+  "version": "5.7.0",
   "homepage": "https://github.com/vbenjs/vue-vben-admin",
   "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
   "repository": {
@@ -20,7 +20,9 @@
     }
   },
   "dependencies": {
+    "@types/sortablejs": "catalog:",
     "@vben-core/composables": "workspace:*",
+    "@vben-core/design": "workspace:*",
     "@vben-core/form-ui": "workspace:*",
     "@vben-core/layout-ui": "workspace:*",
     "@vben-core/menu-ui": "workspace:*",
@@ -37,6 +39,7 @@
     "@vben/types": "workspace:*",
     "@vben/utils": "workspace:*",
     "@vueuse/core": "catalog:",
+    "sortablejs": "catalog:",
     "vue": "catalog:",
     "vue-router": "catalog:"
   }
