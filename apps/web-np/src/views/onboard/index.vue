@@ -129,10 +129,10 @@ onUnmounted(() => {
         {{ $t('page.onboard.index.subtitle') }}
       </small>
 
-      <div class="mt-5 w-full max-w-4xl">
-        <Steps :current="state.currentStep" :items="items" class="mb-10" />
+      <div class="mt-5 w-full max-w-5xl">
+        <Steps :current="state.currentStep" :items="items" />
 
-        <div class="mb-10 flex items-center justify-center space-x-5">
+        <div class="my-10 flex items-center justify-center space-x-5">
           <VbenButton
             variant="outline"
             class="w-32"
