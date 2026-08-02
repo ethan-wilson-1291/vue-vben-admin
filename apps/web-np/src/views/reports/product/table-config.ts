@@ -72,6 +72,7 @@ export const gridOptions: VxeTableGridOptions = {
     },
     {
       cellRender: { name: 'cellMoney' },
+      slots: { default: 'netPayment' },
       className: 'font-semibold',
       field: 'netPayment',
       title: $t('field-name.netPayment'),
@@ -103,6 +104,7 @@ export const gridOptions: VxeTableGridOptions = {
     },
     {
       cellRender: { name: 'cellMoney' },
+      slots: { default: 'grossProfit' },
       className: 'font-semibold',
       field: 'grossProfit',
       title: $t('field-name.grossProfit'),
@@ -115,6 +117,7 @@ export const gridOptions: VxeTableGridOptions = {
     },
     {
       cellRender: { name: 'CellPercentage' },
+      slots: { default: 'grossProfitMargin' },
       className: 'font-semibold',
       field: 'grossProfitMargin',
       title: $t('field-name.grossProfitMargin'),

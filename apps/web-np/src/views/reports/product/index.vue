@@ -4,9 +4,15 @@ import { Page } from '@vben/common-ui';
 import { Image as AImage } from 'ant-design-vue';
 
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
+import { useSubscriptionGate } from '#/shared/subscription-gate';
+import { formatMoney, numberWithCommas } from '#/shared/utils';
+import { useShopStore } from '#/store';
 import UpgradeBtn from '#/views/shared-components/upgrade-btn.vue';
 
 import { formOptions, gridOptions } from './table-config';
+
+const shopStore = useShopStore();
+const { gateClass } = useSubscriptionGate();
 
 const [Grid] = useVbenVxeGrid({
   gridOptions,
@@ -35,6 +41,45 @@ const [Grid] = useVbenVxeGrid({
             {{ row.productName }}
           </div>
         </div>
+      </template>
+
+      <template #netPayment="{ row, column }">
+        <span
+          :class="gateClass"
+          class="inline-block w-full text-right font-semibold"
+        >
+          {{
+            formatMoney(
+              row[column.field],
+              shopStore.shop.currencyFromApp,
+              shopStore.shop.currencyRate,
+            )
+          }}
+        </span>
+      </template>
+
+      <template #grossProfit="{ row, column }">
+        <span
+          :class="gateClass"
+          class="inline-block w-full text-right font-semibold"
+        >
+          {{
+            formatMoney(
+              row[column.field],
+              shopStore.shop.currencyFromApp,
+              shopStore.shop.currencyRate,
+            )
+          }}
+        </span>
+      </template>
+
+      <template #grossProfitMargin="{ row, column }">
+        <span
+          :class="gateClass"
+          class="inline-block w-full text-right font-semibold"
+        >
+          {{ numberWithCommas(`${row[column.field]}%`) }}
+        </span>
       </template>
     </Grid>
   </Page>

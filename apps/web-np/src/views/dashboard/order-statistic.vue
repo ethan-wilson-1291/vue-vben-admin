@@ -14,6 +14,7 @@ import { $t } from '@vben/locales';
 import { Alert } from 'ant-design-vue';
 
 import { shopToggleNewFeatureNotice } from '#/api';
+import { useSubscriptionGate } from '#/shared/subscription-gate';
 import { formatMoney, redirectToExternal } from '#/shared/utils';
 import { useShopSettingStore, useShopStore } from '#/store';
 
@@ -30,6 +31,7 @@ defineOptions({
 });
 
 const shopStore = useShopStore();
+const { gateClass, gateStyle } = useSubscriptionGate();
 const shopSettingStore = useShopSettingStore();
 const currency = shopStore.shop.currencyFromApp;
 const rate = shopStore.shop.currencyRate;
@@ -341,15 +343,7 @@ const closeNewFeatureNotice = () => {
               <span
                 class="text-sm"
                 :class="getChangePercentColor(item.changePercent)"
-                :style="
-                  shopStore.isFreeSubscription
-                    ? {
-                        filter: 'blur(4px)',
-                        pointerEvents: 'none',
-                        userSelect: 'none',
-                      }
-                    : undefined
-                "
+                :style="gateStyle"
                 v-tippy="{
                   content: item.previousValue
                     ? $t('page.dashboard.comparedWithValue', [
@@ -366,10 +360,7 @@ const closeNewFeatureNotice = () => {
 
         <CardContent
           class="flex items-center justify-between text-lg"
-          :class="{
-            'pointer-events-none select-none blur-sm':
-              shopStore.isFreeSubscription,
-          }"
+          :class="gateClass"
         >
           {{ item.value }}
         </CardContent>
@@ -485,15 +476,7 @@ const closeNewFeatureNotice = () => {
             <template v-if="item.changePercent">
               <span
                 :class="getChangePercentColor(item.changePercent)"
-                :style="
-                  shopStore.isFreeSubscription
-                    ? {
-                        filter: 'blur(4px)',
-                        pointerEvents: 'none',
-                        userSelect: 'none',
-                      }
-                    : undefined
-                "
+                :style="gateStyle"
                 v-tippy="{
                   content: item.previousValue
                     ? $t('page.dashboard.comparedWithValue', [
@@ -508,13 +491,7 @@ const closeNewFeatureNotice = () => {
           </CardTitle>
         </CardHeader>
 
-        <CardContent
-          class="pb-0 !text-lg"
-          :class="{
-            'pointer-events-none select-none blur-sm':
-              shopStore.isFreeSubscription,
-          }"
-        >
+        <CardContent class="pb-0 !text-lg" :class="gateClass">
           {{ item.value }}
         </CardContent>
       </Card>

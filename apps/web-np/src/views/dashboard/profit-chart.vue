@@ -15,6 +15,7 @@ import { EchartsUI, useEcharts } from '@vben/plugins/echarts';
 
 import { Empty, Select } from 'ant-design-vue';
 
+import { useSubscriptionGate } from '#/shared/subscription-gate';
 import { formatMoney, redirect } from '#/shared/utils';
 import { useShopStore } from '#/store';
 
@@ -26,6 +27,7 @@ import {
 
 const chartRef = ref<EchartsUIType>();
 const shopStore = useShopStore();
+const { gateClass } = useSubscriptionGate();
 const { renderEcharts } = useEcharts(chartRef);
 
 const chartOptions = [
@@ -180,12 +182,7 @@ const reload = () => {
       </CardTitle>
     </CardHeader>
     <CardContent>
-      <div
-        :class="{
-          'pointer-events-none select-none blur-sm':
-            shopStore.isFreeSubscription,
-        }"
-      >
+      <div :class="gateClass">
         <EchartsUI
           ref="chartRef"
           v-show="dashboardState.profitChart.netProfit.length > 0"

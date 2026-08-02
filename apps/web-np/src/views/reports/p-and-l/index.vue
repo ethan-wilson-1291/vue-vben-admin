@@ -3,6 +3,7 @@ import { Page } from '@vben/common-ui';
 import { IconifyIcon } from '@vben/icons';
 import { $t } from '@vben/locales';
 
+import { useSubscriptionGate } from '#/shared/subscription-gate';
 import { formatMoney, getFieldExplain, numberWithCommas } from '#/shared/utils';
 import { useShopStore } from '#/store';
 import UpgradeBtn from '#/views/shared-components/upgrade-btn.vue';
@@ -10,6 +11,7 @@ import UpgradeBtn from '#/views/shared-components/upgrade-btn.vue';
 import { Grid } from './table-config';
 
 const shopStore = useShopStore();
+const { gateClass } = useSubscriptionGate();
 
 const hasBold = (id: string) =>
   [
@@ -60,15 +62,7 @@ const formatVal = (rowName: string, val: any) => {
         </div>
       </template>
       <template #date="{ row, column: { field } }">
-        <div
-          :class="[
-            { 'font-semibold': hasBold(row.id) },
-            {
-              'pointer-events-none select-none blur-sm':
-                shopStore.isFreeSubscription,
-            },
-          ]"
-        >
+        <div :class="[{ 'font-semibold': hasBold(row.id) }, gateClass]">
           {{ formatVal(row.id, row[field]) }}
         </div>
       </template>
