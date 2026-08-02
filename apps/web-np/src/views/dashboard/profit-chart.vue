@@ -143,7 +143,7 @@ const reload = () => {
 </script>
 
 <template>
-  <Card class="mt-5">
+  <Card>
     <CardHeader>
       <CardTitle class="flex items-center justify-between space-x-1">
         <span class="text-lg">

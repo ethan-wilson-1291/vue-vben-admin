@@ -316,8 +316,8 @@ const closeNewFeatureNotice = () => {
     class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
   >
     <template v-for="item in getOverview" :key="item.title">
-      <Card class="w-full" :title="item.title">
-        <CardHeader class="pb-2">
+      <Card class="w-full gap-0" :title="item.title">
+        <CardHeader class="">
           <CardTitle
             class="flex flex-nowrap items-center justify-between text-lg"
           >
@@ -380,7 +380,6 @@ const closeNewFeatureNotice = () => {
   <Alert
     v-if="shopStore.isFreeSubscription"
     :show-icon="true"
-    class="mt-5"
     type="warning"
     closable
   >
@@ -420,7 +419,6 @@ const closeNewFeatureNotice = () => {
   <Alert
     v-if="shopSettingStore.showNewFeatureNotice"
     :show-icon="true"
-    class="mt-5"
     type="info"
     closable
     @close="closeNewFeatureNotice"
@@ -461,12 +459,12 @@ const closeNewFeatureNotice = () => {
   </Alert>
 
   <Card
-    class="mt-5 grid grid-cols-1 gap-4 pb-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
+    class="p-0 grid grid-cols-1 gap-4 pb-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
     v-loading="dashboardState.loading"
   >
     <template v-for="item in getDetails" :key="item.title">
-      <Card class="w-full border-0" :title="item.title">
-        <CardHeader class="pb-2">
+      <Card class="w-full border-0 shadow-none gap-0" :title="item.title">
+        <CardHeader class="">
           <CardTitle
             class="flex flex-nowrap items-center space-x-1"
             :class="item.isBold ? 'font-semibold' : 'font-normal'"
