@@ -1,0 +1,63 @@
+<script lang="ts" setup>
+import type { ChatMessage } from '#/store';
+
+import { RefreshCw } from '#/icons';
+
+defineProps<{
+  message: ChatMessage;
+}>();
+
+const emit = defineEmits<{
+  retry: [messageId: string];
+}>();
+</script>
+
+<template>
+  <div
+    class="flex mb-4"
+    :class="[message.role === 'user' ? 'justify-end' : 'justify-start']"
+  >
+    <!-- Assistant avatar -->
+    <div
+      v-if="message.role === 'assistant'"
+      class="mr-2 mt-1 flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs text-primary"
+    >
+      AI
+    </div>
+
+    <div
+      class="max-w-[80%] rounded-lg px-3 py-2 text-sm"
+      :class="[
+        message.role === 'user'
+          ? 'bg-primary text-primary-foreground'
+          : 'bg-muted text-foreground',
+      ]"
+    >
+      <!-- Message content -->
+      <div class="whitespace-pre-wrap break-words">
+        {{ message.content }}
+        <span
+          v-if="message.status === 'streaming'"
+          class="ml-0.5 inline-block h-4 w-1 animate-pulse bg-current"
+        ></span>
+      </div>
+
+      <!-- Error state -->
+      <div
+        v-if="message.status === 'error'"
+        class="mt-2 flex items-center gap-2"
+      >
+        <span class="text-xs text-red-500">
+          {{ message.errorMessage || 'Something went wrong' }}
+        </span>
+        <button
+          class="inline-flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
+          @click="emit('retry', message.id)"
+        >
+          <RefreshCw class="size-3" />
+          Retry
+        </button>
+      </div>
+    </div>
+  </div>
+</template>

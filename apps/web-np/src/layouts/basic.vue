@@ -12,6 +12,8 @@ import { isShopifyEmbedded } from '#/shared/shopify-utils';
 import { redirectToExternal } from '#/shared/utils';
 import { useAuthStore, useShopStore } from '#/store';
 import LoginForm from '#/views/_core/authentication/login.vue';
+import AiChatButton from '#/views/ai-chat/ai-chat-button.vue';
+import AiChatPanel from '#/views/ai-chat/ai-chat-panel.vue';
 
 import Chat from './chat.vue';
 import Notification from './notification.vue';
@@ -122,5 +124,9 @@ watch(
     <template #lock-screen>
       <LockScreen :avatar @to-login="handleLogout" />
     </template>
+
+    <!-- AI Chat: floating button + slide-out panel -->
+    <AiChatButton />
+    <AiChatPanel />
   </BasicLayout>
 </template>
