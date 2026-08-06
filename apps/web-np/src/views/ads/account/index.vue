@@ -220,12 +220,12 @@ const handleSwitchCosts = (adAccount: any, checked: any) => {
           </VbenButton>
           <template #overlay>
             <Menu>
-              <!-- <MenuItem @click="addNewConnection('facebook')">
+              <MenuItem @click="addNewConnection('facebook')">
                 <div class="flex items-center justify-start space-x-2">
                   <IconifyIcon :icon="getAdsIcon('facebook')" />
                   <span>{{ $t('page.ad-connections.channel.facebook') }}</span>
                 </div>
-              </MenuItem> -->
+              </MenuItem>
               <MenuItem @click="addNewConnection('tiktok')">
                 <div class="flex items-center justify-start space-x-2">
                   <IconifyIcon :icon="getAdsIcon('tiktok')" />
