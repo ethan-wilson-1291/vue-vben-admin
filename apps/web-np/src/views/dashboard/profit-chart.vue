@@ -49,6 +49,7 @@ const handleChangeGroupBy = (val: any) => {
   dashboardState.profitChart.groupBy = val;
 
   generateDashboardData(currentPeriod);
+  reload();
 };
 
 onMounted(() => {
