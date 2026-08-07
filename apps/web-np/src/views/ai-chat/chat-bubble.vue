@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import type { ChatMessage } from '#/store';
 
+import { VbenButton } from '@vben/common-ui';
+
 import { Loader2, RefreshCw } from '#/icons';
 
 defineProps<{
@@ -72,16 +74,18 @@ const TOOL_LABELS: Record<string, string> = {
         v-if="message.status === 'error'"
         class="mt-2 flex items-center gap-2"
       >
-        <span class="text-xs text-red-500">
+        <span class="text-xs text-destructive">
           {{ message.errorMessage || 'Something went wrong' }}
         </span>
-        <button
-          class="inline-flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
+        <VbenButton
+          class="gap-1"
+          size="sm"
+          variant="ghost"
           @click="emit('retry', message.id)"
         >
           <RefreshCw class="size-3" />
           Retry
-        </button>
+        </VbenButton>
       </div>
     </div>
   </div>

@@ -1,7 +1,10 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 
+import { VbenIconButton } from '@vben/common-ui';
 import { $t } from '@vben/locales';
+
+import { Textarea } from '@vben-core/shadcn-ui';
 
 import { ArrowUpToLine } from '#/icons';
 
@@ -22,20 +25,21 @@ function handleSend() {
 <template>
   <div class="border-t p-3">
     <div class="flex items-end gap-2">
-      <textarea
+      <Textarea
         v-model="inputText"
-        class="min-h-[40px] max-h-[120px] flex-1 resize-none rounded-md border bg-background px-3 py-2 text-sm outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20"
-        rows="1"
+        class="min-h-[40px] max-h-[120px] flex-1 resize-none text-sm"
         :placeholder="$t('page.common.aiChat.inputPlaceholder')"
+        rows="1"
         @keydown.enter.exact.prevent="handleSend"
-      ></textarea>
-      <button
+      />
+      <VbenIconButton
         :disabled="!inputText.trim()"
-        class="flex size-9 shrink-0 items-center justify-center rounded-md bg-primary text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-40"
+        class="size-9 shrink-0"
+        variant="default"
         @click="handleSend"
       >
         <ArrowUpToLine class="size-4" />
-      </button>
+      </VbenIconButton>
     </div>
   </div>
 </template>

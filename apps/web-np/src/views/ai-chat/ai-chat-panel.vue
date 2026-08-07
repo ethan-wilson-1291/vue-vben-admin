@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { VbenButton, VbenIconButton } from '@vben/common-ui';
 import { $t } from '@vben/locales';
 
 import {
@@ -39,19 +40,19 @@ const shopStore = useShopStore();
             </h2>
           </div>
           <div class="flex items-center gap-1">
-            <button
-              class="flex size-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-              :title="$t('page.common.aiChat.newChat')"
+            <VbenIconButton
+              class="text-muted-foreground"
+              :tooltip="$t('page.common.aiChat.newChat')"
               @click="chatStore.clearChat()"
             >
               <AntPlus class="size-4" />
-            </button>
-            <button
-              class="flex size-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+            </VbenIconButton>
+            <VbenIconButton
+              class="text-muted-foreground"
               @click="chatStore.closePanel()"
             >
               <X class="size-4" />
-            </button>
+            </VbenIconButton>
           </div>
         </div>
 
@@ -63,12 +64,9 @@ const shopStore = useShopStore();
           <p class="text-sm text-muted-foreground">
             {{ $t('page.common.aiChat.upgradeRequired') }}
           </p>
-          <button
-            class="rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground"
-            @click="shopStore.redirectToPricing()"
-          >
+          <VbenButton variant="default" @click="shopStore.redirectToPricing()">
             {{ $t('page.common.aiChat.upgrade') }}
-          </button>
+          </VbenButton>
         </div>
 
         <!-- Chat body -->

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { VbenButton } from '@vben/common-ui';
 import { $t } from '@vben/locales';
 
 const emit = defineEmits<{
@@ -22,14 +23,16 @@ const suggestions = [
       {{ $t('page.common.aiChat.emptyDescription') }}
     </p>
     <div class="flex flex-wrap justify-center gap-2">
-      <button
+      <VbenButton
         v-for="suggestion in suggestions"
         :key="suggestion"
-        class="rounded-full border px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+        class="rounded-full"
+        size="sm"
+        variant="outline"
         @click="emit('selectQuestion', suggestion)"
       >
         {{ suggestion }}
-      </button>
+      </VbenButton>
     </div>
   </div>
 </template>
