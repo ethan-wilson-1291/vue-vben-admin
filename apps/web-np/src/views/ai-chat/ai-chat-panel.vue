@@ -10,7 +10,7 @@ import {
   MessageScrollerViewport,
 } from '@vben-core/shadcn-ui';
 
-import { X } from '#/icons';
+import { AntPlus, X } from '#/icons';
 import { useAiChatStore, useShopStore } from '#/store';
 
 import ChatBubble from './chat-bubble.vue';
@@ -38,12 +38,21 @@ const shopStore = useShopStore();
               {{ $t('page.aiChat.title') }}
             </h2>
           </div>
-          <button
-            class="flex size-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-            @click="chatStore.closePanel()"
-          >
-            <X class="size-4" />
-          </button>
+          <div class="flex items-center gap-1">
+            <button
+              class="flex size-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+              :title="$t('page.aiChat.newChat')"
+              @click="chatStore.clearChat()"
+            >
+              <AntPlus class="size-4" />
+            </button>
+            <button
+              class="flex size-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+              @click="chatStore.closePanel()"
+            >
+              <X class="size-4" />
+            </button>
+          </div>
         </div>
 
         <!-- Subscription gate -->

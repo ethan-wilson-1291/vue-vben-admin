@@ -4,6 +4,7 @@ export const AntHistory = createIconifyIcon('ant-design:history-outlined');
 export const AntPlus = createIconifyIcon('ant-design:plus-outlined');
 export const ArrowRight = createIconifyIcon('lucide:arrow-right');
 export const ArrowUpToLine = createIconifyIcon('lucide:arrow-up-to-line');
+export const Loader2 = createIconifyIcon('lucide:loader-2');
 export const MessageCircle = createIconifyIcon('lucide:message-circle');
 export const RefreshCw = createIconifyIcon('lucide:refresh-cw');
 export const Statistic = createIconifyIcon('clarity:process-on-vm-line');

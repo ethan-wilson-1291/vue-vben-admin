@@ -5,17 +5,22 @@ export interface ChatMessage {
   role: 'assistant' | 'user';
   content: string;
   timestamp: number;
-  status: 'done' | 'error' | 'sending' | 'streaming';
+  status: 'done' | 'error' | 'sending' | 'streaming' | 'thinking';
   errorMessage?: string;
+  /** Name of the tool currently being called, e.g. "get_p_and_l_report" */
+  toolCallStatus?: string;
 }
 
 interface AiChatState {
   messages: ChatMessage[];
   isOpen: boolean;
   isLoading: boolean;
+  /** Current conversation ID from the BE. null = new conversation. */
+  conversationId: null | string;
 }
 
 const STORAGE_KEY = 'np-ai-chat-messages';
+const CONVERSATION_KEY = 'np-ai-chat-conversation';
 
 function loadMessages(): ChatMessage[] {
   try {
@@ -31,6 +36,26 @@ function saveMessages(messages: ChatMessage[]): void {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
   } catch {
     // localStorage full or unavailable — silently ignore
+  }
+}
+
+function loadConversationId(): null | string {
+  try {
+    return localStorage.getItem(CONVERSATION_KEY);
+  } catch {
+    return null;
+  }
+}
+
+function saveConversationId(id: null | string): void {
+  try {
+    if (id) {
+      localStorage.setItem(CONVERSATION_KEY, id);
+    } else {
+      localStorage.removeItem(CONVERSATION_KEY);
+    }
+  } catch {
+    // silently ignore
   }
 }
 
@@ -57,7 +82,10 @@ export const useAiChatStore = defineStore('np-ai-chat', {
     updateMessage(
       messageId: string,
       updates: Partial<
-        Pick<ChatMessage, 'content' | 'errorMessage' | 'status'>
+        Pick<
+          ChatMessage,
+          'content' | 'errorMessage' | 'status' | 'toolCallStatus'
+        >
       >,
     ) {
       const msg = this.messages.find((m) => m.id === messageId);
@@ -70,6 +98,9 @@ export const useAiChatStore = defineStore('np-ai-chat', {
       }
       if (updates.errorMessage !== undefined) {
         msg.errorMessage = updates.errorMessage;
+      }
+      if (updates.toolCallStatus !== undefined) {
+        msg.toolCallStatus = updates.toolCallStatus;
       }
       saveMessages(this.messages);
     },
@@ -86,25 +117,39 @@ export const useAiChatStore = defineStore('np-ai-chat', {
       const assistantMsg = this.addMessage('assistant', '');
 
       try {
-        // Dynamic import to avoid circular dependency at store init
         const { postChatMessage } = await import('#/api/ai');
 
-        // Collect current history for context (exclude the placeholder)
-        const history = this.messages
-          .filter((m) => m.id !== assistantMsg.id && m.status === 'done')
-          .map((m) => ({ content: m.content, role: m.role }));
-
-        await postChatMessage(
+        const result = await postChatMessage(
           text.trim(),
-          history,
-          // onToken callback — append each chunk
+          this.conversationId,
+          // onToken — append each chunk
           (chunk: string) => {
             this.updateMessage(assistantMsg.id, {
               content: (assistantMsg.content + chunk) as string,
               status: 'streaming',
             });
           },
+          // onToolCall — show tool name while running
+          (name: string) => {
+            this.updateMessage(assistantMsg.id, {
+              status: 'thinking',
+              toolCallStatus: name,
+            });
+          },
+          // onToolResult — tool done, back to streaming for next text
+          () => {
+            this.updateMessage(assistantMsg.id, {
+              status: 'streaming',
+              toolCallStatus: undefined,
+            });
+          },
         );
+
+        // Store conversation ID for multi-turn
+        if (result.conversationId) {
+          this.conversationId = result.conversationId;
+          saveConversationId(result.conversationId);
+        }
 
         // Mark complete
         this.updateMessage(assistantMsg.id, { status: 'done' });
@@ -137,7 +182,9 @@ export const useAiChatStore = defineStore('np-ai-chat', {
 
     clearChat() {
       this.messages = [];
+      this.conversationId = null;
       saveMessages(this.messages);
+      saveConversationId(null);
     },
 
     togglePanel() {
@@ -157,5 +204,6 @@ export const useAiChatStore = defineStore('np-ai-chat', {
     messages: loadMessages(),
     isOpen: false,
     isLoading: false,
+    conversationId: loadConversationId(),
   }),
 });
