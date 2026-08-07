@@ -35,13 +35,13 @@ const shopStore = useShopStore();
           <div class="flex items-center gap-2">
             <span class="text-lg">🤖</span>
             <h2 class="text-sm font-semibold">
-              {{ $t('page.aiChat.title') }}
+              {{ $t('page.common.aiChat.title') }}
             </h2>
           </div>
           <div class="flex items-center gap-1">
             <button
               class="flex size-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-              :title="$t('page.aiChat.newChat')"
+              :title="$t('page.common.aiChat.newChat')"
               @click="chatStore.clearChat()"
             >
               <AntPlus class="size-4" />
@@ -61,13 +61,13 @@ const shopStore = useShopStore();
           class="flex flex-1 flex-col items-center justify-center gap-4 p-6 text-center"
         >
           <p class="text-sm text-muted-foreground">
-            {{ $t('page.aiChat.upgradeRequired') }}
+            {{ $t('page.common.aiChat.upgradeRequired') }}
           </p>
           <button
             class="rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground"
             @click="shopStore.redirectToPricing()"
           >
-            {{ $t('page.aiChat.upgrade') }}
+            {{ $t('page.common.aiChat.upgrade') }}
           </button>
         </div>
 

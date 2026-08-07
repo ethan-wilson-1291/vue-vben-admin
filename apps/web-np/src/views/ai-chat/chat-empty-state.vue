@@ -6,9 +6,9 @@ const emit = defineEmits<{
 }>();
 
 const suggestions = [
-  $t('page.aiChat.suggestion1'),
-  $t('page.aiChat.suggestion2'),
-  $t('page.aiChat.suggestion3'),
+  $t('page.common.aiChat.suggestion1'),
+  $t('page.common.aiChat.suggestion2'),
+  $t('page.common.aiChat.suggestion3'),
 ];
 </script>
 
@@ -16,10 +16,10 @@ const suggestions = [
   <div class="flex flex-1 flex-col items-center justify-center p-6 text-center">
     <div class="mb-4 text-4xl">🤖</div>
     <h3 class="mb-1 text-lg font-semibold">
-      {{ $t('page.aiChat.emptyTitle') }}
+      {{ $t('page.common.aiChat.emptyTitle') }}
     </h3>
     <p class="mb-6 text-sm text-muted-foreground">
-      {{ $t('page.aiChat.emptyDescription') }}
+      {{ $t('page.common.aiChat.emptyDescription') }}
     </p>
     <div class="flex flex-wrap justify-center gap-2">
       <button
