@@ -120,13 +120,13 @@ watch(
       >
         <LoginForm />
       </AuthenticationLoginExpiredModal>
+
+      <!-- AI Chat: floating button + slide-out panel -->
+      <AiChatButton />
+      <AiChatPanel />
     </template>
     <template #lock-screen>
       <LockScreen :avatar @to-login="handleLogout" />
     </template>
-
-    <!-- AI Chat: floating button + slide-out panel -->
-    <AiChatButton />
-    <AiChatPanel />
   </BasicLayout>
 </template>
