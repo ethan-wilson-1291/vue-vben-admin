@@ -813,7 +813,13 @@
       "deleteConversation": "Delete conversation",
       "deleteConfirm": "Are you sure you want to delete this conversation?",
       "today": "Today",
-      "yesterday": "Yesterday"
+      "yesterday": "Yesterday",
+      "thinking": "Thinking...",
+      "retry": "Retry",
+      "errorDefault": "Something went wrong",
+      "toolRunning": "Running {tool}...",
+      "aiAvatar": "AI",
+      "analyzingFinancialData": "Analyzing financial data..."
     }
   }
 }

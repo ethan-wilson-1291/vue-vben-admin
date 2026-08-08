@@ -813,7 +813,13 @@
       "deleteConversation": "删除对话",
       "deleteConfirm": "确定要删除此对话吗？",
       "today": "今天",
-      "yesterday": "昨天"
+      "yesterday": "昨天",
+      "thinking": "思考中...",
+      "retry": "重试",
+      "errorDefault": "出了点问题",
+      "toolRunning": "正在运行 {tool}...",
+      "aiAvatar": "AI",
+      "analyzingFinancialData": "正在分析财务数据..."
     }
   }
 }

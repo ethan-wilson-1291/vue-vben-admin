@@ -813,7 +813,13 @@
       "deleteConversation": "Elimina conversazione",
       "deleteConfirm": "Sei sicuro di voler eliminare questa conversazione?",
       "today": "Oggi",
-      "yesterday": "Ieri"
+      "yesterday": "Ieri",
+      "thinking": "Pensando...",
+      "retry": "Riprova",
+      "errorDefault": "Qualcosa è andato storto",
+      "toolRunning": "Esecuzione di {tool}...",
+      "aiAvatar": "IA",
+      "analyzingFinancialData": "Analisi dei dati finanziari..."
     }
   }
 }

@@ -4,6 +4,7 @@ import type { ChatMessage } from '#/store';
 import { computed } from 'vue';
 
 import { VbenButton } from '@vben/common-ui';
+import { $t } from '@vben/locales';
 
 import { Loader2, RefreshCw } from '#/icons';
 import { renderMarkdown } from '#/shared/markdown';
@@ -24,9 +25,15 @@ const renderedContent = computed(() => {
   return html;
 });
 
-const TOOL_LABELS: Record<string, string> = {
-  get_p_and_l_report: 'Analyzing financial data...',
-};
+function getToolLabel(toolCallStatus: string): string {
+  const knownLabels: Record<string, string> = {
+    get_p_and_l_report: $t('page.common.aiChat.analyzingFinancialData'),
+  };
+  return (
+    knownLabels[toolCallStatus] ||
+    $t('page.common.aiChat.toolRunning', { tool: toolCallStatus })
+  );
+}
 </script>
 
 <template>
@@ -39,16 +46,11 @@ const TOOL_LABELS: Record<string, string> = {
       v-if="message.role === 'assistant'"
       class="mr-2 mt-1 flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs text-primary"
     >
-      AI
+      {{ $t('page.common.aiChat.aiAvatar') }}
     </div>
 
     <div
-      class="max-w-[80%] rounded-lg px-3 py-2 text-sm"
-      :class="[
-        message.role === 'user'
-          ? 'bg-primary text-primary-foreground'
-          : 'bg-muted text-foreground',
-      ]"
+      class="max-w-[80%] rounded-lg px-3 py-2 text-sm bg-muted text-foreground"
     >
       <!-- Tool call status indicator -->
       <div
@@ -56,10 +58,7 @@ const TOOL_LABELS: Record<string, string> = {
         class="mb-2 flex items-center gap-2 text-xs text-muted-foreground"
       >
         <Loader2 class="size-3 animate-spin" />
-        <span>{{
-          TOOL_LABELS[message.toolCallStatus] ||
-          `Running ${message.toolCallStatus}...`
-        }}</span>
+        <span>{{ getToolLabel(message.toolCallStatus) }}</span>
       </div>
 
       <!-- Message content -->
@@ -74,7 +73,7 @@ const TOOL_LABELS: Record<string, string> = {
         class="flex items-center gap-2 text-muted-foreground"
       >
         <Loader2 class="size-3 animate-spin" />
-        <span>Thinking...</span>
+        <span>{{ $t('page.common.aiChat.thinking') }}</span>
       </div>
 
       <!-- Error state -->
@@ -83,7 +82,7 @@ const TOOL_LABELS: Record<string, string> = {
         class="mt-2 flex items-center gap-2"
       >
         <span class="text-xs text-destructive">
-          {{ message.errorMessage || 'Something went wrong' }}
+          {{ message.errorMessage || $t('page.common.aiChat.errorDefault') }}
         </span>
         <VbenButton
           class="gap-1"
@@ -92,7 +91,7 @@ const TOOL_LABELS: Record<string, string> = {
           @click="emit('retry', message.id)"
         >
           <RefreshCw class="size-3" />
-          Retry
+          {{ $t('page.common.aiChat.retry') }}
         </VbenButton>
       </div>
     </div>
