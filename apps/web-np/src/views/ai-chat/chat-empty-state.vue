@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { computed } from 'vue';
+
 import { VbenButton } from '@vben/common-ui';
 import { $t } from '@vben/locales';
 
@@ -6,11 +8,11 @@ const emit = defineEmits<{
   selectQuestion: [text: string];
 }>();
 
-const suggestions = [
+const suggestions = computed(() => [
   $t('page.common.aiChat.suggestion1'),
   $t('page.common.aiChat.suggestion2'),
   $t('page.common.aiChat.suggestion3'),
-];
+]);
 </script>
 
 <template>

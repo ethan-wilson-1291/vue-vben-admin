@@ -52,7 +52,7 @@ const TOOL_LABELS: Record<string, string> = {
     >
       <!-- Tool call status indicator -->
       <div
-        v-if="message.toolCallStatus"
+        v-if="message.toolCallStatus && message.status === 'thinking'"
         class="mb-2 flex items-center gap-2 text-xs text-muted-foreground"
       >
         <Loader2 class="size-3 animate-spin" />

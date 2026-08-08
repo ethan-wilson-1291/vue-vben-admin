@@ -48,7 +48,9 @@ function handleNewChat() {
         >
           <!-- Chat view header: back arrow + title -->
           <template
-            v-if="chatStore.view === 'chat' && chatStore.conversationId"
+            v-if="
+              chatStore.view === 'chat' && chatStore.conversations.length > 0
+            "
           >
             <div class="flex min-w-0 flex-1 items-center gap-2">
               <VbenIconButton

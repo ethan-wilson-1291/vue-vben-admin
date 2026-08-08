@@ -9,6 +9,7 @@ export const Loader2 = createIconifyIcon('lucide:loader-2');
 export const MessageCircle = createIconifyIcon('lucide:message-circle');
 export const MessageSquare = createIconifyIcon('lucide:message-square');
 export const RefreshCw = createIconifyIcon('lucide:refresh-cw');
+export const Send = createIconifyIcon('lucide:send');
 export const Statistic = createIconifyIcon('clarity:process-on-vm-line');
 export const Support = createIconifyIcon('fluent:person-support-28-regular');
 export const Trash2 = createIconifyIcon('lucide:trash-2');

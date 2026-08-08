@@ -6,7 +6,7 @@ import { $t } from '@vben/locales';
 
 import { Textarea } from '@vben-core/shadcn-ui';
 
-import { ArrowUpToLine } from '#/icons';
+import { Send } from '#/icons';
 
 const emit = defineEmits<{
   send: [text: string];
@@ -24,7 +24,7 @@ function handleSend() {
 
 <template>
   <div class="border-t p-3">
-    <div class="flex items-end gap-2">
+    <div class="flex items-center gap-2">
       <Textarea
         v-model="inputText"
         class="min-h-[40px] max-h-[120px] flex-1 resize-none text-sm"
@@ -38,7 +38,7 @@ function handleSend() {
         variant="default"
         @click="handleSend"
       >
-        <ArrowUpToLine class="size-4" />
+        <Send class="size-4" />
       </VbenIconButton>
     </div>
   </div>
