@@ -4,6 +4,8 @@ import { computed } from 'vue';
 import { VbenButton } from '@vben/common-ui';
 import { $t } from '@vben/locales';
 
+import { Bot } from '#/icons';
+
 const emit = defineEmits<{
   selectQuestion: [text: string];
 }>();
@@ -17,7 +19,7 @@ const suggestions = computed(() => [
 
 <template>
   <div class="flex flex-1 flex-col items-center justify-center p-6 text-center">
-    <div class="mb-4 text-4xl">🤖</div>
+    <Bot class="mb-4 size-10" />
     <h3 class="mb-1 text-lg font-semibold">
       {{ $t('page.common.aiChat.emptyTitle') }}
     </h3>

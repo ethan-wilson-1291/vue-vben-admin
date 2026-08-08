@@ -11,7 +11,7 @@ import {
   MessageScrollerViewport,
 } from '@vben-core/shadcn-ui';
 
-import { AntPlus, ArrowLeft, X } from '#/icons';
+import { AntPlus, ArrowLeft, Bot, X } from '#/icons';
 import { useAiChatStore, useShopStore } from '#/store';
 
 import ChatBubble from './chat-bubble.vue';
@@ -86,7 +86,7 @@ function handleNewChat() {
           <!-- List view / new chat header -->
           <template v-else>
             <div class="flex items-center gap-2">
-              <span class="text-lg">🤖</span>
+              <Bot class="size-5" />
               <h2 class="text-sm font-semibold">
                 {{ $t('page.common.aiChat.title') }}
               </h2>

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { Bot } from '#/icons';
 import { $t } from '#/locales';
 import { useAiChatStore } from '#/store';
 
@@ -7,9 +8,11 @@ const chatStore = useAiChatStore();
 <template>
   <div
     class="ml-0.5 group flex h-8 cursor-pointer items-center gap-2 rounded-2xl border-none bg-none px-2 py-0.5 outline-none md:bg-accent"
-    @click="chatStore.openPanel()"
+    @click="chatStore.togglePanel()"
   >
-    🤖
+    <Bot
+      class="text-muted-foreground duration-300 group-hover:text-foreground"
+    />
     <span
       class="hidden text-xs text-muted-foreground duration-300 group-hover:text-foreground md:block"
     >
