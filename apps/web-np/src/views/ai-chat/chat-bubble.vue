@@ -6,7 +6,7 @@ import { computed } from 'vue';
 import { VbenButton } from '@vben/common-ui';
 import { $t } from '@vben/locales';
 
-import { Loader2, RefreshCw } from '#/icons';
+import { Bot, Loader2, RefreshCw } from '#/icons';
 import { renderMarkdown } from '#/shared/markdown';
 
 const props = defineProps<{
@@ -42,12 +42,10 @@ function getToolLabel(toolCallStatus: string): string {
     :class="[message.role === 'user' ? 'justify-end' : 'justify-start']"
   >
     <!-- Assistant avatar -->
-    <div
+    <Bot
       v-if="message.role === 'assistant'"
-      class="mr-2 mt-1 flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs text-primary"
-    >
-      {{ $t('page.common.aiChat.aiAvatar') }}
-    </div>
+      class="mr-2 mt-1 size-6 shrink-0 rounded-full bg-primary/10 p-1 text-primary"
+    />
 
     <div
       class="max-w-[80%] rounded-lg px-3 py-2 text-sm bg-muted text-foreground"

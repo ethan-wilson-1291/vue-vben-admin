@@ -6,6 +6,7 @@ import { $t } from '@vben/locales';
 import { Alert } from 'ant-design-vue';
 
 import { shopToggleNewFeatureNotice } from '#/api';
+import { Bot } from '#/icons';
 import { redirect } from '#/shared/utils';
 import { useAiChatStore, useShopSettingStore } from '#/store';
 
@@ -53,10 +54,7 @@ const goToSettings = () => {
       <div
         class="mb-3 flex gap-3 rounded-lg border border-blue-100 bg-blue-50 p-3"
       >
-        <IconifyIcon
-          icon="lucide:bot"
-          class="mt-0.5 size-5 shrink-0 text-blue-500"
-        />
+        <Bot class="mt-0.5 size-5 shrink-0 text-blue-500" />
         <div class="min-w-0">
           <p class="font-semibold">
             {{ $t('page.dashboard.newFeatureAiTitle') }}

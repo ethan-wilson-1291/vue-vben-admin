@@ -3,7 +3,7 @@ import { createIconifyIcon } from '@vben/icons';
 export const AntHistory = createIconifyIcon('ant-design:history-outlined');
 export const AntPlus = createIconifyIcon('ant-design:plus-outlined');
 export const ArrowLeft = createIconifyIcon('lucide:arrow-left');
-export const Bot = createIconifyIcon('lucide:bot');
+export const Bot = createIconifyIcon('thesvg-color:gemini');
 export const ArrowRight = createIconifyIcon('lucide:arrow-right');
 export const ArrowUpToLine = createIconifyIcon('lucide:arrow-up-to-line');
 export const Loader2 = createIconifyIcon('lucide:loader-2');
