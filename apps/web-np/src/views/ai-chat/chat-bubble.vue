@@ -1,17 +1,28 @@
 <script lang="ts" setup>
 import type { ChatMessage } from '#/store';
 
+import { computed } from 'vue';
+
 import { VbenButton } from '@vben/common-ui';
 
 import { Loader2, RefreshCw } from '#/icons';
+import { renderMarkdown } from '#/shared/markdown';
 
-defineProps<{
+const props = defineProps<{
   message: ChatMessage;
 }>();
 
 const emit = defineEmits<{
   retry: [messageId: string];
 }>();
+
+const renderedContent = computed(() => {
+  const html = renderMarkdown(props.message.content);
+  if (props.message.status === 'streaming') {
+    return `${html}<span class="ml-0.5 inline-block h-4 w-1 animate-pulse bg-current align-middle"></span>`;
+  }
+  return html;
+});
 
 const TOOL_LABELS: Record<string, string> = {
   get_p_and_l_report: 'Analyzing financial data...',
@@ -52,13 +63,10 @@ const TOOL_LABELS: Record<string, string> = {
       </div>
 
       <!-- Message content -->
-      <div class="whitespace-pre-wrap break-words">
-        {{ message.content }}
-        <span
-          v-if="message.status === 'streaming'"
-          class="ml-0.5 inline-block h-4 w-1 animate-pulse bg-current"
-        ></span>
-      </div>
+      <div
+        class="prose prose-sm max-w-none break-words dark:prose-invert"
+        v-html="renderedContent"
+      ></div>
 
       <!-- Thinking indicator (before first token) -->
       <div

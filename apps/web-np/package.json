@@ -48,6 +48,7 @@
     "crisp-sdk-web": "^1.0.25",
     "currency-formatter": "^1.5.9",
     "dayjs": "catalog:",
+    "markdown-it": "^14.1.0",
     "pinia": "catalog:",
     "pusher-js": "^8.4.0",
     "vue": "catalog:",
@@ -56,6 +57,7 @@
   },
   "devDependencies": {
     "@shopify/app-bridge-types": "^0.5.3",
-    "@types/currency-formatter": "^1.5.4"
+    "@types/currency-formatter": "^1.5.4",
+    "@types/markdown-it": "^14.1.2"
   }
 }
