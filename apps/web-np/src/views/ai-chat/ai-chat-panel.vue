@@ -11,15 +11,28 @@ import {
   MessageScrollerViewport,
 } from '@vben-core/shadcn-ui';
 
-import { AntPlus, X } from '#/icons';
+import { AntPlus, ArrowLeft, X } from '#/icons';
 import { useAiChatStore, useShopStore } from '#/store';
 
 import ChatBubble from './chat-bubble.vue';
 import ChatEmptyState from './chat-empty-state.vue';
 import ChatInput from './chat-input.vue';
+import ConversationList from './conversation-list.vue';
 
 const chatStore = useAiChatStore();
 const shopStore = useShopStore();
+
+function handleDeleteConversation(id: string) {
+  chatStore.removeConversation(id);
+}
+
+function handleSelectConversation(id: string) {
+  chatStore.loadConversation(id);
+}
+
+function handleNewChat() {
+  chatStore.newChat();
+}
 </script>
 
 <template>
@@ -33,27 +46,65 @@ const shopStore = useShopStore();
         <div
           class="flex shrink-0 items-center justify-between border-b px-4 py-3"
         >
-          <div class="flex items-center gap-2">
-            <span class="text-lg">🤖</span>
-            <h2 class="text-sm font-semibold">
-              {{ $t('page.common.aiChat.title') }}
-            </h2>
-          </div>
-          <div class="flex items-center gap-1">
-            <VbenIconButton
-              class="text-muted-foreground"
-              :tooltip="$t('page.common.aiChat.newChat')"
-              @click="chatStore.clearChat()"
-            >
-              <AntPlus class="size-4" />
-            </VbenIconButton>
-            <VbenIconButton
-              class="text-muted-foreground"
-              @click="chatStore.closePanel()"
-            >
-              <X class="size-4" />
-            </VbenIconButton>
-          </div>
+          <!-- Chat view header: back arrow + title -->
+          <template
+            v-if="chatStore.view === 'chat' && chatStore.conversationId"
+          >
+            <div class="flex min-w-0 flex-1 items-center gap-2">
+              <VbenIconButton
+                class="text-muted-foreground shrink-0"
+                :tooltip="$t('page.common.aiChat.backToList')"
+                @click="chatStore.showConversationList()"
+              >
+                <ArrowLeft class="size-4" />
+              </VbenIconButton>
+              <h2 class="truncate text-sm font-semibold">
+                {{
+                  chatStore.conversationTitle || $t('page.common.aiChat.title')
+                }}
+              </h2>
+            </div>
+            <div class="flex shrink-0 items-center gap-1">
+              <VbenIconButton
+                class="text-muted-foreground"
+                :tooltip="$t('page.common.aiChat.newChat')"
+                @click="handleNewChat()"
+              >
+                <AntPlus class="size-4" />
+              </VbenIconButton>
+              <VbenIconButton
+                class="text-muted-foreground"
+                @click="chatStore.closePanel()"
+              >
+                <X class="size-4" />
+              </VbenIconButton>
+            </div>
+          </template>
+
+          <!-- List view / new chat header -->
+          <template v-else>
+            <div class="flex items-center gap-2">
+              <span class="text-lg">🤖</span>
+              <h2 class="text-sm font-semibold">
+                {{ $t('page.common.aiChat.title') }}
+              </h2>
+            </div>
+            <div class="flex items-center gap-1">
+              <VbenIconButton
+                class="text-muted-foreground"
+                :tooltip="$t('page.common.aiChat.newChat')"
+                @click="handleNewChat()"
+              >
+                <AntPlus class="size-4" />
+              </VbenIconButton>
+              <VbenIconButton
+                class="text-muted-foreground"
+                @click="chatStore.closePanel()"
+              >
+                <X class="size-4" />
+              </VbenIconButton>
+            </div>
+          </template>
         </div>
 
         <!-- Subscription gate -->
@@ -68,6 +119,13 @@ const shopStore = useShopStore();
             {{ $t('page.common.aiChat.upgrade') }}
           </VbenButton>
         </div>
+
+        <!-- Conversation list view -->
+        <ConversationList
+          v-else-if="chatStore.view === 'list'"
+          @delete="handleDeleteConversation"
+          @select="handleSelectConversation"
+        />
 
         <!-- Chat body -->
         <template v-else>

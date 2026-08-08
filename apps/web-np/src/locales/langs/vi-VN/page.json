@@ -806,7 +806,14 @@
       "newChat": "Cuộc trò chuyện mới",
       "suggestion3": "What's my current profit margin trend?",
       "upgradeRequired": "AI Assistant is available on the Pro plan",
-      "upgrade": "Upgrade to Pro"
+      "upgrade": "Upgrade to Pro",
+      "backToList": "Quay lại danh sách",
+      "conversations": "Cuộc trò chuyện",
+      "noConversations": "Chưa có cuộc trò chuyện nào",
+      "deleteConversation": "Xóa cuộc trò chuyện",
+      "deleteConfirm": "Bạn có chắc muốn xóa cuộc trò chuyện này?",
+      "today": "Hôm nay",
+      "yesterday": "Hôm qua"
     }
   }
 }

@@ -78,6 +78,7 @@ app.vue (or root layout)
 ### Empty State (`ChatEmptyState`)
 
 Shown when there are no messages. Displays 3-4 suggested questions as tappable chips, e.g.:
+
 - "What were my top-selling products this week?"
 - "How did my ad spend change month-over-month?"
 - "What's my current profit margin trend?"
@@ -88,17 +89,17 @@ Shown when there are no messages. Displays 3-4 suggested questions as tappable c
 
 ```ts
 interface ChatMessage {
-  id: string
-  role: 'user' | 'assistant'
-  content: string
-  timestamp: number
-  status: 'sending' | 'streaming' | 'done' | 'error'
+  id: string;
+  role: 'user' | 'assistant';
+  content: string;
+  timestamp: number;
+  status: 'sending' | 'streaming' | 'done' | 'error';
 }
 
 interface AiChatState {
-  messages: ChatMessage[]
-  isOpen: boolean
-  isLoading: boolean
+  messages: ChatMessage[];
+  isOpen: boolean;
+  isLoading: boolean;
 }
 ```
 
@@ -128,7 +129,7 @@ interface AiChatState {
 ## Error Handling
 
 | Scenario | UI Treatment |
-|---|---|
+| --- | --- |
 | API network error / 5xx | Assistant bubble: "Something went wrong" + retry button |
 | API 4xx (rate limit, etc.) | Show the specific API error message in the assistant bubble |
 | Token expired mid-chat | Handled by `requestClient` interceptor; on failure show "Please log in again" |

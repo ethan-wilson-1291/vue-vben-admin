@@ -24,10 +24,12 @@
 ### Task 1: Install shadcn-vue message-scroller
 
 **Files:**
+
 - Create: `packages/@core/ui-kit/shadcn-ui/src/ui/message-scroller/` (directory + component files)
 - Modify: `packages/@core/ui-kit/shadcn-ui/src/ui/index.ts`
 
 **Interfaces:**
+
 - Produces: `MessageScrollerProvider`, `MessageScroller`, `MessageScrollerViewport`, `MessageScrollerContent`, `MessageScrollerItem`, `MessageScrollerButton` — exported from `@vben-core/shadcn-ui`
 - Produces: `useMessageScroller`, `useMessageScrollerVisibility`, `useMessageScrollerScrollable` composables
 
@@ -40,6 +42,7 @@ cd packages/@core/ui-kit/shadcn-ui && pnpm dlx shadcn-vue@latest add message-scr
 - [ ] **Step 2: Verify the installed files**
 
 Check that the following files were created under `packages/@core/ui-kit/shadcn-ui/src/ui/message-scroller/`:
+
 - `index.ts` (barrel export)
 - `MessageScrollerProvider.vue`
 - `MessageScroller.vue`
@@ -56,6 +59,7 @@ ls packages/@core/ui-kit/shadcn-ui/src/ui/message-scroller/
 - [ ] **Step 3: Add message-scroller to the UI barrel export**
 
 Edit `packages/@core/ui-kit/shadcn-ui/src/ui/index.ts`, add the line:
+
 ```ts
 export * from './message-scroller';
 ```
@@ -82,10 +86,12 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 ### Task 2: Create AI chat Pinia store
 
 **Files:**
+
 - Create: `apps/web-np/src/store/ai-chat.ts`
 - Modify: `apps/web-np/src/store/index.ts`
 
 **Interfaces:**
+
 - Produces: `useAiChatStore` — Pinia store with id `'np-ai-chat'`
   - State: `messages: ChatMessage[]`, `isOpen: boolean`, `isLoading: boolean`
   - Getters: (none initially)
@@ -165,7 +171,9 @@ export const useAiChatStore = defineStore('np-ai-chat', {
 
     updateMessage(
       messageId: string,
-      updates: Partial<Pick<ChatMessage, 'content' | 'status' | 'errorMessage'>>,
+      updates: Partial<
+        Pick<ChatMessage, 'content' | 'status' | 'errorMessage'>
+      >,
     ) {
       const msg = this.messages.find((m) => m.id === messageId);
       if (!msg) return;
@@ -271,6 +279,7 @@ export const useAiChatStore = defineStore('np-ai-chat', {
 - [ ] **Step 2: Register the store in the barrel export**
 
 Edit `apps/web-np/src/store/index.ts`, add:
+
 ```ts
 export * from './ai-chat';
 ```
@@ -295,10 +304,12 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 ### Task 3: Create AI API client
 
 **Files:**
+
 - Create: `apps/web-np/src/api/ai.ts`
 - Modify: `apps/web-np/src/api/index.ts`
 
 **Interfaces:**
+
 - Produces: `postChatMessage(message: string, history: Array<{role: string, content: string}>, onToken: (chunk: string) => void): Promise<void>`
 - Consumes: `requestClient` from `#/api/request` — uses its built-in `postSSE` method which runs request interceptors (auth headers) and handles SSE parsing
 
@@ -333,56 +344,60 @@ export function postChatMessage(
     let sseBuffer = '';
 
     requestClient
-      .postSSE(AI_CHAT_ENDPOINT, { message, history }, {
-        onMessage(rawChunk: string) {
-          sseBuffer += rawChunk;
+      .postSSE(
+        AI_CHAT_ENDPOINT,
+        { message, history },
+        {
+          onMessage(rawChunk: string) {
+            sseBuffer += rawChunk;
 
-          // SSE messages are separated by "\n\n"
-          const parts = sseBuffer.split('\n\n');
-          // The last part may be incomplete — keep it in the buffer
-          sseBuffer = parts.pop() ?? '';
+            // SSE messages are separated by "\n\n"
+            const parts = sseBuffer.split('\n\n');
+            // The last part may be incomplete — keep it in the buffer
+            sseBuffer = parts.pop() ?? '';
 
-          for (const part of parts) {
-            const lines = part.split('\n');
-            for (const line of lines) {
-              if (line.startsWith('data: ')) {
-                const data = line.slice(6).trim();
-                if (data === '[DONE]') return;
-                try {
-                  const parsed = JSON.parse(data);
-                  const chunk =
-                    parsed?.content ?? parsed?.delta ?? parsed?.text ?? '';
-                  if (chunk) onToken(chunk);
-                } catch {
-                  // Plain text — treat as content
-                  if (data) onToken(data);
+            for (const part of parts) {
+              const lines = part.split('\n');
+              for (const line of lines) {
+                if (line.startsWith('data: ')) {
+                  const data = line.slice(6).trim();
+                  if (data === '[DONE]') return;
+                  try {
+                    const parsed = JSON.parse(data);
+                    const chunk =
+                      parsed?.content ?? parsed?.delta ?? parsed?.text ?? '';
+                    if (chunk) onToken(chunk);
+                  } catch {
+                    // Plain text — treat as content
+                    if (data) onToken(data);
+                  }
                 }
               }
             }
-          }
-        },
-        onEnd() {
-          // Flush any remaining buffered SSE data
-          if (sseBuffer.trim()) {
-            const lines = sseBuffer.split('\n');
-            for (const line of lines) {
-              if (line.startsWith('data: ')) {
-                const data = line.slice(6).trim();
-                if (data === '[DONE]') break;
-                try {
-                  const parsed = JSON.parse(data);
-                  const chunk =
-                    parsed?.content ?? parsed?.delta ?? parsed?.text ?? '';
-                  if (chunk) onToken(chunk);
-                } catch {
-                  if (data) onToken(data);
+          },
+          onEnd() {
+            // Flush any remaining buffered SSE data
+            if (sseBuffer.trim()) {
+              const lines = sseBuffer.split('\n');
+              for (const line of lines) {
+                if (line.startsWith('data: ')) {
+                  const data = line.slice(6).trim();
+                  if (data === '[DONE]') break;
+                  try {
+                    const parsed = JSON.parse(data);
+                    const chunk =
+                      parsed?.content ?? parsed?.delta ?? parsed?.text ?? '';
+                    if (chunk) onToken(chunk);
+                  } catch {
+                    if (data) onToken(data);
+                  }
                 }
               }
             }
-          }
-          resolve();
+            resolve();
+          },
         },
-      })
+      )
       .catch((err: Error) => {
         reject(err);
       });
@@ -393,6 +408,7 @@ export function postChatMessage(
 - [ ] **Step 2: Register the API module in the barrel export**
 
 Edit `apps/web-np/src/api/index.ts`, add:
+
 ```ts
 export * from './ai';
 ```
@@ -419,11 +435,13 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 ### Task 4: Create chat UI sub-components
 
 **Files:**
+
 - Create: `apps/web-np/src/views/ai-chat/chat-bubble.vue`
 - Create: `apps/web-np/src/views/ai-chat/chat-input.vue`
 - Create: `apps/web-np/src/views/ai-chat/chat-empty-state.vue`
 
 **Interfaces:**
+
 - Consumes: `ChatMessage` type from `#/store`
 - Consumes: `useAiChatStore` from `#/store`
 - `ChatBubble` props: `message: ChatMessage`, emits: `retry(messageId: string)`
@@ -610,9 +628,11 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 ### Task 5: Create AiChatPanel component
 
 **Files:**
+
 - Create: `apps/web-np/src/views/ai-chat/ai-chat-panel.vue`
 
 **Interfaces:**
+
 - Consumes: `useAiChatStore` from `#/store`
 - Consumes: `useShopStore` from `#/store`
 - Consumes: `MessageScrollerProvider`, `MessageScroller`, `MessageScrollerViewport`, `MessageScrollerContent`, `MessageScrollerItem`, `MessageScrollerButton` from `@vben-core/shadcn-ui`
@@ -762,9 +782,11 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 ### Task 6: Create AiChatButton floating FAB
 
 **Files:**
+
 - Create: `apps/web-np/src/views/ai-chat/ai-chat-button.vue`
 
 **Interfaces:**
+
 - Consumes: `useAiChatStore` from `#/store`
 - Produces: Floating button that toggles `chatStore.isOpen`
 
@@ -805,6 +827,7 @@ const buttonStyle = computed(() => ({
 - [ ] **Step 2: Add the `MessageCircle` icon to the icons file**
 
 Edit `apps/web-np/src/icons.ts`, add:
+
 ```ts
 export const MessageCircle = createIconifyIcon('lucide:message-circle');
 ```
@@ -829,9 +852,11 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 ### Task 7: Integrate into layout
 
 **Files:**
+
 - Modify: `apps/web-np/src/layouts/basic.vue`
 
 **Interfaces:**
+
 - Consumes: `AiChatButton` from `#/views/ai-chat/ai-chat-button.vue`
 - Consumes: `AiChatPanel` from `#/views/ai-chat/ai-chat-panel.vue`
 
@@ -840,18 +865,20 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 Edit `apps/web-np/src/layouts/basic.vue`:
 
 **In the `<script>` section**, add the imports:
+
 ```ts
 import AiChatButton from '#/views/ai-chat/ai-chat-button.vue';
 import AiChatPanel from '#/views/ai-chat/ai-chat-panel.vue';
 ```
 
 **In the `<template>` section**, add the components right before the closing `</BasicLayout>` tag:
+
 ```html
-<AiChatButton />
-<AiChatPanel />
+<AiChatButton /> <AiChatPanel />
 ```
 
 The section around line 113-126 should become:
+
 ```html
     <template #notification>
       <ShopStatistic />
@@ -896,9 +923,11 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 ### Task 8: Add i18n strings
 
 **Files:**
+
 - Find and modify the appropriate locale file(s) under `apps/web-np/src/locales/`
 
 **Interfaces:**
+
 - Produces: i18n keys used by chat components:
   - `page.aiChat.title` — "AI Assistant"
   - `page.aiChat.inputPlaceholder` — "Ask a question about your store..."

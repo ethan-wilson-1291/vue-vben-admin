@@ -45,19 +45,19 @@
     "@vueuse/core": "catalog:",
     "@vueuse/integrations": "catalog:",
     "ant-design-vue": "catalog:",
-    "crisp-sdk-web": "^1.0.25",
-    "currency-formatter": "^1.5.9",
+    "crisp-sdk-web": "catalog:",
+    "currency-formatter": "catalog:",
     "dayjs": "catalog:",
-    "markdown-it": "^14.1.0",
+    "markdown-it": "catalog:",
     "pinia": "catalog:",
-    "pusher-js": "^8.4.0",
+    "pusher-js": "catalog:",
     "vue": "catalog:",
     "vue-router": "catalog:",
     "vxe-table": "catalog:"
   },
   "devDependencies": {
-    "@shopify/app-bridge-types": "^0.5.3",
-    "@types/currency-formatter": "^1.5.4",
-    "@types/markdown-it": "^14.1.2"
+    "@shopify/app-bridge-types": "catalog:",
+    "@types/currency-formatter": "catalog:",
+    "@types/markdown-it": "catalog:"
   }
 }

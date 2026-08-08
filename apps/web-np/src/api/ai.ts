@@ -1,10 +1,35 @@
 import { requestClient } from '#/api/request';
 
 const AI_CHAT_ENDPOINT = '/api/ai/chat';
+const AI_CONVERSATIONS_ENDPOINT = '/api/ai/conversations';
 
 interface ChatDonePayload {
   conversationId: string;
   title: string;
+}
+
+export interface Conversation {
+  id: string;
+  title: null | string;
+  model: string;
+  message_count: number;
+  updated_at: string;
+  created_at: string;
+}
+
+export interface ConversationDetail {
+  id: string;
+  title: null | string;
+  model: string;
+  message_count: number;
+  messages: ChatMessagePayload[];
+  updated_at: string;
+  created_at: string;
+}
+
+export interface ChatMessagePayload {
+  role: 'assistant' | 'user';
+  content: string;
 }
 
 /**
@@ -188,4 +213,38 @@ function handleEvent(
       break;
     }
   }
+}
+
+/**
+ * Fetch all conversations for the current user.
+ * The BE returns a paginated response; we extract the items array.
+ */
+export async function fetchConversations(): Promise<Conversation[]> {
+  const response = await requestClient.get<{
+    items: Conversation[];
+    page: number;
+    pageSize: number;
+    total: number;
+  }>(AI_CONVERSATIONS_ENDPOINT);
+  return response.items;
+}
+
+/**
+ * Fetch a single conversation with its messages.
+ * The BE wraps the conversation in a `conversation` key.
+ */
+export async function fetchConversation(
+  id: string,
+): Promise<ConversationDetail> {
+  const response = await requestClient.get<{
+    conversation: ConversationDetail;
+  }>(`${AI_CONVERSATIONS_ENDPOINT}/${id}`);
+  return response.conversation;
+}
+
+/**
+ * Delete a conversation by ID.
+ */
+export function deleteConversation(id: string): Promise<void> {
+  return requestClient.delete(`${AI_CONVERSATIONS_ENDPOINT}/${id}`);
 }

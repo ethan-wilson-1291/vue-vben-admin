@@ -806,7 +806,14 @@
       "newChat": "新建对话",
       "suggestion3": "What's my current profit margin trend?",
       "upgradeRequired": "AI Assistant is available on the Pro plan",
-      "upgrade": "Upgrade to Pro"
+      "upgrade": "Upgrade to Pro",
+      "backToList": "返回列表",
+      "conversations": "对话列表",
+      "noConversations": "暂无对话",
+      "deleteConversation": "删除对话",
+      "deleteConfirm": "确定要删除此对话吗？",
+      "today": "今天",
+      "yesterday": "昨天"
     }
   }
 }

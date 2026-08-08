@@ -806,7 +806,14 @@
       "suggestion3": "What's my current profit margin trend?",
       "newChat": "New chat",
       "upgradeRequired": "AI Assistant is available on the Pro plan",
-      "upgrade": "Upgrade to Pro"
+      "upgrade": "Upgrade to Pro",
+      "backToList": "Back to conversations",
+      "conversations": "Conversations",
+      "noConversations": "No conversations yet",
+      "deleteConversation": "Delete conversation",
+      "deleteConfirm": "Are you sure you want to delete this conversation?",
+      "today": "Today",
+      "yesterday": "Yesterday"
     }
   }
 }
