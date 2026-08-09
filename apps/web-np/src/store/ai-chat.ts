@@ -229,7 +229,7 @@ export const useAiChatStore = defineStore('np-ai-chat', {
         this.messages = detail.messages.map((msg, index) => ({
           id: `msg_loaded_${index}_${Date.now()}`,
           role: msg.role,
-          content: msg.content,
+          content: msg.content ?? '',
           timestamp: Date.now(),
           status: 'done' as const,
         }));

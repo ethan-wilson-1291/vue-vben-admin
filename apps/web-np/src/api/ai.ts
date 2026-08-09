@@ -29,7 +29,7 @@ export interface ConversationDetail {
 
 export interface ChatMessagePayload {
   role: 'assistant' | 'user';
-  content: string;
+  content: null | string;
 }
 
 /**
@@ -239,7 +239,13 @@ export async function fetchConversation(
   const response = await requestClient.get<{
     conversation: ConversationDetail;
   }>(`${AI_CONVERSATIONS_ENDPOINT}/${id}`);
-  return response.conversation;
+  return {
+    ...response.conversation,
+    messages: response.conversation.messages.filter(
+      (msg): msg is ChatMessagePayload & { content: string } =>
+        typeof msg.content === 'string',
+    ),
+  };
 }
 
 /**
