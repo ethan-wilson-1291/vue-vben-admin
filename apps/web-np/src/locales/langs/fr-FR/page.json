@@ -70,7 +70,9 @@
       "previous": "Precedent",
       "next": "Suivant",
       "finish": "Terminer",
-      "completedSuccess": "Configuration initiale terminee avec succes"
+      "completedSuccess": "Configuration initiale terminee avec succes",
+      "aiAssistantTitle": "Decouvrez votre assistant IA",
+      "aiAssistantDescription": "Une fois la configuration terminee, vous aurez acces a un assistant alimente par IA qui peut repondre a vos questions sur les performances de votre boutique, analyser les tendances et fournir des informations instantanees — le tout en langage naturel."
     },
     "common": {
       "more": "Plus",

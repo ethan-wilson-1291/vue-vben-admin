@@ -70,7 +70,9 @@
       "previous": "上一步",
       "next": "下一步",
       "finish": "完成",
-      "completedSuccess": "引导设置已成功完成"
+      "completedSuccess": "引导设置已成功完成",
+      "aiAssistantTitle": "认识你的 AI 助手",
+      "aiAssistantDescription": "设置完成后，你将可以使用 AI 助手，它能够用自然语言回答关于店铺表现的问题、分析趋势并提供即时洞察。"
     },
     "common": {
       "more": "更多",

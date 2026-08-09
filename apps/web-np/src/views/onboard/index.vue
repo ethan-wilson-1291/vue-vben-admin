@@ -8,10 +8,10 @@ import { ArrowLeft, Check } from '@vben/icons';
 import { $t } from '@vben/locales';
 import { preferences } from '@vben/preferences';
 
-import { Flex, message, Steps } from 'ant-design-vue';
+import { message, Steps } from 'ant-design-vue';
 
 import { onboardFinished } from '#/api';
-import { ArrowRight } from '#/icons';
+import { ArrowRight, Bot } from '#/icons';
 import { DefaultRoutes } from '#/shared/constants';
 import { crispDisplay } from '#/shared/crisp';
 import { redirectToPath, toPercentage, toRate } from '#/shared/utils';
@@ -117,7 +117,7 @@ onUnmounted(() => {
 
 <template>
   <Page class="mt-10 h-full">
-    <Flex class="h-full" vertical align="center" gap="large">
+    <div class="flex h-full flex-col items-center gap-6">
       <h2
         class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0"
       >
@@ -132,7 +132,7 @@ onUnmounted(() => {
       <div class="mt-5 w-full max-w-5xl">
         <Steps :current="state.currentStep" :items="items" />
 
-        <div class="my-10 flex items-center justify-center space-x-5">
+        <div class="mt-10 flex items-center justify-center space-x-5">
           <VbenButton
             variant="outline"
             class="w-32"
@@ -166,7 +166,7 @@ onUnmounted(() => {
           </VbenButton>
         </div>
 
-        <div class="flex flex-row space-x-5">
+        <div class="mt-10 flex flex-row gap-5">
           <ChooseLanguage v-if="state.currentStep === 0" />
           <Cogs v-if="state.currentStep === 1" />
           <HandlingFees v-if="state.currentStep === 2" />
@@ -175,7 +175,22 @@ onUnmounted(() => {
 
           <ExampleOrder v-if="state.currentStep > 0" />
         </div>
+
+        <!-- AI Assistant Feature Banner -->
+        <div
+          class="mt-5 flex gap-3 rounded-lg border border-blue-100 bg-blue-50 p-4"
+        >
+          <Bot class="mt-0.5 size-5 shrink-0 text-blue-500" />
+          <div class="min-w-0">
+            <p class="font-semibold">
+              {{ $t('page.onboard.index.aiAssistantTitle') }}
+            </p>
+            <p class="text-sm text-muted-foreground">
+              {{ $t('page.onboard.index.aiAssistantDescription') }}
+            </p>
+          </div>
+        </div>
       </div>
-    </Flex>
+    </div>
   </Page>
 </template>

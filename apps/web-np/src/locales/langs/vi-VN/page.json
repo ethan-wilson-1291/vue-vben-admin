@@ -70,7 +70,9 @@
       "previous": "Quay lại",
       "next": "Tiếp theo",
       "finish": "Hoàn tất",
-      "completedSuccess": "Hoàn tất thiết lập ban đầu thành công"
+      "completedSuccess": "Hoàn tất thiết lập ban đầu thành công",
+      "aiAssistantTitle": "Gặp gỡ Trợ lý AI của bạn",
+      "aiAssistantDescription": "Sau khi thiết lập hoàn tất, bạn sẽ có quyền truy cập vào trợ lý AI có thể trả lời câu hỏi về hiệu suất cửa hàng, phân tích xu hướng và cung cấp thông tin chi tiết tức thì — tất cả bằng ngôn ngữ tự nhiên."
     },
     "common": {
       "more": "Thêm",

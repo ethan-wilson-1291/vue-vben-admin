@@ -70,7 +70,9 @@
       "previous": "Previous",
       "next": "Next",
       "finish": "Finish",
-      "completedSuccess": "Onboarding completed successfully"
+      "completedSuccess": "Onboarding completed successfully",
+      "aiAssistantTitle": "Meet Your AI Assistant",
+      "aiAssistantDescription": "Once setup is complete, you'll have access to an AI-powered assistant that can answer questions about your store's performance, analyze trends, and provide instant insights — all in natural language."
     },
     "common": {
       "more": "More",
