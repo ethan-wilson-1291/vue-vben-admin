@@ -66,6 +66,9 @@ catalogs:
     '@pnpm/workspace.read-manifest':
       specifier: ^1000.3.1
       version: 1000.3.1
+    '@shopify/app-bridge-types':
+      specifier: ^0.5.3
+      version: 0.5.3
     '@stylistic/stylelint-plugin':
       specifier: ^5.2.1
       version: 5.2.1
@@ -129,6 +132,9 @@ catalogs:
     '@types/archiver':
       specifier: ^8.0.0
       version: 8.0.0
+    '@types/currency-formatter':
+      specifier: ^1.5.4
+      version: 1.5.4
     '@types/html-minifier-terser':
       specifier: ^7.0.2
       version: 7.0.2
@@ -141,6 +147,9 @@ catalogs:
     '@types/lodash.clonedeep':
       specifier: ^4.5.9
       version: 4.5.9
+    '@types/markdown-it':
+      specifier: ^14.1.2
+      version: 14.1.2
     '@types/node':
       specifier: ^25.9.5
       version: 25.9.5
@@ -219,12 +228,18 @@ catalogs:
     consola:
       specifier: ^3.4.2
       version: 3.4.2
+    crisp-sdk-web:
+      specifier: ^1.0.25
+      version: 1.2.0
     cross-env:
       specifier: ^10.1.0
       version: 10.1.0
     cspell:
       specifier: ^10.0.1
       version: 10.0.1
+    currency-formatter:
+      specifier: ^1.5.9
+      version: 1.5.9
     cz-git:
       specifier: ^1.13.1
       version: 1.13.1
@@ -318,6 +333,9 @@ catalogs:
     lodash.clonedeep:
       specifier: ^4.5.0
       version: 4.5.0
+    markdown-it:
+      specifier: ^14.1.0
+      version: 14.3.0
     medium-zoom:
       specifier: ^1.1.0
       version: 1.1.0
@@ -363,6 +381,9 @@ catalogs:
     publint:
       specifier: ^0.3.22
       version: 0.3.22
+    pusher-js:
+      specifier: ^8.4.0
+      version: 8.6.0
     qrcode:
       specifier: ^1.5.4
       version: 1.5.4
@@ -964,22 +985,22 @@ importers:
         specifier: 'catalog:'
         version: 4.2.6(vue@3.5.40(typescript@6.0.3))
       crisp-sdk-web:
-        specifier: ^1.0.25
+        specifier: 'catalog:'
         version: 1.2.0
       currency-formatter:
-        specifier: ^1.5.9
+        specifier: 'catalog:'
         version: 1.5.9
       dayjs:
         specifier: 'catalog:'
         version: 1.11.21
       markdown-it:
-        specifier: ^14.1.0
+        specifier: 'catalog:'
         version: 14.3.0
       pinia:
         specifier: ^4.0.2
         version: 4.0.2(@vue/devtools-api@8.2.1)(typescript@6.0.3)(vue@3.5.40(typescript@6.0.3))
       pusher-js:
-        specifier: ^8.4.0
+        specifier: 'catalog:'
         version: 8.6.0
       vue:
         specifier: ^3.5.40
@@ -992,13 +1013,13 @@ importers:
         version: 4.20.9
     devDependencies:
       '@shopify/app-bridge-types':
-        specifier: ^0.5.3
+        specifier: 'catalog:'
         version: 0.5.3
       '@types/currency-formatter':
-        specifier: ^1.5.4
+        specifier: 'catalog:'
         version: 1.5.4
       '@types/markdown-it':
-        specifier: ^14.1.2
+        specifier: 'catalog:'
         version: 14.1.2
 
   apps/web-np-admin:
