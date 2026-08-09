@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { EchartsUIType } from '@vben/plugins/echarts';
 
-import { onMounted, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 
 import {
   Card,
@@ -52,21 +52,16 @@ const handleChangeGroupBy = (val: any) => {
   reload();
 };
 
-onMounted(() => {
-  setTimeout(() => {
-    reload();
-  }, 2000);
-});
-
-// Call reload when dashboardState.loading change from false to true
+// Re-render chart when data finishes loading (or immediately if already loaded)
 watch(
   () => dashboardState.loading,
-  (newVal, _) => {
+  (newVal) => {
     if (newVal === true) {
       return;
     }
     reload();
   },
+  { immediate: true },
 );
 
 const reload = () => {

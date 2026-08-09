@@ -100,11 +100,11 @@ Merged upstream Vben Admin 5.0 framework updates into `uat`. The merge brought i
 
 All hooks passed:
 
-| Hook | Status |
-|---|---|
-| oxlint | ✔ |
-| oxfmt | ✔ |
-| eslint | ✔ |
-| stylelint | ✔ |
-| checkType (47 packages) | ✔ |
-| commitlint | ✔ |
+| Hook                    | Status |
+| ----------------------- | ------ |
+| oxlint                  | ✔      |
+| oxfmt                   | ✔      |
+| eslint                  | ✔      |
+| stylelint               | ✔      |
+| checkType (47 packages) | ✔      |
+| commitlint              | ✔      |

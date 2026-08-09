@@ -59,6 +59,7 @@ catalog:
   '@nolebase/vitepress-plugin-git-changelog': ^2.18.2
   '@playwright/test': ^1.61.1
   '@pnpm/workspace.read-manifest': ^1000.3.1
+  '@shopify/app-bridge-types': ^0.5.3
   '@stylistic/stylelint-plugin': ^5.2.1
   '@tailwindcss/typography': ^0.5.20
   '@tailwindcss/vite': ^4.3.3
@@ -80,10 +81,12 @@ catalog:
   '@tiptap/vue-3': ^3.28.0
   '@tsdown/css': ^0.22.13
   '@types/archiver': ^8.0.0
+  '@types/currency-formatter': ^1.5.4
   '@types/html-minifier-terser': ^7.0.2
   '@types/json-bigint': ^1.0.4
   '@types/jsonwebtoken': ^9.0.10
   '@types/lodash.clonedeep': ^4.5.9
+  '@types/markdown-it': ^14.1.2
   '@types/node': ^25.9.5
   '@types/nprogress': ^0.2.3
   '@types/qrcode': ^1.5.6
@@ -111,8 +114,10 @@ catalog:
   clsx: ^2.1.1
   commitlint-plugin-function-rules: ^5.0.1
   consola: ^3.4.2
+  crisp-sdk-web: ^1.0.25
   cross-env: ^10.1.0
   cspell: ^10.0.1
+  currency-formatter: ^1.5.9
   cz-git: ^1.13.1
   czg: ^1.13.1
   dayjs: ^1.11.21
@@ -144,6 +149,7 @@ catalog:
   knip: ^6.29.0
   lefthook: ^2.1.10
   lodash.clonedeep: ^4.5.0
+  markdown-it: ^14.1.0
   medium-zoom: ^1.1.0
   naive-ui: ^2.44.1
   nitropack: ^2.13.4
@@ -160,6 +166,7 @@ catalog:
   postcss-html: ^1.8.1
   postcss-scss: ^4.0.9
   publint: ^0.3.22
+  pusher-js: ^8.4.0
   qrcode: ^1.5.4
   qs: ^6.15.3
   reka-ui: ^2.10.1
