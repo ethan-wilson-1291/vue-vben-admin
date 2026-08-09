@@ -12,7 +12,9 @@ import { isShopifyEmbedded } from '#/shared/shopify-utils';
 import { redirectToExternal } from '#/shared/utils';
 import { useAuthStore, useShopStore } from '#/store';
 import LoginForm from '#/views/_core/authentication/login.vue';
+import AiChatPanel from '#/views/ai-chat/ai-chat-panel.vue';
 
+import ChatWithAi from './chat-with-ai.vue';
 import Chat from './chat.vue';
 import Notification from './notification.vue';
 import ShopStatistic from './shop-statistic.vue';
@@ -110,6 +112,7 @@ watch(
       <ShopStatistic />
       <Notification />
       <Chat />
+      <ChatWithAi />
     </template>
     <template #extra>
       <AuthenticationLoginExpiredModal
@@ -118,6 +121,10 @@ watch(
       >
         <LoginForm />
       </AuthenticationLoginExpiredModal>
+
+      <!-- AI Chat: floating button + slide-out panel -->
+      <!-- <AiChatButton /> -->
+      <AiChatPanel />
     </template>
     <template #lock-screen>
       <LockScreen :avatar @to-login="handleLogout" />

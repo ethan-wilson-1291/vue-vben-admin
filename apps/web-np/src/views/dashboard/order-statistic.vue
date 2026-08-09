@@ -1,23 +1,16 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  VbenButton,
-} from '@vben/common-ui';
+import { Card, CardContent, CardHeader, CardTitle } from '@vben/common-ui';
 import { IconifyIcon } from '@vben/icons';
 import { $t } from '@vben/locales';
 
-import { Alert } from 'ant-design-vue';
+import { useSubscriptionGate } from '#/shared/subscription-gate';
+import { formatMoney } from '#/shared/utils';
+import { useShopStore } from '#/store';
 
-import { shopToggleNewFeatureNotice } from '#/api';
-import { formatMoney, redirectToExternal } from '#/shared/utils';
-import { useShopSettingStore, useShopStore } from '#/store';
-
-import UpgradeBtn from '../shared-components/upgrade-btn.vue';
+import NewFeatureNotice from './NewFeatureNotice.vue';
+import ReviewPromoNotice from './ReviewPromoNotice.vue';
 import {
   currentPeriod,
   dashboardState,
@@ -30,7 +23,7 @@ defineOptions({
 });
 
 const shopStore = useShopStore();
-const shopSettingStore = useShopSettingStore();
+const { gateClass, gateStyle } = useSubscriptionGate();
 const currency = shopStore.shop.currencyFromApp;
 const rate = shopStore.shop.currencyRate;
 
@@ -296,18 +289,6 @@ const getDetails = computed(() => {
     },
   ];
 });
-
-const handleWriteReview = () => {
-  const url = `https://apps.shopify.com/${import.meta.env.VITE_GLOB_SHOPIFY_APP_HANDLE}#modal-show=WriteReviewModal`;
-  redirectToExternal(url);
-};
-
-const closeNewFeatureNotice = () => {
-  shopSettingStore.showNewFeatureNotice = false;
-  shopToggleNewFeatureNotice({
-    showNewFeatureNotice: false,
-  });
-};
 </script>
 
 <template>
@@ -341,15 +322,7 @@ const closeNewFeatureNotice = () => {
               <span
                 class="text-sm"
                 :class="getChangePercentColor(item.changePercent)"
-                :style="
-                  shopStore.isFreeSubscription
-                    ? {
-                        filter: 'blur(4px)',
-                        pointerEvents: 'none',
-                        userSelect: 'none',
-                      }
-                    : undefined
-                "
+                :style="gateStyle"
                 v-tippy="{
                   content: item.previousValue
                     ? $t('page.dashboard.comparedWithValue', [
@@ -366,10 +339,7 @@ const closeNewFeatureNotice = () => {
 
         <CardContent
           class="flex items-center justify-between text-lg"
-          :class="{
-            'pointer-events-none select-none blur-sm':
-              shopStore.isFreeSubscription,
-          }"
+          :class="gateClass"
         >
           {{ item.value }}
         </CardContent>
@@ -377,89 +347,12 @@ const closeNewFeatureNotice = () => {
     </template>
   </div>
 
-  <Alert
-    v-if="shopStore.isFreeSubscription"
-    :show-icon="true"
-    type="warning"
-    closable
-  >
-    <template #icon>
-      <IconifyIcon icon="emojione-v1:ringing-bell" />
-    </template>
-    <template #message>
-      <span class="font-semibold">
-        {{ $t('page.dashboard.reviewPromoTitle') }}
-      </span>
-    </template>
-    <template #description>
-      {{ $t('page.dashboard.reviewPromoLine1') }}
-      <div>
-        {{ $t('page.dashboard.reviewPromoLine2') }}
-        <strong>{{ $t('page.dashboard.reviewPromoBonus') }}</strong>
-        !
-      </div>
+  <ReviewPromoNotice />
 
-      <div class="flex items-center space-x-2">
-        <UpgradeBtn class="mt-2" size="sm" variant="secondary" />
-
-        <VbenButton
-          class="mt-2"
-          size="sm"
-          variant="secondary"
-          @click="handleWriteReview"
-        >
-          <IconifyIcon class="mr-2" icon="ant-design:export-outlined" />
-          {{ $t('page.dashboard.writeReview') }}
-        </VbenButton>
-      </div>
-    </template>
-    <template #action> </template>
-  </Alert>
-
-  <Alert
-    v-if="shopSettingStore.showNewFeatureNotice"
-    :show-icon="true"
-    type="info"
-    closable
-    @close="closeNewFeatureNotice"
-  >
-    <template #icon>
-      <IconifyIcon icon="lucide:languages" />
-    </template>
-    <template #message>
-      <span class="font-semibold">
-        {{ $t('page.dashboard.newFeatureLanguageTitle') }}
-      </span>
-    </template>
-    <template #description>
-      <div class="flex flex-col gap-3 md:flex-row md:items-start">
-        <div class="md:w-3/5">
-          <p class="mb-2">
-            {{ $t('page.dashboard.newFeatureLanguageDescription') }}
-          </p>
-          <p class="mb-1 text-sm">
-            {{ $t('page.dashboard.newFeatureLanguageListTitle') }}
-          </p>
-          <ul class="m-0 list-disc pl-5 text-sm leading-6">
-            <li>English</li>
-            <li>Español</li>
-            <li>Français</li>
-            <li>Italiano</li>
-            <li>简体中文</li>
-            <li>Tiếng Việt</li>
-          </ul>
-        </div>
-        <img
-          :alt="$t('page.dashboard.newFeatureLanguageImageAlt')"
-          class="w-full rounded border border-gray-200 md:w-3/5"
-          src="/static/images/feature-multiple-language.png"
-        />
-      </div>
-    </template>
-  </Alert>
+  <NewFeatureNotice />
 
   <Card
-    class="p-0 grid grid-cols-1 gap-4 pb-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
+    class="p-0 grid grid-cols-1 gap-0 pb-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
     v-loading="dashboardState.loading"
   >
     <template v-for="item in getDetails" :key="item.title">
@@ -485,15 +378,7 @@ const closeNewFeatureNotice = () => {
             <template v-if="item.changePercent">
               <span
                 :class="getChangePercentColor(item.changePercent)"
-                :style="
-                  shopStore.isFreeSubscription
-                    ? {
-                        filter: 'blur(4px)',
-                        pointerEvents: 'none',
-                        userSelect: 'none',
-                      }
-                    : undefined
-                "
+                :style="gateStyle"
                 v-tippy="{
                   content: item.previousValue
                     ? $t('page.dashboard.comparedWithValue', [
@@ -508,13 +393,7 @@ const closeNewFeatureNotice = () => {
           </CardTitle>
         </CardHeader>
 
-        <CardContent
-          class="pb-0 !text-lg"
-          :class="{
-            'pointer-events-none select-none blur-sm':
-              shopStore.isFreeSubscription,
-          }"
-        >
+        <CardContent class="pb-0 !text-lg" :class="gateClass">
           {{ item.value }}
         </CardContent>
       </Card>

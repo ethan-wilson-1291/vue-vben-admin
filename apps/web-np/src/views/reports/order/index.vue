@@ -12,7 +12,8 @@ import { Modal } from 'ant-design-vue';
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import { orderDelete } from '#/api';
 import { StateStatus } from '#/shared/constants';
-import { showWatermark } from '#/shared/utils';
+import { useSubscriptionGate } from '#/shared/subscription-gate';
+import { formatMoney, numberWithCommas } from '#/shared/utils';
 import { useShopStore, useSystemStatisticStore } from '#/store';
 import UpgradeBtn from '#/views/shared-components/upgrade-btn.vue';
 
@@ -22,6 +23,7 @@ import { orderTableOptions } from './table-config';
 import { formOptions } from './table-filter';
 
 const shopStore = useShopStore();
+const { gateClass } = useSubscriptionGate();
 const systemStatisticStore = useSystemStatisticStore();
 const [Grid, gridApi] = useVbenVxeGrid({
   gridOptions: orderTableOptions,
@@ -71,8 +73,6 @@ onMounted(() => {
       }
     },
   );
-
-  showWatermark();
 });
 
 const handleDetailOpen = (order: any) => {
@@ -106,7 +106,7 @@ const handleDeleteOrders = () => {
   <Page auto-content-height>
     <FormContentModal />
     <FormOrdDetailModal />
-    <Grid>
+    <Grid class>
       <template #name="{ row }">
         <VbenButton
           size="sm"
@@ -123,6 +123,57 @@ const handleDeleteOrders = () => {
             {{ row.name }}
           </span>
         </VbenButton>
+      </template>
+
+      <template #grossSales="{ row, column }">
+        <span :class="gateClass" class="inline-block w-full text-right">
+          {{
+            formatMoney(
+              row[column.field],
+              shopStore.shop.currencyFromApp,
+              shopStore.shop.currencyRate,
+            )
+          }}
+        </span>
+      </template>
+
+      <template #netPayment="{ row, column }">
+        <span
+          :class="gateClass"
+          class="inline-block w-full text-right font-semibold"
+        >
+          {{
+            formatMoney(
+              row[column.field],
+              shopStore.shop.currencyFromApp,
+              shopStore.shop.currencyRate,
+            )
+          }}
+        </span>
+      </template>
+
+      <template #grossProfit="{ row, column }">
+        <span
+          :class="gateClass"
+          class="inline-block w-full text-right font-semibold"
+        >
+          {{
+            formatMoney(
+              row[column.field],
+              shopStore.shop.currencyFromApp,
+              shopStore.shop.currencyRate,
+            )
+          }}
+        </span>
+      </template>
+
+      <template #grossProfitMargin="{ row, column }">
+        <span
+          :class="gateClass"
+          class="inline-block w-full text-right font-semibold"
+        >
+          {{ numberWithCommas(`${row[column.field]}%`) }}
+        </span>
       </template>
 
       <template #toolbar-tools>

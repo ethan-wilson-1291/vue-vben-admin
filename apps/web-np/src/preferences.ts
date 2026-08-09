@@ -20,7 +20,8 @@ export const overridesPreferences = defineOverridesPreferences({
     languageToggle: false,
     lockScreen: false,
     timezone: false,
-    fullscreen: !isShopifyEmbedded(),
+    fullscreen: false, // !isShopifyEmbedded(),
+    refresh: false,
     logoutButtonPosition: 'none',
   },
   tabbar: {

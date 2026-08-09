@@ -18,6 +18,7 @@ import {
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import { orderGetDetail, orderUpdateCostsManually } from '#/api';
 import { countries } from '#/shared/constants';
+import { useSubscriptionGate } from '#/shared/subscription-gate';
 import {
   calcGrossProfitMargin,
   formatMoney,
@@ -115,6 +116,7 @@ const [Grid] = useVbenVxeGrid({
 });
 
 const shopStore = useShopStore();
+const { gateClass } = useSubscriptionGate();
 
 const [Modal, modalApi] = useVbenModal({
   onOpenChange(isOpen: boolean) {
@@ -220,13 +222,15 @@ const calcGrossProfit = () => {
         class="font-bold"
         :span="2"
       >
-        {{
-          formatMoney(
-            state.order.grossSales,
-            shopStore.shop.currencyFromApp,
-            shopStore.shop.currencyRate,
-          )
-        }}
+        <span :class="gateClass">
+          {{
+            formatMoney(
+              state.order.grossSales,
+              shopStore.shop.currencyFromApp,
+              shopStore.shop.currencyRate,
+            )
+          }}
+        </span>
       </DescriptionsItem>
       <DescriptionsItem :label="$t('field-name.totalDiscount')" :span="2">
         {{
@@ -251,13 +255,15 @@ const calcGrossProfit = () => {
         class="font-bold"
         :span="2"
       >
-        {{
-          formatMoney(
-            state.order.netPayment,
-            shopStore.shop.currencyFromApp,
-            shopStore.shop.currencyRate,
-          )
-        }}
+        <span :class="gateClass">
+          {{
+            formatMoney(
+              state.order.netPayment,
+              shopStore.shop.currencyFromApp,
+              shopStore.shop.currencyRate,
+            )
+          }}
+        </span>
       </DescriptionsItem>
       <DescriptionsItem :label="$t('field-name.cogs')" :span="2">
         <div class="flex items-center justify-between space-x-2">
@@ -338,16 +344,20 @@ const calcGrossProfit = () => {
         {{ formatTitle(state.order.paymentGateway) }}
       </DescriptionsItem>
       <DescriptionsItem :label="$t('field-name.grossProfit')" class="font-bold">
-        {{
-          formatMoney(
-            calcGrossProfit(),
-            shopStore.shop.currencyFromApp,
-            shopStore.shop.currencyRate,
-          )
-        }}
+        <span :class="gateClass">
+          {{
+            formatMoney(
+              calcGrossProfit(),
+              shopStore.shop.currencyFromApp,
+              shopStore.shop.currencyRate,
+            )
+          }}
+        </span>
       </DescriptionsItem>
       <DescriptionsItem :label="$t('field-name.grossProfitMargin')">
-        {{ calcGrossProfitMargin(state.order) }}%
+        <span :class="gateClass">
+          {{ calcGrossProfitMargin(state.order) }}%
+        </span>
       </DescriptionsItem>
     </Descriptions>
 

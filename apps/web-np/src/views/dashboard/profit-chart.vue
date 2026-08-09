@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { EchartsUIType } from '@vben/plugins/echarts';
 
-import { onMounted, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 
 import {
   Card,
@@ -15,6 +15,7 @@ import { EchartsUI, useEcharts } from '@vben/plugins/echarts';
 
 import { Empty, Select } from 'ant-design-vue';
 
+import { useSubscriptionGate } from '#/shared/subscription-gate';
 import { formatMoney, redirect } from '#/shared/utils';
 import { useShopStore } from '#/store';
 
@@ -26,6 +27,7 @@ import {
 
 const chartRef = ref<EchartsUIType>();
 const shopStore = useShopStore();
+const { gateClass } = useSubscriptionGate();
 const { renderEcharts } = useEcharts(chartRef);
 
 const chartOptions = [
@@ -47,23 +49,19 @@ const handleChangeGroupBy = (val: any) => {
   dashboardState.profitChart.groupBy = val;
 
   generateDashboardData(currentPeriod);
+  reload();
 };
 
-onMounted(() => {
-  setTimeout(() => {
-    reload();
-  }, 2000);
-});
-
-// Call reload when dashboardState.loading change from false to true
+// Re-render chart when data finishes loading (or immediately if already loaded)
 watch(
   () => dashboardState.loading,
-  (newVal, _) => {
+  (newVal) => {
     if (newVal === true) {
       return;
     }
     reload();
   },
+  { immediate: true },
 );
 
 const reload = () => {
@@ -180,12 +178,7 @@ const reload = () => {
       </CardTitle>
     </CardHeader>
     <CardContent>
-      <div
-        :class="{
-          'pointer-events-none select-none blur-sm':
-            shopStore.isFreeSubscription,
-        }"
-      >
+      <div :class="gateClass">
         <EchartsUI
           ref="chartRef"
           v-show="dashboardState.profitChart.netProfit.length > 0"

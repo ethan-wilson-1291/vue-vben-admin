@@ -10,6 +10,7 @@
   },
   "aliases": {
     "components": "@vben-core/shadcn-ui/components",
-    "utils": "@vben-core/shared/utils"
+    "utils": "@vben-core/shared/utils",
+    "ui": "@vben-core/shadcn-ui/ui"
   }
 }

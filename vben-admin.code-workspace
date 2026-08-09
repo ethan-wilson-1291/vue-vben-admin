@@ -22,11 +22,11 @@
     },
     {
       "name": "@vben/web-np-app",
-      "path": "apps/web-np",
+      "path": "apps/web-np"
     },
     {
       "name": "@vben/web-np-admin",
-      "path": "apps/web-np-admin",
+      "path": "apps/web-np-admin"
     },
     {
       "name": "@vben/web-tdesign",

@@ -75,10 +75,18 @@ class SSE {
       !ArrayBuffer.isView(bodyInit as any) &&
       !(bodyInit instanceof ArrayBuffer) &&
       !(bodyInit instanceof Blob) &&
-      !(bodyInit instanceof FormData) &&
-      ct.includes('application/json')
+      !(bodyInit instanceof FormData)
     ) {
-      bodyInit = JSON.stringify(bodyInit);
+      // Default to JSON if no explicit Content-Type is set
+      if (
+        (!ct || ct.includes('application/json')) &&
+        !merged.has('content-type')
+      ) {
+        merged.set('content-type', 'application/json');
+      }
+      if (!ct || ct.includes('application/json')) {
+        bodyInit = JSON.stringify(bodyInit);
+      }
     }
     const requestInit: RequestInit = {
       ...requestOptions,
